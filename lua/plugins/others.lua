@@ -40,9 +40,24 @@ end
 M.searchbox = function()
    local searchbox = pcall(require, "searchbox")
    if searchbox then
-      vim.api.nvim_set_keymap("n", "/", ':lua require("searchbox").match_all({clear_matches = true})<CR>', { noremap = true })
-      vim.api.nvim_set_keymap("n", "<leader>/", ':lua require("searchbox").replace({confirm = "menu"})<CR>', { noremap = true })
-      vim.api.nvim_set_keymap("v", "<leader>/", '<Esc><cmd>lua require("searchbox").replace({exact = true, visual_mode = true, confirm = "menu"})<CR>', { noremap = true })
+      vim.api.nvim_set_keymap(
+         "n",
+         "/",
+         ':lua require("searchbox").match_all({clear_matches = true})<CR>',
+         { noremap = true }
+      )
+      vim.api.nvim_set_keymap(
+         "n",
+         "<leader>/",
+         ':lua require("searchbox").replace({confirm = "menu"})<CR>',
+         { noremap = true }
+      )
+      vim.api.nvim_set_keymap(
+         "v",
+         "<leader>/",
+         '<Esc><cmd>lua require("searchbox").replace({exact = true, visual_mode = true, confirm = "menu"})<CR>',
+         { noremap = true }
+      )
    end
 end
 

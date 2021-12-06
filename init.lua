@@ -41,4 +41,3 @@ local nyoom_modules = {
 for i = 1, #nyoom_modules, 1 do
    pcall(require, nyoom_modules[i])
 end
-

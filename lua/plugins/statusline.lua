@@ -3,4 +3,3 @@ if not present then
    return
 end
 statusline.lsp_diagnostics = true
-

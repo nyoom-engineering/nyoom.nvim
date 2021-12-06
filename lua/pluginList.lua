@@ -41,10 +41,14 @@ return packer.startup(function()
    }
 
    use {
-      "Clutch-Squad-10669/nord.nvim",
+      --"shaunisingh/nord.nvim",
       --branch = "nvim_api_rewrite",
+      --config = function()
+      --   require("nord").set()
+      --end,
+      "~/nix-darwin-dotfiles/configs/nyoom.nvim/lua/ext/doom-vibrant.nvim",
       config = function()
-         require("nord").set()
+         require("doom").set()
       end,
    }
 
@@ -58,7 +62,6 @@ return packer.startup(function()
 
    use {
       "kyazdani42/nvim-web-devicons",
-      after = "nord.nvim",
    }
 
    use {
@@ -247,7 +250,6 @@ return packer.startup(function()
 
    use {
       "rcarriga/nvim-notify",
-      after = "nord.nvim",
       config = function()
          vim.notify = require "notify"
          require("notify").setup {
@@ -333,7 +335,7 @@ return packer.startup(function()
    use {
       "nvim-orgmode/orgmode",
       ft = "org",
-      setup = vim.cmd("autocmd BufRead,BufNewFile *.org setlocal filetype=org"),
+      setup = vim.cmd "autocmd BufRead,BufNewFile *.org setlocal filetype=org",
       after = { "nvim-treesitter" },
       config = function()
          require("orgmode").setup {}
