@@ -22,7 +22,7 @@ parser_configs.org = {
 }
 
 ts_config.setup {
-   ensure_installed = "maintained",
+   ensure_installed = { "lua", "nix" },
    indent = { enable = true },
    highlight = {
       enable = true,

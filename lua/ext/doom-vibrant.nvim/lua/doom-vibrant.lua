@@ -317,9 +317,9 @@ local plugins = {
 
    -- Cmp
    CmpItemKind = { fg = doom.doom15_gui },
-   CmpItemAbbrMatch = { fg = doom.doom5_gui, style = "bold" },
-   CmpItemAbbrMatchFuzzy = { fg = doom.doom5_gui, style = "bold" },
-   CmpItemAbbr = { fg = doom.doom4_gui },
+   CmpItemAbbrMatch = { fg = doom.doom9_gui, style = "bold" },
+   CmpItemAbbrMatchFuzzy = { fg = doom.doom14_gui, style = "bold" },
+   CmpItemAbbr = { fg = doom.doom13_gui },
    CmpItemMenu = { fg = doom.doom14_gui },
 
    -- Indent Blankline
