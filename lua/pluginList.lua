@@ -62,7 +62,7 @@ return packer.startup(function()
    }
 
    use {
-      "beauwilliams/statusline.lua",
+      "~/nix-darwin-dotfiles/configs/nyoom.nvim/lua/ext/statusline.nvim",
       config = function()
          require "plugins.statusline"
       end,
