@@ -1,15 +1,13 @@
 # Nyoom.nvim
 
-[![Lua](https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?style=for-the-badge&logo=lua)](https://lua.org)
-
-</div>
-
 <div align="center">
-
+  
+[![Lua](https://img.shields.io/badge/Made%20With-Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white)]()
+[![Repo_Size](https://img.shields.io/github/languages/code-size/shaunsingh/nyoom.nvim?color=orange&label=Repo%20Size&style=for-the-badge)]()
+[![Pull_Requests](https://img.shields.io/github/issues-pr/shaunisngh/nyoom.nvim?style=for-the-badge)]()
+[![Issues](https://img.shields.io/github/issues/shausingh/nyoom.nvim?color=red&style=for-the-badge)]()
 [![Neovim Minimum Version](https://img.shields.io/badge/Neovim-0.5+-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://github.com/neovim/neovim)
-
-</div>
-
+  
 ## Install
 
 ### Using nix: 
