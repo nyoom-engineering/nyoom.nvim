@@ -32,13 +32,13 @@ for _, plugin in pairs(disabled_built_ins) do
 end
 
 -- load options, mappings, and plugins
-local doom_modules = {
+local nyoom_modules = {
    "options",
    "mappings",
    "packer_compiled",
 }
 
-for i = 1, #doom_modules, 1 do
-   pcall(require, doom_modules[i])
+for i = 1, #nyoom_modules, 1 do
+   pcall(require, nyoom_modules[i])
 end
 
