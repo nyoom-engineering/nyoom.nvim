@@ -7,7 +7,9 @@
 [![Pull_Requests](https://img.shields.io/github/issues-pr/shaunisngh/nyoom.nvim?style=for-the-badge)]()
 [![Issues](https://img.shields.io/github/issues/shausingh/nyoom.nvim?color=red&style=for-the-badge)]()
 [![Neovim Minimum Version](https://img.shields.io/badge/Neovim-0.5+-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://github.com/neovim/neovim)
-  
+
+</div> 
+
 ## Install
 
 ### Using nix: 
