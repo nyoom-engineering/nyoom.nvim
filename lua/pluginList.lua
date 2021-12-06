@@ -41,15 +41,14 @@ return packer.startup(function()
    }
 
    use {
-      --"shaunisingh/nord.nvim",
-      --branch = "nvim_api_rewrite",
-      --config = function()
-      --   require("nord").set()
-      --end,
-      "~/nix-darwin-dotfiles/configs/nyoom.nvim/lua/ext/doom-vibrant.nvim",
+      "Clutch-Squad-10669/nord.nvim",
       config = function()
-         require("doom").set()
+         require("nord").set()
       end,
+--      "~/.config/nvim/lua/ext/doom.nvim",
+--      config = function()
+--         vim.cmd[[colorscheme doom]]
+--      end,
    }
 
    use {
@@ -65,7 +64,7 @@ return packer.startup(function()
    }
 
    use {
-      "~/nix-darwin-dotfiles/configs/nyoom.nvim/lua/ext/statusline.nvim",
+      "~/.config/nvim/lua/ext/statusline.nvim",
       config = function()
          require "plugins.statusline"
       end,

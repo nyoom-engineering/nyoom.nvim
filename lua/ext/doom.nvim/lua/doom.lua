@@ -1,4 +1,4 @@
--- Colorscheme name:    doom-vibrant.nvim
+-- Colorscheme name:    doom.nvim
 -- Description:         Port of hlissner's doom-vibrant theme for neovim
 -- Author:              https://github.com/shaunsingh
 

@@ -112,7 +112,7 @@ end
 -- statusline for simple buffers such as NvimTree where you don't need mode indicators etc
 function M.simpleLine()
    local statusline = ""
-   return statusline .. "%#Status_Line#" .. bufname.get_buffer_name() .. ""
+   return statusline .. "%#Status_Line#" .. bufname.get_buffer_name() .. ""
 end
 
 -- INACTIVE FUNCTION DISPLAY
