@@ -1,6 +1,3 @@
-local api = vim.api
-local cmd = api.nvim_command
-local call = vim.call
 local modes = require "tables._modes"
 local git_branch = require "sections._git_branch"
 local lsp = require "sections._lsp"
@@ -10,6 +7,7 @@ local bufname = require "sections._bufname"
 local buficon = require "sections._buficon"
 local editable = require "sections._bufeditable"
 local filesize = require "sections._filesize"
+
 local M = {}
 
 -- Separators
@@ -29,50 +27,49 @@ local red = "#ff665c"
 -- fg and bg
 local white_fg = "#bbc2cf"
 local black_fg = "#242730"
-local mybg = "#242730"
 
 --Statusline colour
 local statusline_bg = "None" --> Set to none, use native bg
 local statusline_fg = white_fg
 -- local statusline_font = 'regular'
-cmd("hi Status_Line guibg=" .. statusline_bg .. " guifg=" .. statusline_fg)
+vim.api.nvim_command("hi Status_Line guibg=" .. statusline_bg .. " guifg=" .. statusline_fg)
 
 --LSP Function Highlight Color
-cmd("hi Statusline_LSP_Func guibg=" .. statusline_bg .. " guifg=" .. green)
+vim.api.nvim_command("hi Statusline_LSP_Func guibg=" .. statusline_bg .. " guifg=" .. green)
 
 -- INACTIVE BUFFER Colours
-local InactiveLine_bg = "#1c1c1c"
+local InactiveLine_bg = "#2a2e38"
 local InactiveLine_fg = white_fg
-cmd("hi InActive guibg=" .. InactiveLine_bg .. " guifg=" .. InactiveLine_fg)
+vim.api.nvim_command("hi InActive guibg=" .. InactiveLine_bg .. " guifg=" .. InactiveLine_fg)
 
 -- Redraw different colors for different mode
 local set_mode_colours = function(mode)
    if mode == "n" then
-      cmd("hi Mode guibg=" .. blue .. " guifg=" .. black_fg .. " gui=bold")
-      cmd("hi ModeSeparator guifg=" .. blue)
+      vim.api.nvim_command("hi Mode guibg=" .. blue .. " guifg=" .. black_fg .. " gui=bold")
+      vim.api.nvim_command("hi ModeSeparator guifg=" .. blue)
    end
    if mode == "i" then
-      cmd("hi Mode guibg=" .. green .. " guifg=" .. black_fg .. " gui=bold")
-      cmd("hi ModeSeparator guifg=" .. green)
+      vim.api.nvim_command("hi Mode guibg=" .. green .. " guifg=" .. black_fg .. " gui=bold")
+      vim.api.nvim_command("hi ModeSeparator guifg=" .. green)
    end
    if mode == "v" or mode == "V" or mode == "^V" then
-      cmd("hi Mode guibg=" .. purple .. " guifg=" .. black_fg .. " gui=bold")
-      cmd("hi ModeSeparator guifg=" .. purple)
+      vim.api.nvim_command("hi Mode guibg=" .. purple .. " guifg=" .. black_fg .. " gui=bold")
+      vim.api.nvim_command("hi ModeSeparator guifg=" .. purple)
    end
    if mode == "c" then
-      cmd("hi Mode guibg=" .. yellow .. " guifg=" .. black_fg .. " gui=bold")
-      cmd("hi ModeSeparator guifg=" .. yellow)
+      vim.api.nvim_command("hi Mode guibg=" .. yellow .. " guifg=" .. black_fg .. " gui=bold")
+      vim.api.nvim_command("hi ModeSeparator guifg=" .. yellow)
    end
    if mode == "t" then
-      cmd("hi Mode guibg=" .. red .. " guifg=" .. black_fg .. " gui=bold")
-      cmd("hi ModeSeparator guifg=" .. red)
+      vim.api.nvim_command("hi Mode guibg=" .. red .. " guifg=" .. black_fg .. " gui=bold")
+      vim.api.nvim_command("hi ModeSeparator guifg=" .. red)
    end
 end
 
 function M.activeLine()
    local statusline = ""
    -- Component: Mode
-   local mode = api.nvim_get_mode()["mode"]
+   local mode = vim.api.nvim_get_mode()["mode"]
    set_mode_colours(mode)
    statusline = statusline .. "%#ModeSeparator#" .. space
    statusline = statusline
@@ -103,7 +100,7 @@ function M.activeLine()
    -- Component: Modified, Read-Only, Filesize, Row/Col
    statusline = statusline .. "%#Status_Line#" .. bufmod.is_buffer_modified()
    statusline = statusline .. editable.editable() .. filesize.get_file_size() .. [[ʟ %l/%L c %c]] .. space
-   cmd "set noruler"
+   vim.api.nvim_command "set noruler"
    return statusline
 end
 
