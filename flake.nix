@@ -1,8 +1,10 @@
 {
-  description = ":rocket: Blazing Fast Neovim Configuration Written in lua :rocket::rocket::stars:";
+  description =
+    ":rocket: Blazing Fast Neovim Configuration Written in lua :rocket::rocket::stars:";
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+  inputs.neovim-nightly-overlay.url =
+    "github:nix-community/neovim-nightly-overlay";
 
   outputs = { self, nixpkgs, flake-utils, neovim-nightly-overlay }:
     flake-utils.lib.simpleFlake {

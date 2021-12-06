@@ -48,12 +48,12 @@ cmd("hi InActive guibg=" .. InactiveLine_bg .. " guifg=" .. InactiveLine_fg)
 -- Redraw different colors for different mode
 local set_mode_colours = function(mode)
    if mode == "n" then
-      cmd("hi Mode guibg=" .. green .. " guifg=" .. black_fg .. " gui=bold")
-      cmd("hi ModeSeparator guifg=" .. green)
-   end
-   if mode == "i" then
       cmd("hi Mode guibg=" .. blue .. " guifg=" .. black_fg .. " gui=bold")
       cmd("hi ModeSeparator guifg=" .. blue)
+   end
+   if mode == "i" then
+      cmd("hi Mode guibg=" .. green .. " guifg=" .. black_fg .. " gui=bold")
+      cmd("hi ModeSeparator guifg=" .. green)
    end
    if mode == "v" or mode == "V" or mode == "^V" then
       cmd("hi Mode guibg=" .. purple .. " guifg=" .. black_fg .. " gui=bold")

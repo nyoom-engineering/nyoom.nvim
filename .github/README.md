@@ -48,7 +48,7 @@ Then run `:PackerSync`
 ## TODO
 
 - ~~Rewrite statusline w/o plugins (+async)~~
-- Redo Cmp/LspConfig/Copilot configs and integrations
+- ~~Redo Cmp/LspConfig/Copilot configs and integrations~~
 - ~~Rewrite theme to use `nvim_set_hl`~~
 - Remove hardcoded path and hex values + theme switcher (dark/light)
 
