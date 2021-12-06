@@ -10,6 +10,11 @@
 
 </div> 
 
+## Showcase
+
+WIP
+<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/144912832-08877ef6-5311-4da2-9967-6b6ff3d866ce.png">
+
 ## Install
 
 ### Using nix: 
