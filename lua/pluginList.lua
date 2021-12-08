@@ -128,12 +128,6 @@ return packer.startup(function()
    }
 
    use {
-      "dccsillag/magma-nvim",
-      cmd = { "MagmaInit" },
-      run = ":UpdateRemotePlugins",
-   }
-
-   use {
       "neovim/nvim-lspconfig",
       config = function()
          require "plugins.lspconfig"

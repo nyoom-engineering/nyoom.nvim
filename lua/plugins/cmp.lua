@@ -5,6 +5,9 @@ if not present then
 end
 
 vim.opt.completeopt = "menuone,noselect"
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
 
 -- nvim-cmp setup
 cmp.setup {
@@ -72,7 +75,12 @@ cmp.setup {
          elseif require("luasnip").expand_or_jumpable() then
             vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
          else
-            fallback()
+             local copilot_keys = vim.fn["copilot#Accept"]()
+             if copilot_keys ~= "" then
+                 vim.api.nvim_feedkeys(copilot_keys, "i", true)
+             else
+                 fallback()
+             end
          end
       end,
       ["<S-Tab>"] = function(fallback)
