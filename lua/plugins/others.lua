@@ -137,15 +137,6 @@ M.signature = function()
    end
 end
 
-M.comment = function()
-   local present, comment = pcall(require, "Commment")
-   if present then
-      comment.setup {
-         padding = true,
-      }
-   end
-end
-
 M.orgmode = function()
    local present, orgmode = pcall(require, "orgmode")
    if present then

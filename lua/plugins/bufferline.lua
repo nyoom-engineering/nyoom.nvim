@@ -5,20 +5,20 @@ end
 
 local colors = {
    bg = "NONE",
-   black = "#242730",
-   black2 = "#2a2e38",
-   white = "#bbc2cf",
-   fg = "#bbc2cf",
-   yellow = "#FCCE7B",
-   cyan = "#4db5bd",
-   darkblue = "#51afef",
-   green = "#7bc275",
+   black = "#e7e7e7",
+   black2 = "NONE",
+   white = "#37474F",
+   fg = "#37474F",
+   yellow = "#FFaB91",
+   cyan = "#0098dd",
+   darkblue = "#673AB7",
+   green = "#028e3c",
    orange = "#e69055",
-   purple = "#C57BDB",
-   magenta = "#C57BDB",
+   purple = "#673AB7",
+   magenta = "#673AB7",
    gray = "#62686E",
-   blue = "#51afef",
-   red = "#ff665c",
+   blue = "#0098dd",
+   red = "#FF6961",
 }
 
 bufferline.setup {
@@ -37,7 +37,7 @@ bufferline.setup {
       enforce_regular_tabs = false,
       view = "multiwindow",
       show_buffer_close_icons = true,
-      separator_style = "thin",
+      separator_style = { '', '' },
       always_show_bufferline = false,
       diagnostics = false, -- "or nvim_lsp"
       custom_filter = function(buf_number)
@@ -125,16 +125,16 @@ bufferline.setup {
 
       -- separators
       separator = {
-         guifg = colors.black2,
-         guibg = colors.black2,
+         guifg = colors.black,
+         guibg = colors.black,
       },
       separator_visible = {
-         guifg = colors.black2,
-         guibg = colors.black2,
+         guifg = colors.black,
+         guibg = colors.black,
       },
       separator_selected = {
-         guifg = colors.black2,
-         guibg = colors.black2,
+         guifg = colors.black,
+         guibg = colors.black,
       },
       -- tabs
       tab = {

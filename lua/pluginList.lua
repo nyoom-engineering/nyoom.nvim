@@ -41,14 +41,13 @@ return packer.startup(function()
    }
 
    use {
-      "Clutch-Squad-10669/nord.nvim",
+      "~/.config/nvim/lua/ext/nano",
       config = function()
-         require("nord").set()
+         vim.g.nano_transparent_background = false
+         vim.g.nano_enable_italic_comment = false
+         vim.g.nano_enable_italic = false
+         require('nano').colorscheme()
       end,
---      "~/.config/nvim/lua/ext/doom.nvim",
---      config = function()
---         vim.cmd[[colorscheme doom]]
---      end,
    }
 
    use {
@@ -64,16 +63,16 @@ return packer.startup(function()
    }
 
    use {
-      "~/.config/nvim/lua/ext/statusline.nvim",
+      "akinsho/bufferline.nvim",
       config = function()
-         require "plugins.statusline"
+         require "plugins.bufferline"
       end,
    }
 
    use {
-      "akinsho/bufferline.nvim",
+      "nvim-lualine/lualine.nvim",
       config = function()
-         require "plugins.bufferline"
+         require "plugins.statusline"
       end,
    }
 
@@ -149,14 +148,6 @@ return packer.startup(function()
    use {
       "rafamadriz/friendly-snippets",
       event = "InsertEnter",
-   }
-
-   use {
-      "numToStr/Comment.nvim",
-      after = "friendly-snippets",
-      config = function()
-         require("plugins.others").comment()
-      end,
    }
 
    use {

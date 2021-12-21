@@ -4,14 +4,13 @@ if not present then
 end
 
 local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-parser_configs.norg = {
-   -- on macOS: https://github.com/nvim-neorg/neorg/issues/74#issuecomment-906627223
-   install_info = {
-      url = "https://github.com/nvim-neorg/tree-sitter-norg",
-      files = { "src/parser.c", "src/scanner.cc" },
-      branch = "main",
-   },
-}
+-- parser_configs.norg = {
+--    install_info = {
+--       url = "https://github.com/nvim-neorg/tree-sitter-norg",
+--       files = { "src/parser.c", "src/scanner.cc" },
+--       branch = "main",
+--    },
+-- }
 parser_configs.org = {
    install_info = {
       url = "https://github.com/milisims/tree-sitter-org",
@@ -22,7 +21,7 @@ parser_configs.org = {
 }
 
 ts_config.setup {
-   ensure_installed = { "lua", "nix" },
+   ensure_installed = "maintained",
    indent = { enable = true },
    highlight = {
       enable = true,

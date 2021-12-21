@@ -2,7 +2,7 @@
 vim.g.did_load_filetypes = 1
 vim.g.shell = "/bin/bash" --fish has speed issues with nvim-tree
 vim.g.neovide_cursor_vfx_mode = "pixiedust" -- neovide trail
---vim.opt.fillchars = { eob = " " } -- disable tilde fringe
+vim.opt.termguicolors = true
 vim.opt.undofile = true -- enable persistent undo
 vim.opt.swapfile = false -- disable swap
 vim.opt.cursorline = true -- enable cursorline
