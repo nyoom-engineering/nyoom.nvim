@@ -1,5 +1,4 @@
 local present, cmp = pcall(require, "cmp")
-
 if not present then
    return
 end
@@ -24,9 +23,9 @@ cmp.setup {
             nvim_lua = "Lua",
             Path = "Path",
             luasnip = "LuaSnip",
-            neorg = "Neorg",
             orgmode = "Org",
             treesitter = "ts",
+            copilot = "co",
          })[entry.source.name]
          vim_item.kind = ({
             Text = "",
@@ -75,12 +74,7 @@ cmp.setup {
          elseif require("luasnip").expand_or_jumpable() then
             vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
          else
-             local copilot_keys = vim.fn["copilot#Accept"]()
-             if copilot_keys ~= "" then
-                 vim.api.nvim_feedkeys(copilot_keys, "i", true)
-             else
-                 fallback()
-             end
+            fallback()
          end
       end,
       ["<S-Tab>"] = function(fallback)
@@ -98,8 +92,8 @@ cmp.setup {
       { name = "luasnip" },
       { name = "rg" },
       { name = "nvim_lua" },
-      { name = "neorg" },
       { name = "treesitter" },
       { name = "orgmode" },
+      { name = "copilot" },
    },
 }

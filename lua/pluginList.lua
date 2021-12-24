@@ -28,6 +28,7 @@ return packer.startup(function()
       cmd = "StartupTime",
    }
 
+   -- jk for escape
    use {
       "max397574/better-escape.nvim",
       event = "InsertEnter",
@@ -40,16 +41,18 @@ return packer.startup(function()
       end,
    }
 
+   -- colorscheme
    use {
       "~/.config/nvim/lua/ext/nano",
       config = function()
-         vim.g.nano_transparent_background = false
+         vim.g.nano_enable_transparency = false
          vim.g.nano_enable_italic_comment = false
          vim.g.nano_enable_italic = false
-         require('nano').colorscheme()
+         require("nano").colorscheme()
       end,
    }
 
+   -- reminds me of my keybindings
    use {
       "folke/which-key.nvim",
       keys = "<space>",
@@ -58,31 +61,16 @@ return packer.startup(function()
       end,
    }
 
-   use {
-      "kyazdani42/nvim-web-devicons",
-   }
-
+   -- tabline/bufferline
    use {
       "akinsho/bufferline.nvim",
+      requires = { "kyazdani42/nvim-web-devicons", opt = true },
       config = function()
          require "plugins.bufferline"
       end,
    }
 
-   use {
-      "nvim-lualine/lualine.nvim",
-      config = function()
-         require "plugins.statusline"
-      end,
-   }
-
-   use {
-      "lukas-reineke/indent-blankline.nvim",
-      config = function()
-         require("plugins.others").blankline()
-      end,
-   }
-
+   -- preview the colors of hexcodes
    use {
       "norcalli/nvim-colorizer.lua",
       cmd = "ColorizerToggle",
@@ -91,6 +79,7 @@ return packer.startup(function()
       end,
    }
 
+   -- colorful and fast syntax parsing
    use {
       "nvim-treesitter/nvim-treesitter",
       config = function()
@@ -98,20 +87,27 @@ return packer.startup(function()
       end,
    }
 
+   -- ... now visualize it
    use {
       "nvim-treesitter/playground",
       cmd = "TSPlayground",
    }
 
+   -- colorful parenthesis
    use {
       "p00f/nvim-ts-rainbow",
       after = "nvim-treesitter",
    }
 
+   -- view what I've messed up so far
    use {
       "lewis6991/gitsigns.nvim",
+      config = function()
+         require "plugins.gitsigns"
+      end,
    }
 
+   -- filebrowser
    use {
       "kyazdani42/nvim-tree.lua",
       cmd = { "NvimTreeToggle", "NvimTreeFocus" },
@@ -120,12 +116,7 @@ return packer.startup(function()
       end,
    }
 
-   -- LSP (and copilot
-   use {
-      "github/copilot.vim",
-      event = "InsertEnter",
-   }
-
+   -- LSP
    use {
       "neovim/nvim-lspconfig",
       config = function()
@@ -133,10 +124,12 @@ return packer.startup(function()
       end,
    }
 
+   -- I hate manually installing language servers
    use {
       "williamboman/nvim-lsp-installer",
    }
 
+   -- show signatures in the gutter
    use {
       "ray-x/lsp_signature.nvim",
       after = "nvim-lspconfig",
@@ -145,11 +138,28 @@ return packer.startup(function()
       end,
    }
 
+   -- and a more conventional list at the bottom
+   use {
+      "folke/trouble.nvim",
+      cmd = "Trouble",
+      config = function()
+         require("trouble").setup()
+      end,
+   }
+
+   -- nice looking menu for actions
+   use {
+      "weilbith/nvim-code-action-menu",
+      cmd = "CodeActionMenu",
+   }
+
+   -- I always forget how to code
    use {
       "rafamadriz/friendly-snippets",
       event = "InsertEnter",
    }
 
+   -- completion engine
    use {
       "hrsh7th/nvim-cmp",
       after = "friendly-snippets",
@@ -158,6 +168,7 @@ return packer.startup(function()
       end,
    }
 
+   -- snippet engine
    use {
       "L3MON4D3/LuaSnip",
       wants = "friendly-snippets",
@@ -175,6 +186,16 @@ return packer.startup(function()
    use {
       "hrsh7th/cmp-nvim-lua",
       after = "nvim-cmp",
+   }
+
+   use {
+      "github/copilot.vim",
+      after = "nvim-cmp",
+   }
+
+   use {
+      "hrsh7th/cmp-copilot",
+      after = "copilot.vim",
    }
 
    use {
@@ -197,11 +218,13 @@ return packer.startup(function()
       after = "nvim-cmp",
    }
 
+   -- fuzzy searching for everythign
    use {
       "nvim-telescope/telescope.nvim",
       cmd = "Telescope",
       requires = {
          {
+            -- ... and make it fast
             "nvim-telescope/telescope-fzf-native.nvim",
             "nvim-lua/plenary.nvim",
             run = "make",
@@ -212,16 +235,7 @@ return packer.startup(function()
       end,
    }
 
-   use {
-      "VonHeikemen/fine-cmdline.nvim",
-      requires = {
-         "MunifTanjim/nui.nvim",
-      },
-      config = function()
-         require("plugins.others").fineCmdline()
-      end,
-   }
-
+   -- beautify the UI
    use {
       "VonHeikemen/searchbox.nvim",
       requires = {
@@ -232,6 +246,7 @@ return packer.startup(function()
       end,
    }
 
+   -- and the notifications too!
    use {
       "rcarriga/nvim-notify",
       config = function()
@@ -251,6 +266,7 @@ return packer.startup(function()
       end,
    }
 
+   -- take away distractions
    use {
       "Pocco81/TrueZen.nvim",
       cmd = {
@@ -263,6 +279,7 @@ return packer.startup(function()
       end,
    }
 
+   -- and take away my colors
    use {
       "folke/twilight.nvim",
       cmd = {
@@ -270,10 +287,11 @@ return packer.startup(function()
          "TwilightEnable",
       },
       config = function()
-         require("twilight").setup {}
+         require("twilight").setup()
       end,
    }
 
+   -- move around quickly
    use {
       "phaazon/hop.nvim",
       cmd = {
@@ -289,11 +307,13 @@ return packer.startup(function()
       end,
    }
 
+   -- Let me see what I messed up (in condensed form!)
    use {
       "sindrets/diffview.nvim",
       after = "neogit",
    }
 
+   -- and commit my messups too!
    use {
       "TimUntersberger/neogit",
       cmd = {
@@ -305,29 +325,26 @@ return packer.startup(function()
       end,
    }
 
-   use {
-      "nvim-neorg/neorg",
-      branch = "unstable",
-      setup = vim.cmd "autocmd BufRead,BufNewFile *.norg setlocal filetype=norg",
-      after = { "nvim-treesitter" }, -- you may also specify telescope
-      ft = "norg",
-      config = function()
-         require "plugins.neorg"
-      end,
-   }
-
+   -- and finally, notes
    use {
       "nvim-orgmode/orgmode",
       ft = "org",
       setup = vim.cmd "autocmd BufRead,BufNewFile *.org setlocal filetype=org",
       after = { "nvim-treesitter" },
       config = function()
-         require("orgmode").setup {}
+         require("orgmode").setup()
       end,
    }
 
+   -- fancy maths :tm:
    use {
-      "nvim-neorg/neorg-telescope",
-      ft = "norg",
+      "jbyuki/nabla.nvim",
+      after = "orgmode",
+   }
+
+   -- bring emacs' greatest features to neovim, one by one
+   use {
+      "alec-gibson/nvim-tetris",
+      cmd = "Tetris",
    }
 end)

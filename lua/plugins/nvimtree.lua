@@ -4,8 +4,6 @@ if not present then
    return
 end
 
-vim.o.termguicolors = true
-
 vim.g.nvim_tree_add_trailing = 0 -- append a trailing slash to folder names
 vim.g.nvim_tree_highlight_opened_files = 0
 vim.g.nvim_tree_indent_markers = 1
