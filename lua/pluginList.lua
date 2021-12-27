@@ -7,6 +7,7 @@ else
 end
 
 local use = packer.use
+
 return packer.startup(function()
    -- Have packer manage itself
    use {
@@ -17,10 +18,14 @@ return packer.startup(function()
    -- Startup optimizations
    use {
       "nathom/filetype.nvim",
+      config = function()
+        vim.g.did_load_filetypes = 1
+      end,
    }
 
    use {
       "lewis6991/impatient.nvim",
+      after = 'filetype.nvim',
    }
 
    use {
@@ -31,7 +36,7 @@ return packer.startup(function()
    -- jk for escape
    use {
       "max397574/better-escape.nvim",
-      event = "InsertEnter",
+      event = 'InsertCharPre',
       config = function()
          require("better_escape").setup {
             mapping = { "jk", "jj" },
@@ -44,6 +49,7 @@ return packer.startup(function()
    -- colorscheme
    use {
       "~/.config/nvim/lua/ext/nano",
+      after = "packer.nvim",
       config = function()
          vim.g.nano_enable_transparency = false
          vim.g.nano_enable_italic_comment = false
@@ -64,6 +70,7 @@ return packer.startup(function()
    -- tabline/bufferline
    use {
       "akinsho/bufferline.nvim",
+      after = "nano",
       requires = { "kyazdani42/nvim-web-devicons", opt = true },
       config = function()
          require "plugins.bufferline"
@@ -82,6 +89,8 @@ return packer.startup(function()
    -- colorful and fast syntax parsing
    use {
       "nvim-treesitter/nvim-treesitter",
+      run = ':TSUpdate',
+      event = "BufRead",
       config = function()
          require "plugins.treesitter"
       end,
@@ -119,6 +128,7 @@ return packer.startup(function()
    -- LSP
    use {
       "neovim/nvim-lspconfig",
+      after = "nvim-lsp-installer",
       config = function()
          require "plugins.lspconfig"
       end,
@@ -127,6 +137,14 @@ return packer.startup(function()
    -- I hate manually installing language servers
    use {
       "williamboman/nvim-lsp-installer",
+      opt = true,
+      setup = function()
+         require("config").packer_lazy_load "nvim-lspconfig"
+         -- reload the current file so lsp actually starts for it
+         vim.defer_fn(function()
+            vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
+         end, 0)
+      end,
    }
 
    -- show signatures in the gutter
@@ -235,18 +253,7 @@ return packer.startup(function()
       end,
    }
 
-   -- beautify the UI
-   use {
-      "VonHeikemen/searchbox.nvim",
-      requires = {
-         "MunifTanjim/nui.nvim",
-      },
-      config = function()
-         require("plugins.others").searchbox()
-      end,
-   }
-
-   -- and the notifications too!
+  -- and the notifications too!
    use {
       "rcarriga/nvim-notify",
       config = function()
@@ -329,7 +336,6 @@ return packer.startup(function()
    use {
       "nvim-orgmode/orgmode",
       ft = "org",
-      setup = vim.cmd "autocmd BufRead,BufNewFile *.org setlocal filetype=org",
       after = { "nvim-treesitter" },
       config = function()
          require("orgmode").setup()
@@ -340,6 +346,9 @@ return packer.startup(function()
    use {
       "jbyuki/nabla.nvim",
       after = "orgmode",
+      config = function()
+         require("plugins.others").nabla()
+      end,
    }
 
    -- bring emacs' greatest features to neovim, one by one
@@ -347,4 +356,15 @@ return packer.startup(function()
       "alec-gibson/nvim-tetris",
       cmd = "Tetris",
    }
+
+   -- blazing fast memory safe rust :tm:
+   use {
+      'simrat39/rust-tools.nvim',
+      requires = { 'mfussenegger/nvim-dap' },
+      ft = { 'rust', 'toml' },
+      config = function()
+         require 'langs.rust'
+      end,
+   }
+
 end)

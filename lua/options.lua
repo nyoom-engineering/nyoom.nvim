@@ -1,6 +1,3 @@
-vim.g.did_load_filetypes = 1 -- Do not source the default filetype.vim
-vim.g.shell = "/bin/bash" --fish has speed issues with nvim-tree
-
 vim.opt.ttyfast = true -- faster redrawing
 vim.opt.lazyredraw = false -- don't redraw while executing macros
 vim.opt.clipboard = "unnamedplus" -- enable universal clipboard
@@ -26,8 +23,8 @@ vim.opt.smartcase = true -- only use case if search is capital
 vim.opt.ignorecase = true -- ""
 vim.opt.magic = true -- set magic on, for regular expressions
 
-vim.g.neovide_cursor_vfx_mode = "pixiedust" -- neovide trail
 vim.opt.guifont = "Liga SFMono Nerd Font:h14" -- set guifont for neovide
+vim.opt.fillchars = { eob = " " } -- disable tilde fringe
 
 vim.opt.shortmess:append "casI" -- disable intro
 vim.opt.whichwrap:append "<>hl" -- clean aligned wraps

@@ -9,7 +9,7 @@
   outputs = { self, nixpkgs, flake-utils, neovim-nightly-overlay }:
     flake-utils.lib.simpleFlake {
       inherit self nixpkgs;
-      name = "default.nvim";
+      name = "nyoom.nvim";
       overlay = neovim-nightly-overlay.overlay;
       shell = ./shell.nix;
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" "aarch64-linux"];

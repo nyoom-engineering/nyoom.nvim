@@ -6,13 +6,11 @@
 [![Repo_Size](https://img.shields.io/github/languages/code-size/shaunsingh/nyoom.nvim?color=orange&label=Repo%20Size&style=for-the-badge)]()
 [![Pull_Requests](https://img.shields.io/github/issues-pr/shaunisngh/nyoom.nvim?style=for-the-badge)]()
 [![Issues](https://img.shields.io/github/issues/shausingh/nyoom.nvim?color=red&style=for-the-badge)]()
-[![Neovim Minimum Version](https://img.shields.io/badge/Neovim-0.5+-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://github.com/neovim/neovim)
+[![Neovim Minimum Version](https://img.shields.io/badge/Neovim-0.6+-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://github.com/neovim/neovim)
 
 </div> 
 
 ## Showcase
-
-<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/144915258-dc6652cf-64e4-458f-8f01-8f17dbb33756.png">
 
 ## Install
 
@@ -22,10 +20,9 @@ Requires nix version > 21.11, with experimental features `flakes` and `nix-comma
 ```bash
 git clone --depth 1 shaunsingh/nyoom.nvim && cd nyoom.nvim 
 nix develop
-nvim
 ```
 
-Then run `:PackerSync`
+Then run `nvim` as usual, and `:PackerSync` to update/install plugins
 
 ### Regular:
 
@@ -35,6 +32,7 @@ Install the following dependencies:
 - luajit
 - ripgrep
 - nodejs (optional, for copilot)
+- font with nerdfont icons 
 
 ```bash
 git clone --depth 1 shaunsingh/nyoom.nvim ~/.config/nvim 
@@ -49,12 +47,12 @@ Then run `:PackerSync`
 
 ## Features
 
-## TODO
-
-- ~~Rewrite statusline w/o plugins (+async)~~
-- ~~Redo Cmp/LspConfig/Copilot configs and integrations~~
-- ~~Rewrite theme to use `nvim_set_hl`~~
-- Remove hardcoded path and hex values + theme switcher (dark/light)
+Nyoom.nvim provides the following: 
+- Lazy Loaded plugin management via Packer.nvim
+- Optimized startup and caching via filetype.nvim and impatient.nvim
+- Fast colorscheme via the `nvim_set_hl` api
+- Tabline using bufferline.nvim 
+- Fast & colorful syntax highlighting, indentation, and parenthesis via nvim-treesitter
 
 ## Warning
 
