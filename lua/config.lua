@@ -22,41 +22,11 @@ However, this adds more issues, mainly "Core" Configuration files have to reflec
 
 Doom-emacs has a wise solution to this. While Doom-emacs itself is opinionated, it is broken up into opinionated modules the user can enable/disable, as well as a `config.el` file the user can write their own elisp configurations too. In that spirit, what I have below is a `config.lua`. It follows the same idea, the user can override and add their own configuration. In its current state, its just personal snippets of mine, but soon it will become a file the user can use to modify core features and add their own 
 
-TODO 
-- add (after!)/method to override lazy loaded configs
-- add way for user to add thier own plugins/configs
 #+end_rant
 ]]
 
 -- Give neovide a pixiedust effect on its trail
 vim.g.neovide_cursor_vfx_mode = "pixiedust"
-
--- Using autocmd and CursorMoved/CursorMovedI events, zz is applied to every keystroke that would change the cursor position. Minorly optimized by only applying zz to vertical line movement. Will update to lua once autocmd is natively supported, vimscript is currently more performant
-vim.api.nvim_exec(
-  [[
-    :function StayCenteredI()
-    :  let line = line(".")
-    :  if line != get(b:, 'last_line', 0)
-    :    let col = getcurpos()[4]
-    :    normal! zz
-    :    call cursor(line, col)
-    :    let b:last_line = line
-    :  endif
-    :endfunction
-    :function StayCentered()
-    :  let line = line(".")
-    :  if line != get(b:, 'last_line', 0)
-    :    normal! zz
-    :    let b:last_line = line
-    :  endif
-    :endfunction
-    augroup StayCentered
-      autocmd!
-      autocmd CursorMovedI * :call StayCenteredI()
-      autocmd CursorMoved * :call StayCentered()
-    augroup END
-  ]], true
-)
 
 -- Highlight on yank
 vim.cmd [[

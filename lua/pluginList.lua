@@ -58,6 +58,14 @@ return packer.startup(function()
       end,
    }
 
+   use {
+      "~/.config/nvim/lua/ext/nano-modeline",
+      after = "packer.nvim",
+      config = function()
+         require("nano-modeline").setup()
+      end,
+   }
+
    -- reminds me of my keybindings
    use {
       "folke/which-key.nvim",
@@ -70,11 +78,15 @@ return packer.startup(function()
    -- tabline/bufferline
    use {
       "akinsho/bufferline.nvim",
-      after = "nano",
-      requires = { "kyazdani42/nvim-web-devicons", opt = true },
+      after = "nvim-web-devicons",
       config = function()
          require "plugins.bufferline"
       end,
+   }
+
+   use {
+      "kyazdani42/nvim-web-devicons", 
+      after = "nano",
    }
 
    -- preview the colors of hexcodes

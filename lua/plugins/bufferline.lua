@@ -47,7 +47,7 @@ bufferline.setup {
    highlights = {
       background = {
          guifg = p.fg,
-         guibg = p.black,
+         guibg = p.white,
       },
 
       -- buffers
@@ -58,27 +58,27 @@ bufferline.setup {
       },
       buffer_visible = {
          guifg = p.grey,
-         guibg = p.black,
+         guibg = p.white,
       },
 
       -- for diagnostics = "nvim_lsp"
       error = {
          guifg = p.grey,
-         guibg = p.black,
+         guibg = p.white,
       },
       error_diagnostic = {
          guifg = p.grey,
-         guibg = p.black,
+         guibg = p.white,
       },
 
       -- close buttons
       close_button = {
          guifg = p.grey,
-         guibg = p.black,
+         guibg = p.white,
       },
       close_button_visible = {
          guifg = p.grey,
-         guibg = p.black,
+         guibg = p.white,
       },
       close_button_selected = {
          guifg = p.bg_red,
@@ -86,7 +86,7 @@ bufferline.setup {
       },
       fill = {
          guifg = p.fg,
-         guibg = p.black,
+         guibg = p.white,
       },
       indicator_selected = {
          guifg = p.slightwhite,
@@ -96,11 +96,11 @@ bufferline.setup {
       -- modified
       modified = {
          guifg = p.bg_red,
-         guibg = p.black,
+         guibg = p.white,
       },
       modified_visible = {
          guifg = p.bg_red,
-         guibg = p.black,
+         guibg = p.white,
       },
       modified_selected = {
          guifg = p.bg_green,
@@ -123,10 +123,10 @@ bufferline.setup {
       -- tabs
       tab = {
          guifg = p.grey,
-         guibg = p.black,
+         guibg = p.white,
       },
       tab_selected = {
-         guifg = p.black,
+         guifg = p.white,
          guibg = p.purple,
       },
       tab_close = {

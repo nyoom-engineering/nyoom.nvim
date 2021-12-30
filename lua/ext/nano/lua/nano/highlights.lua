@@ -18,7 +18,7 @@ end
 hl.predef = {
    Fg = { fg = p.fg, bold = true },
    Grey = { fg = p.grey, bold = true },
-   Red = { fg = p.red },
+   Red = { fg = p.purple },
    Yellow = { fg = p.yellow },
    Blue = { fg = p.blue },
    Purple = { fg = p.purple },
@@ -26,18 +26,18 @@ hl.predef = {
    BlueItalic = { fg = p.blue, italic = cfg.italic },
    PurpleItalic = { fg = p.purple, italic = cfg.italic },
    FgItalic = { fg = p.fg, italic = cfg.italic },
-   RedItalic = { fg = p.red, italic = cfg.italic },
+   RedItalic = { fg = p.purple, italic = cfg.italic },
 }
 
 hl.common = {
-   Normal = { fg = p.fg, bg = p.black },
-   FloatBorder = { fg = p.purple, bg = p.black },
-   MsgArea = { fg = p.fg, bg = p.black },
-   Terminal = { fg = p.fg, bg = p.black },
-   EndOfBuffer = { fg = p.bg2, bg = p.black },
+   Normal = { fg = p.fg, bg = p.white },
+   FloatBorder = { fg = p.purple, bg = p.white },
+   MsgArea = { fg = p.fg, bg = p.white },
+   Terminal = { fg = p.fg, bg = p.white },
+   EndOfBuffer = { fg = p.bg1, bg = p.white },
    FoldColumn = { fg = p.fg, bg = p.bg1 },
    Folded = { fg = p.fg, bg = p.bg1 },
-   SignColumn = { fg = p.fg, bg = p.black },
+   SignColumn = { fg = p.fg, bg = p.white },
    ToolbarLine = { fg = p.fg },
    Cursor = { reverse = true },
    vCursor = { reverse = true },
@@ -48,47 +48,47 @@ hl.common = {
    CursorLine = { bg = p.slightwhite },
    ColorColumn = { bg = p.bg1 },
    CursorLineNr = { fg = p.fg },
-   LineNr = { fg = p.bg4 },
+   LineNr = { fg = p.bg2 },
    Conceal = { fg = p.grey, bg = p.bg1 },
    DiffAdd = { fg = p.none, bg = p.yellow },
    DiffChange = { fg = p.none, bg = p.bg_green },
    DiffDelete = { fg = p.none, bg = p.bg_red },
    DiffText = { fg = p.none, reverse = true },
    Directory = { fg = p.purple },
-   ErrorMsg = { fg = p.red, bold = true, underline = true },
+   ErrorMsg = { fg = p.purple, bold = true, underline = true },
    WarningMsg = { fg = p.purple, bold = true },
    MoreMsg = { fg = p.blue, bold = true },
-   IncSearch = { fg = p.red, bg = p.slightwhite, bold = true },
-   Search = { fg = p.red, bg = p.slightwhite, bold = true },
+   IncSearch = { fg = p.purple, bg = p.slightwhite, bold = true },
+   Search = { fg = p.purple, bg = p.slightwhite, bold = true },
    MatchParen = { fg = p.fg, bg = p.slightwhite, bold = true },
-   NonText = { fg = p.bg4 },
-   Whitespace = { fg = p.bg4 },
-   SpecialKey = { fg = p.bg4 },
+   NonText = { fg = p.bg2 },
+   Whitespace = { fg = p.bg2 },
+   SpecialKey = { fg = p.bg2 },
    Pmenu = { fg = p.fg, bg = p.slightwhite },
    PmenuSbar = { fg = p.none, bg = p.slightwhite },
-   PmenuSel = { fg = p.black, bg = p.bg_green },
-   WildMenu = { fg = p.black, bg = p.blue },
+   PmenuSel = { fg = p.white, bg = p.bg_green },
+   WildMenu = { fg = p.white, bg = p.blue },
    PmenuThumb = { fg = p.none, bg = p.grey },
    Question = { fg = p.purple },
-   SpellBad = { fg = p.red, underline = true, sp = p.red },
+   SpellBad = { fg = p.purple, underline = true, sp = p.purple },
    SpellCap = { fg = p.purple, underline = true, sp = p.purple },
    SpellLocal = { fg = p.blue, underline = true, sp = p.blue },
    SpellRare = { fg = p.purple, underline = true, sp = p.purple },
-   StatusLine = { fg = p.fg, bg = p.bg2 },
-   StatusLineTerm = { fg = p.fg, bg = p.bg2 },
+   StatusLine = { fg = p.modeline_fg, bg = p.bg1, bold = true },
+   StatusLineTerm = { fg = p.modeline_fg, bg = p.bg2 },
    StatusLineNC = { fg = p.grey, bg = p.bg1 },
    StatusLineTermNC = { fg = p.grey, bg = p.bg1 },
-   TabLine = { fg = p.fg, bg = p.bg4 },
+   TabLine = { fg = p.fg, bg = p.bg2 },
    TabLineFill = { fg = p.grey, bg = p.bg1 },
-   TabLineSel = { fg = p.black, bg = p.bg_red },
-   VertSplit = { fg = p.black, bg = p.black },
+   TabLineSel = { fg = p.white, bg = p.bg_red },
+   VertSplit = { fg = p.white, bg = p.white },
    Visual = { bg = p.bg1 },
    VisualNOS = { fg = p.none, bg = p.bg2, underline = true },
    QuickFixLine = { fg = p.blue, underline = true },
    Debug = { fg = p.purple },
-   debugPC = { fg = p.black, bg = p.purple },
-   debugBreakpoint = { fg = p.black, bg = p.red },
-   ToolbarButton = { fg = p.black, bg = p.bg_blue },
+   debugPC = { fg = p.white, bg = p.purple },
+   debugBreakpoint = { fg = p.white, bg = p.purple },
+   ToolbarButton = { fg = p.white, bg = p.bg_blue },
 }
 
 hl.syntax = {
@@ -122,8 +122,8 @@ hl.syntax = {
    Title = hl.predef.Yellow,
    Tag = hl.predef.Fg,
    Delimiter = hl.predef.FgItalic,
-   Comment = { fg = p.bg4, italic = cfg.italic_comment },
-   SpecialComment = { fg = p.bg4, italic = cfg.italic_comment },
+   Comment = { fg = p.bg2, italic = cfg.italic_comment },
+   SpecialComment = { fg = p.bg2, italic = cfg.italic_comment },
    Todo = { fg = p.blue, bold = true, italic = cfg.italic_comment },
 }
 
@@ -133,15 +133,15 @@ hl.plugins.lsp = {
    LspCxxHlGroupNamespace = hl.predef.Blue,
    LspCxxHlSkippedRegion = hl.predef.Grey,
    LspCxxHlSkippedRegionBeginEnd = hl.predef.Red,
-   LspDiagnosticsDefaultError = { fg = u.color_gamma(p.red, 0.5) },
+   LspDiagnosticsDefaultError = { fg = u.color_gamma(p.purple, 0.5) },
    LspDiagnosticsDefaultHint = { fg = u.color_gamma(p.purple, 0.5) },
    LspDiagnosticsDefaultInformation = { fg = u.color_gamma(p.blue, 0.5) },
    LspDiagnosticsDefaultWarning = { fg = u.color_gamma(p.purple, 0.5) },
-   LspDiagnosticsUnderlineError = { underline = true, sp = u.color_gamma(p.red, 0.5) },
+   LspDiagnosticsUnderlineError = { underline = true, sp = u.color_gamma(p.purple, 0.5) },
    LspDiagnosticsUnderlineHint = { underline = true, sp = u.color_gamma(p.purple, 0.5) },
    LspDiagnosticsUnderlineInformation = { underline = true, sp = u.color_gamma(p.blue, 0.5) },
    LspDiagnosticsUnderlineWarning = { underline = true, sp = u.color_gamma(p.purple, 0.5) },
-   DiagnosticSignError = { fg = u.color_gamma(p.red, 0.5) },
+   DiagnosticSignError = { fg = u.color_gamma(p.purple, 0.5) },
    DiagnosticSignHint = { fg = u.color_gamma(p.purple, 0.5) },
    DiagnosticSignInfo = { fg = u.color_gamma(p.blue, 0.5) },
    DiagnosticSignWarn = { fg = u.color_gamma(p.purple, 0.5) },
@@ -201,14 +201,14 @@ hl.plugins.cmp = {
 
 hl.plugins.blankline = {
    IndentBlanklineChar = { fg = p.bg1 },
-   IndentBlanklineContextChar = { fg = p.bg5 },
+   IndentBlanklineContextChar = { fg = p.bg2 },
 }
 
 hl.plugins.hop = {
-   HopNextKey = { fg = p.red },
+   HopNextKey = { fg = p.purple },
    HopNextKey1 = { fg = p.purple },
    HopNextKey2 = { fg = p.blue },
-   HopUnmatched = { fg = p.bg3 },
+   HopUnmatched = { fg = p.bg2 },
 }
 
 hl.plugins.gitsigns = {
@@ -224,9 +224,15 @@ hl.plugins.gitsigns = {
 }
 
 hl.plugins.telescope = {
-   TelescopeSelectionCaret = { fg = p.red },
+   TelescopeSelectionCaret = { fg = p.purple },
    TelescopeSelection = hl.predef.Fg,
    TelescopeMatching = hl.predef.Fg,
+}
+
+hl.plugins.modeline = {
+   StatusLineAccent = { fg = p.white, bg = p.yellow },
+   StatusLineDull = { fg = p.bg2, bg = p.bg1, },
+   StatusLineInactive = { fg = p.bg2, bg = p.bg1 },
 }
 
 function M.clear_namespace()
