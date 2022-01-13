@@ -131,10 +131,7 @@ return packer.startup(function()
    -- LSP
    use {
       "neovim/nvim-lspconfig",
-      after = "nvim-lsp-installer",
-      config = function()
-         require "plugins.lspconfig"
-      end,
+      after = "nvim-lsp-installer"
    }
 
    -- I hate manually installing language servers
@@ -147,6 +144,9 @@ return packer.startup(function()
          vim.defer_fn(function()
             vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
          end, 0)
+      end,
+      config = function()
+         require "plugins.lspconfig"
       end,
    }
 
@@ -359,15 +359,15 @@ return packer.startup(function()
       "alec-gibson/nvim-tetris",
       cmd = "Tetris",
    }
-
-   -- blazing fast memory safe rust :tm:
-   use {
-      'simrat39/rust-tools.nvim',
-      requires = { 'mfussenegger/nvim-dap' },
-      ft = { 'rust', 'toml' },
-      config = function()
-         require 'langs.rust'
-      end,
-   }
+    use { 
+      "CRAG666/code_runner.nvim",
+      requires = 'nvim-lua/plenary.nvim', 
+      branch = "new_features",
+      cmd = {
+         "RunCode",
+         "RunFile",
+         "RunProject",
+      },
+    }
 
 end)

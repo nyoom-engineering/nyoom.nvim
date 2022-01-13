@@ -1,6 +1,7 @@
-local present, lsp_installer_servers = pcall(require, "nvim-lsp-installer.servers")
-if not present then 
-    return
+local present1, lspconfig = pcall(require, "lspconfig")
+local present2, lsp_installer = pcall(require, "nvim-lsp-installer")
+if not (present1 or present2) then
+   return
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -20,42 +21,33 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
    },
 }
 
+-- lazy load servers
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
+
+-- replace the default lsp diagnostic symbols
 local function lspSymbol(name, icon)
-   local hl = "DiagnosticSign" .. name
-   vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
+   vim.fn.sign_define("LspDiagnosticsSign" .. name, { text = icon, numhl = "LspDiagnosticsDefaul" .. name })
 end
-
 lspSymbol("Error", "")
-lspSymbol("Info", "")
+lspSymbol("Information", "")
 lspSymbol("Hint", "")
-lspSymbol("Warn", "")
+lspSymbol("Warning", "")
 
-vim.diagnostic.config {
+-- add smol icon before diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
    virtual_text = {
-      prefix = "",
+      prefix = "",
       spacing = 0,
    },
    signs = true,
    underline = true,
-   update_in_insert = false,
-}
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-   border = "single",
-})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-   border = "single",
+   update_in_insert = false, -- update diagnostics insert mode
 })
 
-local server_available, requested_server = lsp_installer_servers.get_server("sumneko_lua", "pyright")
-if server_available then
-    requested_server:on_ready(function ()
-        local opts = {}
-        requested_server:setup(opts)
-    end)
-    if not requested_server:is_installed() then
-        requested_server:install()
-    end
-end
-
-
+-- rounded borders
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
