@@ -23,4 +23,3 @@ map("n", "<c-k>", "<cmd>wincmd k<CR>") --ctrlhjkl to navigate splits
 map("n", "<c-j>", "<cmd>wincmd j<CR>")
 map("n", "<c-h>", "<cmd>wincmd h<CR>")
 map("n", "<c-l>", "<cmd>wincmd l<CR>")
-

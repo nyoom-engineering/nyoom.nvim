@@ -231,7 +231,7 @@ hl.plugins.telescope = {
 
 hl.plugins.modeline = {
    StatusLineAccent = { fg = p.white, bg = p.yellow },
-   StatusLineDull = { fg = p.bg2, bg = p.bg1, },
+   StatusLineDull = { fg = p.bg2, bg = p.bg1 },
    StatusLineInactive = { fg = p.bg2, bg = p.bg1 },
 }
 

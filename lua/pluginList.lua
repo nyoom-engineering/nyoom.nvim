@@ -27,7 +27,7 @@ return packer.startup(function()
    -- jk for escape
    use {
       "max397574/better-escape.nvim",
-      event = 'InsertCharPre',
+      event = "InsertCharPre",
       config = function()
          require("better_escape").setup {
             mapping = { "jk", "jj" },
@@ -76,7 +76,7 @@ return packer.startup(function()
    }
 
    use {
-      "kyazdani42/nvim-web-devicons", 
+      "kyazdani42/nvim-web-devicons",
       after = "nano",
    }
 
@@ -92,7 +92,7 @@ return packer.startup(function()
    -- colorful and fast syntax parsing
    use {
       "nvim-treesitter/nvim-treesitter",
-      run = ':TSUpdate',
+      run = ":TSUpdate",
       event = "BufRead",
       config = function()
          require "plugins.treesitter"
@@ -131,7 +131,7 @@ return packer.startup(function()
    -- LSP
    use {
       "neovim/nvim-lspconfig",
-      after = "nvim-lsp-installer"
+      after = "nvim-lsp-installer",
    }
 
    -- I hate manually installing language servers
@@ -256,7 +256,7 @@ return packer.startup(function()
       end,
    }
 
-  -- and the notifications too!
+   -- and the notifications too!
    use {
       "rcarriga/nvim-notify",
       config = function()
@@ -359,15 +359,17 @@ return packer.startup(function()
       "alec-gibson/nvim-tetris",
       cmd = "Tetris",
    }
-    use { 
+   use {
       "CRAG666/code_runner.nvim",
-      requires = 'nvim-lua/plenary.nvim', 
+      requires = "nvim-lua/plenary.nvim",
       branch = "new_features",
       cmd = {
          "RunCode",
          "RunFile",
          "RunProject",
       },
-    }
-
+      config = function()
+         require "plugins.code_runner"
+      end,
+   }
 end)

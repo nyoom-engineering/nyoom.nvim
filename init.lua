@@ -2,16 +2,16 @@
 -- Author: Shaurya Singh (@shaunsingh)
 
 --load impatient first
-local present, impatient = pcall(require, 'impatient')
+local present, impatient = pcall(require, "impatient")
 
 -- use opt-in filetype.lua instead of vimscript default
 vim.g.did_load_filetypes = 0
 vim.g.do_filetype_lua = 1
 
--- fish has speed issues with nvim-tree. Adjust this if you 
-  -- 1. already have your default shell as zsh/sh/bash or 
-  -- 2. Have your default shell in a different location
-vim.g.shell = "/bin/bash" 
+-- fish has speed issues with nvim-tree. Adjust this if you
+-- 1. already have your default shell as zsh/sh/bash or
+-- 2. Have your default shell in a different location
+vim.g.shell = "/bin/bash"
 
 --disable builtin plugins
 local disabled_built_ins = {
@@ -57,5 +57,3 @@ vim.cmd "silent! command PackerInstall lua require 'pluginList' require('packer'
 vim.cmd "silent! command PackerStatus lua require 'pluginList' require('packer').status()"
 vim.cmd "silent! command PackerSync lua require 'pluginList' require('packer').sync()"
 vim.cmd "silent! command PackerUpdate lua require 'pluginList' require('packer').update()"
-
-

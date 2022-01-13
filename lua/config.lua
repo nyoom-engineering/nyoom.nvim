@@ -36,7 +36,7 @@ vim.cmd [[
   augroup end
 ]]
 
--- I want to defer lsp by a bit, and some other utilities 
+-- I want to defer lsp by a bit, and some other utilities
 local M = {}
 M.packer_lazy_load = function(plugin, timer)
    if plugin then
@@ -47,5 +47,3 @@ M.packer_lazy_load = function(plugin, timer)
    end
 end
 return M
-
-

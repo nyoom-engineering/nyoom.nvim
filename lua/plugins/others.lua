@@ -15,16 +15,9 @@ end
 M.nabla = function()
    local nabla = pcall(require, "nabla")
    if nabla then
-      vim.api.nvim_set_keymap(
-         "n",
-         "<leader>p",
-         ':lua require("nabla").action()<CR>',
-         { noremap = true }
-      )
+      vim.api.nvim_set_keymap("n", "<leader>p", ':lua require("nabla").action()<CR>', { noremap = true })
    end
 end
-
-
 
 M.luasnip = function()
    local present, luasnip = pcall(require, "luasnip")
