@@ -38,14 +38,22 @@ return packer.startup(function()
    }
 
    -- colorscheme
+   -- use {
+   --    "~/.config/nvim/lua/ext/nano",
+   --    after = "packer.nvim",
+   --    config = function()
+   --       vim.g.nano_enable_transparency = false
+   --       vim.g.nano_enable_italic_comment = false
+   --       vim.g.nano_enable_italic = false
+   --       require("nano").colorscheme()
+   --    end,
+   -- }
+--
    use {
-      "~/.config/nvim/lua/ext/nano",
+      "shaunsingh/nord.nvim",
       after = "packer.nvim",
       config = function()
-         vim.g.nano_enable_transparency = false
-         vim.g.nano_enable_italic_comment = false
-         vim.g.nano_enable_italic = false
-         require("nano").colorscheme()
+         vim.cmd[[colorscheme nord]]
       end,
    }
 
@@ -66,18 +74,9 @@ return packer.startup(function()
       end,
    }
 
-   -- tabline/bufferline
-   use {
-      "akinsho/bufferline.nvim",
-      after = "nvim-web-devicons",
-      config = function()
-         require "plugins.bufferline"
-      end,
-   }
-
    use {
       "kyazdani42/nvim-web-devicons",
-      after = "nano",
+      after = "nord.nvim",
    }
 
    -- preview the colors of hexcodes
@@ -359,17 +358,14 @@ return packer.startup(function()
       "alec-gibson/nvim-tetris",
       cmd = "Tetris",
    }
+
+   -- Running code
    use {
-      "CRAG666/code_runner.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      branch = "new_features",
-      cmd = {
-         "RunCode",
-         "RunFile",
-         "RunProject",
-      },
+      "michaelb/sniprun", 
+      run = 'bash ./install.sh',
+      cmd = "SnipRun",
       config = function()
-         require "plugins.code_runner"
+         require'sniprun'.setup()
       end,
    }
 end)

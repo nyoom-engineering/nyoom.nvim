@@ -38,7 +38,6 @@ true_zen.setup {
       },
    },
    integrations = {
-      nvim_bufferline = true,
       twilight = true,
    },
 }
