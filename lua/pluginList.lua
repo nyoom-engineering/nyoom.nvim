@@ -238,7 +238,7 @@ return packer.startup(function()
       after = "nvim-cmp",
    }
 
-   -- fuzzy searching for everythign
+   -- fuzzy searching for everything
    use {
       "nvim-telescope/telescope.nvim",
       cmd = "Telescope",
