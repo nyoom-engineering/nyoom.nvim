@@ -1,4 +1,4 @@
-local _2afile_2a = "fnl/config.fnl"
+local _2afile_2a = "config.fnl"
 local _2amodule_name_2a = "core"
 local _2amodule_2a
 do

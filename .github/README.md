@@ -1,16 +1,24 @@
 # Nyoom.nvim
 
-<div align="center">
-  
-[![Lua](https://img.shields.io/badge/Made%20With-Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white)]()
-[![Repo_Size](https://img.shields.io/github/languages/code-size/shaunsingh/nyoom.nvim?color=orange&label=Repo%20Size&style=for-the-badge)]()
-[![Pull_Requests](https://img.shields.io/github/issues-pr/shaunisngh/nyoom.nvim?style=for-the-badge)]()
-[![Issues](https://img.shields.io/github/issues/shausingh/nyoom.nvim?color=red&style=for-the-badge)]()
-[![Neovim Minimum Version](https://img.shields.io/badge/Neovim-0.6+-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://github.com/neovim/neovim)
+This config was a reponse to new configs that pop up, with very abstracted and complex codebases, such as NvChad. They try to be a one-size-fits-all config. NvChad and LunarVim both try to fit as much overall functionality as possible and needlessly lazy load *everything*, when it really isn't needed. Complex codebases lead to less freedom for end-user extensiblity. Try forking NvChad and making your own configuration out of it. Thats right, you can't. Everything is tied to the userConfig, and you rely on the maintainer of said code to implement features. 
 
-</div> 
+Nyoom.nvim provides a solution to these problems by providing only the necessary code in order to make a functioning configuration. The end goal of nyoom.nvim is to be used as a base config for users to extend and add upon, leading to a more unique editing experience. Its relatively small and simple, offers the bare minimum needed plugins to have a powerful config, and is suited to my needs, but can just as easily be suited to yours!
+
+Fennel is a programming language that brings together the speed, simplicity, and reach of Lua with the flexibility of a lisp syntax and macro system. With the macros provided, you can configure neovim just as easily, or dare I say *easier* than you can with Lua, while retaining the performance benefits of LuaJIT.
+
+I recommend not to clone and directly install this config, but to fork it, inspect the code, and adjust it to your liking. The best neovim configuration is what *you* make, and this config is only supposed to provide you the tools to do so.
+
+All the magic happens in the `fnl/` folder. Some files to check out:
+- `init.fnl`: This is where all your plugins go. The init file is in charge of configuring packer, installing, as well as loading plugins
+- `config.fnl`: This is where neovim settings go
+- `macros.fnl`: In lisps, macros allow the user to define arbitrary functions that convert certain Lisp forms into different forms before evaluating or compiling them. This file contains all the macros that I (and a few others, thanks kat!) have written to help you out on your neovim journey. I don't recommend touching this file unless you know what you're doing
+- `maps.fnl`: This is where all your mappings go
+- `au.fnl`: This is where autocommands go. Autocommands are a way to tell Vim (and NeoVim) to run certain commands whenever certain events happen. An example, highlighting yank (y), is provided. 
+- `plug/`: This is where plugin configs go.
 
 ## Showcase
+
+Coming soon!
 
 ## Install
 
@@ -29,9 +37,9 @@ Then run `nvim` as usual, and `:PackerSync` to update/install plugins
 Install the following dependencies: 
 
 - neovim-nightly (or neovim stable)
-- luajit
 - ripgrep
 - nodejs (optional, for copilot)
+- fennel + fnlfmt (not required, but recommended)
 - font with nerdfont icons 
 
 ```bash
@@ -41,18 +49,14 @@ nvim
 
 Then run `:PackerSync`
 
-## Showcase
-
-## Theme Showcase
-
 ## Features
 
 Nyoom.nvim provides the following: 
-- Lazy Loaded plugin management via Packer.nvim
-- Optimized startup and caching via filetype.nvim and impatient.nvim
-- Fast colorscheme via the `nvim_set_hl` api
-- Tabline using bufferline.nvim 
-- Fast & colorful syntax highlighting, indentation, and parenthesis via nvim-treesitter
+- Fast plugin management via Packer.nvim
+- Optimized startup and caching via filetype.lua and impatient.nvim
+- Macros and easy to configure plugins via Fennel
+- Colorful syntax highlighting, indentation, and parenthesis via nvim-treesitter
+- Diagonstics and lsp support using nvim_lsp
 
 ## Warning
 

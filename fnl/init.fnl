@@ -9,7 +9,7 @@
                                      ;; bootstrap stuff
                                      (package! :wbthomason/packer.nvim) ; plugin manager
                                      (package! :Olical/aniseed
-                                               {:bfranch :develop})
+                                               {:branch :develop})
                                      ; fennel environment
                                      (package! :lewis6991/impatient.nvim) ; faster loading
                                      ;; fennel dev
