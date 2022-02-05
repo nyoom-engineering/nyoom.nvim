@@ -1,6 +1,6 @@
 {
   description =
-    ":rocket: Blazing Fast Neovim Configuration Written in lua :rocket::rocket::stars:";
+    ":rocket: Blazing Fast Neovim Configuration Written in fennel :rocket::rocket::stars:";
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.neovim-nightly-overlay.url =

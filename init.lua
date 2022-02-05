@@ -1,12 +1,11 @@
--- Nyoom.nvim, Blazing fast neovim config
--- Author: Shaurya Singh (@shaunsingh)
-
---load impatient first
-local present, impatient = pcall(require, "impatient")
+-- Entrypoint for my Neovim configuration!
+-- We simply bootstrap packer and Aniseed here, as well as load impatient and some optimizations
+-- It's then up to Aniseed to compile and load fnl/config/init.fnl
 
 -- use opt-in filetype.lua instead of vimscript default
-vim.g.did_load_filetypes = 0
+-- EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
 vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
 
 -- fish has speed issues with nvim-tree. Adjust this if you
 -- 1. already have your default shell as zsh/sh/bash or
@@ -15,45 +14,55 @@ vim.g.shell = "/bin/bash"
 
 --disable builtin plugins
 local disabled_built_ins = {
-   "2html_plugin",
-   "getscript",
-   "getscriptPlugin",
-   "gzip",
-   "logipat",
-   "netrw",
-   "netrwPlugin",
-   "netrwSettings",
-   "netrwFileHandlers",
-   "matchit",
-   "tar",
-   "tarPlugin",
-   "rrhelper",
-   "spellfile_plugin",
-   "vimball",
-   "vimballPlugin",
-   "zip",
-   "zipPlugin",
+	"2html_plugin",
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"matchit",
+	"tar",
+	"tarPlugin",
+	"rrhelper",
+	"spellfile_plugin",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-   vim.g["loaded_" .. plugin] = 1
+	vim.g["loaded_" .. plugin] = 1
 end
 
--- load options, mappings, and plugins
-local nyoom_modules = {
-   "config",
-   "options",
-   "mappings",
-   "packer_compiled",
-}
+local execute = vim.api.nvim_command
+local fn = vim.fn
+local fmt = string.format
 
-for i = 1, #nyoom_modules, 1 do
-   pcall(require, nyoom_modules[i])
+-- make the package path ~/.local/share/nvim/plug
+local packer_path = fn.stdpath("data") .. "/site/pack"
+
+function ensure(user, repo)
+	local install_path = fmt("%s/packer/start/%s", packer_path, repo, repo)
+	if fn.empty(fn.glob(install_path)) > 0 then
+		execute(fmt("!git clone https://github.com/%s/%s %s", user, repo, install_path))
+		execute(fmt("packadd %s", repo))
+	end
 end
 
--- since we lazy load packer.nvim, we need to load it when we run packer-related commands
-vim.cmd "silent! command PackerCompile lua require 'pluginList' require('packer').compile()"
-vim.cmd "silent! command PackerInstall lua require 'pluginList' require('packer').install()"
-vim.cmd "silent! command PackerStatus lua require 'pluginList' require('packer').status()"
-vim.cmd "silent! command PackerSync lua require 'pluginList' require('packer').sync()"
-vim.cmd "silent! command PackerUpdate lua require 'pluginList' require('packer').update()"
+-- Bootstrap essential plugins required for installing and loading the rest.
+ensure("lewis6991", "impatient.nvim")
+ensure("wbthomason", "packer.nvim")
+ensure("Olical", "aniseed")
+
+-- Load impatient which pre-compiles and caches Lua modules.
+require("impatient")
+
+-- only load plugins if packer has compiled them
+pcall(require, "packer_compiled")
+
+-- load aniseed environment
+vim.g["aniseed#env"] = { module = "init" }

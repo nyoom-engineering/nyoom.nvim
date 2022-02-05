@@ -8,7 +8,7 @@
 } }:
 with pkgs;
 mkShell {
-  buildInputs = [ neovim-nightly luajit ripgrep nodejs-16_x ];
+  buildInputs = [ neovim-nightly ripgrep fennel fnlfmt ];
   shellHook = ''
     alias nvim="nvim -u $(pwd)/init.lua"
   '';
