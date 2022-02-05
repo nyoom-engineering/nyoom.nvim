@@ -13,7 +13,7 @@ All the magic happens in the `fnl/` folder. Some files to check out:
 - `config.fnl`: This is where neovim settings go
 - `macros.fnl`: In lisps, macros allow the user to define arbitrary functions that convert certain Lisp forms into different forms before evaluating or compiling them. This file contains all the macros that I (and a few others, thanks kat!) have written to help you out on your neovim journey. I don't recommend touching this file unless you know what you're doing
 - `maps.fnl`: This is where all your mappings go
-- `au.fnl`: This is where autocommands go. Autocommands are a way to tell Vim (and NeoVim) to run certain commands whenever certain events happen. An example, highlighting yank (y), is provided. 
+- `au.fnl`: This is where autocommands go. Autocommands are a way to tell Vim (and NeoVim) to run certain commands whenever certain events happen. An example, highlighting yank (y), is provided.
 - `plug/`: This is where plugin configs go.
 
 ## Showcase

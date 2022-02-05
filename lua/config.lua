@@ -1,4 +1,4 @@
-local _2afile_2a = "config.fnl"
+local _2afile_2a = "fnl/config.fnl"
 local _2amodule_name_2a = "core"
 local _2amodule_2a
 do
@@ -16,11 +16,10 @@ vim.api.nvim_set_option("mouse", "a")
 vim.api.nvim_win_set_option(0, "number", false)
 vim.api.nvim_buf_set_option(0, "modeline", true)
 vim.api.nvim_buf_set_option(0, "undofile", true)
-vim.api.nvim_buf_set_option(0, "swapfile", true)
+vim.api.nvim_buf_set_option(0, "swapfile", false)
 vim.api.nvim_set_option("lazyredraw", true)
 vim.api.nvim_set_option("ttyfast", true)
 vim.api.nvim_set_option("updatetime", 100)
-vim.api.nvim_set_option("cmdheight", 2)
 vim.api.nvim_win_set_option(0, "list", true)
 vim.api.nvim_win_set_option(0, "conceallevel", 2)
 vim.api.nvim_win_set_option(0, "breakindent", true)

@@ -35,10 +35,12 @@
                                                           (require :plug/treesitter-context_con))})
                                      ; enhanced colors for embedded languages
                                      ;; lsp
+                                     (package! :github/copilot.vim)
                                      (package! {1 :neovim/nvim-lspconfig
                                                 :requires :williamboman/nvim-lsp-installer
                                                 :config (fn []
                                                           (require :plug/lspconfig_con))})
+
                                      ;; aesthetics
                                      (package! {1 :RRethy/nvim-base16
                                                 :config (fn []
