@@ -2,6 +2,7 @@
 
 (nm- :<Space> :<Nop>)
 (let- :g :mapleader " ")
+(let- :g :maplocalleader="m")
 
 ;; easier command line mode
 (nno- ";" ":")

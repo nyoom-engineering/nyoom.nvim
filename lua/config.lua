@@ -1,4 +1,4 @@
-local _2afile_2a = "fnl/config.fnl"
+local _2afile_2a = "/Users/shauryasingh/.config/nvim/fnl/config.fnl"
 local _2amodule_name_2a = "core"
 local _2amodule_2a
 do
@@ -29,7 +29,7 @@ vim.api.nvim_win_set_option(0, "signcolumn", "yes")
 do end (vim.opt_local)["tabstop"] = 4
 vim.opt_local["shiftwidth"] = 4
 vim.opt_local["scrolloff"] = 3
-vim.api.nvim_set_option("guifont", "Liga SFMono Nerd Font:h14")
+vim.api.nvim_set_option("guifont", "Liga SFMono Nerd Font:h15")
 do end (vim.opt)["clipboard"] = (vim.opt.clipboard + "unnamedplus")
 do end (vim.opt)["fillchars"] = (vim.opt.fillchars + "eob: ")
 do end (vim.opt_global)["expandtab"] = true

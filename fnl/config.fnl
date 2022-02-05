@@ -19,7 +19,7 @@
 (setl- shiftwidth 4)
 (setl- scrolloff 3)
 
-(setq guifont "Liga SFMono Nerd Font:h14")
+(setq guifont "Liga SFMono Nerd Font:h15")
 (seta- clipboard :unnamedplus)
 (seta- fillchars "eob: ")
 

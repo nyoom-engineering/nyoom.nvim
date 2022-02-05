@@ -21,33 +21,34 @@
                                      (package! {1 :nvim-telescope/telescope.nvim
                                                 :requires :nvim-lua/plenary.nvim})
                                      ;; treesitter
+                                     ; tree-sitter main plugin
                                      (package! {1 :nvim-treesitter/nvim-treesitter
                                                 :run ":TSUpdate"
                                                 :config (fn []
                                                           (require :plug/treesitter))})
-                                     ; tree-sitter main plugin
+                                     ; color matching brackets
                                      (package! {1 :p00f/nvim-ts-rainbow
                                                 :config (fn []
                                                           (require :plug/rainbow_con))})
-                                     ; color matching brackets
+                                     ; enhanced colors for embedded languages
                                      (package! {1 :romgrk/nvim-treesitter-context
                                                 :config (fn []
                                                           (require :plug/treesitter-context_con))})
-                                     ; enhanced colors for embedded languages
                                      ;; lsp
+                                     ; copilot completion
                                      (package! :github/copilot.vim)
+                                     ; actual lsp
                                      (package! {1 :neovim/nvim-lspconfig
                                                 :requires :williamboman/nvim-lsp-installer
                                                 :config (fn []
                                                           (require :plug/lspconfig_con))})
-
                                      ;; aesthetics
                                      (package! {1 :RRethy/nvim-base16
                                                 :config (fn []
                                                           (require :plug/base16))})
-                                     (package! {1 :nvim-lualine/lualine.nvim
+                                     (package! {1 :shaunsingh/bespoke-modeline-nvim
                                                 :config (fn []
-                                                          (require :plug/lualine_con))})
+                                                          (require :plug/modeline_con))})
                                      ;; notes
                                      (package! {1 :nvim-neorg/neorg
                                                 :config (fn []
