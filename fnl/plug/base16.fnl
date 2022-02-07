@@ -21,5 +21,6 @@
 
 ;; and now to change some highlights I don't agree with
 (cmd "hi VertSplit guibg=bg guifg=bg")
-(cmd "hi StatusLineNC guibg=bg")
-(cmd "hi StatusLine guibg=bg")
+(cmd "hi StatusLineAccent guibg=#0043ce")
+(cmd "hi StatusLine guibg=#262626")
+(cmd "hi StatusLineDull guibg=#262626 guifg=#525252")

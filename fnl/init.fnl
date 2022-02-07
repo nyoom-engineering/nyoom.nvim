@@ -46,6 +46,9 @@
                                      (package! {1 :RRethy/nvim-base16
                                                 :config (fn []
                                                           (require :plug/base16))})
+                                     (package! {1 :lewis6991/gitsigns.nvim
+                                                :config (fn []
+                                                          (require :plug/gitsigns_con))})
                                      (package! {1 :shaunsingh/bespoke-modeline-nvim
                                                 :config (fn []
                                                           (require :plug/modeline_con))})
