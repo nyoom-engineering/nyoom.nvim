@@ -1,4 +1,4 @@
-local _2afile_2a = "/Users/shauryasingh/.config/nvim/fnl/config.fnl"
+local _2afile_2a = ".config/nvim/fnl/config.fnl"
 local _2amodule_name_2a = "core"
 local _2amodule_2a
 do
@@ -34,4 +34,4 @@ do end (vim.opt)["clipboard"] = (vim.opt.clipboard + "unnamedplus")
 do end (vim.opt)["fillchars"] = (vim.opt.fillchars + "eob: ")
 do end (vim.opt_global)["expandtab"] = true
 vim.opt["nrformats"] = (vim.opt.nrformats - "octal")
-return nil
+return _2amodule_2a

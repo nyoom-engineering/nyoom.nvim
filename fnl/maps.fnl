@@ -26,10 +26,6 @@
 ;; wrap/unwrap
 (nno- :<leader>tw "<cmd>set wrap!<CR>")
 
-;; hop
-; map("n", "<leader>ww", "<cmd>HopWord<CR>")
-; map("n", "<leader>l", "<cmd>HopLine<CR>")
-
 ;; telescope
 (nno- "<leader>:" "<cmd>Telescope commands<CR>")
 (nno- :<leader>bb "<cmd>Telescope buffers<CR>")
@@ -38,4 +34,4 @@
 (nno- :<leader>f "<cmd>Telescope current_buffer_fuzzy_find<CR>")
 
 ;; truezen
-; map("n", "<leader>tz", "<cmd>TZAtaraxis<CR>")
+(nno- :<leader>tz "<cmd>TZAtaraxis<CR>")

@@ -6,16 +6,8 @@
 (fn sym-tostring [x]
   `,(tostring x))
 
-;; plugin initialization
-;; for packer.nvim
-(fn plugInit [...]
-  `(do
-     ((. (require :packer) :startup) (fn []
-                                       (do
-                                         ,...)))))
-
-;; lets name it package! to get that emacs feel
-(fn package! [plugin]
+;; lets name it use-package to get that emacs feel
+(fn use-package [plugin]
   `(use ,plugin))
 
 ;; nvim_api_command
@@ -64,8 +56,8 @@
         scope :buf]
     `(tset vim.opt_local ,option ,value)))
 
-;; using setq once again, for that emacs-y feel
-(fn setq [option value]
+;; we want to be thorough about this
+(fn set- [option value]
   (let [option (sym-tostring option)
         value value
         scope (get-scope option)]
@@ -452,7 +444,7 @@
  : nno-
  : nm-
  : let-
- : setq
+ : set-
  : setl-
  : setg-
  : seta-
@@ -460,8 +452,7 @@
  : setr-
  : col-
  : cmd
- : package!
- : plugInit
+ : use-package
  : aug-
  : auc-
  : opt-

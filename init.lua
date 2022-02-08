@@ -14,28 +14,28 @@ vim.g.shell = "/bin/bash"
 
 --disable builtin plugins
 local disabled_built_ins = {
-	"2html_plugin",
-	"getscript",
-	"getscriptPlugin",
-	"gzip",
-	"logipat",
-	"netrw",
-	"netrwPlugin",
-	"netrwSettings",
-	"netrwFileHandlers",
-	"matchit",
-	"tar",
-	"tarPlugin",
-	"rrhelper",
-	"spellfile_plugin",
-	"vimball",
-	"vimballPlugin",
-	"zip",
-	"zipPlugin",
+    "2html_plugin",
+    "getscript",
+    "getscriptPlugin",
+    "gzip",
+    "logipat",
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "matchit",
+    "tar",
+    "tarPlugin",
+    "rrhelper",
+    "spellfile_plugin",
+    "vimball",
+    "vimballPlugin",
+    "zip",
+    "zipPlugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-	vim.g["loaded_" .. plugin] = 1
+    vim.g["loaded_" .. plugin] = 1
 end
 
 local execute = vim.api.nvim_command
@@ -46,11 +46,11 @@ local fmt = string.format
 local packer_path = fn.stdpath("data") .. "/site/pack"
 
 function ensure(user, repo)
-	local install_path = fmt("%s/packer/start/%s", packer_path, repo, repo)
-	if fn.empty(fn.glob(install_path)) > 0 then
-		execute(fmt("!git clone https://github.com/%s/%s %s", user, repo, install_path))
-		execute(fmt("packadd %s", repo))
-	end
+    local install_path = fmt("%s/packer/start/%s", packer_path, repo, repo)
+        if fn.empty(fn.glob(install_path)) > 0 then
+        execute(fmt("!git clone https://github.com/%s/%s %s", user, repo, install_path))
+        execute(fmt("packadd %s", repo))
+    end
 end
 
 -- Bootstrap essential plugins required for installing and loading the rest.
