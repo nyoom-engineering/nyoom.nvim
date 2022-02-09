@@ -1,4 +1,4 @@
-local _2afile_2a = ".config/nvim/fnl/config.fnl"
+local _2afile_2a = "fnl/config.fnl"
 local _2amodule_name_2a = "core"
 local _2amodule_2a
 do
@@ -32,6 +32,13 @@ vim.opt_local["scrolloff"] = 3
 vim.api.nvim_set_option("guifont", "Liga SFMono Nerd Font:h15")
 do end (vim.opt)["clipboard"] = (vim.opt.clipboard + "unnamedplus")
 do end (vim.opt)["fillchars"] = (vim.opt.fillchars + "eob: ")
-do end (vim.opt_global)["expandtab"] = true
+vim.cmd("hi StatusLineNC gui=underline guibg=NONE guifg=#262626")
+vim.cmd("hi StatusLine guibg=#161616")
+do end (vim.opt_global)["statusline"] = "%=%t: %2l (%2p%%)"
+vim.opt_global["expandtab"] = true
 vim.opt["nrformats"] = (vim.opt.nrformats - "octal")
+local built_ins = {netrw = "netrwPlugin", netrwSettings = "netrwFileHandlers", gzip = "zip", zipPlugin = "tar", tarPlugin = "getscript", getscriptPlugin = "vimball", vimballPlugin = "2html_plugin", logipat = "rrhelper", spellfile_plugin = "matchit"}
+for _0, p in ipairs(built_ins) do
+  vim.g[("loaded_" .. p)] = 1
+end
 return _2amodule_2a

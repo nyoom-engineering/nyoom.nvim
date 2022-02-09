@@ -1,4 +1,3 @@
-;; general vim.cmd functions
 (fn cmd [string]
   `(vim.cmd ,string))
 

@@ -19,7 +19,5 @@
        :base0E "#be95ff"
        :base0F "#3ddbd9"})
 
-;; and now to change some highlights I don't agree with
+;; not sure why versplit is colored, removing it looks much cleaner 
 (cmd "hi VertSplit guibg=bg guifg=bg")
-(cmd "hi StatusLineNC guibg=#0043ce")
-(cmd "hi StatusLine guibg=#161616")
