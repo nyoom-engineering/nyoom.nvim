@@ -1,37 +1,26 @@
 (module maps {require-macros [macros]})
 
-(nm- :<Space> :<Nop>)
 (let- :g :mapleader " ")
-(let- :g :maplocalleader="m")
+
+;; no highlight on escape
+(map! [n] "<esc>" "<esc><cmd>noh<cr>")
 
 ;; easier command line mode
-(nno- ";" ":")
-(vno- ";" ":")
-
-;; resize
-(nno- :<C-h> :<C-W><)
-(nno- :<C-j> :<C-W>+)
-(nno- :<C-k> :<C-W>-)
-(nno- :<C-l> :<C-W>>)
-
-;; move window
-(nno- :<A-h> :<C-w>h)
-(nno- :<A-j> :<C-w>j)
-(nno- :<A-k> :<C-w>k)
-(nno- :<A-l> :<C-w>l)
-
-;; quit terminal
-(tno- :<C-Space> "<C-\\><C-N>")
+(map! [n] ";" ":")
+(map! [v] ";" ":")
 
 ;; wrap/unwrap
-(nno- :<leader>tw "<cmd>set wrap!<CR>")
+(map! [n] :<leader>tw "<cmd>set wrap!<CR>")
+
+;; treesitter 
+(map! [n] :<Leader>h ":TSHighlightCapturesUnderCursor<CR>")
 
 ;; telescope
-(nno- "<leader>:" "<cmd>Telescope commands<CR>")
-(nno- :<leader>bb "<cmd>Telescope buffers<CR>")
-(nno- :<leader>fr "<cmd>Telescope oldfiles<CR>")
-(nno- :<leader>. "<cmd>Telescope find_files<CR>")
-(nno- :<leader>f "<cmd>Telescope current_buffer_fuzzy_find<CR>")
+(map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
+(map! [n] :<leader>bb "<cmd>Telescope buffers<CR>")
+(map! [n] :<leader>fr "<cmd>Telescope oldfiles<CR>")
+(map! [n] :<leader>. "<cmd>Telescope find_files<CR>")
+(map! [n] :<leader>f "<cmd>Telescope current_buffer_fuzzy_find<CR>")
 
 ;; truezen
-(nno- :<leader>tz "<cmd>TZAtaraxis<CR>")
+(map! [n] :<leader>tz :<cmd>TZAtaraxis<CR>)
