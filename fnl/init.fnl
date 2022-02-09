@@ -42,9 +42,13 @@
               {:run :TSUpdate
                :config! :treesitter
                :requires [:p00f/nvim-ts-rainbow
-                          :romgrk/nvim-treesitter-context
                           (pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})]})
+
+(use-package! :romgrk/nvim-treesitter-context
+              {:after :nvim-treesitter
+               :config (fn []
+                        (opt- treesitter-context.config setup {:enable true}))})
 
 ;; lsp
 (use-package! :github/copilot.vim)

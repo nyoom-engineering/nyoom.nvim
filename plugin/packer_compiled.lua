@@ -84,7 +84,7 @@ _G.packer_plugins = {
     url = "https://github.com/Olical/aniseed"
   },
   ["better-escape.nvim"] = {
-    config = { "\27LJ\2\nv\0\0\4\0\6\0\b6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2D\0\2\0\fmapping\1\0\2\22clear_empty_lines\2\tkeys\n<Esc>\1\3\0\0\ajk\ajj\nsetup\18better_escape\frequire\0" },
+    config = { "\27LJ\2\nv\0\0\4\0\6\0\b6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2D\0\2\0\fmapping\1\0\2\tkeys\n<Esc>\22clear_empty_lines\2\1\3\0\0\ajk\ajj\nsetup\18better_escape\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -136,20 +136,22 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-notify"] = {
-    config = { "\27LJ\2\n�\1\0\0\4\0\a\0\r6\0\0\0006\1\2\0'\3\1\0B\1\2\2=\1\1\0006\0\2\0'\2\1\0B\0\2\0029\0\3\0005\2\4\0005\3\5\0=\3\6\2D\0\2\0\nicons\1\0\5\nTRACE\b✎\nDEBUG\b\tINFO\b\nERROR\b\tWARN\b\1\0\3\18minimum_width\0032\ftimeout\3�\19\vstages\nslide\nsetup\frequire\vnotify\bvim\0" },
+    config = { "\27LJ\2\n�\1\0\0\4\0\a\0\r6\0\0\0006\1\2\0'\3\1\0B\1\2\2=\1\1\0006\0\2\0'\2\1\0B\0\2\0029\0\3\0005\2\4\0005\3\5\0=\3\6\2D\0\2\0\nicons\1\0\5\nDEBUG\b\tINFO\b\nTRACE\b✎\nERROR\b\tWARN\b\1\0\3\ftimeout\3�\19\vstages\nslide\18minimum_width\0032\nsetup\frequire\vnotify\bvim\0" },
     loaded = true,
     path = "/Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
   },
   ["nvim-treesitter"] = {
-    config = { "require('pack.treesitter')" },
+    after = { "nvim-treesitter-context" },
     loaded = true,
-    path = "/Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
-    url = "https://github.com/nvim-treesitter/nvim-treesitter"
+    only_config = true
   },
   ["nvim-treesitter-context"] = {
+    config = { "\27LJ\2\nR\0\0\3\0\4\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0D\0\2\0\1\0\1\venable\2\nsetup\30treesitter-context.config\frequire\0" },
+    load_after = {},
     loaded = true,
-    path = "/Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    needs_bufread = false,
+    path = "/Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/nvim-treesitter-context",
     url = "https://github.com/romgrk/nvim-treesitter-context"
   },
   ["nvim-ts-rainbow"] = {
@@ -219,44 +221,52 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require('pack.treesitter')
-time([[Config for nvim-treesitter]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require('pack.telescope_con')
-time([[Config for telescope.nvim]], false)
--- Config for: which-key.nvim
-time([[Config for which-key.nvim]], true)
-require('which-key').setup()
-time([[Config for which-key.nvim]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 require('pack.lspconfig_con')
 time([[Config for nvim-lspconfig]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-require('pack.gitsigns_con')
-time([[Config for gitsigns.nvim]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+require('which-key').setup()
+time([[Config for which-key.nvim]], false)
 -- Config for: nvim-base16
 time([[Config for nvim-base16]], true)
 require('pack.base16')
 time([[Config for nvim-base16]], false)
+-- Config for: nvim-notify
+time([[Config for nvim-notify]], true)
+try_loadstring("\27LJ\2\n�\1\0\0\4\0\a\0\r6\0\0\0006\1\2\0'\3\1\0B\1\2\2=\1\1\0006\0\2\0'\2\1\0B\0\2\0029\0\3\0005\2\4\0005\3\5\0=\3\6\2D\0\2\0\nicons\1\0\5\nDEBUG\b\tINFO\b\nTRACE\b✎\nERROR\b\tWARN\b\1\0\3\ftimeout\3�\19\vstages\nslide\18minimum_width\0032\nsetup\frequire\vnotify\bvim\0", "config", "nvim-notify")
+time([[Config for nvim-notify]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require('pack.treesitter')
+time([[Config for nvim-treesitter]], false)
 -- Config for: neorg
 time([[Config for neorg]], true)
 require('pack.neorg_con')
 time([[Config for neorg]], false)
--- Config for: nvim-notify
-time([[Config for nvim-notify]], true)
-try_loadstring("\27LJ\2\n�\1\0\0\4\0\a\0\r6\0\0\0006\1\2\0'\3\1\0B\1\2\2=\1\1\0006\0\2\0'\2\1\0B\0\2\0029\0\3\0005\2\4\0005\3\5\0=\3\6\2D\0\2\0\nicons\1\0\5\nTRACE\b✎\nDEBUG\b\tINFO\b\nERROR\b\tWARN\b\1\0\3\18minimum_width\0032\ftimeout\3�\19\vstages\nslide\nsetup\frequire\vnotify\bvim\0", "config", "nvim-notify")
-time([[Config for nvim-notify]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require('pack.telescope_con')
+time([[Config for telescope.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+require('pack.gitsigns_con')
+time([[Config for gitsigns.nvim]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd nvim-treesitter-context ]]
+
+-- Config for: nvim-treesitter-context
+try_loadstring("\27LJ\2\nR\0\0\3\0\4\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0D\0\2\0\1\0\1\venable\2\nsetup\30treesitter-context.config\frequire\0", "config", "nvim-treesitter-context")
+
+time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TSPlayground lua require("packer.load")({'playground'}, { cmd = "TSPlayground", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TZAtaraxis lua require("packer.load")({'TrueZen.nvim'}, { cmd = "TZAtaraxis", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Trouble lua require("packer.load")({'trouble.nvim'}, { cmd = "Trouble", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TSPlayground lua require("packer.load")({'playground'}, { cmd = "TSPlayground", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]

@@ -18,6 +18,3 @@
                           4 "#a2a9b0"
                           5 "#8f8b8b"
                           6 "#ada8a8"}}})
-
-;; load context
-(opt- treesitter-context.config setup {:enable true})
