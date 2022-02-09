@@ -31,9 +31,6 @@ ensure("Olical", "aniseed")
 -- Load impatient which pre-compiles and caches Lua modules.
 require("impatient")
 
--- only load plugins if packer has compiled them
-pcall(require, "packer_compiled")
-
 -- load aniseed environment
 vim.g["aniseed#env"] = { module = "init" }
 
