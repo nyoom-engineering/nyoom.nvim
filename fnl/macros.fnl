@@ -55,7 +55,7 @@
         scope :buf]
     `(tset vim.opt_local ,option ,value)))
 
-;; we want to be thorough about this
+;; set general
 (fn set- [option value]
   (let [option (sym-tostring option)
         value value

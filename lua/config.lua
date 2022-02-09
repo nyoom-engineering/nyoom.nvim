@@ -1,4 +1,4 @@
-local _2afile_2a = "fnl/config.fnl"
+local _2afile_2a = "/Users/shauryasingh/.config/nvim/fnl/config.fnl"
 local _2amodule_name_2a = "core"
 local _2amodule_2a
 do
@@ -29,11 +29,12 @@ vim.api.nvim_win_set_option(0, "signcolumn", "yes")
 do end (vim.opt_local)["tabstop"] = 4
 vim.opt_local["shiftwidth"] = 4
 vim.opt_local["scrolloff"] = 3
-vim.api.nvim_set_option("guifont", "Liga SFMono Nerd Font:h15")
+vim.api.nvim_set_option("guifont", "Liga SFMono Nerd Font:h14")
 do end (vim.opt)["clipboard"] = (vim.opt.clipboard + "unnamedplus")
 do end (vim.opt)["fillchars"] = (vim.opt.fillchars + "eob: ")
-vim.cmd("hi StatusLineNC gui=underline guibg=NONE guifg=#262626")
-vim.cmd("hi StatusLine guibg=#161616")
+vim.cmd("hi StatusLineNC gui=underline guibg=#161616 guifg=#262626")
+vim.cmd("hi StatusLine gui=underline guibg=#161616 guifg=#525252")
+vim.cmd("hi VertSplit guibg=bg guifg=bg")
 do end (vim.opt_global)["statusline"] = "%=%t: %2l (%2p%%)"
 vim.opt_global["expandtab"] = true
 vim.opt["nrformats"] = (vim.opt.nrformats - "octal")

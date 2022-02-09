@@ -18,5 +18,4 @@
                                          :keep_default_fold_fillchars false
                                          :bg_configuration true}
                               :focus {:margin_of_error 5
-                                      :focus_method :experimental}}
-                      :integration {:lualine true}})
+                                      :focus_method :experimental}}})

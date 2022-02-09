@@ -18,6 +18,3 @@
        :base0D "#ff7eb6"
        :base0E "#be95ff"
        :base0F "#3ddbd9"})
-
-;; not sure why versplit is colored, removing it looks much cleaner 
-(cmd "hi VertSplit guibg=bg guifg=bg")

@@ -22,14 +22,16 @@
 (setl- scrolloff 3)
 
 ;; gui
-(set- guifont "Liga SFMono Nerd Font:h15")
+(set- guifont "Liga SFMono Nerd Font:h14")
 (seta- clipboard :unnamedplus)
 (seta- fillchars "eob: ")
 
 ;; statusline
 ; adjust highlights
-(cmd "hi StatusLineNC gui=underline guibg=NONE guifg=#262626")
-(cmd "hi StatusLine guibg=#161616")
+(cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#262626")
+(cmd "hi StatusLine gui=underline guibg=#161616 guifg=#525252")
+;; (cmd "hi VertSplit guibg=bg guifg=#262626")
+(cmd "hi VertSplit guibg=bg guifg=bg")
 ; remove ruler
 (set- noru true)
 ; minimal statusline
