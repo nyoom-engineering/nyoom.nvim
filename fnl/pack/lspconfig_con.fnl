@@ -1,7 +1,7 @@
 (module lspconfig_con {require-macros [macros]})
 
 (def nvim-lsp (require :lspconfig))
-(defn on-attach [client bufnr] (set- omnifunc "v:lua.vim.lsp.omnifunc")
+(defn on-attach [client bufnr] (set! omnifunc "v:lua.vim.lsp.omnifunc")
       (map! [n] :gD "<cmd>lua vim.lsp.buf.declaration()<CR>" :silent)
       (map! [n] :gd "<cmd>lua vim.lsp.buf.definition()<CR>" :silent)
       (map! [n] :K "<cmd>lua vim.lsp.buf.hover()<CR>" :silent)
@@ -27,14 +27,11 @@
       (map! [n] :<leader>F "<cmd>lua vim.lsp.buf.formatting()<CR>" :silent))
 
 (def servers {1 clangd 2 sumneko_lua})
-
 (def lsp_installer (require :nvim-lsp-installer))
-
 (lsp_installer.on_server_ready (fn [server]
                                  (def opts
                                       {:on_attach on-attach
                                        :flags {:debounce_text_changes 150}})
                                  (server:setup opts)))
-
 (each [_ lsp (ipairs servers)]
   (lsp_installer.on_server_ready lsp))

@@ -23,6 +23,14 @@
 (fn head [xs]
   (. xs 1))
 
+(fn includes? [xs x]
+  (accumulate [is? false
+               _ v (ipairs xs)
+               :until is?] (= v x)))
+
+(fn empty? [xs]
+  (= 0 (length xs)))
+
 (fn fn? [x]
   "Returns whether the parameter(s) is a function.
   A function is defined as any list with 'fn or 'hashfn as their first
@@ -31,6 +39,24 @@
     (list? x)
     (or (= 'fn (head x))
         (= 'hashfn (head x)))))
+
+(lambda gensym-checksum [...]
+  "Generates a new symbol from the checksum of the object passed as
+  a paremeter.
+  The paremeter first is casted into a string using the function
+  `fennel.view`.
+  If only one paremeter is passed to the function the return value is the
+  checksum as a symbol.
+  If two paremeters are passed, the first one is considered the prefix.
+  If three paremeters are passed, the first one is considered the prefix and
+  the last one is considered the suffix.
+  This function depends on the md5 library and the fennel library."
+  (match [...]
+    [prefix object suffix] (let [{: view} (require :fennel)
+                                 {:sumhexa md5} (require :md5)]
+                             (sym (.. prefix (md5 (view object)) suffix)))
+    [prefix object] (gensym-checksum prefix object "")
+    [object] (gensym-checksum "" object "")))
 
 ;; vlua, fnl functions in global namespace
 (lambda vlua [x]
@@ -126,157 +152,172 @@
     `((. (require :packer) :startup) #(do
                                         ,(unpack (icollect [_ v (ipairs packs) :into rocks]
                                                    v))))))
+(lambda let! [name value]
+  "Set a vim variable using the lua API.
+  The name can be either a symbol or a string.
+  If the name begins with [gbwt] followed by [/:.], the name is scoped to the
+  respective scope:
+  g -> global (default)
+  b -> buffer
+  w -> window
+  t -> tab"
+  (assert-compile (or (str? name) (sym? name))
+                  "expected string or symbol for name" name)
+  (let [name (->str name)
+        scope (when (includes? ["g/" "b/" "w/" "t/"
+                                "g." "b." "w." "t."
+                                "g:" "b:" "w:" "t:"] (name:sub 1 2))
+                (name:sub 1 1))
+        name (if
+               (nil? scope) name
+               (name:sub 3))]
+    `(tset ,(match scope
+              :b 'vim.b
+              :w 'vim.w
+              :t 'vim.t
+              _ 'vim.g) ,name ,value)))
 
-(fn cmd [string]
-  `(vim.cmd ,string))
+(fn let!-mult [...]
+  "Set one or multiple vim variables using the lua API.
+  The name can be either a symbol or a string.
+  If the name begins with [gbwt] followed by [/:.], the name is scoped to the
+  respective scope:
+  g -> global (default)
+  b -> buffer
+  w -> window
+  t -> tab"
+  (fn aux [...]
+    (match [...]
+      (where [& rest] (empty? rest)) []
+      [name value & rest] [(let! name value)
+                           (unpack (aux (unpack rest)))]
+      _ []))
+  (let [exprs (aux ...)]
+    (if
+      (> (length exprs) 1) `(do ,(unpack exprs))
+      (unpack exprs))))
 
-;; convert to string)
-(fn sym-tostring [x]
-  `,(tostring x))
+(lambda set! [name ?value]
+  "Set a vim option using the lua API.
+  The name of the option must be a symbol.
+  If no value is specified, if the name begins with 'no' the value becomes
+  false, it becomes true otherwise.
+  e.g.
+  `nospell` -> spell false
+  `spell`   -> spell true"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (let [name (->str name)
+        value (or ?value
+                  (not (name:match "^no")))
+        name (or (name:match "^no(.+)$")
+                 name)]
+    (if (fn? value)
+      (let [fsym (gensym-checksum "__" value)]
+        `(do
+           (global ,fsym ,value)
+           (tset vim.opt ,name ,(vlua fsym))))
+      (match (name:sub -1)
+        :+ `(: (. vim.opt ,(name:sub 1 -2)) :append ,value)
+        :- `(: (. vim.opt ,(name:sub 1 -2)) :remove ,value)
+        :^ `(: (. vim.opt ,(name:sub 1 -2)) :prepend ,value)
+        _ `(tset vim.opt ,name ,value)))))
 
-;; nvim_api_command
-;; for Ex commands/user commands
-(fn com- [function ...]
-  (let [function (sym-tostring function)
-        args [...]]
-    (var output function)
-    (each [k v (pairs args)]
-      (set output (.. output " " (sym-tostring v))))
-    `(vim.api.nvim_command ,output)))
+(fn set!-mult [...]
+  "Set one or multiple vim options using the lua API.
+  The name of the option must be a symbol.
+  If no value is specified, if the name begins with 'no' the value becomes
+  false, it becomes true otherwise.
+  e.g.
+  `nospell` -> spell false
+  `spell`   -> spell true"
+  (fn aux [...]
+    (match [...]
+      (where [& rest] (empty? rest)) []
+      (where [name value & rest] (not (sym? value))) [(set! name value)
+                                                      (unpack (aux (unpack rest)))]
+      [name & rest] [(set! name)
+                     (unpack (aux (unpack rest)))]
+      _ []))
+  (let [exprs (aux ...)]
+    (if
+      (> (length exprs) 1) `(do ,(unpack exprs))
+      (unpack exprs))))
 
-;; require configs
-;; lua options really, i find the table lookup syntax to be garbage
+(lambda local-set! [name ?value]
+  "Set a vim local option using the lua API.
+  The name of the option must be a symbol.
+  If no value is specified, if the name begins with 'no' the value becomes
+  false, it becomes true otherwise.
+  e.g.
+  `nospell` -> spell false
+  `spell`   -> spell true"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (let [name (->str name)
+        value (or ?value
+                  (not (name:match "^no")))
+        name (or (name:match "^no(.+)$")
+                 name)]
+    (if (fn? value)
+      (let [fsym (gensym-checksum "__" value)]
+        `(do
+           (global ,fsym ,value)
+           (tset vim.opt_local ,name ,(vlua fsym))))
+      (match (name:sub -1)
+        :+ `(: (. vim.opt_local ,(name:sub 1 -2)) :append ,value)
+        :- `(: (. vim.opt_local ,(name:sub 1 -2)) :remove ,value)
+        :^ `(: (. vim.opt_local ,(name:sub 1 -2)) :prepend ,value)
+        _ `(tset vim.opt_local ,name ,value)))))
+
+(fn local-set!-mult [...]
+  "Set one or multiple vim local options using the lua API.
+  The name of the option must be a symbol.
+  If no value is specified, if the name begins with 'no' the value becomes
+  false, it becomes true otherwise.
+  e.g.
+  `nospell` -> spell false
+  `spell`   -> spell true"
+  (fn aux [...]
+    (match [...]
+      (where [& rest] (empty? rest)) []
+      (where [name value & rest] (not (sym? value))) [(local-set! name value)
+                                                      (unpack (aux (unpack rest)))]
+      [name & rest] [(local-set! name)
+                     (unpack (aux (unpack rest)))]
+      _ []))
+  (let [exprs (aux ...)]
+    (if
+      (> (length exprs) 1) `(do ,(unpack exprs))
+      (unpack exprs))))
+
+(lambda command! [name expr ?desc]
+  "Define a user command using the lua API.
+  See the help for nvim_add_user_command for more information."
+  (assert-compile (or (str? name) (sym? name)) "expected string or symbol for name" name)
+  (assert-compile (or (str? expr) (fn? expr) (sym? expr)) "expected string or function or symbol for expr" expr)
+  (assert-compile (or (nil? ?desc) (str? ?desc)) "expected string or nil for description" ?desc)
+  (let [name (->str name)
+        desc (if (and (not ?desc) (or (fn? expr) (sym? expr))) (view expr)
+               ?desc)]
+    `(vim.api.nvim_add_user_command ,name ,expr {:desc ,desc})))
+
 (fn opt- [tableOrigin lookupValue ...]
-  (let [tableOrigin (sym-tostring tableOrigin)
-        lookupValue (sym-tostring lookupValue)
+  (let [tableOrigin (->str tableOrigin)
+        lookupValue (->str lookupValue)
         output [...]]
     `(do
        ((. (require ,tableOrigin) ,lookupValue) ,...))))
 
-;; get the scope of an option (global, window, or buffer)
-(fn get-scope [opt]
-  (if (pcall vim.api.nvim_get_option_info opt)
-      (. (vim.api.nvim_get_option_info opt) :scope)
-      false))
-
-;; passed function used to actually set options
-(fn set-option [option value scope]
-  (match scope
-    :global `(vim.api.nvim_set_option ,option ,value)
-    :win `(vim.api.nvim_win_set_option 0 ,option ,value)
-    :buf `(vim.api.nvim_buf_set_option 0 ,option ,value)))
-
-;; set global
-(fn setg- [option value]
-  (let [option (sym-tostring option)
-        value value
-        scope :buf]
-    `(tset vim.opt_global ,option ,value)))
-
-;; set local
-(fn setl- [option value]
-  (let [option (sym-tostring option)
-        value value
-        scope :buf]
-    `(tset vim.opt_local ,option ,value)))
-
-;; set general
-(fn set- [option value]
-  (let [option (sym-tostring option)
-        value value
-        scope (get-scope option)]
-    (set-option option value scope)))
-
-;; set append
-(fn seta- [option value]
-  (let [option (sym-tostring option)
-        value (sym-tostring value)]
-    `(tset vim.opt ,option (+ (. vim.opt ,option) ,value))))
-
-;; set prepend
-(fn setp- [option value]
-  (let [option (sym-tostring option)
-        value value]
-    `(tset vim.opt ,option (^ (. vim.opt ,option) ,value))))
-
-;; set remove
-(fn setr- [option value]
-  (let [option (sym-tostring option)
-        value value]
-    `(tset vim.opt ,option (- (. vim.opt ,option) ,value))))
-
-;; set colorscheme
-(fn col- [scheme]
-  (let [scheme (.. "colorscheme " (sym-tostring scheme))]
-    (cmd scheme)))
-
-;; augroup
-(fn aug- [group ...]
-  ;; set up augroup group autocmd!
-  (let [group (.. "augroup " (sym-tostring group) "\nautocmd!")]
-    `(do
-       (cmd ,group)
-       ;; do the autocmd
-       (do
-         ,...)
-       ;; close the autocmd group
-       (cmd "augroup END"))))
-
-;; autocmd
-(fn auc- [event filetype command]
-  (let [event (sym-tostring event)
-        command command]
-    ;; check if the filetype is a regex
-    ;; set to string first so its parsed as such
-    ;; else just set to value of the filetype arg
-    (var ftOut (sym-tostring filetype))
-    (if (= ftOut "*")
-        (set ftOut "*")
-        (set ftOut filetype))
-    `(do
-       (cmd (.. "autocmd " ,event " " ,ftOut " " ,command)))))
-
-;; let
-(fn let- [scope obj ...]
-  (let [scope (sym-tostring scope)
-        obj (sym-tostring obj)
-        output []
-        value []]
-    (var output [...])
-    (var value [])
-    ;; if number of operands is 1
-    (if (= (length output) 1 (each [key val (pairs output)]
-                               ;; set the output to just the value of the operands
-                               (set value val)))
-        (> (length output) 1 ;; else set the output to the whole table
-           (do
-             (set value output))))
-    (match scope
-      :g `(tset vim.g ,obj ,value)
-      :b `(tset vim.b ,obj ,value)
-      :w `(tset vim.w ,obj ,value)
-      :t `(tset vim.t ,obj ,value)
-      :v `(tset vim.v ,obj ,value)
-      :env `(tset vim.env ,obj ,value))))
-
 {: map!
  : buf-map!
- : let-
- : set-
- : setl-
- : setg-
- : seta-
- : setp-
- : setr-
- : col-
- : cmd
- : aug-
- : auc-
- : opt-
- : com-
- : pack
+ : command!
  : use-package!
+ : pack
  : rock
  : rock!
  : init!
- : vlua}
+ : gensym-checksum
+ : vlua
+ : opt-
+ :let! let!-mult
+ :set! set!-mult
+ :local-set! local-set!-mult}

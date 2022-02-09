@@ -1,7 +1,6 @@
 (module init {require-macros [macros] autoload {c aniseed.compile}})
 
 ; call global settings
-(require :au)
 (require :config)
 (require :maps)
 
@@ -15,9 +14,7 @@
 (use-package! :Olical/aniseed {:branch :develop})
 
 ; autocompile fennel config
-(use-package! :Olical/conjure
-              {:branch :develop
-               :config! "conjure"})
+(use-package! :Olical/conjure {:branch :develop})
 
 ;; jk/jj for escape
 (use-package! :max397574/better-escape.nvim

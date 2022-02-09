@@ -1,7 +1,5 @@
 (module maps {require-macros [macros]})
 
-(let- :g :mapleader " ")
-
 ;; no highlight on escape
 (map! [n] "<esc>" "<esc><cmd>noh<cr>")
 
