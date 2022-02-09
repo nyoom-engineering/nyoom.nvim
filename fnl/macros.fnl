@@ -24,9 +24,8 @@
   (. xs 1))
 
 (fn includes? [xs x]
-  (accumulate [is? false
-               _ v (ipairs xs)
-               :until is?] (= v x)))
+  (accumulate [is? false _ v (ipairs xs) :until is?]
+    (= v x)))
 
 (fn empty? [xs]
   (= 0 (length xs)))
@@ -35,10 +34,7 @@
   "Returns whether the parameter(s) is a function.
   A function is defined as any list with 'fn or 'hashfn as their first
   element."
-  (and
-    (list? x)
-    (or (= 'fn (head x))
-        (= 'hashfn (head x)))))
+  (and (list? x) (or (= `fn (head x)) (= `hashfn (head x)))))
 
 (lambda gensym-checksum [...]
   "Generates a new symbol from the checksum of the object passed as
@@ -71,16 +67,18 @@
   (assert-compile (sym? modes) "expected symbol for modes" modes)
   (assert-compile (tbl? options) "expected table for options" options)
   (assert-compile (str? lhs) "expected string for lhs" lhs)
-  (assert-compile (or (str? rhs) (list? rhs) (fn? rhs) (sym? rhs)) "expected string or list or function or symbol for rhs" rhs)
-  (assert-compile (or (nil? ?desc) (str? ?desc)) "expected string or nil for description" ?desc)
-  (let [modes (icollect [char (gmatch (->str modes) ".")] char)
-        options (collect [_ v (ipairs options)] (->str v) true)
-        rhs (if (and (not (fn? rhs)) (list? rhs)) `#,rhs
-              rhs)
-        desc (if (and (not ?desc) (or (fn? rhs) (sym? rhs))) (view rhs)
-               ?desc)
-        options (if desc (doto options (tset :desc desc))
-                  options)]
+  (assert-compile (or (str? rhs) (list? rhs) (fn? rhs) (sym? rhs))
+                  "expected string or list or function or symbol for rhs" rhs)
+  (assert-compile (or (nil? ?desc) (str? ?desc))
+                  "expected string or nil for description" ?desc)
+  (let [modes (icollect [char (gmatch (->str modes) ".")]
+                char)
+        options (collect [_ v (ipairs options)]
+                  (->str v)
+                  true)
+        rhs (if (and (not (fn? rhs)) (list? rhs)) `#,rhs rhs)
+        desc (if (and (not ?desc) (or (fn? rhs) (sym? rhs))) (view rhs) ?desc)
+        options (if desc (doto options (tset :desc desc)) options)]
     `(vim.keymap.set ,modes ,lhs ,rhs ,options)))
 
 (lambda buf-map! [[modes & options] lhs rhs ?description]
@@ -88,7 +86,7 @@
   Supports all the options that the API supports.
   Automatically sets the `:buffer` option."
   (let [options (doto options
-                      (insert :buffer))]
+                  (insert :buffer))]
     (map! [modes (unpack options)] lhs rhs ?description)))
 
 ;; packer
@@ -152,6 +150,7 @@
     `((. (require :packer) :startup) #(do
                                         ,(unpack (icollect [_ v (ipairs packs) :into rocks]
                                                    v))))))
+
 (lambda let! [name value]
   "Set a vim variable using the lua API.
   The name can be either a symbol or a string.
@@ -164,18 +163,28 @@
   (assert-compile (or (str? name) (sym? name))
                   "expected string or symbol for name" name)
   (let [name (->str name)
-        scope (when (includes? ["g/" "b/" "w/" "t/"
-                                "g." "b." "w." "t."
-                                "g:" "b:" "w:" "t:"] (name:sub 1 2))
+        scope (when (includes? [:g/
+                                :b/
+                                :w/
+                                :t/
+                                :g.
+                                :b.
+                                :w.
+                                :t.
+                                "g:"
+                                "b:"
+                                "w:"
+                                "t:"]
+                               (name:sub 1 2))
                 (name:sub 1 1))
-        name (if
-               (nil? scope) name
-               (name:sub 3))]
+        name (if (nil? scope)
+                 name
+                 (name:sub 3))]
     `(tset ,(match scope
-              :b 'vim.b
-              :w 'vim.w
-              :t 'vim.t
-              _ 'vim.g) ,name ,value)))
+              :b `vim.b
+              :w `vim.w
+              :t `vim.t
+              _ `vim.g) ,name ,value)))
 
 (fn let!-mult [...]
   "Set one or multiple vim variables using the lua API.
@@ -189,13 +198,14 @@
   (fn aux [...]
     (match [...]
       (where [& rest] (empty? rest)) []
-      [name value & rest] [(let! name value)
-                           (unpack (aux (unpack rest)))]
+      [name value & rest] [(let! name value) (unpack (aux (unpack rest)))]
       _ []))
+
   (let [exprs (aux ...)]
-    (if
-      (> (length exprs) 1) `(do ,(unpack exprs))
-      (unpack exprs))))
+    (if (> (length exprs) 1)
+        `(do
+           ,(unpack exprs))
+        (unpack exprs))))
 
 (lambda set! [name ?value]
   "Set a vim option using the lua API.
@@ -207,20 +217,18 @@
   `spell`   -> spell true"
   (assert-compile (sym? name) "expected symbol for name" name)
   (let [name (->str name)
-        value (or ?value
-                  (not (name:match "^no")))
-        name (or (name:match "^no(.+)$")
-                 name)]
+        value (or ?value (not (name:match :^no)))
+        name (or (name:match "^no(.+)$") name)]
     (if (fn? value)
-      (let [fsym (gensym-checksum "__" value)]
-        `(do
-           (global ,fsym ,value)
-           (tset vim.opt ,name ,(vlua fsym))))
-      (match (name:sub -1)
-        :+ `(: (. vim.opt ,(name:sub 1 -2)) :append ,value)
-        :- `(: (. vim.opt ,(name:sub 1 -2)) :remove ,value)
-        :^ `(: (. vim.opt ,(name:sub 1 -2)) :prepend ,value)
-        _ `(tset vim.opt ,name ,value)))))
+        (let [fsym (gensym-checksum "__" value)]
+          `(do
+             (global ,fsym ,value)
+             (tset vim.opt ,name ,(vlua fsym))))
+        (match (name:sub -1)
+          "+" `(: (. vim.opt ,(name:sub 1 -2)) :append ,value)
+          "-" `(: (. vim.opt ,(name:sub 1 -2)) :remove ,value)
+          "^" `(: (. vim.opt ,(name:sub 1 -2)) :prepend ,value)
+          _ `(tset vim.opt ,name ,value)))))
 
 (fn set!-mult [...]
   "Set one or multiple vim options using the lua API.
@@ -233,15 +241,16 @@
   (fn aux [...]
     (match [...]
       (where [& rest] (empty? rest)) []
-      (where [name value & rest] (not (sym? value))) [(set! name value)
-                                                      (unpack (aux (unpack rest)))]
-      [name & rest] [(set! name)
-                     (unpack (aux (unpack rest)))]
+      (where [name value & rest] (not (sym? value)))
+      [(set! name value) (unpack (aux (unpack rest)))]
+      [name & rest] [(set! name) (unpack (aux (unpack rest)))]
       _ []))
+
   (let [exprs (aux ...)]
-    (if
-      (> (length exprs) 1) `(do ,(unpack exprs))
-      (unpack exprs))))
+    (if (> (length exprs) 1)
+        `(do
+           ,(unpack exprs))
+        (unpack exprs))))
 
 (lambda local-set! [name ?value]
   "Set a vim local option using the lua API.
@@ -253,20 +262,18 @@
   `spell`   -> spell true"
   (assert-compile (sym? name) "expected symbol for name" name)
   (let [name (->str name)
-        value (or ?value
-                  (not (name:match "^no")))
-        name (or (name:match "^no(.+)$")
-                 name)]
+        value (or ?value (not (name:match :^no)))
+        name (or (name:match "^no(.+)$") name)]
     (if (fn? value)
-      (let [fsym (gensym-checksum "__" value)]
-        `(do
-           (global ,fsym ,value)
-           (tset vim.opt_local ,name ,(vlua fsym))))
-      (match (name:sub -1)
-        :+ `(: (. vim.opt_local ,(name:sub 1 -2)) :append ,value)
-        :- `(: (. vim.opt_local ,(name:sub 1 -2)) :remove ,value)
-        :^ `(: (. vim.opt_local ,(name:sub 1 -2)) :prepend ,value)
-        _ `(tset vim.opt_local ,name ,value)))))
+        (let [fsym (gensym-checksum "__" value)]
+          `(do
+             (global ,fsym ,value)
+             (tset vim.opt_local ,name ,(vlua fsym))))
+        (match (name:sub -1)
+          "+" `(: (. vim.opt_local ,(name:sub 1 -2)) :append ,value)
+          "-" `(: (. vim.opt_local ,(name:sub 1 -2)) :remove ,value)
+          "^" `(: (. vim.opt_local ,(name:sub 1 -2)) :prepend ,value)
+          _ `(tset vim.opt_local ,name ,value)))))
 
 (fn local-set!-mult [...]
   "Set one or multiple vim local options using the lua API.
@@ -279,25 +286,29 @@
   (fn aux [...]
     (match [...]
       (where [& rest] (empty? rest)) []
-      (where [name value & rest] (not (sym? value))) [(local-set! name value)
-                                                      (unpack (aux (unpack rest)))]
-      [name & rest] [(local-set! name)
-                     (unpack (aux (unpack rest)))]
+      (where [name value & rest] (not (sym? value)))
+      [(local-set! name value) (unpack (aux (unpack rest)))]
+      [name & rest] [(local-set! name) (unpack (aux (unpack rest)))]
       _ []))
+
   (let [exprs (aux ...)]
-    (if
-      (> (length exprs) 1) `(do ,(unpack exprs))
-      (unpack exprs))))
+    (if (> (length exprs) 1)
+        `(do
+           ,(unpack exprs))
+        (unpack exprs))))
 
 (lambda command! [name expr ?desc]
   "Define a user command using the lua API.
   See the help for nvim_add_user_command for more information."
-  (assert-compile (or (str? name) (sym? name)) "expected string or symbol for name" name)
-  (assert-compile (or (str? expr) (fn? expr) (sym? expr)) "expected string or function or symbol for expr" expr)
-  (assert-compile (or (nil? ?desc) (str? ?desc)) "expected string or nil for description" ?desc)
+  (assert-compile (or (str? name) (sym? name))
+                  "expected string or symbol for name" name)
+  (assert-compile (or (str? expr) (fn? expr) (sym? expr))
+                  "expected string or function or symbol for expr" expr)
+  (assert-compile (or (nil? ?desc) (str? ?desc))
+                  "expected string or nil for description" ?desc)
   (let [name (->str name)
         desc (if (and (not ?desc) (or (fn? expr) (sym? expr))) (view expr)
-               ?desc)]
+                 ?desc)]
     `(vim.api.nvim_add_user_command ,name ,expr {:desc ,desc})))
 
 (fn opt- [tableOrigin lookupValue ...]

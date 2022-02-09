@@ -1,0 +1,93 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.006  000.006: --- NVIM STARTING ---
+000.901  000.896: locale set
+006.486  005.585: inits 1
+006.504  000.018: window checked
+009.920  003.415: parsing arguments
+010.192  000.272: expanding arguments
+010.229  000.037: inits 2
+010.788  000.560: init highlight
+010.790  000.001: waiting for UI
+013.093  002.304: done waiting for UI
+013.104  000.011: init screen for UI
+013.129  000.024: init default mappings
+013.202  000.074: init default autocommands
+015.337  000.062  000.062: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/ftplugin.vim
+015.570  000.032  000.032: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/indent.vim
+022.044  006.168  006.168: sourcing /Users/shauryasingh/.config/nvim/init.lua
+022.058  002.594: sourcing vimrc file(s)
+022.630  000.025  000.025: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/aniseed/ftdetect/fennel.vim
+022.784  000.014  000.014: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/neorg/ftdetect/norg.vim
+023.267  000.016  000.016: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/fusion.vim
+023.337  000.015  000.015: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/gdresource.vim
+023.403  000.013  000.013: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/gdscript.vim
+023.469  000.012  000.012: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/glimmer.vim
+023.535  000.013  000.013: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/glsl.vim
+023.603  000.014  000.014: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/gowork.vim
+023.677  000.018  000.018: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/graphql.vim
+023.750  000.018  000.018: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/hack.vim
+023.833  000.020  000.020: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/hcl.vim
+023.902  000.014  000.014: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/heex.vim
+023.982  000.014  000.014: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/hjson.vim
+024.066  000.015  000.015: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/json5.vim
+024.140  000.019  000.019: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/ledger.vim
+024.209  000.013  000.013: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/nix.vim
+024.285  000.015  000.015: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/prisma.vim
+024.367  000.013  000.013: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/pug.vim
+024.442  000.016  000.016: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/ql.vim
+024.532  000.021  000.021: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/query.vim
+024.618  000.027  000.027: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/surface.vim
+024.681  000.013  000.013: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/teal.vim
+024.753  000.014  000.014: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/tlaplus.vim
+024.819  000.017  000.017: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/yang.vim
+025.282  002.891  002.502: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/filetype.lua
+025.349  000.014  000.014: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/filetype.vim
+025.695  000.077  000.077: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/syntax/synload.vim
+025.778  000.352  000.276: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/syntax/syntax.vim
+027.882  000.123  000.123: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/gzip.vim
+027.938  000.011  000.011: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/health.vim
+028.013  000.031  000.031: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/man.vim
+029.085  000.160  000.160: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+029.267  001.210  001.049: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/matchit.vim
+029.443  000.130  000.130: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/matchparen.vim
+029.740  000.252  000.252: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/netrwPlugin.vim
+030.004  000.027  000.027: sourcing /Users/shauryasingh/.local/share/nvim/rplugin.vim
+030.009  000.212  000.185: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/rplugin.vim
+030.122  000.060  000.060: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/shada.vim
+030.199  000.020  000.020: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/spellfile.vim
+030.334  000.079  000.079: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/tarPlugin.vim
+030.468  000.080  000.080: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/tohtml.vim
+030.537  000.017  000.017: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/tutor.vim
+030.700  000.105  000.105: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/plugin/zipPlugin.vim
+046.492  015.604  015.604: sourcing /Users/shauryasingh/.config/nvim/plugin/packer_compiled.lua
+047.145  003.895: loading rtp plugins
+049.733  002.048  002.048: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/aniseed/plugin/aniseed.vim
+052.219  002.230  002.230: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/conjure/plugin/conjure.vim
+053.048  000.318  000.318: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/copilot.vim/autoload/copilot.vim
+053.081  000.548  000.230: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/copilot.vim/plugin/copilot.vim
+053.625  000.060  000.060: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer/plugin/nvim-lsp-installer.vim
+053.931  000.066  000.066: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-lspconfig/plugin/lspconfig.vim
+054.742  000.523  000.523: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/plugin/nvim-treesitter.vim
+054.989  000.016  000.016: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context/plugin/treesitter-context.vim
+055.397  000.193  000.193: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow/plugin/rainbow.vim
+055.700  000.023  000.023: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
+056.313  000.111  000.111: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/telescope.nvim/plugin/telescope.vim
+056.541  000.012  000.012: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/which-key.nvim/plugin/which-key.vim
+056.873  003.899: loading packages
+056.918  000.045: loading after plugins
+056.925  000.007: inits 3
+059.078  002.153: reading ShaDa
+059.126  000.048: opening buffers
+059.169  000.043: BufEnter autocommands
+059.173  000.004: editing files in windows
+063.867  004.694: VimEnter autocommands
+063.869  000.002: UIEnter autocommands
+064.159  000.130  000.130: sourcing /nix/store/qlya2glhbdlgqlz46gai79iqqmh72ny2-neovim-unwrapped-master/share/nvim/runtime/autoload/provider/clipboard.vim
+064.167  000.167: before starting main loop
+064.599  000.433: first screen update
+064.601  000.002: --- NVIM STARTED ---

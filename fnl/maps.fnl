@@ -1,7 +1,7 @@
 (module maps {require-macros [macros]})
 
 ;; no highlight on escape
-(map! [n] "<esc>" "<esc><cmd>noh<cr>")
+(map! [n] :<esc> :<esc><cmd>noh<cr>)
 
 ;; easier command line mode
 (map! [n] ";" ":")
