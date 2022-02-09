@@ -3,6 +3,11 @@
 (local {: gmatch} string)
 (local {: insert} table)
 
+;; packer
+(global fnl/pack [])
+(global fnl/rock [])
+
+;; qol functions
 (fn ->str [x]
   (tostring x))
 
@@ -27,14 +32,13 @@
     (or (= 'fn (head x))
         (= 'hashfn (head x)))))
 
-(global fnl/pack [])
-(global fnl/rock [])
-
+;; vlua, fnl functions in global namespace
 (lambda vlua [x]
   "Return a symbol mapped to `v:lua.%s()`, where `%s` is the symbol."
   (assert-compile (sym? x) "expected symbol for x" x)
   (format "v:lua.%s()" (->str x)))
 
+;; map/local map
 (lambda map! [[modes & options] lhs rhs ?desc]
   "Defines a new mapping using the lua API.
   Supports all the options that the API supports."
@@ -61,6 +65,7 @@
                       (insert :buffer))]
     (map! [modes (unpack options)] lhs rhs ?description)))
 
+;; packer
 (lambda pack [identifier ?options]
   "Returns a mixed table with the identifier as the first sequential element
   and options as hash-table items.
