@@ -1,5 +1,8 @@
 (import-macros {: map!} :conf.macros)
 
+;; jk/jj for escape 
+(map! [i] :jk :<esc>)
+
 ;; no highlight on escape
 (map! [n] :<esc> :<esc><cmd>noh<cr>)
 

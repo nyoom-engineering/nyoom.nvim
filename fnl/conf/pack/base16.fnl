@@ -1,3 +1,4 @@
+(import-macros {: cmd} :conf.macros)
 (local {: setup} (require :base16-colorscheme))
 
 ;; https://www.ibm.com/brand/experience-guides/developer/brand/color/
@@ -19,6 +20,6 @@
         :base0F "#3ddbd9"})
 
 ;; override highlights
-(vim.cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#262626")
-(vim.cmd "hi StatusLine gui=underline guibg=#161616 guifg=#525252")
-(vim.cmd "hi VertSplit guibg=bg guifg=bg")
+(cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#262626")
+(cmd "hi StatusLine gui=underline guibg=#161616 guifg=#525252")
+(cmd "hi VertSplit guibg=bg guifg=bg")

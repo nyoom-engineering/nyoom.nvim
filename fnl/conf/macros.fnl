@@ -1,6 +1,8 @@
-;; modified from https://github.com/datwaft/nvim.conf/blob/main/fnl/conf/macro/pack.fnl
-(local {: format} string)
-(local {: gmatch} string)
+;; modified from https://github.com/datwaft/nvim.conf/blob/main/fnl/conf/macro/
+
+(local {: format
+        : gmatch} string)
+
 (local {: insert} table)
 
 ;; packer
@@ -11,6 +13,12 @@
 (fn ->str [x]
   (tostring x))
 
+(fn head [xs]
+  (. xs 1))
+
+(fn cmd [string]
+  `(vim.cmd ,string))
+
 (fn str? [x]
   (= :string (type x)))
 
@@ -19,9 +27,6 @@
 
 (fn nil? [x]
   (= nil x))
-
-(fn head [xs]
-  (. xs 1))
 
 (fn includes? [xs x]
   (accumulate [is? false _ v (ipairs xs) :until is?]
@@ -311,16 +316,19 @@
                  ?desc)]
     `(vim.api.nvim_add_user_command ,name ,expr {:desc ,desc})))
 
-{: map!
+{;; mappings
+ : map!
  : buf-map!
+ ;; vim commands/autocommands
  : command!
- : use-package!
+ : cmd
+ ;; packer
  : pack
- : rock
- : rock!
+ : use-package!
  : init!
- : gensym-checksum
+ ;; v:lua
  : vlua
+ ;; variable/config (let/set)
  :let! let!-mult
  :set! set!-mult
  :local-set! local-set!-mult}

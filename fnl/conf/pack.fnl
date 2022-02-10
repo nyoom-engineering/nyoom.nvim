@@ -5,15 +5,6 @@
 (use-package! :rktjmp/hotpot.nvim)
 (use-package! :Olical/conjure {:branch :develop})
 
-;; jk/jj for escape
-(use-package! :max397574/better-escape.nvim
-              {:event :InsertCharPre
-               :config (fn []
-                         (local {: setup} (require :better_escape))
-                         (setup {:mapping {1 :jk 2 :jj}
-                                 :clear_empty_lines true
-                                 :keys :<Esc>}))})
-
 ;; show bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
 
@@ -28,20 +19,16 @@
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
-              {:run :TSUpdate
-               :config! :treesitter
+              {:config! :treesitter
                :requires [:p00f/nvim-ts-rainbow
                           (pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})]})
 
 ;; lsp
 (use-package! :github/copilot.vim)
-
-; copilot completion
 (use-package! :neovim/nvim-lspconfig
               {:config! :lspconfig_con
                :requires :williamboman/nvim-lsp-installer})
-
 (use-package! :folke/trouble.nvim {:cmd :Trouble
                                    :config (fn []
                                              (local {: setup} (require :trouble))
@@ -49,10 +36,9 @@
 
 ;; aesthetics
 (use-package! :RRethy/nvim-base16 {:config! :base16})
-
 (use-package! :lewis6991/gitsigns.nvim {:config! :gitsigns_con})
-
 (use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config! :truezen_con})
+(use-package! :kevinhwang91/nvim-hlslens {:confg! :hlslens_con})
 
 ;; notifications
 (use-package! :rcarriga/nvim-notify
