@@ -1,29 +1,18 @@
-(module init {require-macros [macros] autoload {c aniseed.compile}})
-
-; call global settings
-(require :config)
-(require :maps)
+(import-macros {: pack : use-package! : init!} :conf.macros)
 
 ;; bootstrap stuff
 (use-package! :wbthomason/packer.nvim)
-
-; use-package manager
-(use-package! :lewis6991/impatient.nvim)
-
-; faster loading
-(use-package! :Olical/aniseed {:branch :develop})
-
-; autocompile fennel config
+(use-package! :rktjmp/hotpot.nvim)
 (use-package! :Olical/conjure {:branch :develop})
 
 ;; jk/jj for escape
 (use-package! :max397574/better-escape.nvim
               {:event :InsertCharPre
                :config (fn []
-                         (opt- better_escape setup
-                               {:mapping {1 :jk 2 :jj}
-                                :clear_empty_lines true
-                                :keys :<Esc>}))})
+                         (local {: setup} (require :better_escape))
+                         (setup {:mapping {1 :jk 2 :jj}
+                                 :clear_empty_lines true
+                                 :keys :<Esc>}))})
 
 ;; show bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
@@ -44,11 +33,6 @@
                :requires [:p00f/nvim-ts-rainbow
                           (pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})]})
-
-(use-package! :romgrk/nvim-treesitter-context
-              {:after :nvim-treesitter
-               :config (fn []
-                        (opt- treesitter-context.config setup {:enable true}))})
 
 ;; lsp
 (use-package! :github/copilot.vim)
@@ -71,15 +55,15 @@
 (use-package! :rcarriga/nvim-notify
               {:config (fn []
                          (set vim.notify (require :notify))
-                         (opt- notify setup
-                               {:stages :slide
-                                :timeout 2500
-                                :minimum_width 50
-                                :icons {:ERROR ""
-                                        :WARN ""
-                                        :INFO ""
-                                        :DEBUG ""
-                                        :TRACE "✎"}}))})
+                         (local {: setup} (require :notify))
+                         (setup {:stages :slide
+                                 :timeout 2500
+                                 :minimum_width 50
+                                 :icons {:ERROR ""
+                                         :WARN ""
+                                         :INFO ""
+                                         :DEBUG ""
+                                         :TRACE "✎"}}))})
 
 ;; notes
 (use-package! :nvim-neorg/neorg

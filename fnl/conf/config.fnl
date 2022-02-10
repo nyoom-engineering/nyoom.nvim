@@ -1,9 +1,4 @@
-(module core {require-macros [macros]})
-
-;; override highlights
-(vim.cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#262626")
-(vim.cmd "hi StatusLine gui=underline guibg=#161616 guifg=#525252")
-(vim.cmd "hi VertSplit guibg=bg guifg=bg")
+(import-macros {: set!} :conf.macros)
 
 ;; genearl settings
 (set! noru)

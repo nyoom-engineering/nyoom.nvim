@@ -4,8 +4,8 @@
 (local {: insert} table)
 
 ;; packer
-(global fnl/pack [])
-(global fnl/rock [])
+(global conf/pack [])
+(global conf/rock [])
 
 ;; qol functions
 (fn ->str [x]
@@ -101,7 +101,7 @@
   (let [options (or ?options {})
         options (collect [k v (pairs options)]
                   (if (= k :config!)
-                      (values :config (format "require('pack.%s')" v))
+                      (values :config (format "require('conf.pack.%s')" v))
                       (= k :init)
                       (values :config (format "require('%s').setup()" v))
                       (values k v)))]
@@ -110,13 +110,13 @@
 
 (lambda use-package! [identifier ?options]
   "Declares a plugin with its options.
-  This is a mixed table saved on the global compile-time variable fnl/pack.
+  This is a mixed table saved on the global compile-time variable conf/pack.
   See https://github.com/wbthomason/packer.nvim for information about the
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (assert-compile (or (nil? ?options) (tbl? ?options))
                   "expected table for options" ?options)
-  (insert fnl/pack (pack identifier ?options)))
+  (insert conf/pack (pack identifier ?options)))
 
 (lambda rock [identifier ?options]
   "Returns a mixed table with the identifier as the first sequential element
@@ -132,20 +132,20 @@
 
 (lambda rock! [identifier ?options]
   "Declares a plugin with its options.
-  This is a mixed table saved on the global compile-time variable fnl/rock.
+  This is a mixed table saved on the global compile-time variable conf/rock.
   See https://github.com/wbthomason/packer.nvim for information about the
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (assert-compile (or (nil? ?options) (tbl? ?options))
                   "expected table for options" ?options)
-  (insert fnl/rock (rock identifier ?options)))
+  (insert conf/rock (rock identifier ?options)))
 
 (lambda init! []
   "Initializes the plugin manager with the previously declared plugins and
   their options."
-  (let [packs (icollect [_ v (ipairs fnl/pack)]
+  (let [packs (icollect [_ v (ipairs conf/pack)]
                 `(use ,v))
-        rocks (icollect [_ v (ipairs fnl/rock)]
+        rocks (icollect [_ v (ipairs conf/rock)]
                 `(use_rocks ,v))]
     `((. (require :packer) :startup) #(do
                                         ,(unpack (icollect [_ v (ipairs packs) :into rocks]
@@ -311,13 +311,6 @@
                  ?desc)]
     `(vim.api.nvim_add_user_command ,name ,expr {:desc ,desc})))
 
-(fn opt- [tableOrigin lookupValue ...]
-  (let [tableOrigin (->str tableOrigin)
-        lookupValue (->str lookupValue)
-        output [...]]
-    `(do
-       ((. (require ,tableOrigin) ,lookupValue) ,...))))
-
 {: map!
  : buf-map!
  : command!
@@ -328,7 +321,6 @@
  : init!
  : gensym-checksum
  : vlua
- : opt-
  :let! let!-mult
  :set! set!-mult
  :local-set! local-set!-mult}

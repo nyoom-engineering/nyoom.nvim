@@ -1,5 +1,5 @@
 -- Entrypoint for my Neovim configuration!
--- We simply bootstrap packer and Aniseed here, as well as load impatient and some optimizations
+-- We simply bootstrap packer and Aniseed here, as well as some optimizations
 -- It's then up to Aniseed to compile and load fnl/config/init.fnl
 
 -- use opt-in filetype.lua instead of vimscript default
@@ -24,13 +24,18 @@ function ensure(user, repo)
 end
 
 -- Bootstrap essential plugins required for installing and loading the rest.
-ensure("lewis6991", "impatient.nvim")
 ensure("wbthomason", "packer.nvim")
-ensure("Olical", "aniseed")
+ensure("rktjmp", "hotpot.nvim")
 
--- Load impatient which pre-compiles and caches Lua modules.
-require("impatient")
 
--- load aniseed environment
-vim.g["aniseed#env"] = { module = "init" }
+if pcall(require, "hotpot") then
+  -- Setup hotpot.nvim
+  require("hotpot").setup({
+    provide_require_fennel = true,
+  })
+  require("conf")
+else
+  print("Unabled to require hotpot")
+end
+
 
