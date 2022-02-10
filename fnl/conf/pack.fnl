@@ -5,7 +5,8 @@
 (use-package! :rktjmp/hotpot.nvim)
 (use-package! :Olical/conjure {:branch :develop})
 
-;; show bindings
+;; bindings
+(use-package! :windwp/nvim-autopairs {:init :nvim-autopairs})
 (use-package! :folke/which-key.nvim {:init :which-key})
 
 ;; navigation
@@ -13,8 +14,9 @@
               {:config! :telescope_con
                :requires [:nvim-lua/popup.nvim
                           :nvim-lua/plenary.nvim
-                          :nvim-telescope/telescope-fzy-native.nvim
-                          (pack :nvim-telescope/telescope-smart-history.nvim
+                          :nvim-telescope/telescope-file-browser.nvim
+                          :nvim-telescope/telescope-packer.nvim
+                          (pack :nvim-telescope/telescope-frecency.nvim
                                 {:requires [:tami5/sqlite.lua]})]})
 
 ;; tree-sitter

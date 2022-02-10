@@ -3,29 +3,21 @@
 (fn on-attach [client bufnr]
   (import-macros {: buf-map! : local-set!} :conf.macros)
   (local-set! omnifunc "v:lua.vim.lsp.omnifunc")
-  (buf-map! [n] :gD "<cmd>lua vim.lsp.buf.declaration()<CR>" :silent)
-  (buf-map! [n] :gd "<cmd>lua vim.lsp.buf.definition()<CR>" :silent)
-  (buf-map! [n] :K "<cmd>lua vim.lsp.buf.hover()<CR>" :silent)
-  (buf-map! [n] :gi "<cmd>lua vim.lsp.buf.implementation()<CR>" :silent)
-  (buf-map! [n] :<C-k> "<cmd>lua vim.lsp.buf.signature_help()<CR>" :silent)
-  (buf-map! [n] :<leader>wa "<cmd>lua vim.lsp.buf.add_workleader_folder()<CR>"
-            :silent)
-  (buf-map! [n] :<leader>wr
-            "<cmd>lua vim.lsp.buf.remove_workleader_folder()<CR>" :silent)
-  (buf-map! [n] :<leader>wl
-            "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workleader_folders()))<CR>"
-            :silent)
-  (buf-map! [n] :<leader>D "<cmd>lua vim.lsp.buf.type_definition()<CR>" :silent)
-  (buf-map! [n] :<leader>rn "<cmd>lua vim.lsp.buf.rename()<CR>" :silent)
-  (buf-map! [n] :<leader>ca "<cmd>lua vim.lsp.buf.code_action()<CR>" :silent)
-  (buf-map! [n] :gr "<cmd>lua vim.lsp.buf.references()<CR>" :silent)
-  (buf-map! [n] :<leader>E
-            "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>" :silent)
+  (buf-map! [n] :<leader>gD "<cmd>lua vim.lsp.buf.declaration()<CR>" :silent)
+  (buf-map! [n] :<leader>gf "<cmd>lua vim.lsp.buf.definition()<CR>" :silent)
+  (buf-map! [n] :<leader>gi "<cmd>lua vim.lsp.buf.implementation()<CR>" :silent)
+  (buf-map! [n] :<leader>gt "<cmd>Trouble<CR>" :silent)
+  (buf-map! [n] :<leader>gba "<cmd>lua vim.lsp.buf.add_workleader_folder()<CR>" :silent)
+  (buf-map! [n] :<leader>gbr "<cmd>lua vim.lsp.buf.remove_workleader_folder()<CR>" :silent)
+  (buf-map! [n] :<leader>gl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workleader_folders()))<CR>" :silent)
+  (buf-map! [n] :<leader>gd "<cmd>lua vim.lsp.buf.type_definition()<CR>" :silent)
+  (buf-map! [n] :<leader>gn "<cmd>lua vim.lsp.buf.rename()<CR>" :silent)
+  (buf-map! [n] :<leader>ga "<cmd>lua vim.lsp.buf.code_action()<CR>" :silent)
+  (buf-map! [n] :<leader>gr "<cmd>lua vim.lsp.buf.references()<CR>" :silent)
+  (buf-map! [n] :<leader>ge "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>" :silent)
   (buf-map! [n] "[d" "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" :silent)
   (buf-map! [n] "]d" "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" :silent)
-  (buf-map! [n] :<leader>Q "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>"
-            :silent)
-  (buf-map! [n] :<leader>F "<cmd>lua vim.lsp.buf.formatting()<CR>" :silent))
+  (buf-map! [n] :<leader>gq "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>" :silent))
 
 (let [{: config : severity} vim.diagnostic
       {: sign_define} vim.fn]

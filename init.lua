@@ -23,19 +23,15 @@ function ensure(user, repo)
     end
 end
 
--- Bootstrap essential plugins required for installing and loading the rest.
+-- Bootstrap essential plugins
 ensure("wbthomason", "packer.nvim")
 ensure("rktjmp", "hotpot.nvim")
 
+-- load hotpot, have it profide fennel.lua
+require("hotpot").setup({provide_require_fennel = true})
 
-if pcall(require, "hotpot") then
-  -- Setup hotpot.nvim
-  require("hotpot").setup({
-    provide_require_fennel = true,
-  })
-  require("conf")
-else
-  print("Unabled to require hotpot")
-end
+-- load config
+require("conf")
+
 
 

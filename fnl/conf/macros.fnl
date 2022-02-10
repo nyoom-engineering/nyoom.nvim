@@ -1,5 +1,4 @@
 ;; modified from https://github.com/datwaft/nvim.conf/blob/main/fnl/conf/macro/
-
 (local {: format
         : gmatch} string)
 

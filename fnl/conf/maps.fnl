@@ -11,17 +11,20 @@
 (map! [v] ";" ":")
 
 ;; wrap/unwrap
-(map! [n] :<leader>tw "<cmd>set wrap!<CR>")
+(map! [n] :<leader>w "<cmd>set wrap!<CR>")
 
 ;; treesitter 
-(map! [n] :<Leader>h ":TSHighlightCapturesUnderCursor<CR>")
+(map! [n] :<Leader>th ":TSHighlightCapturesUnderCursor<CR>")
+(map! [n] :<Leader>tp ":TSPlayground<CR>")
 
 ;; telescope
 (map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
-(map! [n] :<leader>bb "<cmd>Telescope buffers<CR>")
-(map! [n] :<leader>fr "<cmd>Telescope oldfiles<CR>")
-(map! [n] :<leader>. "<cmd>Telescope find_files<CR>")
+(map! [n] :<leader>b "<cmd>Telescope buffers<CR>")
+(map! [n] :<leader>r "<cmd>Telescope frecency<CR>")
+(map! [n] :<leader>. "<cmd>Telescope file_browser<CR>")
 (map! [n] :<leader>f "<cmd>Telescope current_buffer_fuzzy_find<CR>")
+(map! [n] :<leader>p "<cmd>Telescope packer<CR>")
+(map! [n] :<leader><space> "<cmd>Telescope find_files<CR>")
 
 ;; truezen
-(map! [n] :<leader>tz :<cmd>TZAtaraxis<CR>)
+(map! [n] :<leader>z :<cmd>TZAtaraxis<CR>)

@@ -23,9 +23,4 @@
                                          :aa "@parameter.outer"}}
                       :swap {:enable true
                              :swap_next {:<localleader>> "@parameter.inner"}
-                             :swap_previous {:<localleader>< "@parameter.inner"}}}
-        :context_commentstring {:enable true}
-        :matchup {:enable true}})
-
-(set! foldmethod :expr)
-(set! foldexpr "nvim_treesitter#foldexpr()")
+                             :swap_previous {:<localleader>< "@parameter.inner"}}}})
