@@ -42,7 +42,10 @@
               {:config! :lspconfig_con
                :requires :williamboman/nvim-lsp-installer})
 
-(use-package! :folke/trouble.nvim {:cmd :Trouble :init :trouble})
+(use-package! :folke/trouble.nvim {:cmd :Trouble
+                                   :config (fn []
+                                             (local {: setup} (require :trouble))
+                                             (setup {:icons false}))})
 
 ;; aesthetics
 (use-package! :RRethy/nvim-base16 {:config! :base16})

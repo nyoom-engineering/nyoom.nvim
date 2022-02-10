@@ -36,8 +36,8 @@
            :severity_sort true
            :float {:show_header false :border :single}})
   (sign_define :DiagnosticSignError {:text "" :texthl :DiagnosticSignError})
-  (sign_define :DiagnosticSignWarn {:text "" :texthl :DiagnosticSignWarn})
-  (sign_define :DiagnosticSignInfo {:text "" :texthl :DiagnosticSignInfo})
+  (sign_define :DiagnosticSignWarn {:text "" :texthl :DiagnosticSignWarn})
+  (sign_define :DiagnosticSignInfo {:text "" :texthl :DiagnosticSignInfo})
   (sign_define :DiagnosticSignHint {:text "" :texthl :DiagnosticSignHint}))
 
 (let [{: with : handlers} vim.lsp]
