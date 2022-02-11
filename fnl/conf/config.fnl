@@ -1,13 +1,23 @@
 (import-macros {: set!
                 : let!} :conf.macros)
 
+;; let! is used for vim.g. options. For example, (let! do_filetype_lua 1) expands to vim.g["do_filetype_lua"]=1.
+
 ; Disable ruby/perl
 (let! loaded_ruby_provider 0)
 (let! loaded_perl_provider 0)
 
-; Use filetype.lua
+;; use opt-in filetype.lua instead of vimscript default
+;; EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
 (let! do_filetype_lua 1)
 (let! did_load_filetypes 0)
+
+;; set! is used for vim.opt options. For example, (set! mouse :a) expands to vim.opt["mouse"]="a"
+;; if a string or number isn't passed to set!, it will assume true. e.g. (set! list) will expand to vim.opt["list"]=true
+;; Similarly if the option starts with no, it will assume false e.g. (set! noru) will expand to vim.opt["ru"]=false
+
+;; disable the ruler
+(set! noru)
 
 ;; show whitespaces as characters 
 (set! list)
@@ -52,9 +62,6 @@
 ;; I don't get the point of fancy statusline plugins. 
 ;; I used to use them, until I realized that I could do the same in a more elegant and minimal way. 
 ;; Now I just have this one line statusline, which works well enough
-
-;; disable the ruler
-(set! noru)
 
 ;; filename + lineno
 (set! statusline "%F%m%r%h%w: %2l")

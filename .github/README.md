@@ -49,17 +49,16 @@ nix develop
 Then run `nvim` as usual, and `:PackerSync` to update/install plugins
 
 ## Notes
-I've currently removed impatient.nvim, as it doesn't offer any benefit with hotpot (and sometimes results in worse performance, see: https://github.com/rktjmp/hotpot.nvim/issues/26). Hotpot manages its own cache, which doesn't go under the `lua/` folder like aniseed does. Currently that means this config is a bit "slow". Why is slow in quotes you ask?
-- Slow is subjective, the whole config still starts up in under 50ms on my machine. While this is slower than some configs (e.g. NvChad) 
-- This config also does away with the excessive lazy loading, and the first UI refresh is within ~= 10ms of NvChad
-- Its still 500ms faster than my emacs config, if that means anything to you. 
-- Theres room for improvement, once https://github.com/neovim/neovim/pull/15436 lands (which https://github.com/lewis6991/impatient.nvim is based on) then hotpot will get faster. 
 
-I recommend trying to not worry about startuptime for the time being, another 50ms here and there isn't much anyways.
-If you're looking to use aniseed+impatient over hotpot, then feel free to use an older commit of this repository.
+### Aniseed vs Hotpot
+
+- Aniseed: Aniseed bridges the gap between Fennel and Neovim, Allowing you to easily write plugins or configuration in a Clojure-like Lisp with great runtime performance. As opposed to hotpot, aniseed provides macros, is slightly faster and more featureful, compiles fennel files to the lua/ directory, and has better integration with conjure. It aims to provide a more clojure-like experience, and behaves as a superset of fennel. It is the recommended compiler, as its more frequently updated, disables compiler sandboxing by default (reducing macro pains), and provides a more stable experience overall.
+
+- Hotpot: Hotpot will transparently compile your Fennel code into Lua and then return the compiled module. Future calls to `require` (including in future Neovim sessions) will skip the compile step unless it's stale. Only compiles and caches fennel files, providing a more native experience for the user. On the other hand, it is slightly slower and less developed. Users looking for macros can use the builtin macros defined in macros.fnl, or the zest.nvim library.
+
+In `init.lua`, you can set the compiler to aniseed/hotpot, and nyoom will handle the rest. All the current configuration is hotpot-compatible, so it doesn't use any aniseed macros by default. However, you are free to use them yourself. 
 
 ## Warning
 
 If you have an issue with a plugin in Nyoom.nvim, first you should report it to Nyoom.nvim to see if it's an issue with it. Please don't bother package maintainers with issues that are caused by my configs, and vice versa. I'm new to fennel, so don't hesitate to tell me my lisp-fu sucks! 
-
 

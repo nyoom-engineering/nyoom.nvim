@@ -5,6 +5,11 @@
 (let! mapleader " ")
 (let! maplocalleader ",")
 
+;; the map! macro is used for any mappings. It has the following syntax: 
+;; (map! [<mode>] :key1 :commandtorun)
+;; e.g. (map! [i] :jk :<esc>) binds jk to <esc> in insert mode
+;; the buf-map! macro is used for buffer-local mappings, like those needed for LSP
+
 ;; jk/jj for escape 
 (map! [i] :jk :<esc>)
 
@@ -34,8 +39,10 @@
 ;; truezen
 (map! [n] :<leader>z :<cmd>TZAtaraxis<CR>)
 
-;; fennel/hotpot API
-(map! [v] :<leader>e "<cmd>lua print(require('hotpot.api.eval')['eval-selection']())<CR>")
-(map! [v] :<leader>c "<cmd>lua print(require('hotpot.api.compile')['compile-selection']())<CR>")
-(map! [n] :<leader>c "<cmd>lua print(require('hotpot.api.compile')['compile-buffer'](0))<CR>")
+(if (= fennel_compiler :hotpot)
+    (do
+      (map! [v] :<leader>e "<cmd>lua print(require('hotpot.api.eval')['eval-selection']())<CR>")
+      (map! [v] :<leader>c "<cmd>lua print(require('hotpot.api.compile')['compile-selection']())<CR>")
+      (map! [n] :<leader>c "<cmd>lua print(require('hotpot.api.compile')['compile-buffer'](0))<CR>")))
+
 
