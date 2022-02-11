@@ -2,8 +2,16 @@
 
 ;; bootstrap stuff
 (use-package! :wbthomason/packer.nvim)
-(use-package! :rktjmp/hotpot.nvim)
+(use-package! :lewis6991/impatient.nvim)
 (use-package! :Olical/conjure {:branch :develop})
+
+;; lispy configs
+(if (= compiler aniseed)
+    (do
+      (use-package! :Olical/aniseed {:branch :develop}))
+    (= compiler hotpot)
+    (do
+      (use-package! :rktjmp/hotpot.nvim)))
 
 ;; bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
@@ -15,13 +23,16 @@
 
 ;; navigation
 (use-package! :nvim-telescope/telescope.nvim
-              {:config! :telescope_con
+              {:cmd :Telescope
+               :config! :telescope_con
                :requires [:nvim-lua/popup.nvim
                           :nvim-lua/plenary.nvim
                           :nvim-telescope/telescope-file-browser.nvim
                           :nvim-telescope/telescope-packer.nvim
                           (pack :nvim-telescope/telescope-frecency.nvim
-                                {:requires [:tami5/sqlite.lua]})]})
+                                {:requires [:tami5/sqlite.lua]})
+                          (pack :nvim-telescope/telescope-fzf-native.nvim
+                                {:run :make})]})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter

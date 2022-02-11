@@ -21,10 +21,21 @@ end
 
 -- Bootstrap essential plugins
 ensure("wbthomason", "packer.nvim")
-ensure("rktjmp", "hotpot.nvim")
+ensure("lewis6991", "impatient.nvim")
 
--- load hotpot, have it provide fennel.lua
-require("hotpot").setup()
+-- impatient optimization
+require("impatient")
 
--- load config
-require("conf")
+compiler = aniseed -- change this to hotpot if you want to use hotpot
+
+if compiler == aniseed then
+    ensure("Olical", "aniseed")
+    vim.g["aniseed#env"] = {module = "conf.init"}
+elseif compiler == hotpot then
+    ensure("rktjmp", "hotpot.nvim")
+    require("hotpot").setup()
+    require("conf")
+else
+    error("Unknown compiler")
+end
+

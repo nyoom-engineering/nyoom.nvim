@@ -26,6 +26,7 @@
                    :dynamic_preview_title true}})
 
 ;; load our extensions
+((. (require :telescope) :load_extension) :fzf)
 ((. (require :telescope) :load_extension) :packer)
 ((. (require :telescope) :load_extension) :file_browser)
 
