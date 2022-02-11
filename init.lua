@@ -1,13 +1,9 @@
--- Entrypoint for my Neovim configuration!
--- We simply bootstrap packer and Aniseed here, as well as some optimizations
--- It's then up to Aniseed to compile and load fnl/config/init.fnl
+-- Entrypoint for the neovim configuration
+-- We simply bootstrap packer and hotpot here
+-- It's then up to hotpot to compile and load fnl/conf/init.fnl
 
 -- use opt-in filetype.lua instead of vimscript default
 -- EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
-vim.g.mapleader = " "
-
 local execute = vim.api.nvim_command
 local fn = vim.fn
 local fmt = string.format
@@ -27,11 +23,8 @@ end
 ensure("wbthomason", "packer.nvim")
 ensure("rktjmp", "hotpot.nvim")
 
--- load hotpot, have it profide fennel.lua
-require("hotpot").setup({provide_require_fennel = true})
+-- load hotpot, have it provide fennel.lua
+require("hotpot").setup()
 
 -- load config
 require("conf")
-
-
-

@@ -20,6 +20,6 @@
         :base0F "#3ddbd9"})
 
 ;; override highlights
-(cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#262626")
-(cmd "hi StatusLine gui=underline guibg=#161616 guifg=#525252")
+(cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#393939")
+(cmd "hi StatusLine gui=underline guibg=#161616 guifg=#393939")
 (cmd "hi VertSplit guibg=bg guifg=bg")

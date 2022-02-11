@@ -1,7 +1,13 @@
-(import-macros {: set!} :conf.macros)
+(import-macros {: set!
+                : let!} :conf.macros)
 
-;; disable the ruler
-(set! noru)
+; Disable ruby/perl
+(let! loaded_ruby_provider 0)
+(let! loaded_perl_provider 0)
+
+; Use filetype.lua
+(let! do_filetype_lua 1)
+(let! did_load_filetypes 0)
 
 ;; show whitespaces as characters 
 (set! list)
@@ -43,11 +49,18 @@
 ;; universal clipboard support
 (set! clipboard :unnamedplus)
 
-;; slightly more minimal statusline
-(set! statusline "%=%t: %2l (%2p%%)")
+;; I don't get the point of fancy statusline plugins. 
+;; I used to use them, until I realized that I could do the same in a more elegant and minimal way. 
+;; Now I just have this one line statusline, which works well enough
+
+;; disable the ruler
+(set! noru)
+
+;; filename + lineno
+(set! statusline "%F%m%r%h%w: %2l")
 
 ;; font for GUI's. You probably want to change this
-(set! guifont "Liga SFMono Nerd Font:h14")
+(set! guifont "Liga SFMono Nerd Font:h15")
 
 ;; disable built-in plugins
 (local built-ins {:netrw :netrwPlugin

@@ -6,8 +6,12 @@
 (use-package! :Olical/conjure {:branch :develop})
 
 ;; bindings
-(use-package! :windwp/nvim-autopairs {:init :nvim-autopairs})
 (use-package! :folke/which-key.nvim {:init :which-key})
+
+;; completion (note: I don't really like completion, so I just have some paren and comment help for now)
+(use-package! :github/copilot.vim)
+(use-package! :numToStr/Comment.nvim {:init :Comment})
+(use-package! :windwp/nvim-autopairs {:init :nvim-autopairs})
 
 ;; navigation
 (use-package! :nvim-telescope/telescope.nvim
@@ -27,7 +31,6 @@
                                 {:cmd :TSPlayground})]})
 
 ;; lsp
-(use-package! :github/copilot.vim)
 (use-package! :neovim/nvim-lspconfig
               {:config! :lspconfig_con
                :requires :williamboman/nvim-lsp-installer})
