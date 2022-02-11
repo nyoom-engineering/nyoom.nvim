@@ -6,10 +6,10 @@
 (use-package! :Olical/conjure {:branch :develop})
 
 ;; lispy configs
-(if (= compiler aniseed)
+(if (= fennel-compiler :aniseed)
     (do
       (use-package! :Olical/aniseed {:branch :develop}))
-    (= compiler hotpot)
+    (= fennel-compiler :hotpot)
     (do
       (use-package! :rktjmp/hotpot.nvim)))
 

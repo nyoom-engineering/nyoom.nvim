@@ -26,12 +26,12 @@ ensure("lewis6991", "impatient.nvim")
 -- impatient optimization
 require("impatient")
 
-compiler = aniseed -- change this to hotpot if you want to use hotpot
+fennel_compiler = "aniseed" -- change this to hotpot if you want to use hotpot
 
-if compiler == aniseed then
+if fennel_compiler == "aniseed" then
     ensure("Olical", "aniseed")
     vim.g["aniseed#env"] = {module = "conf.init"}
-elseif compiler == hotpot then
+elseif fennel_compiler == "hotpot" then
     ensure("rktjmp", "hotpot.nvim")
     require("hotpot").setup()
     require("conf")
