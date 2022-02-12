@@ -5,7 +5,6 @@
                       :ruler true
                       :showmode true
                       :showcmd false}
-             :top {:showtabline 0}
              :left {:number false :relativenumber false :signcolumn :no}}
         :modes {:ataraxis {:left_padding 32
                            :right_padding 32

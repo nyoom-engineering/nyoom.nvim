@@ -52,7 +52,7 @@ Then run `nvim` as usual, and `:PackerSync` to update/install plugins
 
 ### Aniseed vs Hotpot
 
-- Aniseed: Aniseed bridges the gap between Fennel and Neovim, Allowing you to easily write plugins or configuration in a Clojure-like Lisp with great runtime performance. As opposed to hotpot, aniseed provides macros, is slightly faster and more featureful, compiles fennel files to the lua/ directory, and has better integration with conjure. It aims to provide a more clojure-like experience, and behaves as a superset of fennel. It is the recommended compiler, as its more frequently updated, disables compiler sandboxing by default (reducing macro pains), and provides a more stable experience overall.
+- Aniseed: Aniseed bridges the gap between Fennel and Neovim, Allowing you to easily write plugins or configuration in a Clojure-like Lisp with great runtime performance. As opposed to hotpot, aniseed provides macros, is slightly faster and more featureful, compiles fennel files to the lua/ directory, and has better integration with conjure. It aims to provide a more clojure-like experience, and behaves as a superset of fennel.
 
 - Hotpot: Hotpot will transparently compile your Fennel code into Lua and then return the compiled module. Future calls to `require` (including in future Neovim sessions) will skip the compile step unless it's stale. Only compiles and caches fennel files, providing a more native experience for the user. On the other hand, it is slightly slower and less developed. Users looking for macros can use the builtin macros defined in macros.fnl, or the zest.nvim library.
 

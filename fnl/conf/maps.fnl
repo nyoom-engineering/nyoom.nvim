@@ -1,5 +1,4 @@
-(import-macros {: map!
-                : let!} :conf.macros)
+(import-macros {: map! : let!} :conf.macros)
 
 ;; add leader keys
 (let! mapleader " ")
@@ -41,8 +40,9 @@
 
 (if (= fennel_compiler :hotpot)
     (do
-      (map! [v] :<leader>e "<cmd>lua print(require('hotpot.api.eval')['eval-selection']())<CR>")
-      (map! [v] :<leader>c "<cmd>lua print(require('hotpot.api.compile')['compile-selection']())<CR>")
-      (map! [n] :<leader>c "<cmd>lua print(require('hotpot.api.compile')['compile-buffer'](0))<CR>")))
-
-
+      (map! [v] :<leader>e
+            "<cmd>lua print(require('hotpot.api.eval')['eval-selection']())<CR>")
+      (map! [v] :<leader>c
+            "<cmd>lua print(require('hotpot.api.compile')['compile-selection']())<CR>")
+      (map! [n] :<leader>c
+            "<cmd>lua print(require('hotpot.api.compile')['compile-buffer'](0))<CR>")))

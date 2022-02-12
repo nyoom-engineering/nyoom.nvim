@@ -1,6 +1,5 @@
 ;; modified from https://github.com/datwaft/nvim.conf/blob/main/fnl/conf/macro/
-(local {: format
-        : gmatch} string)
+(local {: format : gmatch} string)
 
 (local {: insert} table)
 
@@ -315,17 +314,13 @@
                  ?desc)]
     `(vim.api.nvim_add_user_command ,name ,expr {:desc ,desc})))
 
-{;; mappings
- : map!
+{: map!
  : buf-map!
- ;; vim commands/autocommands
  : command!
  : cmd
- ;; packer
  : pack
  : use-package!
  : init!
- ;; v:lua
  : vlua
  ;; variable/config (let/set)
  :let! let!-mult

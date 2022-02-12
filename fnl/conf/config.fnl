@@ -1,16 +1,10 @@
-(import-macros {: set!
-                : let!} :conf.macros)
+(import-macros {: set! : let!} :conf.macros)
 
 ;; let! is used for vim.g. options. For example, (let! do_filetype_lua 1) expands to vim.g["do_filetype_lua"]=1.
 
 ; Disable ruby/perl
 (let! loaded_ruby_provider 0)
 (let! loaded_perl_provider 0)
-
-;; use opt-in filetype.lua instead of vimscript default
-;; EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
-(let! do_filetype_lua 1)
-(let! did_load_filetypes 0)
 
 ;; set! is used for vim.opt options. For example, (set! mouse :a) expands to vim.opt["mouse"]="a"
 ;; if a string or number isn't passed to set!, it will assume true. e.g. (set! list) will expand to vim.opt["list"]=true

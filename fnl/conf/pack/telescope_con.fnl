@@ -33,4 +33,3 @@
 ;; only load smart history if sqlite is available
 (when (ffi.load :libsqlite3)
   ((. (require :telescope) :load_extension) :frecency))
-
