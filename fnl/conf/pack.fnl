@@ -92,8 +92,6 @@
 (use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config! :truezen_con})
 (use-package! :kevinhwang91/nvim-hlslens {:confg! :hlslens_con})
 (use-package! :lewis6991/gitsigns.nvim {:init :gitsigns :after :plenary.nvim})
-
-;; notifications
 (use-package! :rcarriga/nvim-notify
               {:config (fn []
                          (set vim.notify (require :notify))

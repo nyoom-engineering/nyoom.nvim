@@ -27,7 +27,5 @@
 
 ;; bold various syntax & TODO
 (cmd "hi Todo gui=bold")
-(cmd "hi TSInclude gui=bold")
-(cmd "hi TSKeyword gui=bold")
 (cmd "hi TSSymbol gui=bold")
 (cmd "hi TSFunction gui=bold")

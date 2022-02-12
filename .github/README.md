@@ -1,6 +1,6 @@
 # Nyoom.nvim
 
-This config was a reponse to new configs that pop up, with very abstracted and complex codebases, such as NvChad. They try to be a one-size-fits-all config. NvChad and LunarVim both try to fit as much overall functionality as possible and needlessly lazy load *everything*, when it really isn't needed. Complex codebases lead to less freedom for end-user extensiblity. Try forking NvChad and making your own configuration out of it. Thats right, you can't. Everything is tied to the userConfig, and you rely on the maintainer of said code to implement features. 
+This config was a response to new configs that pop up, with very abstracted and complex codebases, such as NvChad. They try to be a one-size-fits-all config. NvChad and LunarVim both try to fit as much overall functionality as possible and needlessly lazy load *everything*, when it really isn't needed. Complex codebases lead to less freedom for end-user extensiblity. Try forking NvChad and making your own configuration out of it. Thats right, you can't. Everything is tied to the userConfig, and you rely on the maintainer of said code to implement features. 
 
 Nyoom.nvim provides a solution to these problems by providing only the necessary code in order to make a functioning configuration. The end goal of nyoom.nvim is to be used as a base config for users to extend and add upon, leading to a more unique editing experience. Its relatively small and simple, offers the bare minimum needed plugins to have a powerful config, and is suited to my needs, but can just as easily be suited to yours!
 
@@ -52,11 +52,58 @@ nix develop
 
 Then run `nvim` as usual, and `:PackerSync` to update/install plugins
 
-## Notes
+## Useful plugins
+
+### Essentials
+
+- packer.nvim
+- impatient.nvim
+- which-key.nvim
+
+### Lisps
+
+- conjure
+- hotpot
+- aniseed
+- parinfer-rust
+
+### Completion
+
+- copilot
+- Comment.nvim
+- nvim-autopairs
+
+### Utilities
+
+- Telescope: 
+ - File browser
+ - Packer
+ - frecency
+ - fzf-native
+- Treesitter: 
+ - Playground
+ - nvim-ts-rainbow
+- Lsp: 
+ - Lspconfig
+ - Trouble.nvim
+ - nvim-lsp-installer
+
+### Looks
+
+- nvim-base16
+- TrueZen.nvim
+- nvim-hlslens
+- gitsigns.nvim
+- nvim-notify
+
+### Note-taking
+
+- neorg
+- orgmode
 
 ### Aniseed vs Hotpot
 
-- Aniseed: Aniseed bridges the gap between Fennel and Neovim, Allowing you to easily write plugins or configuration in a Clojure-like Lisp with great runtime performance. As opposed to hotpot, aniseed provides macros, is slightly faster and more featureful, compiles fennel files to the lua/ directory, and has better integration with conjure. It aims to provide a more clojure-like experience, and behaves as a superset of fennel.
+- Aniseed: Aniseed bridges the gap between Fennel and Neovim, Allowing you to easily write plugins or configuration in a Clojure-like Lisp with great runtime performance. As opposed to hotpot, aniseed provides macros, is slightly faster and more featurefull, compiles fennel files to the lua/ directory, and has better integration with conjure. It aims to provide a more clojure-like experience, and behaves as a superset of fennel.
 
 - Hotpot: Hotpot will transparently compile your Fennel code into Lua and then return the compiled module. Future calls to `require` (including in future Neovim sessions) will skip the compile step unless it's stale. Only compiles and caches fennel files, providing a more native experience for the user. On the other hand, it is slightly slower and less developed. Users looking for macros can use the builtin macros defined in macros.fnl, or the zest.nvim library.
 
