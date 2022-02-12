@@ -1,19 +1,37 @@
 {
-  description =
-    ":rocket: Blazing Fast Neovim Configuration Written in fennel :rocket::rocket::stars:";
+  description = ":rocket: Blazing Fast Neovim Configuration Written in fennel :rocket::rocket::stars:";
 
-  inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.neovim-nightly-overlay.url =
-    "github:nix-community/neovim-nightly-overlay";
+  inputs = {
+    nixpkgs.url      = "github:nixos/nixpkgs/nixos-unstable";
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    flake-utils.url  = "github:numtide/flake-utils";
+  };
 
-  outputs = { self, nixpkgs, flake-utils, neovim-nightly-overlay }:
-    flake-utils.lib.simpleFlake {
-      inherit self nixpkgs;
-      name = "nyoom.nvim";
-      overlay = neovim-nightly-overlay.overlay;
-      shell = ./shell.nix;
-      systems =
-        [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" "aarch64-linux" ];
-    };
+  outputs = { self, nixpkgs, rust-overlay, neovim-nightly-overlay, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        overlays = [ (import rust-overlay) (import neovim-nightly-overlay) ];
+        pkgs = import nixpkgs {
+          inherit system overlays;
+        };
+      in
+      with pkgs;
+      {
+        devShell = mkShell {
+          buildInputs = [
+            neovim-nightly
+            ripgrep
+            fennel
+            fnlfmt
+            rust-bin.nightly.latest.default
+          ];
+
+          shellHook = ''
+            alias nvim="nvim -u $(pwd)/init.lua"
+          '';
+        };
+      }
+    );
 }
 

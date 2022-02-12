@@ -22,6 +22,10 @@ Coming soon!
 
 ## Install
 
+### Dependencies
+
+The only dependencies are `neovim`, `git`, and optionally `rustc/cargo` if you plan to use `parinfer-rust`.
+
 ### Regular:
 
 Install the following dependencies: 

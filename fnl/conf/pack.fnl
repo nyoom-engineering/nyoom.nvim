@@ -11,6 +11,7 @@
 (use-package! :nvim-lua/popup.nvim)
 (use-package! :nvim-lua/plenary.nvim)
 (use-package! :wbthomason/packer.nvim)
+(use-package! :lewis6991/impatient.nvim)
 
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel
@@ -20,21 +21,20 @@
                 :scheme])
 
 ;; One catch to the use-package! macro: It doesn't obey code. It will get sent to packer whether its in an if/else statement or not. To work around this, we can add aniseed/hotpot as requirements for the conjure package, then use the pack macro to load them instead
+
+;; lispy configs
 (use-package! :Olical/conjure
               {:branch :develop
                :ft lisp-ft
-               :requires [(if (= fennel_compiler :aniseed)
+               :requires [(pack :eraserhd/parinfer-rust {:run "cargo build --release"
+                                                         :ft lisp-ft})
+                          (if (= fennel_compiler :aniseed)
                               (do
                                 (pack :Olical/aniseed {:branch :develop}))
                               (= fennel_compiler :hotpot)
                               (do
                                 (pack :rktjmp/hotpot.nvim)))]})
 
-;; optimizations
-(use-package! :lewis6991/impatient.nvim)
-(use-package! :tweekmonster/startuptime.vim {:cmd :StartupTime})
-
-;; lispy configs
 ;; This config also introduces :init and :config! keywords. 
 
 ;; :init! is used to initialize any package which as the form require("<name>").setup

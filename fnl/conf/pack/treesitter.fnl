@@ -1,9 +1,6 @@
 (import-macros {: set!} :conf.macros)
 (local {: setup} (require :nvim-treesitter.configs))
 
-;; orgmode.nvim uses modern gcc features which are not supported by clang. Lets force treesitter to compile using gcc
-(tset (require :nvim-treesitter.install) :compilers {1 :gcc-11})
-
 ;; add orgmode parser
 (local parser-config ((. (require :nvim-treesitter.parsers) :get_parser_configs)))
 (set parser-config.org {:install_info {:url "https://github.com/milisims/tree-sitter-org"

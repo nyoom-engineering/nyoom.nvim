@@ -19,7 +19,15 @@
         :base0E "#be95ff"
         :base0F "#3ddbd9"})
 
-;; override highlights
+;; custom highlights
 (cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#393939")
 (cmd "hi StatusLine gui=underline guibg=#161616 guifg=#393939")
+(cmd "hi MatchParen gui=underline guibg=#262626")
 (cmd "hi VertSplit guibg=bg guifg=bg")
+
+;; bold various syntax & TODO
+(cmd "hi Todo gui=bold")
+(cmd "hi TSInclude gui=bold")
+(cmd "hi TSKeyword gui=bold")
+(cmd "hi TSSymbol gui=bold")
+(cmd "hi TSFunction gui=bold")
