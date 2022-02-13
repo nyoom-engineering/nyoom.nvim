@@ -89,7 +89,7 @@ If you have trouble configuring neovim to your needs, check out [Antifennel](htt
 
 ### Dependencies
 
-The only dependencies are `neovim-nightly`, `git`, and optionally `rustc/cargo` if you plan to use `parinfer-rust`.
+The only dependencies are `neovim-nightly` and `git`.
 
 ### Regular:
 
@@ -98,7 +98,6 @@ Install the following dependencies:
 - ripgrep
 - nodejs (optional, for copilot)
 - fennel + fnlfmt (not required, but recommended)
-- rustc + cargo (ideally via rustup, not required, but recommended for parinfer)
 - font with nerdfont icons 
 
 ```bash

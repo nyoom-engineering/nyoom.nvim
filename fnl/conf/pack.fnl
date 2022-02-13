@@ -22,8 +22,8 @@
 (use-package! :Olical/conjure
               {:branch :develop
                :ft lisp-ft
-               :requires [(pack :eraserhd/parinfer-rust
-                                {:run "cargo build --release" :ft lisp-ft})
+               :requires [(pack :gpanders/nvim-parinfer
+                                {:ft lisp-ft})
                           (if (= fennel_compiler :aniseed)
                               (do
                                 (pack :Olical/aniseed {:branch :develop}))

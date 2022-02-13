@@ -3,15 +3,14 @@
 
   inputs = {
     nixpkgs.url      = "github:nixos/nixpkgs/nixos-unstable";
-    rust-overlay.url = "github:oxalica/rust-overlay";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     flake-utils.url  = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, rust-overlay, neovim-nightly-overlay, flake-utils, ... }:
+  outputs = { self, nixpkgs, neovim-nightly-overlay, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        overlays = [ (import rust-overlay) (import neovim-nightly-overlay) ];
+        overlays = [ (import neovim-nightly-overlay) ];
         pkgs = import nixpkgs {
           inherit system overlays;
         };
@@ -24,7 +23,6 @@
             ripgrep
             fennel
             fnlfmt
-            rust-bin.nightly.latest.default
           ];
 
           shellHook = ''
