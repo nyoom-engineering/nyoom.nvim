@@ -10,7 +10,6 @@ I recommend not to clone and directly install this config, but to fork it, inspe
 
 ## Showcase
 
-![This might not be up to date, but its representative of the config as of 02/13/22](demo.png)
 
 ## Why fennel?
 Fennel is a programming language that brings together the speed, simplicity, and reach of Lua with the flexibility of a lisp syntax and macro system. Macros are how lisps accomplish metaprogramming. You’ll see a lot of people treat lisp macros with a kind of mystical reverence. While several other languages have macro systems, the power of macros in lisps stem from allowance of lisps to you to write programs using the same notation you use for data structures. Remember: code is data, and we just need to manipulate data.
