@@ -1,12 +1,34 @@
+
 # Nyoom.nvim
 
-Note: Requires neovim-nightly (v0.7)
+<div align="center">
+
+[![Fennel](	https://img.shields.io/badge/Made%20with%20Fennel-2C2D72?style=for-the-badge&logo=lua&logoColor=white)](https://fennel-lang.org)
+
+</div>
+
+<div align="center">
+
+[![License](https://img.shields.io/github/license/shaunsingh/nyoom.nvim?style=flat-square)](https://mit-license.org/)
+[![Open Issues](https://img.shields.io/github/issues-raw/shaunsingh/nyoom.nvim?style=flat-square)](https://github.com/shaunsingh/nyoom.nvim/issues)
+[![Neovim Minimum Version](https://img.shields.io/badge/Neovim-0.7.0-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://github.com/neovim/neovim)
+
+</div>
+
+> \<leader\>\<space\> Nyoommmmm!
+>
+> ~ Nyoom.nvim users (probably)
 
 This config was a response to new configs that pop up, with very abstracted and complex codebases, such as NvChad. They try to be a one-size-fits-all config. NvChad and LunarVim both try to fit as much overall functionality as possible and needlessly lazy load *everything*, when it really isn't needed. Complex codebases lead to less freedom for end-user extensiblity. Try forking NvChad and making your own configuration out of it. Thats right, you can't. Everything is tied to the userConfig, and you rely on the maintainer of said code to implement features. 
 
 Nyoom.nvim provides a solution to these problems by providing only the necessary code in order to make a functioning configuration. The end goal of nyoom.nvim is to be used as a base config for users to extend and add upon, leading to a more unique editing experience. Its relatively small and simple, offers the bare minimum needed plugins to have a powerful config, and is suited to my needs, but can just as easily be suited to yours!
 
 I recommend not to clone and directly install this config, but to fork it, inspect the code, and adjust it to your liking. The best neovim configuration is what *you* make, and this config is only supposed to provide you the tools to do so.
+
+## Credits
+
+- [David Guevara](https://github.com/datwaft) For getting me into fennel, and for some of his beautiful macros. Without him Nyoom wouldn't exist! 
+- [Oliver Caldwell](https://github.com/Olical/) For his excellent work on Aniseed, Conjure, and making fennel feel like a first class langugae in neovim
 
 ## Showcase
 
@@ -50,6 +72,18 @@ All the magic happens in the `fnl/` folder. Some files to check out:
 - `macros.fnl`: In lisps, macros allow the user to define arbitrary functions that convert certain Lisp forms into different forms before evaluating or compiling them. This file contains all the macros that I (and a few others, thanks David and Kat!) have written to help you out on your neovim journey. I don't recommend touching this file unless you know what you're doing
 - `maps.fnl`: This is where all your mappings go
 - `pack/`: This is where plugin configs go.
+
+## Learning Fennel
+
+For most people, chances are you haven't even heard of fennel before. So where should you start?
+1. Read through the [Documentation](https://fennel-lang.org/)
+2. [Install fennel](https://fennel-lang.org/setup#downloading-fennel) yourself! (Skip the part where it goes over adding fennel support to your editor, thats what this project is for :p)
+3. [Learn lua](https://fennel-lang.org/lua-primer) first. I recommend reading through the [https://github.com/nanotee/nvim-lua-guide](Neovim lua guide) as well.
+4. [Learn fennel](https://fennel-lang.org/tutorial)
+5. Go over the [Style guide](https://fennel-lang.org/style).
+6. [Learn macros](https://fennel-lang.org/macros). 
+
+If you have trouble configuring neovim to your needs, check out [Antifennel](https://fennel-lang.org/see) to see how lua code compiles back to fennel! However, the generated code isn't always the cleanest, so its recommend you use it as a last resort. If you need any help, feel free to reach out to me via email or discord, and be sure to join the [Conjure Discord](https://conjure.fun/discord) too! 
 
 ## Install
 
