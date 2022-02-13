@@ -32,7 +32,7 @@ aniseed: Aniseed bridges the gap between Fennel (a Lisp that compiles to Lua) an
 hotpot: Hotpot will transparently compile your Fennel code into Lua and then return the compiled module. Future calls to `require` (including in future Neovim sessions) will skip the compile step unless it's stale. Only compiles and caches fennel files, providing a more native experience for the user. On the other hand, it is slightly slower and less developed. Users looking for macros can use the builtin macros defined in macros.fnl, or the zest.nvim library.
 --]]
 
-fennel_compiler = "hotpot"
+fennel_compiler = "aniseed"
 
 if fennel_compiler == "aniseed" then
     ensure("Olical", "aniseed")

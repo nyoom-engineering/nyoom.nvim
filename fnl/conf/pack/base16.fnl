@@ -1,7 +1,9 @@
 (import-macros {: cmd} :conf.macros)
 (local {: setup} (require :base16-colorscheme))
 
-;; https://www.ibm.com/brand/experience-guides/developer/brand/color/
+
+;; You can either define your own colors
+;; E.g. colors from https://www.ibm.com/brand/experience-guides/developer/brand/color/
 (setup {:base00 "#161616"
         :base01 "#262626"
         :base02 "#393939"
@@ -19,10 +21,14 @@
         :base0E "#be95ff"
         :base0F "#3ddbd9"})
 
-;; custom highlights
+;; minimal statusline
 (cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#393939")
 (cmd "hi StatusLine gui=underline guibg=#161616 guifg=#393939")
+
+;; subtle delimiters
 (cmd "hi MatchParen gui=underline guibg=#262626")
+
+;; transparent vertical splits
 (cmd "hi VertSplit guibg=bg guifg=bg")
 
 ;; bold various syntax & TODO

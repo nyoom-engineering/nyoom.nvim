@@ -14,11 +14,7 @@
 (use-package! :lewis6991/impatient.nvim)
 
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
-(local lisp-ft [:fennel
-                :clojure
-                :lisp
-                :racket
-                :scheme])
+(local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
 ;; One catch to the use-package! macro: It doesn't obey code. It will get sent to packer whether its in an if/else statement or not. To work around this, we can add aniseed/hotpot as requirements for the conjure package, then use the pack macro to load them instead
 
@@ -26,8 +22,8 @@
 (use-package! :Olical/conjure
               {:branch :develop
                :ft lisp-ft
-               :requires [(pack :eraserhd/parinfer-rust {:run "cargo build --release"
-                                                         :ft lisp-ft})
+               :requires [(pack :eraserhd/parinfer-rust
+                                {:run "cargo build --release" :ft lisp-ft})
                           (if (= fennel_compiler :aniseed)
                               (do
                                 (pack :Olical/aniseed {:branch :develop}))
@@ -106,14 +102,15 @@
                                          :TRACE "✎"}}))})
 
 ;; Notes: Neorg or orgmode are both great, pick your poison.
-(use-package! :nvim-neorg/neorg {:config! :neorg_con
-                                 :ft :norg
-                                 :after :nvim-treesitter})
-(use-package! :nvim-orgmode/orgmode {:init :orgmode
-                                     :ft :org
-                                     :after :nvim-treesitter
-                                     :requires (pack :akinsho/org-bullets.nvim {:ft :org 
-                                                                                 :init :org-bullets})})
+(use-package! :nvim-neorg/neorg
+              {:config! :neorg_con :ft :norg :after :nvim-treesitter})
+
+(use-package! :nvim-orgmode/orgmode
+              {:init :orgmode
+               :ft :org
+               :after :nvim-treesitter
+               :requires (pack :akinsho/org-bullets.nvim
+                               {:ft :org :init :org-bullets})})
 
 ;; At the end of the file, the init! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (init!)

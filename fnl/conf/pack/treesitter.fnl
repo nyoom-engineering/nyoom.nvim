@@ -1,17 +1,30 @@
 (import-macros {: set!} :conf.macros)
 (local {: setup} (require :nvim-treesitter.configs))
 
-;; add orgmode parser
-(local parser-config ((. (require :nvim-treesitter.parsers) :get_parser_configs)))
+;; set up external parsers 
+(local parser-config
+       ((. (require :nvim-treesitter.parsers) :get_parser_configs)))
+
+;; org-mode parser
 (set parser-config.org {:install_info {:url "https://github.com/milisims/tree-sitter-org"
                                        :revision :f110024d539e676f25b72b7c80b0fd43c34264ef
                                        :files {1 :src/parser.c
                                                2 :src/scanner.cc}}
                         :filetype :org})
+;; neorg parsers
+(set parser-config.norg_meta
+     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-meta"
+                     :files {1 :src/parser.c}
+                     :branch :main}})
+(set parser-config.norg_table
+     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
+                     :files {1 :src/parser.c}
+                     :branch :main}})    	
 
 ;; the usual
-(setup {:ensure_installed :maintained
-        :highlight {:enable true 
+(setup {:ensure_installed {1 :lua
+                           2 :fennel}
+        :highlight {:enable true
                     :use_languagetree true
                     :disable {1 :org}
                     :additional_vim_regex_highlighting {1 :org}}

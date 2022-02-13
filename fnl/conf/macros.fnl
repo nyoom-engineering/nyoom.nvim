@@ -322,7 +322,6 @@
  : use-package!
  : init!
  : vlua
- ;; variable/config (let/set)
  :let! let!-mult
  :set! set!-mult
  :local-set! local-set!-mult}
