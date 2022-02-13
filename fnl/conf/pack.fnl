@@ -22,8 +22,7 @@
 (use-package! :Olical/conjure
               {:branch :develop
                :ft lisp-ft
-               :requires [(pack :gpanders/nvim-parinfer
-                                {:ft lisp-ft})
+               :requires [(pack :gpanders/nvim-parinfer {:ft lisp-ft})
                           (if (= fennel_compiler :aniseed)
                               (do
                                 (pack :Olical/aniseed {:branch :develop}))
@@ -42,10 +41,17 @@
 (use-package! :folke/which-key.nvim {:init :which-key})
 
 ;; completion (note: I don't really like completion, so I just have some paren and comment help for now)
-(use-package! :github/copilot.vim {:event :InsertEnter})
 (use-package! :numToStr/Comment.nvim {:init :Comment})
-(use-package! :windwp/nvim-autopairs
-              {:init :nvim-autopairs :event :InsertEnter})
+(use-package! :hrsh7th/nvim-cmp
+              {:after :cmp-under-comparator
+               :config! :cmp_con
+               :requires [(pack :hrsh7th/cmp-nvim-lsp {:after :nvim-lspconfig})
+                          (pack :PaterJason/cmp-conjure {:after :nvim-cmp})
+                          (pack :hrsh7th/cmp-path {:after :nvim-cmp})
+                          (pack :hrsh7th/cmp-copilot {:after :nvim-cmp})
+                          (pack :github/copilot.vim {:event :InsertCharPre})
+                          (pack :lukas-reineke/cmp-under-comparator
+                                {:event :InsertCharPre})]})
 
 ;; Lastly, you can use the pack macro to create package declarations within a use-package! block.
 ;; e.g. (use-package! :nvim-telescope/telescope.nvim {:requires [(pack :nvim-telescope/telescope-frecency.nvim {:requires [:tami5/sqlite.lua]})]}) will create a package declaration for telescope-frecency.nvim, which requires sqlite.

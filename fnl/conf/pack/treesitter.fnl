@@ -11,19 +11,20 @@
                                        :files {1 :src/parser.c
                                                2 :src/scanner.cc}}
                         :filetype :org})
+
 ;; neorg parsers
 (set parser-config.norg_meta
      {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-meta"
                      :files {1 :src/parser.c}
                      :branch :main}})
+
 (set parser-config.norg_table
      {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
                      :files {1 :src/parser.c}
-                     :branch :main}})    	
+                     :branch :main}})
 
 ;; the usual
-(setup {:ensure_installed {1 :lua
-                           2 :fennel}
+(setup {:ensure_installed {1 :lua 2 :fennel}
         :highlight {:enable true
                     :use_languagetree true
                     :disable {1 :org}
