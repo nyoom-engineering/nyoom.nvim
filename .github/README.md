@@ -10,6 +10,31 @@ I recommend not to clone and directly install this config, but to fork it, inspe
 
 ## Showcase
 
+Lispy editing using [conjure](https://github.com/Olical/conjure) and [parinfer-rust](https://github.com/eraserhd/parinfer-rust)
+
+<img width="1368" alt="conjure" src="https://user-images.githubusercontent.com/71196912/153767677-ecb3b82a-d57d-4cf7-bd42-a67b5d56df4f.png">
+
+https://user-images.githubusercontent.com/71196912/153767688-a5e0cfc9-6437-43d1-9205-ed8ca7a07ae5.mov
+
+Note-taking and Getting Things Done with [neorg](https://github.com/nvim-neorg/neorg) and [orgmode](https://github.com/nvim-orgmode/orgmode)
+
+<img width="1402" alt="neorg" src="https://user-images.githubusercontent.com/71196912/153767720-2a021786-a99d-43ec-81f1-7c6078bc684e.png">
+
+Syntax highlighting and Error checking with Neovim's builtin LSP, [lspconfig](https://github.com/neovim/nvim-lspconfig), [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer/), [trouble.nvim](https://github.com/folke/trouble.nvim) and [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+
+<img width="1402" alt="lsp" src="https://user-images.githubusercontent.com/71196912/153767871-f3416e7a-93f9-4842-bfbd-16a3ff7b1d8f.png">
+
+https://user-images.githubusercontent.com/71196912/153768142-b35ac2aa-eb3d-489d-918d-b11870758c8f.mov
+
+Pretty notifications and focused editing using [TrueZen](https://github.com/pocco81/truezen.nvim), [nvim-notify](https://github.com/rcarriga/nvim-notify), and [nvim-hlslens](https://github.com/kevinhwang91/nvim-hlslens)
+
+<img width="1402" alt="notifymap" src="https://user-images.githubusercontent.com/71196912/153767963-dcc51971-0a05-40e3-84f4-0870dc4fcbde.png">
+
+Informative Keybinds, Native Fuzzy Finding, and fast file history using [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim), [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim), [telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim), [sqlite.lua](https://github.com/tami5/sqlite.lua) and [which-key.nvim](https://github.com/folke/which-key.nvim)
+
+<img width="1350" alt="which-key" src="https://user-images.githubusercontent.com/71196912/153768853-7e87a72a-0fff-4416-a63e-6252cd85b3a1.png">
+
+https://user-images.githubusercontent.com/71196912/153768858-7b3cd304-03ba-4958-b0d6-c743ebb4642b.mov
 
 ## Why fennel?
 Fennel is a programming language that brings together the speed, simplicity, and reach of Lua with the flexibility of a lisp syntax and macro system. Macros are how lisps accomplish metaprogramming. You’ll see a lot of people treat lisp macros with a kind of mystical reverence. While several other languages have macro systems, the power of macros in lisps stem from allowance of lisps to you to write programs using the same notation you use for data structures. Remember: code is data, and we just need to manipulate data.
@@ -58,55 +83,6 @@ nix develop
 ```
 
 Then run `nvim` as usual, and `:PackerSync` to update/install plugins
-
-## Useful plugins
-
-### Essentials
-
-- packer.nvim
-- impatient.nvim
-- which-key.nvim
-
-### Lisps
-
-- conjure
-- hotpot
-- aniseed
-- parinfer-rust
-
-### Completion
-
-- copilot
-- Comment.nvim
-- nvim-autopairs
-
-### Utilities
-
-- Telescope: 
- - File browser
- - Packer
- - frecency
- - fzf-native
-- Treesitter: 
- - Playground
- - nvim-ts-rainbow
-- Lsp: 
- - Lspconfig
- - Trouble.nvim
- - nvim-lsp-installer
-
-### Looks
-
-- nvim-base16
-- TrueZen.nvim
-- nvim-hlslens
-- gitsigns.nvim
-- nvim-notify
-
-### Note-taking
-
-- neorg
-- orgmode
 
 ### Aniseed vs Hotpot
 
