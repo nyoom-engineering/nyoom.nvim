@@ -1,4 +1,4 @@
-(import-macros {: pack : use-package! : init!} :conf.macros)
+(import-macros {: pack : use-package! : rock : rock! : unpack!} :conf.macros)
 
 ;; Emacs' use-package is not a package manager! Although use-package does have the useful capability to interface with package managers, its mainly for configuring and loading packages. 
 ;; Still, as packer.nvim is use-package inspired, lets just think of it as a vim-y version of straight-use-package for now :)
@@ -7,9 +7,33 @@
 ;; (use-package! <repo-name> {:keyword :arg ...} ...)
 ;; Please refer to :h packer.nvim for more information.
 
+;;; Emacs' use-package is not a package manager! Although use-package does have the useful capability to interface with package managers, its mainly for configuring and loading packages.
+;;; Still, as packer.nvim is use-package inspired, lets just think of it as a vim-y version of straight-use-package for now :)
+
+;;; The syntax is simple:
+;;; (use-package! <repo-name> {:keyword :arg ...} ...)
+;;; Please refer to :h packer.nvim for more information. I trust the examples below are enough to get you started.
+
+;;; One catch to the use-package! macro: It doesn't obey whats around it, whatever package declaration you create gets directly added to the global conf/pack list. To work around this, we can add aniseed/hotpot as requirements for the conjure package, then use the pack macro to load them instead.
+;;; You can use the pack macro to create package declarations within a use-package! block.
+;;; e.g. (use-package! :nvim-telescope/telescope.nvim {:requires [(pack :nvim-telescope/telescope-frecency.nvim {:requires [:tami5/sqlite.lua]})]}) will create a package declaration for telescope-frecency.nvim, which requires sqlite.
+
+;;; This config also introduces the init! keyword
+;;; :init! is used to initialize any package which as the form require("<name>").setup
+;;; e.g. (use-package! :folke/which-key.nvim {:init :which-key}) expands to use({config = "require('which-key').setup()", "folke/which-key.nvim"})
+
+;;; Some other notes about the package macros
+;;; Packages can be added with use-package! anywhere you please, as they are added to a global list. However, make sure to call packitup! after you have declared all the packages you need to install, as the configuration will ignore everything *after* packitup! is called.
+;;; Similar to use-package and pack, there are also the rock and rock! macros for declaring, you guessed it, luarock dependencies. As I don't like external dependencies (and because luarocks is *extremely* finicky on macOS), you don't see it used in this config by default. Feel free to use it yourself though.
+;;; rock vs rock!: rock is to rock! as pack is to use-package!
+
+;;; for lazy loading, here is a quick reference of the events you should use.
+;;; 1. BufRead (read the contexts of demo.txt into the new buffer)
+;;; 2. InsertEnter (swap into Insert mode)
+;;; 3. InsertCharPre (swap into Insert mode, right when you press the first input)
+;;; you can also lazy load packages on commands (:cmd), filetypes (:ft), and after other plugins (:after).
+
 ;; Bootstrap essential plugins
-(use-package! :nvim-lua/popup.nvim)
-(use-package! :nvim-lua/plenary.nvim)
 (use-package! :wbthomason/packer.nvim)
 (use-package! :lewis6991/impatient.nvim)
 
@@ -30,13 +54,6 @@
                               (do
                                 (pack :rktjmp/hotpot.nvim)))]})
 
-;; This config also introduces :init and :config! keywords. 
-
-;; :init! is used to initialize any package which as the form require("<name>").setup
-;; e.g. (use-package! :folke/which-key.nvim {:init :which-key}) expands to use({config = "require('which-key').setup()", "folke/which-key.nvim"})
-;; :config! is used to load a configuration file for a package, from the pack/ directory.
-;; e.g. (use-package! :nvim-telescope/telescope.nvim {:config! :telescope_con}) will load the file telescope_con.fnl in the pack/ directory.
-
 ;; bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
 
@@ -45,7 +62,7 @@
 (use-package! :hrsh7th/nvim-cmp
               {:after :cmp-under-comparator
                :config! :cmp_con
-               :requires [(pack :hrsh7th/cmp-nvim-lsp {:after :nvim-lspconfig})
+               :requires [(pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
                           (pack :PaterJason/cmp-conjure {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-copilot {:after :nvim-cmp})
@@ -53,23 +70,20 @@
                           (pack :lukas-reineke/cmp-under-comparator
                                 {:event :InsertCharPre})]})
 
-;; Lastly, you can use the pack macro to create package declarations within a use-package! block.
-;; e.g. (use-package! :nvim-telescope/telescope.nvim {:requires [(pack :nvim-telescope/telescope-frecency.nvim {:requires [:tami5/sqlite.lua]})]}) will create a package declaration for telescope-frecency.nvim, which requires sqlite.
-
 ;; Fuzzy navigation
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 (use-package! :nvim-telescope/telescope.nvim
               {:after :telescope-fzf-native.nvim
                :config! :telescope_con
-               :requires [(pack :nvim-telescope/telescope-file-browser.nvim
-                                {:cmd "Telescope file_browser"})
-                          (pack :nvim-telescope/telescope-packer.nvim
-                                {:cmd "Telescope packer"})
+               :requires [(pack :nvim-lua/popup.nvim
+                                {:cmd :Telescope})
+                          (pack :nvim-lua/plenary.nvim
+                                {:after :popup.nvim})
                           (pack :nvim-telescope/telescope-frecency.nvim
                                 {:requires [:tami5/sqlite.lua]
-                                 :cmd "Telescope frecency"})
+                                 :after :telescope-fzf-native.nvim})
                           (pack :nvim-telescope/telescope-fzf-native.nvim
-                                {:run :make :cmd :Telescope})]})
+                                {:run :make :after :plenary.nvim})]})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -92,8 +106,6 @@
 ;; aesthetics
 (use-package! :RRethy/nvim-base16 {:config! :base16})
 (use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config! :truezen_con})
-(use-package! :kevinhwang91/nvim-hlslens {:confg! :hlslens_con})
-(use-package! :lewis6991/gitsigns.nvim {:init :gitsigns :after :plenary.nvim})
 (use-package! :rcarriga/nvim-notify
               {:config (fn []
                          (set vim.notify (require :notify))
@@ -119,4 +131,4 @@
                                {:ft :org :init :org-bullets})})
 
 ;; At the end of the file, the init! macro is called to initialize packer and pass each package to the packer.nvim plugin.
-(init!)
+(unpack!)

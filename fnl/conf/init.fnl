@@ -1,5 +1,9 @@
-;; This configuration is modular. Each group of configuration (mappings, settings, packages) is in its own file. This file loads the other 3.
+;; Nyoom core is loaded first
+(require :conf.modules.core)
 
+;; User config is loaded second
 (require :conf.config)
-(require :conf.maps)
+
+;; packer config is loaded last
 (require :conf.pack)
+

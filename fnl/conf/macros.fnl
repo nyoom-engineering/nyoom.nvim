@@ -39,7 +39,7 @@
   element."
   (and (list? x) (or (= `fn (head x)) (= `hashfn (head x)))))
 
-(lambda gensym-checksum [...]
+(λ gensym-checksum [...]
   "Generates a new symbol from the checksum of the object passed as
   a paremeter.
   The paremeter first is casted into a string using the function
@@ -58,13 +58,13 @@
     [object] (gensym-checksum "" object "")))
 
 ;; vlua, fnl functions in global namespace
-(lambda vlua [x]
+(λ vlua [x]
   "Return a symbol mapped to `v:lua.%s()`, where `%s` is the symbol."
   (assert-compile (sym? x) "expected symbol for x" x)
   (format "v:lua.%s()" (->str x)))
 
 ;; map/local map
-(lambda map! [[modes & options] lhs rhs ?desc]
+(λ map! [[modes & options] lhs rhs ?desc]
   "Defines a new mapping using the lua API.
   Supports all the options that the API supports."
   (assert-compile (sym? modes) "expected symbol for modes" modes)
@@ -84,7 +84,7 @@
         options (if desc (doto options (tset :desc desc)) options)]
     `(vim.keymap.set ,modes ,lhs ,rhs ,options)))
 
-(lambda buf-map! [[modes & options] lhs rhs ?description]
+(λ buf-map! [[modes & options] lhs rhs ?description]
   "Defines a new mapping using the lua API.
   Supports all the options that the API supports.
   Automatically sets the `:buffer` option."
@@ -93,7 +93,7 @@
     (map! [modes (unpack options)] lhs rhs ?description)))
 
 ;; packer
-(lambda pack [identifier ?options]
+(λ pack [identifier ?options]
   "Returns a mixed table with the identifier as the first sequential element
   and options as hash-table items.
   See https://github.com/wbthomason/packer.nvim for information about the
@@ -111,7 +111,7 @@
     (doto options
       (tset 1 identifier))))
 
-(lambda use-package! [identifier ?options]
+(λ use-package! [identifier ?options]
   "Declares a plugin with its options.
   This is a mixed table saved on the global compile-time variable conf/pack.
   See https://github.com/wbthomason/packer.nvim for information about the
@@ -121,7 +121,7 @@
                   "expected table for options" ?options)
   (insert conf/pack (pack identifier ?options)))
 
-(lambda rock [identifier ?options]
+(λ rock [identifier ?options]
   "Returns a mixed table with the identifier as the first sequential element
   and options as hash-table items.
   See https://github.com/wbthomason/packer.nvim for information about the
@@ -133,7 +133,7 @@
     (doto options
       (tset 1 identifier))))
 
-(lambda rock! [identifier ?options]
+(λ rock! [identifier ?options]
   "Declares a plugin with its options.
   This is a mixed table saved on the global compile-time variable conf/rock.
   See https://github.com/wbthomason/packer.nvim for information about the
@@ -143,7 +143,7 @@
                   "expected table for options" ?options)
   (insert conf/rock (rock identifier ?options)))
 
-(lambda init! []
+(λ unpack! []
   "Initializes the plugin manager with the previously declared plugins and
   their options."
   (let [packs (icollect [_ v (ipairs conf/pack)]
@@ -154,7 +154,7 @@
                                         ,(unpack (icollect [_ v (ipairs packs) :into rocks]
                                                    v))))))
 
-(lambda let! [name value]
+(λ let! [name value]
   "Set a vim variable using the lua API.
   The name can be either a symbol or a string.
   If the name begins with [gbwt] followed by [/:.], the name is scoped to the
@@ -210,7 +210,7 @@
            ,(unpack exprs))
         (unpack exprs))))
 
-(lambda set! [name ?value]
+(λ set! [name ?value]
   "Set a vim option using the lua API.
   The name of the option must be a symbol.
   If no value is specified, if the name begins with 'no' the value becomes
@@ -255,7 +255,7 @@
            ,(unpack exprs))
         (unpack exprs))))
 
-(lambda local-set! [name ?value]
+(λ local-set! [name ?value]
   "Set a vim local option using the lua API.
   The name of the option must be a symbol.
   If no value is specified, if the name begins with 'no' the value becomes
@@ -300,7 +300,7 @@
            ,(unpack exprs))
         (unpack exprs))))
 
-(lambda command! [name expr ?desc]
+(λ command! [name expr ?desc]
   "Define a user command using the lua API.
   See the help for nvim_add_user_command for more information."
   (assert-compile (or (str? name) (sym? name))
@@ -320,7 +320,9 @@
  : cmd
  : pack
  : use-package!
- : init!
+ : rock
+ : rock!
+ : unpack!
  : vlua
  :let! let!-mult
  :set! set!-mult
