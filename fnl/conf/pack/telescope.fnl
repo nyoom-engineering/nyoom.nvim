@@ -1,15 +1,7 @@
 (local {: setup} (require :telescope))
 (local ffi (require :ffi))
 
-(setup {:defaults {:borderchars {1 " "
-                                 2 " "
-                                 3 " "
-                                 4 " "
-                                 5 " "
-                                 6 " "
-                                 7 " "
-                                 8 " "}
-                   :prompt_prefix "   "
+(setup {:defaults {:prompt_prefix "   "
                    :selection_caret "  "
                    :entry_prefix "  "
                    :sorting_strategy :ascending
@@ -21,7 +13,7 @@
                                    :width 0.87
                                    :height 0.8
                                    :preview_cutoff 120}
-                   :use_less true
+                   :use_less false
                    :set_env {:COLORTERM :truecolor}
                    :dynamic_preview_title true}})
 

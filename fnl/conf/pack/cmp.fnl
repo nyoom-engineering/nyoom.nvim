@@ -1,4 +1,4 @@
-(import-macros {: set! : let!} :conf.macros)
+(import-macros {: set! : let! : cmd} :conf.macros)
 (local {: setup
         : mapping
         :config {: compare : disable}
@@ -9,10 +9,28 @@
 (local under-compare (require :cmp-under-comparator))
 (local {: insert} table)
 
+;; we don't want copilot to override our cmp settings 
 (let! copilot_no_tab_map true)
 (let! copilot_assume_mapped true)
 (let! copilot_tab_fallback "")
 
+;; colors!
+(cmd "hi CmpItemAbbrMatch gui=bold guifg=#FAFAFA")
+(cmd "hi CmpItemAbbrMatchFuzzy guifg=#FAFAFA")
+(cmd "hi CmpItemAbbr guifg=#a8a8a8")
+
+(cmd "hi CmpItemKindVariable guibg=NONE guifg=#be95ff")
+(cmd "hi CmpItemKindInterface guibg=NONE guifg=#be95ff")
+(cmd "hi CmpItemKindText guibg=NONE guifg=#be95ff")
+
+(cmd "hi CmpItemKindFunction guibg=NONE guifg=#ff7eb6")
+(cmd "hi CmpItemKindMethod guibg=NONE guifg=#ff7eb6")
+
+(cmd "hi CmpItemKindKeyword guibg=NONE guifg=#33b1ff")
+(cmd "hi CmpItemKindProperty guibg=NONE guifg=#33b1ff")
+(cmd "hi CmpItemKindUnit guibg=NONE guifg=#33b1ff")
+
+;; and of course some settings
 (set! completeopt [:menu :menuone :noselect])
 
 (setup {:preselect types.cmp.PreselectMode.None

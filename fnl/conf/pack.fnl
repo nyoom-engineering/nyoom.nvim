@@ -40,8 +40,6 @@
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
-;; One catch to the use-package! macro: It doesn't obey code. It will get sent to packer whether its in an if/else statement or not. To work around this, we can add aniseed/hotpot as requirements for the conjure package, then use the pack macro to load them instead
-
 ;; lispy configs
 (use-package! :Olical/conjure
               {:branch :develop
@@ -61,7 +59,7 @@
 (use-package! :numToStr/Comment.nvim {:init :Comment})
 (use-package! :hrsh7th/nvim-cmp
               {:after :cmp-under-comparator
-               :config! :cmp_con
+               :config! :cmp
                :requires [(pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
                           (pack :PaterJason/cmp-conjure {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-path {:after :nvim-cmp})
@@ -74,7 +72,7 @@
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 (use-package! :nvim-telescope/telescope.nvim
               {:after :telescope-fzf-native.nvim
-               :config! :telescope_con
+               :config! :telescope
                :requires [(pack :nvim-lua/popup.nvim
                                 {:cmd :Telescope})
                           (pack :nvim-lua/plenary.nvim
@@ -94,7 +92,7 @@
 
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
-              {:config! :lspconfig_con
+              {:config! :lsp
                :requires :williamboman/nvim-lsp-installer})
 
 (use-package! :folke/trouble.nvim
@@ -105,7 +103,7 @@
 
 ;; aesthetics
 (use-package! :RRethy/nvim-base16 {:config! :base16})
-(use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config! :truezen_con})
+(use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config! :truezen})
 (use-package! :rcarriga/nvim-notify
               {:config (fn []
                          (set vim.notify (require :notify))
@@ -119,16 +117,11 @@
                                          :DEBUG ""
                                          :TRACE "✎"}}))})
 
-;; Notes: Neorg or orgmode are both great, pick your poison.
+;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go
 (use-package! :nvim-neorg/neorg
-              {:config! :neorg_con :ft :norg :after :nvim-treesitter})
+              {:config! :neorg 
+               :ft :norg 
+               :after :nvim-treesitter})
 
-(use-package! :nvim-orgmode/orgmode
-              {:init :orgmode
-               :ft :org
-               :after :nvim-treesitter
-               :requires (pack :akinsho/org-bullets.nvim
-                               {:ft :org :init :org-bullets})})
-
-;; At the end of the file, the init! macro is called to initialize packer and pass each package to the packer.nvim plugin.
+;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)

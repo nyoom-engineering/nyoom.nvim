@@ -19,7 +19,6 @@
   (set vim.lsp.handlers.textDocument/hover
        (with handlers.hover {:border :single})))
 
-(local servers {1 clangd 2 sumneko_lua})
 (local lsp_installer (require :nvim-lsp-installer))
 
 (lsp_installer.on_server_ready (fn [server]
@@ -29,5 +28,7 @@
                                             :update_capabilities) (vim.lsp.protocol.make_client_capabilities)))
                                    (server:setup opts))))
 
-(each [_ lsp (ipairs servers)]
-  (lsp_installer.on_server_ready lsp))
+;; TODO
+;; install lua server by default
+;; lsp mappings on attach
+;; remove cmp dependency
