@@ -79,7 +79,7 @@
                                 {:after :popup.nvim})
                           (pack :nvim-telescope/telescope-frecency.nvim
                                 {:requires [:tami5/sqlite.lua]
-                                 :after :telescope-fzf-native.nvim})
+                                 :after :plenary.nvim})
                           (pack :nvim-telescope/telescope-fzf-native.nvim
                                 {:run :make :after :plenary.nvim})]})
 
@@ -93,7 +93,8 @@
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
               {:config! :lsp
-               :requires :williamboman/nvim-lsp-installer})
+               :requires [:williamboman/nvim-lsp-installer
+                          (pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
 
 (use-package! :folke/trouble.nvim
               {:cmd :Trouble

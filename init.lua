@@ -25,7 +25,7 @@ ensure("lewis6991", "impatient.nvim")
 require("impatient")
 
 -- global variable to set the user's fennel compiler
-fennel_compiler = "aniseed"
+fennel_compiler = "hotpot"
 
 if fennel_compiler == "aniseed" then
     ensure("Olical", "aniseed")
