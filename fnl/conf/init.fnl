@@ -1,44 +1,40 @@
 ;; Nyoom modules are loaded first
 
 ;; don't enable any of these for now, they don't exist. WIP
-(local nyoom_modules {1 :core})
-                      ;; 2 :completion.cmp
-                      ;; 3 :completion.autopairs
-                      ;; 4 :completion.telescope
-                      ;; 5 :editor.fold
-                      ;; 6 :editor.format
-                      ;; 7 :editor.lispy
-                      ;; 8 :editor.parinfer
-                      ;; 9 :lang.cc
-                      ;; 10 :lang.clojure
-                      ;; 11 :lang.java
-                      ;; 12 :lang.latex
-                      ;; 13 :lang.lua
-                      ;; 14 :lang.neorg
-                      ;; 15 :lang.nix
-                      ;; 16 :lang.org
-                      ;; 17 :lang.rust
-                      ;; 18 :tools.debugger
-                      ;; 19 :tools.eval
-                      ;; 20 :tools.format
-                      ;; 21 :tools.lsp
-                      ;; 21 :tools.luasnip
-                      ;; 22 :tools.neogit
-                      ;; 23 :tools.rgb
-                      ;; 24 :ui.hl-todo
-                      ;; 25 :ui.indent-guides
-                      ;; 26 :ui.modeline
-                      ;; 27 :ui.neotree
-                      ;; 28 :ui.nyoom-dashboard
-                      ;; 29 :ui.tabs
-                      ;; 30 :ui.vc-gutter
-                      ;; 31 :ui.vi-tilde-fringe
-                      ;; 32 :ui.zen})
+(require :conf.modules.core)
 
-(each [_ modulename (ipairs nyoom_modules)]
-  (local (ok err) (pcall require (.. :conf.modules. modulename)))
-  (when (not ok)
-    (error (.. "Error loading " modulename "\n\n" err))))
+;;(include :conf.completion.cmp)
+;;(include :conf.completion.autopairs)
+;;(include :conf.completion.telescope)
+;;(include :conf.editor.fold)
+;;(include :conf.editor.format)
+;;(include :conf.editor.lispy)
+;;(include :conf.editor.parinfer)
+;;(include :conf.lang.cc)
+;;(include :conf.lang.clojure)
+;;(include :conf.lang.java)
+;;(include :conf.lang.latex)
+;;(include :conf.lang.lua)
+;;(include :conf.lang.neorg)
+;;(include :conf.lang.nix)
+;;(include :conf.lang.org)
+;;(include :conf.lang.rust)
+;;(include :conf.tools.debugger)
+;;(include :conf.tools.eval)
+;;(include :conf.tools.format)
+;;(include :conf.tools.lsp)
+;;(include :conf.tools.luasnip)
+;;(include :conf.tools.neogit)
+;;(include :conf.tools.rgb)
+;;(include :conf.ui.hl-todo)
+;;(include :conf.ui.indent-guides)
+;;(include :conf.ui.modeline)
+;;(include :conf.ui.neotree)
+;;(include :conf.ui.nyoom-dashboard)
+;;(include :conf.ui.tabs)
+;;(include :conf.ui.vc-gutter)
+;;(include :conf.ui.vi-tilde-fringe)
+;;(include :conf.ui.zen)
 
 ;; User config is loaded second
 (require :conf.config)

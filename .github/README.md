@@ -96,7 +96,7 @@ Install the following dependencies:
 - font with nerdfont icons 
 
 ```bash
-git clone --depth 1 shaunsingh/nyoom.nvim ~/.config/nvim 
+git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git ~/.config/nvim 
 nvim
 ```
 
@@ -106,7 +106,7 @@ Then run `:PackerSync`
 
 Requires nix version > 21.11, with experimental features `flakes` and `nix-commands` enabled
 ```bash
-git clone --depth 1 shaunsingh/nyoom.nvim && cd nyoom.nvim 
+git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git && cd nyoom.nvim
 nix develop
 ```
 

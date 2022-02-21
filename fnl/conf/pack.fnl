@@ -60,8 +60,7 @@
 (use-package! :hrsh7th/nvim-cmp
               {:after :cmp-under-comparator
                :config! :cmp
-               :requires [(pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
-                          (pack :PaterJason/cmp-conjure {:after :nvim-cmp})
+               :requires [(pack :PaterJason/cmp-conjure {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-copilot {:after :nvim-cmp})
                           (pack :github/copilot.vim {:event :InsertCharPre})
@@ -94,6 +93,7 @@
 (use-package! :neovim/nvim-lspconfig
               {:config! :lsp
                :requires [:williamboman/nvim-lsp-installer
+                          :hrsh7th/cmp-nvim-lsp
                           (pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
 
 (use-package! :folke/trouble.nvim
