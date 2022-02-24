@@ -1,12 +1,5 @@
 (import-macros {: pack : use-package! : rock : rock! : unpack!} :conf.macros)
 
-;; Emacs' use-package is not a package manager! Although use-package does have the useful capability to interface with package managers, its mainly for configuring and loading packages. 
-;; Still, as packer.nvim is use-package inspired, lets just think of it as a vim-y version of straight-use-package for now :)
-
-;; The syntax is simple:
-;; (use-package! <repo-name> {:keyword :arg ...} ...)
-;; Please refer to :h packer.nvim for more information.
-
 ;;; Emacs' use-package is not a package manager! Although use-package does have the useful capability to interface with package managers, its mainly for configuring and loading packages.
 ;;; Still, as packer.nvim is use-package inspired, lets just think of it as a vim-y version of straight-use-package for now :)
 
