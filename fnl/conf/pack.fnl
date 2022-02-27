@@ -51,14 +51,12 @@
 ;; completion (note: I don't really like completion, so I just have some paren and comment help for now)
 (use-package! :numToStr/Comment.nvim {:init :Comment})
 (use-package! :hrsh7th/nvim-cmp
-              {:after :cmp-under-comparator
-               :config! :cmp
+              {:config! :cmp
                :requires [(pack :PaterJason/cmp-conjure {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-copilot {:after :nvim-cmp})
-                          (pack :github/copilot.vim {:event :InsertCharPre})
-                          (pack :lukas-reineke/cmp-under-comparator
-                                {:event :InsertCharPre})]})
+                          :github/copilot.vim
+                          :lukas-reineke/cmp-under-comparator]})
 
 ;; Fuzzy navigation
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
