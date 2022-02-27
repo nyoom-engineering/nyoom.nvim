@@ -15,11 +15,11 @@
 
 (set parser-config.norg_meta
      {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-meta"
-                     :files {1 :src/parser.c}
+                     :files [:src/parser.c]
                      :branch :main}})
 
 (set parser-config.norg_table
      {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
-                     :files {1 :src/parser.c}
+                     :files [:src/parser.c]
                      :branch :main}})
 
