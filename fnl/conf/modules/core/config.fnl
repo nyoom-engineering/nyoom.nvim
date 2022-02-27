@@ -1,6 +1,6 @@
 (import-macros {: set!} :conf.macros)
 
-;; disable unessecary plugins & providers
+;; disable unnecessary plugins & providers
 (let [built-ins [:netrw
                  :netrwPlugin
                  :netrwSettings
@@ -34,7 +34,7 @@
 ;; show whitespaces as characters 
 (set! list)
 
-;; emable mouse
+;; enable mouse
 (set! mouse :a)
 
 ;; disable line numbers

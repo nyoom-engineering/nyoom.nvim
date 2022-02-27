@@ -41,13 +41,13 @@
 
 (λ gensym-checksum [...]
   "Generates a new symbol from the checksum of the object passed as
-  a paremeter.
-  The paremeter first is casted into a string using the function
+  a parameter.
+  The parameter first is casted into a string using the function
   `fennel.view`.
-  If only one paremeter is passed to the function the return value is the
+  If only one parameter is passed to the function the return value is the
   checksum as a symbol.
-  If two paremeters are passed, the first one is considered the prefix.
-  If three paremeters are passed, the first one is considered the prefix and
+  If two parameters are passed, the first one is considered the prefix.
+  If three parameters are passed, the first one is considered the prefix and
   the last one is considered the suffix.
   This function depends on the md5 library and the fennel library."
   (match [...]
