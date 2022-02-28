@@ -52,7 +52,7 @@
 (use-package! :numToStr/Comment.nvim {:init :Comment})
 (use-package! :hrsh7th/nvim-cmp
               {:config! :cmp
-               :requires [(pack :PaterJason/cmp-conjure {:after :nvim-cmp})
+               :requires [(pack :PaterJason/cmp-conjure {:after :conjure})
                           (pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-copilot {:after :nvim-cmp})
                           :github/copilot.vim
