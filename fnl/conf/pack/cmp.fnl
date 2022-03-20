@@ -34,10 +34,7 @@
 (set! completeopt [:menu :menuone :noselect])
 
 (setup {:preselect types.cmp.PreselectMode.None
-        :formatting {;; :fields [cmp.ItemField.Kind
-                     ;;          cmp.ItemField.Abbr
-                     ;;          cmp.ItemField.Menu
-                     :format (fn [entry vim-item]
+        :formatting {:format (fn [entry vim-item]
                                (set vim-item.menu
                                     (. {:nvim_lsp :lsp
                                         :Path :pth

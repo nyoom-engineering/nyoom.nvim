@@ -27,6 +27,7 @@
 ;;; you can also lazy load packages on commands (:cmd), filetypes (:ft), and after other plugins (:after).
 
 ;; Bootstrap essential plugins
+(use-package! :nvim-lua/plenary.nvim)
 (use-package! :wbthomason/packer.nvim)
 (use-package! :lewis6991/impatient.nvim)
 
@@ -43,22 +44,14 @@
                                 (pack :Olical/aniseed {:branch :develop}))
                               (= fennel_compiler :hotpot)
                               (do
-                                (pack :rktjmp/hotpot.nvim)))]})
+                                (pack :rktjmp/hotpot.nvim {:branch :picante})))]})
 
 ;; bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
-
-;; completion (note: I don't really like completion, so I just have some paren and comment help for now)
 (use-package! :numToStr/Comment.nvim {:init :Comment})
-(use-package! :hrsh7th/nvim-cmp
-              {:config! :cmp
-               :requires [(pack :PaterJason/cmp-conjure {:after :conjure})
-                          (pack :hrsh7th/cmp-path {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-copilot {:after :nvim-cmp})
-                          :github/copilot.vim
-                          :lukas-reineke/cmp-under-comparator]})
 
 ;; Fuzzy navigation
+;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 (use-package! :nvim-telescope/telescope.nvim
               {:after :telescope-fzf-native.nvim
@@ -84,8 +77,16 @@
 (use-package! :neovim/nvim-lspconfig
               {:config! :lsp
                :requires [:williamboman/nvim-lsp-installer
-                          :hrsh7th/cmp-nvim-lsp
                           (pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
+
+(use-package! :hrsh7th/nvim-cmp
+      {:config! :cmp
+       :requires [(pack :PaterJason/cmp-conjure {:ft lisp-ft})
+                  (pack :hrsh7th/cmp-copilot {:after :copilot.vim})
+                  :hrsh7th/cmp-nvim-lsp
+                  :hrsh7th/cmp-path
+                  :github/copilot.vim
+                  :lukas-reineke/cmp-under-comparator]})
 
 (use-package! :folke/trouble.nvim
               {:cmd :Trouble

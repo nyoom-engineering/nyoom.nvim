@@ -34,6 +34,11 @@ elseif fennel_compiler == "hotpot" then
     ensure("rktjmp", "hotpot.nvim")
     require("hotpot").setup({
        provide_require_fennel = true,
+       compiler = {
+         modules = {
+           correlate = true
+         }
+       }
      })
     require("conf")
 else
