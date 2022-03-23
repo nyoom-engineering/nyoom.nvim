@@ -76,6 +76,5 @@
 ;; Now I just have this one line statusline, which works well enough
 
 ;; filename + lineno
-(set! laststatus 3)
 (set! statusline "%F%m%r%h%w: %2l")
 

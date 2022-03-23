@@ -39,13 +39,9 @@
               {:branch :develop
                :ft lisp-ft
                :requires [(pack :gpanders/nvim-parinfer {:ft lisp-ft})
-                          (if (= fennel_compiler :aniseed)
-                              (do
-                                (pack :Olical/aniseed {:branch :develop}))
-                              (= fennel_compiler :hotpot)
-                              (do
-                                (pack :rktjmp/hotpot.nvim {:branch :picante})))]})
-
+                          (match fennel_compiler
+                            :aniseed (pack :Olical/aniseed {:branch :develop})
+                            :hotpot (pack :rktjmp/hotpot.nvim {:branch :master}))]})
 ;; bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
 (use-package! :numToStr/Comment.nvim {:init :Comment})
@@ -110,7 +106,7 @@
                                          :DEBUG ""
                                          :TRACE "✎"}}))})
 
-;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go
+;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. Firenvim is mostly for when I need to use the web but I want to keep neovim around with me  
 (use-package! :nvim-neorg/neorg
               {:config! :neorg 
                :ft :norg 

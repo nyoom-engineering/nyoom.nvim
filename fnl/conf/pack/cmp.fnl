@@ -1,4 +1,4 @@
-(import-macros {: set! : let! : cmd} :conf.macros)
+(import-macros {: set! : let! : cmd : highlight!} :conf.macros)
 (local {: setup
         : mapping
         :config {: compare : disable}

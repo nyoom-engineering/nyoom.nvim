@@ -321,7 +321,7 @@
   (assert-compile (tbl? attributes) "expected table for attributes" attributes)
   (assert-compile (tbl? colors) "expected colors for colors" colors)
   (let [name (->str name)
-        colors (collect [_ v (ipairs attributes) :into colors] (->str v))]
+        colors (collect [_ v (ipairs attributes) :into colors] (->str v) true)]
     `(vim.api.nvim_set_hl 0 ,name ,colors)))
 
 (λ link! [new to old]

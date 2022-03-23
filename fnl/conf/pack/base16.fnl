@@ -1,4 +1,4 @@
-(import-macros {: cmd} :conf.macros)
+(import-macros {: cmd : highlight!} :conf.macros)
 (local {: setup} (require :base16-colorscheme))
 
 ;; You can either define your own colors
