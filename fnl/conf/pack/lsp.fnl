@@ -1,5 +1,7 @@
 (local config (require :lspconfig))
 
+(local lsp_installer (require :nvim-lsp-installer))
+
 (let [{: config : severity} vim.diagnostic
       {: sign_define} vim.fn]
   (config {:underline {:severity {:min severity.INFO}}
@@ -19,8 +21,6 @@
   (set vim.lsp.handlers.textDocument/hover
        (with handlers.hover {:border :single})))
 
-(local lsp_installer (require :nvim-lsp-installer))
-
 (lsp_installer.on_server_ready (fn [server]
                                  (let [opts {}]
                                    (set opts.capabilities
@@ -28,7 +28,4 @@
                                             :update_capabilities) (vim.lsp.protocol.make_client_capabilities)))
                                    (server:setup opts))))
 
-;; TODO
-;; install lua server by default
-;; lsp mappings on attach
-;; remove cmp dependency
+

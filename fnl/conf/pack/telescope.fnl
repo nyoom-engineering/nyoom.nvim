@@ -1,5 +1,4 @@
 (local {: setup} (require :telescope))
-(local ffi (require :ffi))
 
 (setup {:defaults {:prompt_prefix "   "
                    :selection_caret "  "
@@ -17,9 +16,3 @@
                    :set_env {:COLORTERM :truecolor}
                    :dynamic_preview_title true}})
 
-;; load our extensions
-((. (require :telescope) :load_extension) :fzf)
-
-;; only load smart history if sqlite is available
-(when (ffi.load :libsqlite3)
-  ((. (require :telescope) :load_extension) :frecency))

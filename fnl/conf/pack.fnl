@@ -1,5 +1,4 @@
 (import-macros {: pack : use-package! : rock : rock! : unpack!} :conf.macros)
-
 ;;; Emacs' use-package is not a package manager! Although use-package does have the useful capability to interface with package managers, its mainly for configuring and loading packages.
 ;;; Still, as packer.nvim is use-package inspired, lets just think of it as a vim-y version of straight-use-package for now :)
 
@@ -41,7 +40,8 @@
                :requires [(pack :gpanders/nvim-parinfer {:ft lisp-ft})
                           (match fennel_compiler
                             :aniseed (pack :Olical/aniseed {:branch :develop})
-                            :hotpot (pack :rktjmp/hotpot.nvim {:branch :master}))]})
+                            :hotpot (pack :rktjmp/hotpot.nvim {:branch :master})
+                            :tangerine (pack :udayvir-singh/tangerine.nvim {:branch :teacher}))]})
 ;; bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
 (use-package! :numToStr/Comment.nvim {:init :Comment})
@@ -50,39 +50,34 @@
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 (use-package! :nvim-telescope/telescope.nvim
-              {:after :telescope-fzf-native.nvim
-               :config! :telescope
-               :requires [(pack :nvim-lua/popup.nvim
-                                {:cmd :Telescope})
-                          (pack :nvim-lua/plenary.nvim
-                                {:after :popup.nvim})
-                          (pack :nvim-telescope/telescope-frecency.nvim
-                                {:requires [:tami5/sqlite.lua]
-                                 :after :plenary.nvim})
-                          (pack :nvim-telescope/telescope-fzf-native.nvim
-                                {:run :make :after :plenary.nvim})]})
+              {:cmd :Telescope
+               :config! :telescope})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
               {:config! :treesitter
-               :requires [(pack :p00f/nvim-ts-rainbow {:after :nvim-treesitter})
+               :requires [:p00f/nvim-ts-rainbow
                           (pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})]})
 
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
               {:config! :lsp
-               :requires [:williamboman/nvim-lsp-installer
+               :requires [(pack :williamboman/nvim-lsp-installer)
+                          (pack :hrsh7th/cmp-nvim-lsp)
                           (pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
 
 (use-package! :hrsh7th/nvim-cmp
-      {:config! :cmp
-       :requires [(pack :PaterJason/cmp-conjure {:ft lisp-ft})
-                  (pack :hrsh7th/cmp-copilot {:after :copilot.vim})
-                  :hrsh7th/cmp-nvim-lsp
-                  :hrsh7th/cmp-path
-                  :github/copilot.vim
-                  :lukas-reineke/cmp-under-comparator]})
+              {:config! :cmp
+               :after :cmp-under-comparator
+               :requires [(pack :lukas-reineke/cmp-under-comparator {:event :InsertEnter})
+                          (pack :L3MON4D3/LuaSnip {:after :nvim-cmp})
+                          (pack :saadparwaiz1/cmp_luasnip {:after :LuaSnip})
+                          (pack :hrsh7th/cmp-path {:after :nvim-cmp})
+                          (pack :PaterJason/cmp-conjure {:ft lisp-ft})
+                          (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
+                          (pack :ray-x/cmp-treesitter {:after :nvim-cmp})
+                          (pack :hrsh7th/cmp-nvim-lua {:after :nvim-cmp})]})
 
 (use-package! :folke/trouble.nvim
               {:cmd :Trouble
@@ -108,8 +103,8 @@
 
 ;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. Firenvim is mostly for when I need to use the web but I want to keep neovim around with me  
 (use-package! :nvim-neorg/neorg
-              {:config! :neorg 
-               :ft :norg 
+              {:config! :neorg
+               :ft :norg
                :after :nvim-treesitter})
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.

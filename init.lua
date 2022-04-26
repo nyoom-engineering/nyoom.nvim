@@ -41,6 +41,17 @@ elseif fennel_compiler == "hotpot" then
        }
      })
     require("conf")
+elseif fennel_compiler == "tangerine" then
+    ensure("udayvir-singh", "tangerine.nvim")
+    require("tangerine").setup({
+        compiler = {
+            hooks = {
+                "oninit",
+                "onsave"
+            }
+        }
+    })
+    require("conf")
 else
     error("Unknown compiler")
 end
