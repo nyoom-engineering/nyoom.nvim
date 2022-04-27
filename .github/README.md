@@ -38,7 +38,7 @@ It also aligns with many of Doom's features:
 - A standard library designed to simplify your fennel bike shedding.
 - A declarative package management system (inspired by `use-package`, powered by [Packer.nvim](https://github.com/wbthomason/packer.nvim)). Install packages from anywhere, and pin them to any commit.
 - A Space(vim)-esque keybinding scheme, centered around leader and localleader prefix keys (SPC and SPCm).
-- Project search (and replace) utilities, powered by ripgrep, fzf-native, sqlite, and telescope.
+- Project search (and replace) utilities, powered by ripgrep, and telescope.
 
 However, it also disagrees with some of those ideals
 - Packages are not pinned to commits *by default*. Unlike Doom, this configuration includes fewer than 20 packages by default and breaking changes are usually few and far between. Everything is rolling release, and if a breaking change does occur I will push a fix within a day (pinky promise!). Of course, you are free to pin packages yourself (and use [:PackerSnapshot](https://github.com/wbthomason/packer.nvim/pull/370)). I may reconsider as nyoom grows. 
@@ -107,6 +107,7 @@ Then run `:PackerSync`
 Requires nix version > 21.11, with experimental features `flakes` and `nix-commands` enabled
 ```bash
 git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git && cd nyoom.nvim
+(edit init.lua and change fennel_compiler to aniseed)
 nix develop
 ```
 
@@ -124,7 +125,6 @@ All the magic happens in the `fnl/` folder. Some files to check out:
 - `pack.fnl`: This is where all your plugins go. The pack file is in charge of configuring packer, installing, as well as loading plugins
 - `config.fnl`: This is where neovim settings go. 
 - `macros.fnl`: In lisps, macros allow the user to define arbitrary functions that convert certain Lisp forms into different forms before evaluating or compiling them. This file contains all the macros that I (and a few others, thanks David and Kat!) have written to help you out on your neovim journey. I don't recommend touching this file unless you know what you're doing
-- `maps.fnl`: This is where all your mappings go
 - `pack/`: This is where plugin configs go.
 
 ### Learning Fennel
