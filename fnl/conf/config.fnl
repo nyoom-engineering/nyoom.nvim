@@ -17,5 +17,3 @@
 
 ;; e.g. jk/jj for escape. Some people like this, others don't
 (map! [i] :jk :<esc>)
-
-

@@ -37,5 +37,3 @@
             "<cmd>lua print(require('hotpot.api.compile')['compile-selection']())<CR>")
       (map! [n] :<leader>c
             "<cmd>lua print(require('hotpot.api.compile')['compile-buffer'](0))<CR>")))
-
-

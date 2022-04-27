@@ -3,15 +3,6 @@
 
 ;; the usual
 (setup {:ensure_installed [:lua :fennel]
-        :highlight {:enable true
-                    :use_languagetree true}
+        :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
-        :rainbow {:enable true
-                  :extended_mode true
-                  :colors ["#878d96"
-                           "#a8a8a8"
-                           "#8d8d8d"
-                           "#a2a9b0"
-                           "#8f8b8b"
-                           "#ada8a8"]}})
-
+        :rainbow {:enable true :extended_mode true}})

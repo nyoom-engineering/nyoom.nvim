@@ -15,4 +15,3 @@
                    :use_less false
                    :set_env {:COLORTERM :truecolor}
                    :dynamic_preview_title true}})
-

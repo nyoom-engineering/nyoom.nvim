@@ -41,7 +41,9 @@
                           (match fennel_compiler
                             :aniseed (pack :Olical/aniseed {:branch :develop})
                             :hotpot (pack :rktjmp/hotpot.nvim {:branch :master})
-                            :tangerine (pack :udayvir-singh/tangerine.nvim {:branch :teacher}))]})
+                            :tangerine (pack :udayvir-singh/tangerine.nvim
+                                             {:branch :teacher}))]})
+
 ;; bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
 (use-package! :numToStr/Comment.nvim {:init :Comment})
@@ -50,8 +52,7 @@
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 (use-package! :nvim-telescope/telescope.nvim
-              {:cmd :Telescope
-               :config! :telescope})
+              {:cmd :Telescope :config! :telescope})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -65,12 +66,14 @@
               {:config! :lsp
                :requires [(pack :williamboman/nvim-lsp-installer)
                           (pack :hrsh7th/cmp-nvim-lsp)
-                          (pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
+                          (pack :j-hui/fidget.nvim
+                                {:after :nvim-lspconfig :init :fidget})]})
 
 (use-package! :hrsh7th/nvim-cmp
               {:config! :cmp
                :after :cmp-under-comparator
-               :requires [(pack :lukas-reineke/cmp-under-comparator {:event :InsertEnter})
+               :requires [(pack :lukas-reineke/cmp-under-comparator
+                                {:event :InsertEnter})
                           (pack :L3MON4D3/LuaSnip {:after :nvim-cmp})
                           (pack :saadparwaiz1/cmp_luasnip {:after :LuaSnip})
                           (pack :hrsh7th/cmp-path {:after :nvim-cmp})
@@ -103,9 +106,7 @@
 
 ;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. Firenvim is mostly for when I need to use the web but I want to keep neovim around with me  
 (use-package! :nvim-neorg/neorg
-              {:config! :neorg
-               :ft :norg
-               :after :nvim-treesitter})
+              {:config! :neorg :ft :norg :after :nvim-treesitter})
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)

@@ -28,39 +28,16 @@
 ;; and of course some settings
 (set! completeopt [:menu :menuone :noselect])
 
-(setup {:preselect (. (. (. (require :cmp.types)
-                            :cmp)
-                         :PreselectMode)
-                      :None)
-        :style {:winhighlight "NormalFloat:NormalFloat,FloatBorder:FloatBorder"}
+(setup {:preselect (. (. (. (require :cmp.types) :cmp) :PreselectMode) :None)
         :experimental {:native_menu false :ghost_text true}
-        :window {:completion {:border {1 "╭"
-                                       2 "─"
-                                       3 "╮"
-                                       4 "│"
-                                       5 "╯"
-                                       6 "─"
-                                       7 "╰"
-                                       8 "│"}
-                                      :scrollbar "║"
-                                      :autocomplete {1 (. (. (. (require :cmp.types)
-                                                                :cmp)
-                                                             :TriggerEvent)
-                                                          :InsertEnter)
-                                                     2 (. (. (. (require :cmp.types)
-                                                                :cmp)
-                                                             :TriggerEvent)
-                                                          :TextChanged)}}
-                         :documentation {:border {1 "╭"
-                                                  2 "─"
-                                                  3 "╮"
-                                                  4 "│"
-                                                  5 "╯"
-                                                  6 "─"
-                                                  7 "╰"
-                                                  8 "│"}
-                                         :winhighlight "NormalFloat:NormalFloat,FloatBorder:FloatBorder"
-                                         :scrollbar "║"}}
+        :window {:completion {:autocomplete {1 (. (. (. (require :cmp.types)
+                                                        :cmp)
+                                                     :TriggerEvent)
+                                                  :InsertEnter)
+                                             2 (. (. (. (require :cmp.types)
+                                                        :cmp)
+                                                     :TriggerEvent)
+                                                  :TextChanged)}}}
         :formatting {:format (fn [entry vim-item]
                                (set vim-item.menu
                                     (. {:nvim_lsp :lsp
@@ -118,12 +95,11 @@
                                                                                          true)
                                                          "")
                                         (fallback)
-                                      [:i :s])))
+                                        [:i :s])))
                   :<S-Tab> (mapping (fn [fallback]
                                       (if (visible)
                                           (mapping (mapping.select_prev_item {:behavior insert-behavior}))
-                                          ((. (require :luasnip)
-                                              :jumpable) (- 1))
+                                          ((. (require :luasnip) :jumpable) (- 1))
                                           (vim.fn.feedkeys (vim.api.nvim_replace_termcodes :<Plug>luasnip-jump-prev
                                                                                            true
                                                                                            true

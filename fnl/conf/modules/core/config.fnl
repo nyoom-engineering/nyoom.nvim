@@ -27,7 +27,6 @@
     (let [p (.. :loaded_ v :_provider)]
       (tset vim.g p 0))))
 
-
 ;; disable the ruler
 (set! noru)
 
@@ -77,4 +76,3 @@
 
 ;; filename + lineno
 (set! statusline "%F%m%r%h%w: %2l")
-

@@ -35,3 +35,11 @@
 (cmd "hi TSSymbol gui=bold")
 (cmd "hi TSFunction gui=bold")
 
+;; parens: trying to make it closer to emacs carbon
+(cmd "hi rainbowcol1 guifg=#878d96")
+(cmd "hi rainbowcol2 guifg=#a8a8a8")
+(cmd "hi rainbowcol3 guifg=#8d8d8d")
+(cmd "hi rainbowcol4 guifg=#a2a9b0")
+(cmd "hi rainbowcol5 guifg=#8f8b8b")
+(cmd "hi rainbowcol6 guifg=#ada8a8")
+(cmd "hi rainbowcol7 guifg=#878d96")
