@@ -43,8 +43,8 @@
                                     (. {:nvim_lsp :lsp
                                         :nvim_lua :lua
                                         :buffer :buf
-                                        :luasnip :snp
                                         :path :pth
+                                        :copilot :cop
                                         :treesitter :trs
                                         :conjure :cj}
                                        entry.source.name))
@@ -76,44 +76,26 @@
                                         :TypeParameter ""}
                                        vim-item.kind))
                                vim-item)}
-        :snippet {:expand (fn [args]
-                            ((. (require :luasnip) :lsp_expand) args.body))}
         :mapping {:<C-b> (mapping.scroll_docs -4)
                   :<C-f> (mapping.scroll_docs 4)
                   :<C-space> (mapping.complete)
                   :<C-e> (mapping.abort)
                   :<up> disable
                   :<down> disable
-                  :<Tab> (mapping (fn [fallback]
-                                    (if (visible)
-                                        (mapping (mapping.select_next_item {:behavior insert-behavior}))
-                                        ((. (require :luasnip)
-                                            :expand_or_jumpable))
-                                        (vim.fn.feedkeys (vim.api.nvim_replace_termcodes :<Plug>luasnip-expand-or-jump
-                                                                                         true
-                                                                                         true
-                                                                                         true)
-                                                         "")
-                                        (fallback)
-                                        [:i :s])))
-                  :<S-Tab> (mapping (fn [fallback]
-                                      (if (visible)
-                                          (mapping (mapping.select_prev_item {:behavior insert-behavior}))
-                                          ((. (require :luasnip) :jumpable) (- 1))
-                                          (vim.fn.feedkeys (vim.api.nvim_replace_termcodes :<Plug>luasnip-jump-prev
-                                                                                           true
-                                                                                           true
-                                                                                           true)
-                                                           "")
-                                          (fallback)))
-                                    [:i :s])
-                  :<space> (mapping.confirm {:select false})}
-        :sources [{:name :nvim_lsp}
-                  {:name :conjure}
-                  {:name :nvim_lua}
-                  {:name :buffer}
-                  {:name :treesitter}
-                  {:name :luasnip}
+                  "<Tab>" (mapping (mapping.select_next_item {:behavior insert-behavior}) [:i :s])
+                  "<S-Tab>" (mapping (mapping.select_prev_item {:behavior insert-behavior}) [:i :s])
+                  "<space>" (mapping.confirm {:select false})}
+        :sources [{:name :nvim_lsp
+                   :max_item_count 5}
+                  {:name :conjure
+                   :max_item_count 5}
+                  {:name :nvim_lua
+                   :max_item_count 3}
+                  {:name :buffer
+                   :max_item_count 2}
+                  {:name :treesitter
+                   :max_item_count 3}
+                  {:name :copilot}
                   {:name :path}]
         :sorting {:comparators [compare.offset
                                 compare.exact

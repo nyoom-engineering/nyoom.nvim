@@ -44,6 +44,10 @@
                             :tangerine (pack :udayvir-singh/tangerine.nvim
                                              {:branch :teacher}))]})
 
+;; rusty stuff
+(use-package! :simrat39/rust-tools.nvim {:ft :rust
+                                         :init :rust-tools})
+
 ;; bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
 (use-package! :numToStr/Comment.nvim {:init :Comment})
@@ -68,18 +72,24 @@
                           (pack :hrsh7th/cmp-nvim-lsp)
                           (pack :j-hui/fidget.nvim
                                 {:after :nvim-lspconfig :init :fidget})]})
+;; completion/copilot
+(use-package! :zbirenbaum/copilot.lua
+              {:event :InsertEnter
+               :config (fn []
+                         (vim.schedule (fn []
+                                         ((. (require :copilot)
+                                             :setup)))))})
 
 (use-package! :hrsh7th/nvim-cmp
               {:config! :cmp
                :after :cmp-under-comparator
                :requires [(pack :lukas-reineke/cmp-under-comparator
                                 {:event :InsertEnter})
-                          (pack :L3MON4D3/LuaSnip {:after :nvim-cmp})
-                          (pack :saadparwaiz1/cmp_luasnip {:after :LuaSnip})
                           (pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :PaterJason/cmp-conjure {:ft lisp-ft})
                           (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
                           (pack :ray-x/cmp-treesitter {:after :nvim-cmp})
+                          (pack :zbirenbaum/copilot-cmp {:after :copilot.lua})
                           (pack :hrsh7th/cmp-nvim-lua {:after :nvim-cmp})]})
 
 (use-package! :folke/trouble.nvim

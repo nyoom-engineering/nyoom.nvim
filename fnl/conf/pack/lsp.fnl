@@ -1,5 +1,4 @@
 (local config (require :lspconfig))
-
 (local lsp_installer (require :nvim-lsp-installer))
 
 (let [{: config : severity} vim.diagnostic
