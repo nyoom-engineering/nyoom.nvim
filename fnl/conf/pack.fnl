@@ -1,4 +1,4 @@
-(import-macros {: pack : use-package! : rock : rock! : unpack!} :conf.macros)
+(import-macros {: pack : use-package! : rock : rock! : unpack! : cmd} :conf.macros)
 ;;; Emacs' use-package is not a package manager! Although use-package does have the useful capability to interface with package managers, its mainly for configuring and loading packages.
 ;;; Still, as packer.nvim is use-package inspired, lets just think of it as a vim-y version of straight-use-package for now :)
 
@@ -84,7 +84,7 @@
                         ((. (require :lazytimer)
                             :packer_lazy_load) :nvim-lspconfig)
                         (vim.defer_fn (fn []
-                                        (vim.cmd "if &ft == \"packer\" | echo \"\" | else | silent! e %"))
+                                        (cmd "if &ft == \"packer\" | echo \"\" | else | silent! e %"))
                                       0))})
 
 ;; git

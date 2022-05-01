@@ -56,4 +56,4 @@
   au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
   au WinEnter,BufEnter,FileType NvimTree*,terminal setlocal statusline=%!v:lua.Statusline.short()
   au WinLeave,BufLeave,FileType NvimTree*,terminal setlocal statusline=%!v:lua.Statusline.short()
-")  
+")

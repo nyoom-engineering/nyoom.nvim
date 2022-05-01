@@ -61,6 +61,9 @@
 ;; add some padding while scrolling
 (set! scrolloff 3)
 
+;; global statusline
+(set! laststatus 3)
+
 ;; disable intro
 (set! shortmess+ :I)
 
