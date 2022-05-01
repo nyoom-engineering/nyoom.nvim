@@ -45,7 +45,7 @@
                                              {:branch :teacher}))]})
 
 ;; rusty stuff
-(use-package! :simrat39/rust-tools.nvim {:ft :rust
+(use-package! :simrat39/rust-tools.nvim {:ft :rust 
                                          :init :rust-tools})
 
 ;; bindings
@@ -63,16 +63,41 @@
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
               {:config! :treesitter
-               :requires [:p00f/nvim-ts-rainbow
+               :run ":TSUpdate"
+               :event {1 :BufRead 2 :BufNewFile}
+               :requires [(pack :p00f/nvim-ts-rainbow {:event {1 :BufRead 2 :BufNewFile}})
                           (pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})]})
 
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
-              {:config! :lsp
-               :requires [(pack :williamboman/nvim-lsp-installer)
-                          (pack :hrsh7th/cmp-nvim-lsp)
-                          (pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
+              {:module :lspconfig
+               :config! :lsp
+               :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})
+                          (pack :williamboman/nvim-lsp-installer {:setup (fn [])}
+                                                                ((. (require :lazytimer)
+                                                                    :packer_lazy_load) :nvim-lsp-installer.nvim))
+                          (pack :hrsh7th/cmp-nvim-lsp {:setup (fn []
+                                                                ((. (require :lazytimer)
+                                                                    :packer_lazy_load) :cmp-nvim-lsp))})]
+               :setup (fn []
+                        ((. (require :lazytimer)
+                            :packer_lazy_load) :nvim-lspconfig)
+                        (vim.defer_fn (fn []
+                                        (vim.cmd "if &ft == \"packer\" | echo \"\" | else | silent! e %"))
+                                      0))})
+
+;; git
+(use-package! :lewis6991/gitsigns.nvim
+              {:config! :gitsigns
+               :setup (fn []
+                        ((. (require :lazytimer)
+                            :packer_lazy_load) :gitsigns.nvim))})
+
+(use-package! :TimUntersberger/neogit
+              {:init :neogit
+               :cmd :Neogit})
+
 ;; completion/copilot
 (use-package! :zbirenbaum/copilot.lua
               {:event :InsertEnter
@@ -83,6 +108,7 @@
 
 (use-package! :hrsh7th/nvim-cmp
               {:config! :cmp
+               :module :cmp
                :after :cmp-under-comparator
                :requires [(pack :lukas-reineke/cmp-under-comparator
                                 {:event :InsertEnter})

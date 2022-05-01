@@ -61,6 +61,9 @@
 ;; add some padding while scrolling
 (set! scrolloff 3)
 
+;; disable intro
+(set! shortmess+ :I)
+
 ;; the default updatetime in vim is around 4 seconds. This messes with gitsigns and the like, lets reduce it
 (set! updatetime 500)
 
@@ -73,3 +76,5 @@
 ;; universal clipboard support
 (set! clipboard :unnamedplus)
 
+;; gitsigns
+(set! diffopt [:filler :internal :indent-heuristic :algorithm:histogram])
