@@ -50,13 +50,15 @@
 
 ;; bindings
 (use-package! :folke/which-key.nvim {:init :which-key})
-(use-package! :numToStr/Comment.nvim {:init :Comment})
+(use-package! :ggandor/leap.nvim
+              {:config (fn []
+                         ((. (require :leap) :set_default_keymaps)))})
 
-;; Fuzzy navigation
+;; File navigation
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
 ;; the loading order for this one is a bit weird, but it works. Extensions are loaded on their command, fzf native is loaded first, then telescope.nvim after fzf.
-(use-package! :nvim-telescope/telescope.nvim
-              {:cmd :Telescope :config! :telescope})
+(use-package! :nvim-telescope/telescope.nvim {:cmd :Telescope :config! :telescope})
+(use-package! :kyazdani42/nvim-tree.lua {:cmd :NvimTreeToggle :config! :nvimtree})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -70,8 +72,7 @@
               {:config! :lsp
                :requires [(pack :williamboman/nvim-lsp-installer)
                           (pack :hrsh7th/cmp-nvim-lsp)
-                          (pack :j-hui/fidget.nvim
-                                {:after :nvim-lspconfig :init :fidget})]})
+                          (pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
 ;; completion/copilot
 (use-package! :zbirenbaum/copilot.lua
               {:event :InsertEnter
@@ -101,6 +102,7 @@
 ;; aesthetics
 (use-package! :RRethy/nvim-base16 {:config! :base16})
 (use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config! :truezen})
+(use-package! :folke/twilight.nvim {:init :twilight})
 (use-package! :rcarriga/nvim-notify
               {:config (fn []
                          (set vim.notify (require :notify))

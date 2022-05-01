@@ -13,4 +13,5 @@
                            :ideal_writing_area_width {1 0}
                            :auto_padding false
                            :bg_configuration true}
-                :focus {:margin_of_error 5 :focus_method :experimental}}})
+                :focus {:margin_of_error 5 :focus_method :experimental}}
+        :integrations {:twilight true}})

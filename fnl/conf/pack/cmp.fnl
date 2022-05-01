@@ -29,15 +29,8 @@
 (set! completeopt [:menu :menuone :noselect])
 
 (setup {:preselect (. (. (. (require :cmp.types) :cmp) :PreselectMode) :None)
-        :experimental {:native_menu false :ghost_text true}
-        :window {:completion {:autocomplete {1 (. (. (. (require :cmp.types)
-                                                        :cmp)
-                                                     :TriggerEvent)
-                                                  :InsertEnter)
-                                             2 (. (. (. (require :cmp.types)
-                                                        :cmp)
-                                                     :TriggerEvent)
-                                                  :TextChanged)}}}
+        :window {:documentation {:border :solid}
+                 :completion {:border :solid}}
         :formatting {:format (fn [entry vim-item]
                                (set vim-item.menu
                                     (. {:nvim_lsp :lsp

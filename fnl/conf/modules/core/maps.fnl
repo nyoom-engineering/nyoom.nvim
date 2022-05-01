@@ -19,11 +19,14 @@
 (map! [n] :<Leader>tp ":TSPlayground<CR>")
 
 ;; telescope
-(map! [n] :<leader>b "<cmd>Telescope buffers theme=ivy<CR>")
-(map! [n] :<leader>ff "<cmd>Telescope current_buffer_fuzzy_find theme=ivy<CR>")
-(map! [n] :<leader>fr "<cmd>Telescope oldfiles theme=ivy<CR>")
-(map! [n] "<leader>:" "<cmd>Telescope commands theme=ivy<CR>")
-(map! [n] :<leader><space> "<cmd>Telescope find_files theme=ivy<CR>")
+(map! [n] :<leader>b "<cmd>Telescope buffers<CR>")
+(map! [n] :<leader>ff "<cmd>Telescope current_buffer_fuzzy_find<CR>")
+(map! [n] :<leader>fr "<cmd>Telescope oldfiles<CR>")
+(map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
+(map! [n] :<leader><space> "<cmd>Telescope find_files<CR>")
+
+;; nvimtree
+(map! [n] :<leader>o "<cmd>NvimTreeToggle<CR>")
 
 ;; truezen
 (map! [n] :<leader>z :<cmd>TZAtaraxis<CR>)

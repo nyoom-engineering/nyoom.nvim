@@ -20,10 +20,6 @@
         :base0E "#be95ff"
         :base0F "#3ddbd9"})
 
-;; minimal statusline
-(cmd "hi StatusLineNC gui=underline guibg=#161616 guifg=#393939")
-(cmd "hi StatusLine gui=underline guibg=#161616 guifg=#393939")
-
 ;; subtle delimiters
 (cmd "hi MatchParen gui=underline guibg=#262626")
 
@@ -43,3 +39,27 @@
 (cmd "hi rainbowcol5 guifg=#8f8b8b")
 (cmd "hi rainbowcol6 guifg=#ada8a8")
 (cmd "hi rainbowcol7 guifg=#878d96")
+
+;; minimal statusline
+(cmd "hi StatusInactive guifg=#525252")
+(cmd "hi StatusLine guibg=#161616 guifg=#393939")
+(cmd "hi StatusLineNC guibg=#161616 guifg=#525252")
+(cmd "hi StatusNormal gui=underline guibg=#161616 guifg=#393939")
+(cmd "hi StatusCommand gui=underline guibg=#161616 guifg=#393939")
+(cmd "hi StatusReplace guifg=#161616 guibg=#dde1e6")
+(cmd "hi StatusInsert guifg=#161616 guibg=#3ddbd9")
+(cmd "hi StatusVisual guifg=#161616 guibg=#ff7eb6")
+(cmd "hi StatusTerminal guifg=#161616 guibg=#be95ff")
+
+;; better nvimtree
+(cmd "hi NvimTreeImageFile guifg=#33b1ff")
+(cmd "hi NvimTreeFolderIcon guifg=#525252")
+(cmd "hi NvimTreeFolderIcon guifg=#525252")
+(cmd "hi NvimTreeSpecialFile guifg=#be95ff")
+(cmd "hi NvimTreeIndentMarker guifg=#525252")
+(cmd "hi NvimTreeFolderName guibg=NONE guifg=NONE")
+(cmd "hi NvimTreeEmptyFolderName guibg=NONE guifg=NONE")
+(cmd "hi NvimTreeOpenedFolderName guibg=NONE guifg=NONE")
+(cmd "hi NvimTreeWindowPicker guifg=#FAFAFA, guibg=#262626")
+
+
