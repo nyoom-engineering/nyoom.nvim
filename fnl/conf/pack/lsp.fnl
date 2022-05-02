@@ -1,5 +1,6 @@
+(import-macros {: lazy-require!} :conf.macros)
 (local config (require :lspconfig))
-(local lsp_installer (require :nvim-lsp-installer))
+(local lsp_installer (lazy-require! :nvim-lsp-installer))
 
 (let [{: config : severity} vim.diagnostic
       {: sign_define} vim.fn]
@@ -23,6 +24,6 @@
 (lsp_installer.on_server_ready (fn [server]
                                  (let [opts {}]
                                    (set opts.capabilities
-                                        ((. (require :cmp_nvim_lsp)
+                                        ((. (lazy-require! :cmp_nvim_lsp)
                                             :update_capabilities) (vim.lsp.protocol.make_client_capabilities)))
                                    (server:setup opts))))

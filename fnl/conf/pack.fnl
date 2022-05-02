@@ -45,10 +45,9 @@
 
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
-              {:module :lspconfig
-               :config! :lsp
+              {:config! :lsp
                :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})
-                          (pack :williamboman/nvim-lsp-installer)]})
+                          (pack :williamboman/nvim-lsp-installer {:module :nvim-lsp-installer})]})
 
 (use-package! :folke/trouble.nvim
               {:cmd :Trouble
