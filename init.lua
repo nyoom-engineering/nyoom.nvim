@@ -15,16 +15,36 @@ ensure("wbthomason", "packer.nvim")
 ensure("lewis6991", "impatient.nvim")
 require("impatient")
 
--- Compile fennel
-ensure("udayvir-singh", "tangerine.nvim")
-require("tangerine").setup({
-   compiler = {
-      hooks = {
-         "oninit",
-         "onsave",
+-- global variable to set the user's fennel compiler
+fennel_compiler = "hotpot"
+
+if fennel_compiler == "aniseed" then
+   ensure("Olical", "aniseed")
+   vim.g["aniseed#env"] = { module = "conf.init" }
+elseif fennel_compiler == "hotpot" then
+   ensure("rktjmp", "hotpot.nvim")
+   require("hotpot").setup({
+      provide_require_fennel = true,
+      compiler = {
+         modules = {
+            correlate = true,
+         },
       },
-   },
-})
-require("conf")
+   })
+   require("conf")
+elseif fennel_compiler == "tangerine" then
+   ensure("udayvir-singh", "tangerine.nvim")
+   require("tangerine").setup({
+      compiler = {
+         hooks = {
+            "oninit",
+            "onsave",
+         },
+      },
+   })
+   require("conf")
+else
+   error("Unknown compiler")
+end
 
 

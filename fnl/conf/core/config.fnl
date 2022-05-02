@@ -76,9 +76,6 @@
 ;; Set windows width
 (set! winwidth 40)
 
-;; Highlight current cursor line
-(set! cursorline true)
-
 ;; Set a global statusline
 (set! laststatus 3)
 
@@ -117,6 +114,9 @@
 
 ;; Scroll off
 (set! scrolloff 8)
+
+;; Disable cursorline
+(set! cursorline false)
 
 ;; global statusline
 (set! laststatus 3)

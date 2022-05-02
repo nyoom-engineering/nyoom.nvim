@@ -1,8 +1,5 @@
 ;;; Sane defaults/maps
-(require :conf.modules.core)
-
-;;; minimal statusline
-(require :conf.statusline)
+(require :conf.core)
 
 ;; Plugin configs
 (require :conf.pack)
