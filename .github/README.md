@@ -107,7 +107,6 @@ Then run `:PackerSync`
 Requires nix version > 21.11, with experimental features `flakes` and `nix-commands` enabled
 ```bash
 git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git && cd nyoom.nvim
-(edit init.lua and change fennel_compiler to aniseed)
 nix develop
 ```
 
@@ -138,14 +137,6 @@ For most people, chances are you haven't even heard of fennel before. So where s
 6. [Learn macros](https://fennel-lang.org/macros). 
 
 If you have trouble configuring neovim to your needs, check out [Antifennel](https://fennel-lang.org/see) to see how lua code compiles back to fennel! However, the generated code isn't always the cleanest, so its recommend you use it as a last resort. If you need any help, feel free to reach out to me via email or discord, and be sure to join the [Conjure Discord](https://conjure.fun/discord) too! 
-
-### Aniseed vs Hotpot
-
-- Aniseed: Aniseed bridges the gap between Fennel and Neovim, Allowing you to easily write plugins or configuration in a Clojure-like Lisp with great runtime performance. As opposed to hotpot, aniseed provides macros, is slightly faster and more featureful, compiles fennel files to the lua/ directory, and has better integration with conjure. It aims to provide a more clojure-like experience, and behaves as a superset of fennel.
-
-- Hotpot: Hotpot will transparently compile your Fennel code into Lua and then return the compiled module. Future calls to `require` (including in future Neovim sessions) will skip the compile step unless it's stale. Only compiles and caches fennel files, providing a more native experience for the user. On the other hand, it is slightly slower and less developed. Users looking for macros can use the builtin macros defined in macros.fnl, or the zest.nvim library.
-
-In `init.lua`, you can set the compiler to aniseed/hotpot, and nyoom will handle the rest. All the current configuration is hotpot-compatible, so it doesn't use any aniseed macros by default. However, you are free to use them yourself. 
 
 ## Notes
 

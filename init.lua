@@ -1,11 +1,4 @@
---[[
-Entrypoint for the neovim configuration
-We simply bootstrap packer and hotpot/aniseed
-It's then up to hotpot or aniseed to compile and load fnl/conf/init.fnl
---]]
-
 -- use opt-in filetype.lua instead of vimscript default
--- EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
 vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
 
@@ -20,38 +13,18 @@ end
 -- Bootstrap essential plugins
 ensure("wbthomason", "packer.nvim")
 ensure("lewis6991", "impatient.nvim")
-
--- impatient optimization
 require("impatient")
 
--- global variable to set the user's fennel compiler
-fennel_compiler = "hotpot"
+-- Compile fennel
+ensure("udayvir-singh", "tangerine.nvim")
+require("tangerine").setup({
+   compiler = {
+      hooks = {
+         "oninit",
+         "onsave",
+      },
+   },
+})
+require("conf")
 
-if fennel_compiler == "aniseed" then
-   ensure("Olical", "aniseed")
-   vim.g["aniseed#env"] = { module = "conf.init" }
-elseif fennel_compiler == "hotpot" then
-   ensure("rktjmp", "hotpot.nvim")
-   require("hotpot").setup({
-      provide_require_fennel = true,
-      compiler = {
-         modules = {
-            correlate = true,
-         },
-      },
-   })
-   require("conf")
-elseif fennel_compiler == "tangerine" then
-   ensure("udayvir-singh", "tangerine.nvim")
-   require("tangerine").setup({
-      compiler = {
-         hooks = {
-            "oninit",
-            "onsave",
-         },
-      },
-   })
-   require("conf")
-else
-   error("Unknown compiler")
-end
+

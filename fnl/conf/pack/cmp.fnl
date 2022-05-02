@@ -1,13 +1,13 @@
-(import-macros {: set! : let! : cmd} :conf.macros)
+(import-macros {: set! : let! : cmd : lazy-require!} :conf.macros)
 (local {: setup
         : mapping
         : visible
         :config {: compare : disable}
         :SelectBehavior {:Insert insert-behavior :Select select-behavior}
-        : event} (require :cmp))
+        : event} (lazy-require! :cmp))
 
-(local under-compare (require :cmp-under-comparator))
 (local {: insert} table)
+(local under-compare (lazy-require! :cmp-under-comparator))
 
 ;; colors!
 (cmd "hi CmpItemAbbrMatch gui=bold guifg=#FAFAFA")
@@ -29,6 +29,7 @@
 (set! completeopt [:menu :menuone :noselect])
 
 (setup {:preselect (. (. (. (require :cmp.types) :cmp) :PreselectMode) :None)
+        :experimental {:ghost_text true}
         :window {:documentation {:border :solid}
                  :completion {:border :solid}}
         :formatting {:format (fn [entry vim-item]

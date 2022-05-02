@@ -16,9 +16,9 @@
 
 (let [{: with : handlers} vim.lsp]
   (set vim.lsp.handlers.textDocument/signatureHelp
-       (with handlers.signature_help {:border :single}))
+       (with handlers.signature_help {:border :solid}))
   (set vim.lsp.handlers.textDocument/hover
-       (with handlers.hover {:border :single})))
+       (with handlers.hover {:border :solid})))
 
 (lsp_installer.on_server_ready (fn [server]
                                  (let [opts {}]

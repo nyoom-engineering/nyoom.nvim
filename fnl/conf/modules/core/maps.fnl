@@ -1,8 +1,7 @@
 (import-macros {: let! : map!} :conf.macros)
 
 ;; add leader keys
-(let! mapleader " ")
-(let! maplocalleader ",")
+(let! :g.mapleader " ")
 
 ;; no highlight on escape
 (map! [n] :<esc> :<esc><cmd>noh<cr>)
@@ -31,12 +30,3 @@
 ;; truezen
 (map! [n] :<leader>z :<cmd>TZAtaraxis<CR>)
 
-;; we only want these mappings active if hotpot is active 
-(if (= fennel_compiler :hotpot)
-    (do
-      (map! [v] :<leader>e
-            "<cmd>lua print(require('hotpot.api.eval')['eval-selection']())<CR>")
-      (map! [v] :<leader>c
-            "<cmd>lua print(require('hotpot.api.compile')['compile-selection']())<CR>")
-      (map! [n] :<leader>c
-            "<cmd>lua print(require('hotpot.api.compile')['compile-buffer'](0))<CR>")))

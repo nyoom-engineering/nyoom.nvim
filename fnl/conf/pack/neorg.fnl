@@ -1,5 +1,4 @@
 (local {: setup} (require :neorg))
-
 (setup {:load {:core.defaults {}
                :core.norg.concealer {}
                :core.norg.qol.toc {}
@@ -8,16 +7,3 @@
                                            :autodetect true
                                            :autochdir true}}}})
 
-;; neorg treesitter parsers
-(local parser-config
-       ((. (require :nvim-treesitter.parsers) :get_parser_configs)))
-
-(set parser-config.norg_meta
-     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-meta"
-                     :files [:src/parser.c]
-                     :branch :main}})
-
-(set parser-config.norg_table
-     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
-                     :files [:src/parser.c]
-                     :branch :main}})

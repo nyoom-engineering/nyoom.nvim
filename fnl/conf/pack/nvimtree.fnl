@@ -1,5 +1,5 @@
-(import-macros {: let!} :conf.macros)
-(local {: setup} (require :nvim-tree))
+(import-macros {: let! : lazy-require!} :conf.macros)
+(local {: setup} (lazy-require! :nvim-tree))
 
 (let! nvim_tree_show_icons {:git 0 :folders 1 :files 0 :folder_arrows 0})
 

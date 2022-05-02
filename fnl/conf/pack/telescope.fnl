@@ -1,4 +1,5 @@
-(local {: setup} (require :telescope))
+(import-macros {: lazy-require!} :conf.macros)
+(local {: setup} (lazy-require! :telescope))
 
 (setup {:defaults {:prompt_prefix "   "
                    :selection_caret "  "

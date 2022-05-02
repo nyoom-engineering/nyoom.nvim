@@ -1,14 +1,10 @@
 (import-macros {: set!} :conf.macros)
 
-;; disable unnecessary plugins & providers
-(let [built-ins [:netrw
-                 :netrwPlugin
-                 :netrwSettings
-                 :netrwFileHandlers
-                 :gzip
+;;; Disable some built-in Neovim plugins and unneeded providers
+(let [built-ins [:tar
                  :zip
+                 :gzip
                  :zipPlugin
-                 :tar
                  :tarPlugin
                  :getscript
                  :getscriptPlugin
@@ -16,68 +12,117 @@
                  :vimballPlugin
                  :2html_plugin
                  :logipat
-                 :rrhelper
-                 :spellfile_plugin
-                 :matchit]
-      providers [:perl :python :python3 :node :ruby]]
+                 :rrhelper]
+      providers [:perl :node :ruby :python :python3]]
   (each [_ v (ipairs built-ins)]
-    (let [b (.. :loaded_ v)]
-      (tset vim.g b 1)))
+    (let [plugin (.. :loaded_ v)]
+      (tset vim.g plugin 1)))
   (each [_ v (ipairs providers)]
-    (let [p (.. :loaded_ v :_provider)]
-      (tset vim.g p 0))))
+    (let [provider (.. :loaded_ v :_provider)]
+      (tset vim.g provider 0))))
 
-;; disable the ruler
-(set! noru)
+;;; Global options
+(set! hidden true
+      updatetime 200
+      timeoutlen 500
+      shortmess :filnxtToOFatsc
+      inccommand :split
+      path "**")
 
-;; show whitespaces as characters 
-(set! list)
+;; Use clipboard outside Neovim
+(set! clipboard :unnamedplus)
 
-;; enable mouse
+;; Enable mouse input
 (set! mouse :a)
 
-;; disable line numbers
-(set! nonumber)
+;; Faster macros
+(set! lazyredraw true)
 
-;; enable undo (and disable the swap/backup)
-(set! undofile)
-(set! noswapfile)
-(set! nowritebackup)
+;; Disable swapfiles and enable undofiles
+(set! swapfile false
+      undofile true)
 
-;; smart searching
-(set! smartcase)
+;;; UI-related options
+(set! ruler false)
 
-;; tab = 2 spaces
-(set! tabstop 2)
-(set! expandtab)
-(set! shiftwidth 0)
+;; Numbering
+(set! number false)
 
-;; faster macros 
-(set! lazyredraw)
+;; True-color
+(set! termguicolors true)
 
-;; redundant with statusline
-(set! noshowmode)
+;; Cols and chars
+(set! signcolumn "auto:1-3"
+      foldcolumn "auto:3")
 
-;; add some padding while scrolling
-(set! scrolloff 3)
+(set! fillchars {:eob " "
+                 :horiz "━"
+                 :horizup "┻"
+                 :horizdown "┳"
+                 :vert "┃"
+                 :vertleft  "┫"
+                 :vertright "┣"
+                 :verthoriz "╋"
+                 :fold " "
+                 :diff "─"
+                 :msgsep "‾"
+                 :foldsep "│"
+                 :foldopen "▾"
+                 :foldclose "▸"})
+
+;; Do not show mode
+(set! showmode false)
+
+;; Set windows width
+(set! winwidth 40)
+
+;; Highlight current cursor line
+(set! cursorline true)
+
+;; Set a global statusline
+(set! laststatus 3)
+
+;;; Buffer options
+;; Never wrap
+(set! wrap false)
+
+;; Smart search
+(set! smartcase true)
+
+;; Case-insensitive search
+(set! ignorecase true)
+
+;; Indentation rules
+(set! copyindent true
+      smartindent true
+      preserveindent true)
+
+;; Indentation level
+(set! tabstop 4
+      shiftwidth 4
+      softtabstop 4)
+
+;; Expand tabs
+(set! expandtab true)
+
+;; Enable concealing
+(set! conceallevel 2)
+
+;; Automatic split locations
+(set! splitright true
+      splitbelow true)
+
+;; Universal Statusline
+(set! laststatus 3)
+
+;; Scroll off
+(set! scrolloff 8)
 
 ;; global statusline
 (set! laststatus 3)
 
-;; disable intro
-(set! shortmess+ :I)
-
-;; the default updatetime in vim is around 4 seconds. This messes with gitsigns and the like, lets reduce it
-(set! updatetime 500)
-
-;; remove the informative but slightly ugly eob tilde fringe
-(set! fillchars "eob: ")
-
-;; as many signs in the signcolumn as you like, width is auto-adjusted. 
-(set! signcolumn "auto:1-9")
-
-;; universal clipboard support
-(set! clipboard :unnamedplus)
+;; enable termguicolors
+(set! termguicolors)
 
 ;; gitsigns
 (set! diffopt [:filler :internal :indent-heuristic :algorithm:histogram])
