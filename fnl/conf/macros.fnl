@@ -57,7 +57,7 @@
      (setmetatable ret# meta#)
      ret#))
 
-(lambda set! [name value]
+(λ set! [name value]
   "Set a Neovim option using the Lua API"
   (assert-compile (sym? name) "expected symbol for name" name)
   (let [name (->str name)]
@@ -84,7 +84,7 @@
   (let [name (->str name)]
     `(tset vim.opt_local ,name ,value)))
 
-(lambda let! [name value]
+(λ let! [name value]
   "Set a Neovim variable using the Lua API"
   (assert-compile (or (sym? name) (str? name))
                   "expected symbol or string for name" name)

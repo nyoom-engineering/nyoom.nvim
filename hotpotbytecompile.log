@@ -1,0 +1,71 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.007  000.007: --- NVIM STARTING ---
+000.896  000.889: locale set
+009.613  008.717: inits 1
+009.637  000.024: window checked
+009.642  000.004: parsing arguments
+012.459  002.818: expanding arguments
+012.497  000.038: inits 2
+013.104  000.607: init highlight
+013.105  000.002: waiting for UI
+015.324  002.219: done waiting for UI
+015.336  000.012: init screen for UI
+015.366  000.030: init default mappings
+015.424  000.058: init default autocommands
+017.229  000.101  000.101: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/ftplugin.vim
+017.456  000.038  000.038: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/indent.vim
+042.502  000.032  000.032: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/plenary.nvim/plugin/plenary.vim
+047.336  000.015  000.015: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/neorg/ftdetect/norg.vim
+047.410  029.714  029.667: sourcing /Users/shauryasingh/.config/nvim/init.lua
+047.433  002.155: sourcing vimrc file(s)
+048.887  000.284  000.284: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/filetype.lua
+048.941  000.014  000.014: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/filetype.vim
+049.189  000.069  000.069: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/syntax/synload.vim
+049.250  000.242  000.173: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/syntax/syntax.vim
+050.176  000.025  000.025: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/plenary.nvim/plugin/plenary.vim
+050.725  000.012  000.012: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/gzip.vim
+050.765  000.010  000.010: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/health.vim
+050.827  000.033  000.033: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/man.vim
+051.630  000.154  000.154: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+051.769  000.913  000.759: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/matchit.vim
+051.959  000.161  000.161: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/matchparen.vim
+052.288  000.272  000.272: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/netrwPlugin.vim
+052.487  000.009  000.009: sourcing /Users/shauryasingh/.local/share/nvim/rplugin.vim
+052.492  000.156  000.147: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/rplugin.vim
+052.584  000.054  000.054: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/shada.vim
+052.645  000.021  000.021: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/spellfile.vim
+052.699  000.016  000.016: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/tarPlugin.vim
+052.749  000.013  000.013: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/tohtml.vim
+052.800  000.017  000.017: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/tutor.vim
+052.848  000.016  000.016: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/plugin/zipPlugin.vim
+053.505  003.813: loading rtp plugins
+054.266  000.065  000.065: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer/plugin/nvim-lsp-installer.vim
+055.190  000.561  000.561: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-treesitter/plugin/nvim-treesitter.lua
+055.470  000.146  000.146: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow/plugin/rainbow.vim
+056.055  000.221  000.221: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/telescope.nvim/plugin/telescope.lua
+056.207  000.022  000.022: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/twilight.nvim/plugin/twilight.vim
+056.406  000.010  000.010: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/which-key.nvim/plugin/which-key.vim
+056.735  002.205: loading packages
+061.352  002.963  002.963: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/cmp-buffer/after/plugin/cmp_buffer.lua
+061.679  000.184  000.184: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/cmp-conjure/after/plugin/cmp_conjure.lua
+062.259  000.062  000.062: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lua/after/plugin/cmp_nvim_lua.lua
+062.325  000.532  000.470: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp/after/plugin/cmp_nvim_lsp.lua
+062.488  000.054  000.054: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/cmp-path/after/plugin/cmp_path.lua
+062.784  000.191  000.191: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/cmp-treesitter/after/plugin/cmp_treesitter.lua
+062.786  002.127: loading after plugins
+062.794  000.008: inits 3
+063.787  000.993: reading ShaDa
+063.836  000.048: opening buffers
+063.871  000.035: BufEnter autocommands
+063.875  000.004: editing files in windows
+063.897  000.023: VimEnter autocommands
+063.899  000.001: UIEnter autocommands
+065.211  000.137  000.137: sourcing /opt/homebrew/Cellar/neovim/0.7.0/share/nvim/runtime/autoload/provider/clipboard.vim
+065.215  001.179: before starting main loop
+065.644  000.429: first screen update
+065.645  000.001: --- NVIM STARTED ---

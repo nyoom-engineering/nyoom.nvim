@@ -15,10 +15,10 @@
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
 ;; Bootstrap nessecary plugins
-(use-package! :nvim-lua/plenary.nvim)
 (use-package! :wbthomason/packer.nvim)
 (use-package! :lewis6991/impatient.nvim)
 (use-package! :udayvir-singh/tangerine.nvim)
+(use-package! :nvim-lua/plenary.nvim {:module :plenary})
 
 ;; language specific plugins 
 (use-package! :Olical/conjure {:branch :develop :ft lisp-ft})
@@ -32,7 +32,7 @@
 (use-package! :gpanders/nvim-parinfer {:ft lisp-ft})
 
 ;; File navigation
-(use-package! :kyazdani42/nvim-tree.lua {:cmd :NvimTreeToggle :config! :nvimtree})
+(use-package! :kyazdani42/nvim-tree.lua {:config! :nvimtree})
 (use-package! :nvim-lua/telescope.nvim {:config! :telescope})
 
 ;; tree-sitter
@@ -48,8 +48,7 @@
               {:module :lspconfig
                :config! :lsp
                :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})
-                          (pack :williamboman/nvim-lsp-installer)
-                          (pack :hrsh7th/cmp-nvim-lsp)]})
+                          (pack :williamboman/nvim-lsp-installer)]})
 
 (use-package! :folke/trouble.nvim
               {:cmd :Trouble
@@ -72,15 +71,15 @@
 
 (use-package! :hrsh7th/nvim-cmp
               {:config! :cmp
-               :after :cmp-under-comparator
-               :requires [(pack :lukas-reineke/cmp-under-comparator
-                                {:event :InsertEnter})
-                          (pack :hrsh7th/cmp-path {:after :nvim-cmp})
-                          (pack :PaterJason/cmp-conjure {:ft lisp-ft})
+               :event [:InsertEnter]
+               :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
                           (pack :ray-x/cmp-treesitter {:after :nvim-cmp})
+                          (pack :hrsh7th/cmp-nvim-lua {:after :nvim-cmp})
+                          (pack :PaterJason/cmp-conjure {:after :nvim-cmp})
+                          (pack :hrsh7th/cmp-nvim-lsp {:module :cmp_nvim_lsp})
                           (pack :zbirenbaum/copilot-cmp {:after :copilot.lua})
-                          (pack :hrsh7th/cmp-nvim-lua {:after :nvim-cmp})]})
+                          (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})]})
 
 ;; aesthetics
 (use-package! :RRethy/nvim-base16 {:config! :base16})

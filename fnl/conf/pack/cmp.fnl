@@ -28,7 +28,7 @@
 ;; and of course some settings
 (set! completeopt [:menu :menuone :noselect])
 
-(setup {:preselect (. (. (. (require :cmp.types) :cmp) :PreselectMode) :None)
+(setup {:preselect (. (. (. (lazy-require! :cmp.types) :cmp) :PreselectMode) :None)
         :experimental {:ghost_text true}
         :window {:documentation {:border :solid}
                  :completion {:border :solid}}
