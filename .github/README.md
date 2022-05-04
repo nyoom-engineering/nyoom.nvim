@@ -97,35 +97,60 @@ v0.3.0 - Released 5/03/2022
 
 (outdated)
 
-Lispy editing using [conjure](https://github.com/Olical/conjure) and [parinfer-rust](https://github.com/eraserhd/parinfer-rust)
+Fast loading and package management using Nyoom! macros and [Packer.nvim](https://github.com/wbthomason/packer.nvim)
 
-<img width="1368" alt="conjure" src="https://user-images.githubusercontent.com/71196912/153767677-ecb3b82a-d57d-4cf7-bd42-a67b5d56df4f.png">
+<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/166714568-8c2602b9-225b-417c-86bc-235dfbad11f5.png">
+
+Lispy editing using [conjure](https://github.com/Olical/conjure) and [nvim-parinfer](https://github.com/gpanders/nvim-parinfer)
+
+<img width="1388" alt="Screen Shot 2022-05-04 at 10 49 41 AM" src="https://user-images.githubusercontent.com/71196912/166711605-43887f56-eb05-46bc-9a27-95834bb06c32.png">
 
 https://user-images.githubusercontent.com/71196912/153767688-a5e0cfc9-6437-43d1-9205-ed8ca7a07ae5.mov
 
-Note-taking and Getting Things Done with [neorg](https://github.com/nvim-neorg/neorg) and [orgmode](https://github.com/nvim-orgmode/orgmode)
+Lispy configurations with [Tangerine.nvim](https://github.com/udayvir-singh/tangerine.nvim)
 
-<img width="1402" alt="neorg" src="https://user-images.githubusercontent.com/71196912/153767720-2a021786-a99d-43ec-81f1-7c6078bc684e.png">
+<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/166714874-827be0e4-12ae-40ec-b029-559cee13dbed.png">
 
-Syntax highlighting and Error checking with Neovim's builtin LSP, [lspconfig](https://github.com/neovim/nvim-lspconfig), [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer/), [trouble.nvim](https://github.com/folke/trouble.nvim) and [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+Lightweight statusline written in fennel
+
+<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/166715211-2abc94ba-6ead-4c06-9bfb-be15063ef069.png">
+
+Note-taking and Getting Things Done with [neorg](https://github.com/nvim-neorg/neorg)
+
+<img width="1450" alt="Screen Shot 2022-05-04 at 10 55 31 AM" src="https://user-images.githubusercontent.com/71196912/166711562-21c2f41d-f956-4baf-9055-59bccb021e43.png">
+
+Syntax highlighting and Error checking with Neovim's builtin LSP, [lspconfig](https://github.com/neovim/nvim-lspconfig), [trouble.nvim](https://github.com/folke/trouble.nvim) and [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
+
+![unknown-2](https://user-images.githubusercontent.com/71196912/166711742-2097f80e-0e46-4440-ac6c-edcdd0a19725.png)
 
 <img width="1402" alt="lsp" src="https://user-images.githubusercontent.com/71196912/153767871-f3416e7a-93f9-4842-bfbd-16a3ff7b1d8f.png">
 
 https://user-images.githubusercontent.com/71196912/153768142-b35ac2aa-eb3d-489d-918d-b11870758c8f.mov
 
-Quick Completion powered by [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and [copilot.vim](https://github.com/github/copilot.vim)
+Quick Completion and Wildmenu powered by [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and [copilot.lua](https://github.com/zbirenbaum/copilot.lua)
 
-<img width="271" alt="Screen Shot 2022-02-13 at 4 45 22 PM" src="https://user-images.githubusercontent.com/71196912/153777271-61726ee5-6677-450e-8864-d38cf2216c13.png">
+<img width="573" alt="Screen Shot 2022-05-04 at 11 03 19 AM" src="https://user-images.githubusercontent.com/71196912/166711916-4f25cacb-5219-42b5-9611-1a51f797ff76.png">
+<img width="1399" alt="Screen Shot 2022-05-04 at 11 03 05 AM" src="https://user-images.githubusercontent.com/71196912/166711917-0941e87b-f734-416a-a88c-3bfe7aecc159.png">
 
-Pretty notifications and focused editing using [TrueZen](https://github.com/pocco81/truezen.nvim), [nvim-notify](https://github.com/rcarriga/nvim-notify), and [nvim-hlslens](https://github.com/kevinhwang91/nvim-hlslens)
+Pretty notifications and focused editing using [TrueZen](https://github.com/pocco81/truezen.nvim) and [nvim-notify](https://github.com/rcarriga/nvim-notify)
 
-<img width="1402" alt="notifymap" src="https://user-images.githubusercontent.com/71196912/153767963-dcc51971-0a05-40e3-84f4-0870dc4fcbde.png">
+<img width="563" alt="Screen Shot 2022-05-04 at 11 04 52 AM" src="https://user-images.githubusercontent.com/71196912/166712140-1d730080-669b-49a5-8ac1-67e9ceb92610.png">
+<img width="1450" alt="Screen Shot 2022-05-04 at 11 04 38 AM" src="https://user-images.githubusercontent.com/71196912/166712142-10b3b286-32b5-4073-a817-700ab03a432a.png">
 
 Informative Keybinds, Native Fuzzy Finding, and fast file history using [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim), [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim), [telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim), [sqlite.lua](https://github.com/tami5/sqlite.lua) and [which-key.nvim](https://github.com/folke/which-key.nvim)
 
-<img width="1350" alt="which-key" src="https://user-images.githubusercontent.com/71196912/153768853-7e87a72a-0fff-4416-a63e-6252cd85b3a1.png">
+<img width="1402" alt="image" src="https://user-images.githubusercontent.com/71196912/166712865-f584fb81-4dea-440e-b5bd-b98c0e4fcd71.png">
 
 https://user-images.githubusercontent.com/71196912/153768858-7b3cd304-03ba-4958-b0d6-c743ebb4642b.mov
+
+Themeing with [nvim-base16](https://github.com/RRethy/nvim-base16) and [base16-carbon-dark](https://github.com/shaunsingh/base16-carbon-dark)
+
+<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/166713364-c54fbac6-8165-4d7f-8e7f-f6c492a19b91.png">
+
+Magit-like commits with [Neogit](https://github.com/TimUntersberger/neogit) 
+
+<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/166714003-f87b1ed0-93e3-4d4e-9767-0829d1611016.png">
+
 
 ## Why fennel?
 Fennel is a programming language that brings together the speed, simplicity, and reach of Lua with the flexibility of a lisp syntax and macro system. Macros are how lisps accomplish metaprogramming. You’ll see a lot of people treat lisp macros with a kind of mystical reverence. While several other languages have macro systems, the power of macros in lisps stem from allowance of lisps to you to write programs using the same notation you use for data structures. Remember: code is data, and we just need to manipulate data.
