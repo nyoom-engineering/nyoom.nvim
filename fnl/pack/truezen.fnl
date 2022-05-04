@@ -1,4 +1,4 @@
-(import-macros {: lazy-require!} :conf.macros)
+(import-macros {: lazy-require!} :macros.package-macros)
 (local {: setup} (lazy-require! :true-zen))
 
 (setup {:ui {:bottom {:cmdheight 1

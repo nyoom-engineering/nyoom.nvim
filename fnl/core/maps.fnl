@@ -1,7 +1,14 @@
-(import-macros {: let! : map!} :conf.macros)
+(require-macros :macros.keybind-macros)
 
-;; add leader keys
-(let! :g.mapleader " ")
+;; Document leader keys with which-key
+(doc-map! :n :<leader>f :silent :Files)
+(doc-map! :n :<leader>t :silent :Visuals)
+(doc-map! :n :<leader>b :silent :Buffers)
+(doc-map! :n :<leader>o :silent :NvimTree)
+
+;; Document top level keys with which-key
+(doc-map! :n "<leader>:" :silent :M-x)
+(doc-map! :n :<leader><space> :silent "Project Fuzzy Search")
 
 ;; who actually uses C-z or ex mode?
 (map! [n] :<C-z> :<Nop>)
@@ -24,22 +31,21 @@
 (map! [n] :<C-Right> "<cmd>vertical resize -2<cr>")
 
 ;; wrap/unwrap
-(map! [n] :<leader>w "<cmd>set wrap!<CR>")
+(map! [n] :<leader>tw "<cmd>set wrap!<CR>")
 
 ;; treesitter 
 (map! [n] :<Leader>th ":TSHighlightCapturesUnderCursor<CR>")
 (map! [n] :<Leader>tp ":TSPlayground<CR>")
 
 ;; telescope
-(map! [n] :<leader>b "<cmd>Telescope buffers<CR>")
-(map! [n] :<leader>f "<cmd>Telescope current_buffer_fuzzy_find<CR>")
-(map! [n] :<leader>r "<cmd>Telescope oldfiles<CR>")
+(map! [n] :<leader>bb "<cmd>Telescope buffers<CR>")
+(map! [n] :<leader>ff "<cmd>Telescope current_buffer_fuzzy_find<CR>")
+(map! [n] :<leader>fr "<cmd>Telescope oldfiles<CR>")
 (map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
 (map! [n] :<leader><space> "<cmd>Telescope find_files<CR>")
 
 ;; nvimtree
-(map! [n] :<leader>o "<cmd>NvimTreeToggle<CR>")
+(map! [n] :<leader>op :<cmd>NvimTreeToggle<CR>)
 
 ;; truezen
-(map! [n] :<leader>z :<cmd>TZAtaraxis<CR>)
-
+(map! [n] :<leader>tz :<cmd>TZAtaraxis<CR>)

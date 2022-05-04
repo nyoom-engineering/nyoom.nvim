@@ -1,2 +1,1 @@
-lua/conf/** linguist-generated
-lua/md5.lua linguist-vendored
+lua/* linguist-generated

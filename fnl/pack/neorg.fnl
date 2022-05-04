@@ -6,4 +6,3 @@
                :core.norg.dirman {:config {:workspaces {:main "~/org/neorg"}
                                            :autodetect true
                                            :autochdir true}}}})
-

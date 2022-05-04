@@ -1,4 +1,4 @@
-(import-macros {: lazy-require!} :conf.macros)
+(import-macros {: lazy-require!} :macros.package-macros)
 (local {: setup} (lazy-require! :telescope))
 
 (setup {:defaults {:prompt_prefix "   "
@@ -14,4 +14,3 @@
                                    :preview_cutoff 120}
                    :set_env {:COLORTERM :truecolor}
                    :dynamic_preview_title true}})
-
