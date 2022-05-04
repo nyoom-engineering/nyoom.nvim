@@ -1,4 +1,4 @@
--- :fennel:1651634684
+-- :fennel:1651676539
 local _local_1_ = table
 local insert = _local_1_["insert"]
 local function _4_(...)
@@ -108,5 +108,5 @@ local function _19_(fallback)
     return fallback()
   end
 end
-setup({preselect = types.cmp.PreselectMode.None, experimental = {ghost_text = true}, window = {documentation = {border = "solid"}, completion = {border = "solid"}}, snippet = {expand = _16_}, mapping = {["<C-b>"] = mapping.scroll_docs(-4), ["<C-f>"] = mapping.scroll_docs(4), ["<C-e>"] = mapping.abort(), ["<Tab>"] = mapping(_17_, {"i", "s", "c"}), ["<S-Tab>"] = mapping(_19_, {"i", "s", "c"}), ["<C-Space>"] = mapping.confirm({select = true})}, sources = {{name = "nvim_lsp"}, {name = "luasnip"}, {name = "path"}, {name = "buffer"}, {name = "conjure"}, {name = "copilot"}}, sorting = {comparators = {compare.offset, compare.exact, compare.score, under_compare.under, compare.kind, compare.sort_text, compare.length, compare.order}}, formatting = {fields = {kind, abbr, menu}, format = cmp_format({with_text = false})}})
+setup({preselect = types.cmp.PreselectMode.None, experimental = {ghost_text = true}, window = {documentation = {border = "solid"}, completion = {border = "solid"}}, snippet = {expand = _16_}, mapping = {["<C-b>"] = mapping.scroll_docs(-4), ["<C-f>"] = mapping.scroll_docs(4), ["<C-e>"] = mapping.abort(), ["<C-n>"] = mapping(mapping.select_next_item({behavior = insert_behavior}), {"i", "s"}), ["<C-p>"] = mapping(mapping.select_prev_item({behavior = insert_behavior}), {"i", "s"}), ["<Tab>"] = mapping(_17_, {"i", "s", "c"}), ["<S-Tab>"] = mapping(_19_, {"i", "s", "c"}), ["<C-Space>"] = mapping.confirm({select = true})}, sources = {{name = "nvim_lsp"}, {name = "luasnip"}, {name = "path"}, {name = "buffer"}, {name = "conjure"}, {name = "copilot"}}, sorting = {comparators = {compare.offset, compare.exact, compare.score, under_compare.under, compare.kind, compare.sort_text, compare.length, compare.order}}, formatting = {fields = {kind, abbr, menu}, format = cmp_format({with_text = false})}})
 return setup.cmdline(":", {view = {separator = "|"}, sources = {{name = "path"}, {name = "cmdline"}}})

@@ -25,6 +25,7 @@
 (fn replace-termcodes [code]
   (vim.api.nvim_replace_termcodes code true true true))
 
+
 ;;; Setup
 (setup {:preselect types.cmp.PreselectMode.None
         :experimental {:ghost_text true}
@@ -34,6 +35,8 @@
         :mapping {:<C-b> (mapping.scroll_docs -4)
                   :<C-f> (mapping.scroll_docs 4)
                   :<C-e> (mapping.abort)
+                  :<C-n> (mapping (mapping.select_next_item {:behavior insert-behavior}) [:i :s])
+                  :<C-p> (mapping (mapping.select_prev_item {:behavior insert-behavior}) [:i :s])
                   :<Tab> (mapping (fn [fallback]
                                     (if (visible)
                                         (mapping.select_next_item {:behavior insert-behavior})

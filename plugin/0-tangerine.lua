@@ -33,4 +33,4 @@ bootstrap("udayvir-singh/tangerine.nvim")
 require("impatient").enable_profile()
 
 -- Configure tangerine
-require("tangerine").setup({compiler = {verbose = false, hooks = {}}})
+require("tangerine").setup({compiler = {hooks = {}}})
