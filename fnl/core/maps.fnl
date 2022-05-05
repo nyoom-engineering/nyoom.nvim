@@ -14,6 +14,9 @@
 (map! [n] :<C-z> :<Nop>)
 (map! [n] :Q :<Nop>)
 
+;;jk/jj for escape. Some people like this, others don't
+(map! [i] :jk :<esc>)
+
 ;; easier command line mode
 (map! [n] ";" ":")
 (map! [v] ";" ":")

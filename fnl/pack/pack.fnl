@@ -5,8 +5,6 @@
 (init {:autoremove true
        :git {:clone_timeout 300}
        :profile {:enable true :threshold 0}
-       :compile_path (.. (vim.fn.stdpath :config)
-                         :/lua/packer_compiled.lua)
        :display {:header_lines 2
                  :title " packer.nvim"
                  :open_fn (λ open_fn []
@@ -20,12 +18,11 @@
 ;; Packer can manage itself
 (use-package! :wbthomason/packer.nvim)
 
-;; Essential plugins
-(use-package! :lewis6991/impatient.nvim)
+;; Mapping and Documentation
 (use-package! :folke/which-key.nvim {:init :which-key})
 
 ;; lispy configs
-(use-package! :udayvir-singh/tangerine.nvim)
+(use-package! :rktjmp/hotpot.nvim {:branch :master})
 (use-package! :gpanders/nvim-parinfer {:ft lisp-ft})
 (use-package! :Olical/conjure {:branch :develop :ft lisp-ft})
 

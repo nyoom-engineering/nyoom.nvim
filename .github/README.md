@@ -82,20 +82,20 @@ However, it also disagrees with some of those ideals
 
 ## Changelog
 
-v0.3.0 - Released 5/03/2022
-- Removed options for fennel compilers and switched solely to tangerine. Fennel is now manually instead of automatically compiled (using `:FnlCompile!`). The lua source is also shipped with the configuration, instead of having the user compile it themselves.
-- More fennel! Init is rewritten in fennel, and lua dependencies (md5 lib) were removed.
+v0.3.1 - Released 5/03/2022
+- Removed options for fennel compilers and switched solely to ~~Tangerine~~ Hotpot. Fennel is still seamlessly automatically. 
+- More fennel! ~~Init is rewritten in fennel~~ (update: This caused the config to load after runtime files, which meant that `filetype.lua` stopped working. I've sinced reverted back to `init.lua` for now), and lua dependencies (md5 lib) were removed.
 - Refactored the entire config. New directory structure, parted out macros, and cleaned up code. 
 - Statusline has been added! Thin and light global statusline to align with nyoom's philosphies.
 - Lsp/Cmp configs have been re-done. Lsp is now much quicker to load and is a much cleaner implementation. Cmp is much quicker, integrates properly with copilot, and everything was reworked from the ground up.
 - Improved highlighting macros: Highlights are now applied via `nvim_set_hl`.
-- Improved startuptime by 10-20ms: decreased lazy loading and optimized code. 
+- Improved startuptime by 20-30ms: decreased lazy loading and optimized code. 
 - Improved keybinding support: macros for buffer-local mappings and which-key documentation have been added. Nyoom default bindings are now documented within which-key
 - Improved treesitter integration. Textobjects and support for conjure evaluation using treesitter have been added. 
 
-## Showcase
+Note: The reasoning for the change in compiler support is that its far more seamless for the user, it implements a lua bytecode cache (removing the need for impatient.nvim), and its still faster than tangerine or aniseed. Users are welcome to paste in some code from an older version of Nyoom and adjust the compiler to their liking. In fact, I encourage you to try it out if you prefer tangerine or aniseed, its a great intro into basic fennel syntax!
 
-(outdated)
+## Showcase
 
 Fast loading and package management using Nyoom! macros and [Packer.nvim](https://github.com/wbthomason/packer.nvim)
 
@@ -106,10 +106,6 @@ Lispy editing using [conjure](https://github.com/Olical/conjure) and [nvim-parin
 <img width="1388" alt="Screen Shot 2022-05-04 at 10 49 41 AM" src="https://user-images.githubusercontent.com/71196912/166711605-43887f56-eb05-46bc-9a27-95834bb06c32.png">
 
 https://user-images.githubusercontent.com/71196912/153767688-a5e0cfc9-6437-43d1-9205-ed8ca7a07ae5.mov
-
-Lispy configurations with [Tangerine.nvim](https://github.com/udayvir-singh/tangerine.nvim)
-
-<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/166714874-827be0e4-12ae-40ec-b029-559cee13dbed.png">
 
 Lightweight statusline written in fennel
 

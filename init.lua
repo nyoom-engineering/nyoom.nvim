@@ -1,3 +1,7 @@
+-- use opt-in filetype.lua instead of vimscript default
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
+
 -- A function that applies passes the output of string.format to the print
 -- function
 ---@param string string #template string
@@ -16,8 +20,8 @@ local function bootstrap(plugin)
 		vim.fn.system({
 			"git",
 			"clone",
-                        "--depth",
-                        "1",
+            "--depth",
+            "1",
 			"https://github.com/" .. plugin,
 			plugin_path,
 		})
@@ -26,11 +30,10 @@ end
 
 -- Bootstrap tangerine & plugins
 bootstrap("wbthomason/packer.nvim")
-bootstrap("lewis6991/impatient.nvim")
-bootstrap("udayvir-singh/tangerine.nvim")
+bootstrap("rktjmp/hotpot.nvim")
 
--- Cache lua bytecode
-require("impatient").enable_profile()
+-- setup hotspot
+require("hotpot").setup()
 
--- Configure tangerine
-require("tangerine").setup({compiler = {hooks = {}}})
+-- require core config
+require("core")
