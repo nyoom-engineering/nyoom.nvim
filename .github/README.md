@@ -35,6 +35,7 @@ The only dependencies are `neovim-nightly` and `git`.
 
 Install the following dependencies: 
 - neovim-nightly (or neovim stable)
+- rust/cargo (to build parinfer-rust)
 - ripgrep (optional, for telescope)
 - nodejs (optional, for copilot)
 - fennel + fnlfmt (not required, but recommended)
@@ -43,7 +44,6 @@ Install the following dependencies:
 git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git ~/.config/nvim 
 nvim
 ```
-
 Optionally run `:FnlCompile!` (the fennel is precompiled, but you can do it for fun!), then run `:PackerSync`
 
 ### Using nix: 
@@ -53,16 +53,14 @@ Requires nix version > 21.11, with experimental features `flakes` and `nix-comma
 git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git && cd nyoom.nvim
 nix develop
 ```
-
 Then run `nvim` as usual, and `:PackerSync` to update/install plugins
-
 
 ## Design 
 Nyoom.nvim is designed against the mantras of [doom-emacs](https://github.com/hlissner/doom-emacs): (shamelessly copy pasted)
 - Gotta go fast. Startup and run-time performance are priorities.
 - Close to metal. There's less between you and vanilla neovim by design. That's less to grok and less to work around when you tinker.
 - Opinionated, but not stubborn. Nyoom (and Doom) are about reasonable defaults and curated opinions, but use as little or as much of it as you like.
-- Your system, your rules. You know better. At least, Nyoom hopes so! There are no external dependencies, and never will be. 
+- Your system, your rules. You know better. At least, Nyoom hopes so! There are no external dependencies (apart from rust), and never will be. 
 
 It also aligns with many of Doom's features:
 - Minimalistic good looks inspired by modern editors.
@@ -82,6 +80,14 @@ However, it also disagrees with some of those ideals
 
 ## Changelog
 
+v0.3.2 - Released 5/08/2022
+- removed nvim-parinfer and wrote fennel version based on ffi + parinfer-rust. (sidenote: I love how easy neovim makes this, back when I started vim learning enough vimscript to do this was a pipe dream. Long live lua! (and fennel))
+- WIP Treesitter + matchparen speed improvements
+- Properly configured nvimtree
+- Nvim-bufferline integrations 
+- Minor defs/fillchars/lsp/cmp updates
+- Macro updates and optimizations
+
 v0.3.1 - Released 5/03/2022
 - Removed options for fennel compilers and switched solely to ~~Tangerine~~ Hotpot. Fennel is still seamlessly automatically. 
 - More fennel! ~~Init is rewritten in fennel~~ (update: This caused the config to load after runtime files, which meant that `filetype.lua` stopped working. I've sinced reverted back to `init.lua` for now), and lua dependencies (md5 lib) were removed.
@@ -93,6 +99,9 @@ v0.3.1 - Released 5/03/2022
 - Improved keybinding support: macros for buffer-local mappings and which-key documentation have been added. Nyoom default bindings are now documented within which-key
 - Improved treesitter integration. Textobjects and support for conjure evaluation using treesitter have been added. 
 
+v0.3.0 - Pre-5/02/2022
+- I was too lazy to do changelogs
+
 Note: The reasoning for the change in compiler support is that its far more seamless for the user, it implements a lua bytecode cache (removing the need for impatient.nvim), and its still faster than tangerine or aniseed. Users are welcome to paste in some code from an older version of Nyoom and adjust the compiler to their liking. In fact, I encourage you to try it out if you prefer tangerine or aniseed, its a great intro into basic fennel syntax!
 
 ## Showcase
@@ -101,7 +110,7 @@ Fast loading and package management using Nyoom! macros and [Packer.nvim](https:
 
 <img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/166714568-8c2602b9-225b-417c-86bc-235dfbad11f5.png">
 
-Lispy editing using [conjure](https://github.com/Olical/conjure) and [nvim-parinfer](https://github.com/gpanders/nvim-parinfer)
+Lispy editing using [conjure](https://github.com/Olical/conjure) parinfer-rust
 
 <img width="1388" alt="Screen Shot 2022-05-04 at 10 49 41 AM" src="https://user-images.githubusercontent.com/71196912/166711605-43887f56-eb05-46bc-9a27-95834bb06c32.png">
 

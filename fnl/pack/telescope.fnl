@@ -1,5 +1,5 @@
 (import-macros {: lazy-require!} :macros.package-macros)
-(local {: setup} (lazy-require! :telescope))
+(local {: setup : load_extension} (lazy-require! :telescope))
 
 (setup {:defaults {:prompt_prefix "   "
                    :selection_caret "  "
@@ -13,4 +13,14 @@
                                    :height 0.8
                                    :preview_cutoff 120}
                    :set_env {:COLORTERM :truecolor}
-                   :dynamic_preview_title true}})
+                   :dynamic_preview_title true}
+        :extensions {:project {:base_dirs ["~/.config/doom-nvim"
+                                           "~/.config/nvim.fnl"
+                                           "~/Development/Clang"
+                                           "~/Development/Rust"
+                                           "~/Development/Nvim"
+                                           "~/Development/Misc"]}}})
+
+;; Load extensions
+(load_extension :fzf)
+(load_extension :project)

@@ -1,10 +1,13 @@
 (import-macros {: set!} :macros.option-macros)
 (import-macros {: lazy-require!} :macros.package-macros)
+
+(local ts (lazy-require! :nvim-treesitter))
+(local tsq (lazy-require! :nvim-treesitter.query))
+(local tsp (lazy-require! :nvim-treesitter.parsers))
 (local {: setup} (lazy-require! :nvim-treesitter.configs))
-(local parsers (lazy-require! :nvim-treesitter.parsers))
 
 ;;; Extra parsers
-(local parser-config (parsers.get_parser_configs))
+(local parser-config (tsp.get_parser_configs))
 
 ;; neorg treesitter parsers 
 (set parser-config.norg {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg"
@@ -21,11 +24,20 @@
                      :files [:src/parser.c]
                      :branch :main}})
 
+;; WIP highlight/parse only buffer scope
+(ts.define_modules
+  {:nyoom-ts
+   {:highlight_scope {:module_path :utils.ts-highlight-scope
+                      :enable false
+                      :disable []
+                      :is_supported tsq.has_locals}}})
+
 ;; the usual
 (setup {:ensure_installed [:lua :vim :fennel :markdown :nix]
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
         :rainbow {:enable true :extended_mode true}
+        :nyoom-ts {:highlight_scope {:enable true}}
         :incremental_selection {:enable true
                                 :keymaps {:init_selection :gnn
                                           :node_incremental :grn
@@ -47,3 +59,5 @@
                                                    "[[" "@class.outer"}
                              :goto_previous_end {"[M" "@function.outer"
                                                  "[]" "@class.outer"}}}})  
+
+

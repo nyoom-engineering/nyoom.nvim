@@ -45,13 +45,14 @@
                   "expected nil or table for options" ?options)
   (insert pkgs (pack identifier ?options)))
 
-(fn unpack! []
-  "Initializes packer with the previously declared plugins"
-  (let [packages (icollect [_ v (ipairs pkgs)]
-                   `((. (require :packer) :use) ,v))]
-    `((. (require :packer) :startup) #(do
-                                        ,(unpack (icollect [_ v (ipairs packages)]
-                                                   v))))))
+(λ unpack! []
+  "Initializes the plugin manager with the previously declared plugins and
+  their options."
+  (let [packs (icollect [_ v (ipairs pkgs)]
+                `(use ,v))]
+    `((. (require :packer) :startup)
+      (fn [,(sym :use)]
+          ,(unpack (icollect [_ v (ipairs packs)] v))))))
 
 {: pack
  : unpack!

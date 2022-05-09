@@ -1,9 +1,15 @@
 (require-macros :macros.keybind-macros)
+(import-macros {: let!} :macros.option-macros)
+
+;; set leader key
+(let! :g.mapleader " ")
+(let! :g.localleader ",")
 
 ;; Document leader keys with which-key
 (doc-map! :n :<leader>f :silent :Files)
 (doc-map! :n :<leader>t :silent :Visuals)
 (doc-map! :n :<leader>b :silent :Buffers)
+(doc-map! :n :<leader>p :silent :Project)
 (doc-map! :n :<leader>o :silent :NvimTree)
 
 ;; Document top level keys with which-key
@@ -43,6 +49,8 @@
 ;; telescope
 (map! [n] :<leader>bb "<cmd>Telescope buffers<CR>")
 (map! [n] :<leader>ff "<cmd>Telescope current_buffer_fuzzy_find<CR>")
+(map! [n] :<leader>pp "<cmd>lua require('telescope').extensions.project.project({ display_type = 'full' })<CR>")
+(map! [n] :<leader>fr "<cmd>Telescope oldfiles<CR>")
 (map! [n] :<leader>fr "<cmd>Telescope oldfiles<CR>")
 (map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
 (map! [n] :<leader><space> "<cmd>Telescope find_files<CR>")

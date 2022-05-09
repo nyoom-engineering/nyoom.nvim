@@ -11,10 +11,36 @@
         : event} (lazy-require! :cmp))
 
 (local types (lazy-require! :cmp.types))
-(local {: cmp_format} (lazy-require! :lspkind))
 (local under-compare (lazy-require! :cmp-under-comparator))
 (local {: lsp_expand : expand_or_jump : expand_or_jumpable : jump : jumpable}
        (lazy-require! :luasnip))
+
+(local icons {:Text ""
+              :Method ""
+              :Function ""
+              :Constructor "⌘"
+              :Field "ﰠ"
+              :Variable ""
+              :Class "ﴯ"
+              :Interface ""
+              :Module ""
+              :Property "ﰠ"
+              :Unit "塞"
+              :Value ""
+              :Enum ""
+              :Keyword "廓"
+              :Snippet ""
+              :Color ""
+              :File ""
+              :Reference ""
+              :Folder ""
+              :EnumMember ""
+              :Constant ""
+              :Struct "פּ"
+              :Event ""
+              :Operator ""
+              :TypeParameter ""})
+
 
 ;;; Supertab functionality utility functions
 (fn has-words-before []
@@ -69,27 +95,13 @@
                                 compare.sort_text
                                 compare.length
                                 compare.order]}
-        :formatting {:fields [kind abbr menu]
-                     :format (cmp_format {:with_text false})}})
+        :formatting {:fields {1 :kind 2 :abbr 3 :menu}
+                     :format (fn [_ vim-item]
+                               (set vim-item.menu vim-item.kind)
+                               (set vim-item.kind (. icons vim-item.kind))
+                               vim-item)}})
 
 ;; cmdline setup
 (setup.cmdline ":"
                {:view {:separator "|"}
                 :sources [{:name :path} {:name :cmdline}]})
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-                

@@ -64,7 +64,19 @@
 ;; (when (= (vim.fn.executable :tsserver) 1)
 ;;   (lsp.tsserver.setup defaults))
 
-;; and for trickier servers you can do it yourself
+;; clojure
+(when (= (vim.fn.executable :clojure-lsp) 1)
+  (lsp.clojure_lsp.setup defaults))
+
+;; nix
+(when (= (vim.fn.executable :rnix-lsp) 1)
+  (lsp.rnix.setup defaults))
+
+;; rust
+(when (= (vim.fn.executable :rust-analyzer) 1)
+  (lsp.rust_analyzer.setup defaults))
+
+;; for trickier servers you can change up the defaults
 (lsp.sumneko_lua.setup {:on_attach on-attach
                         : capabilities
                         :settings {:Lua {:diagnostics {:globals {1 :vim}}
