@@ -187,6 +187,13 @@ For most people, chances are you haven't even heard of fennel before. So where s
 
 If you have trouble configuring neovim to your needs, check out [Antifennel](https://fennel-lang.org/see) to see how lua code compiles back to fennel! However, the generated code isn't always the cleanest, so its recommend you use it as a last resort. If you need any help, feel free to reach out to me via email or discord, and be sure to join the [Conjure Discord](https://conjure.fun/discord) too! 
 
+### When Fiddling with Fennel Code
+
+While fiddling with the config, you can check if the things are not broken yet:
+1. evaluate form you just written (`<localleader>,er`)
+2. evaluate buffer (`<localleader>,eb`)
+3. start another neovim with a vim command: `:!neovim --headless +PlugSync`
+
 ## Notes
 
 If you have an issue with a plugin in Nyoom.nvim, first you should report it to Nyoom.nvim to see if it's an issue with it. Please don't bother package maintainers with issues that are caused by my configs, and vice versa. I'm new to fennel, so don't hesitate to let me know my lisp-fu sucks! 
