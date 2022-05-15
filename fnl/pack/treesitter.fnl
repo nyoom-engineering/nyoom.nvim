@@ -1,5 +1,4 @@
-(import-macros {: set!} :macros.option-macros)
-(import-macros {: lazy-require!} :macros.package-macros)
+(local {: lazy-require!} (require :utils.lazy-require))
 
 (local ts (lazy-require! :nvim-treesitter))
 (local tsq (lazy-require! :nvim-treesitter.query))
@@ -31,12 +30,19 @@
                       :enable false
                       :disable []
                       :is_supported tsq.has_locals}}})
-
 ;; the usual
 (setup {:ensure_installed [:lua :vim :fennel :markdown :nix]
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
-        :rainbow {:enable true :extended_mode true}
+        :rainbow {:enable true 
+                  :extended_mode true
+                  :colors [:#878d96
+                           :#a8a8a8
+                           :#8d8d8d
+                           :#a2a9b0
+                           :#8f8b8b
+                           :#ada8a8
+                           :#878d96]}
         :nyoom-ts {:highlight_scope {:enable true}}
         :incremental_selection {:enable true
                                 :keymaps {:init_selection :gnn
@@ -61,3 +67,4 @@
                                                  "[]" "@class.outer"}}}})  
 
 
+      	

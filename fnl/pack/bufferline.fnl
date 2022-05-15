@@ -1,5 +1,6 @@
-(import-macros {: lazy-require!} :macros.package-macros)
 (local {: format} string)
+(local {: lazy-require!} (require :utils.lazy-require))
+
 (local {: setup} (lazy-require! :bufferline))
 
 ;;; Setup bufferline

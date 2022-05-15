@@ -1,4 +1,4 @@
-(import-macros {: lazy-require!} :macros.package-macros)
+(local {: lazy-require!} (require :utils.lazy-require))
 
 (local {: insert} table)
 (local {: setup
@@ -12,9 +12,36 @@
 
 (local types (lazy-require! :cmp.types))
 (local under-compare (lazy-require! :cmp-under-comparator))
-(local {: lsp_expand : expand_or_jump : expand_or_jumpable : jump : jumpable}
-       (lazy-require! :luasnip))
+(local {: lsp_expand : expand_or_jump : expand_or_jumpable : jump : jumpable} (lazy-require! :luasnip))
 
+;; Codicons: use if you have installed
+;; (local icons {:Text "  "
+;;               :Method "  "
+;;               :Function "  "
+;;               :Constructor "  "
+;;               :Field "  "
+;;               :Variable "  "
+;;               :Class "  "
+;;               :Interface "  "
+;;               :Module "  "
+;;               :Property "  "
+;;               :Unit "  "
+;;               :Value "  "
+;;               :Enum "  "
+;;               :Keyword "  "
+;;               :Snippet "  "
+;;               :Color "  "
+;;               :File "  "
+;;               :Reference "  "
+;;               :Folder "  "
+;;               :EnumMember "  "
+;;               :Constant "  "
+;;               :Struct "  "
+;;               :Event "  "
+;;               :Operator "  "
+;;               :TypeParameter "  "})                          	
+
+;; default icons (lspkind)
 (local icons {:Text ""
               :Method ""
               :Function ""
@@ -40,7 +67,6 @@
               :Event ""
               :Operator ""
               :TypeParameter ""})
-
 
 ;;; Supertab functionality utility functions
 (fn has-words-before []

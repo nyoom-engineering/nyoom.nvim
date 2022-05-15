@@ -6,7 +6,7 @@
   "Check if given parameter is a table"
   (= :table (type x)))
 
-(λ highlight! [name attributes colors]
+(λ custom-set-face! [name attributes colors]
   "Defines a highlight group using the vim API.
   e.g. (highlight! Error [:bold] {:fg :hex})"
   (assert-compile (sym? name) "expected symbol for name" name)
@@ -28,5 +28,5 @@
         old (->str old)]
     `(vim.api.nvim_set_hl 0 ,new {:link ,old})))
 
-{: highlight!
+{: custom-set-face!
  : link!}

@@ -20,21 +20,18 @@
 ;; Packer can manage itself
 (use-package! :wbthomason/packer.nvim)
 
-;; testing
-(use-package! :tweekmonster/startuptime.vim {:cmd :St})
-
 ;; Mapping and Documentation
-(use-package! :folke/which-key.nvim {:init :which-key})
+(use-package! :folke/which-key.nvim {:config (call-setup :which-key)})
 
 ;; lispy configs
-(use-package! :rktjmp/hotpot.nvim {:branch :master})
+(use-package! :rktjmp/hotpot.nvim)
 (use-package! :Olical/conjure {:branch :develop :ft lisp-ft})
 (use-package! :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
 
 ;; File navigation
-(use-package! :kyazdani42/nvim-tree.lua {:cmd :NvimTreeToggle :config! :nvimtree})
+(use-package! :kyazdani42/nvim-tree.lua {:cmd :NvimTreeToggle :config (load-file :nvimtree)})
 (use-package! :nvim-lua/telescope.nvim
-              {:config! :telescope
+              {:config (load-file :telescope)
                :cmd :Telescope
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})
                           (pack :nvim-telescope/telescope-project.nvim
@@ -45,29 +42,26 @@
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
-               :config! :treesitter
-               :event [:BufRead :BufNewFile]
-               :requires [(pack :p00f/nvim-ts-rainbow {:event [:BufRead :BufNewFile]})
-                          (pack :nvim-treesitter/playground {:cmd :TSPlayground})
-                          (pack :nvim-treesitter/nvim-treesitter-textobjects {:event [:BufRead :BufNewFile]})]})
+               :config (load-file :treesitter)
+               :requires [(pack :p00f/nvim-ts-rainbow)
+                          (pack :nvim-treesitter/nvim-treesitter-textobjects)
+                          (pack :nvim-treesitter/playground {:cmd :TSPlayground})]})
 
 ;; lsp
-(use-package! :folke/trouble.nvim {:cmd :Trouble :init :trouble})
-(use-package! :neovim/nvim-lspconfig {:config! :lsp
-                                      :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
+(use-package! :neovim/nvim-lspconfig {:config (load-file :lsp)}) 
+(use-package! :folke/trouble.nvim {:cmd :Trouble :config (call-setup :trouble)})
+(use-package! :ray-x/lsp_signature.nvim {:module :lsp_signature})
+(use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :config (call-setup :fidget)})
 
 ;; git
-(use-package! :TimUntersberger/neogit {:init :neogit :cmd :Neogit})
+(use-package! :TimUntersberger/neogit {:config (call-setup :neogit) :cmd :Neogit})
 
 ;; completion/copilot
 (use-package! :zbirenbaum/copilot.lua
-              {:event :InsertEnter
-               :config (λ []
-                         (vim.schedule (fn []
-                                         ((. (require :copilot) :setup)))))})
+              {:event :InsertEnter})
 
 (use-package! :hrsh7th/nvim-cmp
-              {:config! :cmp
+              {:config (load-file :cmp)
                :wants [:LuaSnip]
                :event [:InsertEnter :CmdlineEnter]
                :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
@@ -80,21 +74,30 @@
                           (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
-                                                   :config! :luasnip
+                                                   :config (load-file :luasnip)
                                                    :requires [(pack :rafamadriz/friendly-snippets
                                                                     {:opt false})]})]})
 
 ;; aesthetics
-(use-package! :RRethy/nvim-base16 {:config! :base16})
-(use-package! :rcarriga/nvim-notify {:config! :notify})
-(use-package! :monkoose/matchparen.nvim {:config! :matchparen})
+(use-package! :rcarriga/nvim-notify {:config (load-file :notify)})
+(use-package! :monkoose/matchparen.nvim {:config (load-file :matchparen)})
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
-(use-package! :akinsho/bufferline.nvim {:event :BufEnter :config! :bufferline})
-(use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config! :truezen})
-(use-package! :norcalli/nvim-colorizer.lua {:config! :colorizer :event [:BufRead :BufNewFile]})
+(use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config (load-file :truezen)})
+(use-package! :akinsho/bufferline.nvim {:event :BufEnter :config (load-file :bufferline)})
+(use-package! :norcalli/nvim-colorizer.lua {:config (load-file :colorizer) :event [:BufRead :BufNewFile]})
 
 ;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. 
-(use-package! :nvim-neorg/neorg {:config! :neorg :ft :norg :after :nvim-treesitter})
+(use-package! :nvim-neorg/neorg {:config (load-file :neorg) :ft :norg :after :nvim-treesitter})
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)
+
+
+
+
+
+
+
+
+
+

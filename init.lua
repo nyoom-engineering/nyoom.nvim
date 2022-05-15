@@ -33,7 +33,7 @@ bootstrap("wbthomason/packer.nvim")
 bootstrap("rktjmp/hotpot.nvim")
 
 -- setup hotspot
-require("hotpot").setup()
+require("hotpot").setup() 
 
 -- require core config
 require("core")

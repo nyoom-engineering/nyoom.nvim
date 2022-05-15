@@ -79,6 +79,13 @@ However, it also disagrees with some of those ideals
 - [Oliver Caldwell](https://github.com/Olical/) For his excellent work on Aniseed, Conjure, and making fennel feel like a first class language in neovim
 
 ## Changelog
+v0.3.3 - Released 5/10/2022
+- Colorscheme: Rewrite in fennel + macros using nvim api
+- Macros: Rewrite of options macros. Replace keymap macros with which-key
+- Bindings: Conjure/hotpot/fennel compilation and evalulation. Use Which-Key
+- Treesitter/Loading: Fixes for ts-rainbow, telescope.nvim
+- Lsp: Add lsp-signature, improve loading and fix fidget
+- Packer: Cleaned up implementation
 
 v0.3.2 - Released 5/08/2022
 - removed nvim-parinfer and wrote fennel version based on ffi + parinfer-rust. (sidenote: I love how easy neovim makes this, back when I started vim learning enough vimscript to do this was a pipe dream. Long live lua! (and fennel))
@@ -98,9 +105,6 @@ v0.3.1 - Released 5/03/2022
 - Improved startuptime by 20-30ms: decreased lazy loading and optimized code. 
 - Improved keybinding support: macros for buffer-local mappings and which-key documentation have been added. Nyoom default bindings are now documented within which-key
 - Improved treesitter integration. Textobjects and support for conjure evaluation using treesitter have been added. 
-
-v0.3.0 - Pre-5/02/2022
-- I was too lazy to do changelogs
 
 Note: The reasoning for the change in compiler support is that its far more seamless for the user, it implements a lua bytecode cache (removing the need for impatient.nvim), and its still faster than tangerine or aniseed. Users are welcome to paste in some code from an older version of Nyoom and adjust the compiler to their liking. In fact, I encourage you to try it out if you prefer tangerine or aniseed, its a great intro into basic fennel syntax!
 

@@ -1,3 +1,2 @@
-(import-macros {: lazy-require!} :macros.package-macros)
-(local {: setup} (lazy-require! :parinfer))
+(local {: setup} (require :parinfer))
 (setup {:trail_highlight false})

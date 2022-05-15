@@ -1,9 +1,11 @@
-;; Sane defaults
-(require :core.defs)
-(require :core.maps)
+;; Speed up Neovim
+(require :core.optimise-builtins)
 
-;; Statusline
-(require :utils.statusline)
+;; Set vim options
+(require :core.options)
+
+;; Mappings
+(require :core.keymaps)
 
 ;; load packer
 (require :pack.pack)
@@ -12,6 +14,12 @@
 (when (= (vim.fn.filereadable (.. (vim.fn.stdpath :config)
                                   :/lua/packer_compiled.lua)) 1)
   (require :packer_compiled))
+
+;; Colorscheme
+(require :core.highlights)
+
+;; Statusline
+(require :utils.statusline)
 
 ;; require custom parinfer plugin afterim :VimEnter, hence why parinfer-rust is added in /opt (we just use it to build the dylib)
 (fn require-parinfer []

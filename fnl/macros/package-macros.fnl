@@ -1,7 +1,7 @@
 (local {: format} string)
 (local {: insert} table)
 
-(global pkgs [])
+(local pkgs [])
 
 (fn str? [x]
   "Check if given parameter is a string"
@@ -15,28 +15,13 @@
   "Check if given parameter is nil"
   (= :nil x))
 
-(fn lazy-require! [module]
-  "Load a module by when it's needed"
-  `(let [meta# {:__index #(. (require ,module) $2)}
-         ret# {}]
-     (setmetatable ret# meta#)
-     ret#))
-
 (λ pack [identifier ?options]
   "Return a mixed table with the identifier as the first sequential element
   and options as hash-table items"
   (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (assert-compile (or (not (nil? ?options)) (tbl? ?options))
-                  "expected nil or table for options" ?options)
-  (let [options (or ?options {})
-        options (collect [k v (pairs options)]
-                  (if (= k :config!)
-                      (values :config (format "require('pack.%s')" v))
-                      (= k :init!)
-                      (values :config (format "require('%s').setup()" v))
-                      (values k v)))]
-    (doto options
-      (tset 1 identifier))))
+  (assert-compile (or (not (nil? ?options)) (tbl? ?options)) "expected nil or table for options" ?options)
+  (doto (or ?options {})
+    (tset 1 identifier)))
 
 (λ use-package! [identifier ?options]
   "Declares a plugin with its options. Saved on the global compile-time variable pkgs"
@@ -44,6 +29,7 @@
   (assert-compile (or (not (nil? ?options)) (tbl? ?options))
                   "expected nil or table for options" ?options)
   (insert pkgs (pack identifier ?options)))
+
 
 (λ unpack! []
   "Initializes the plugin manager with the previously declared plugins and
@@ -54,7 +40,18 @@
       (fn [,(sym :use)]
           ,(unpack (icollect [_ v (ipairs packs)] v))))))
 
+(fn call-setup [name config]
+  "To config a plugin: call the setup function."
+  `(λ []
+      ((. (require ,name) :setup)
+       ,config)))
+
+(fn load-file [name]
+  "To config a plugin: load a file from pack/ folder."
+  `#(require ,(.. "pack." name)))
+
 {: pack
  : unpack!
- : use-package!
- : lazy-require!}
+ : load-file
+ : call-setup
+ : use-package!}

@@ -1,4 +1,5 @@
-(import-macros {: lazy-require!} :macros.package-macros)
+(local {: lazy-require!} (require :utils.lazy-require))
+
 (local {: config} (lazy-require! :luasnip))
 (local {: load} (lazy-require! :luasnip/loaders/from_vscode))
 
