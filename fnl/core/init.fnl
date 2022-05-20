@@ -4,9 +4,6 @@
 ;; Set vim options
 (require :core.options)
 
-;; Mappings
-(require :core.keymaps)
-
 ;; Autocommands
 (require :core.events)
 
@@ -23,3 +20,10 @@
 (when (= (vim.fn.filereadable (.. (vim.fn.stdpath :config)
                                   :/lua/packer_compiled.lua)) 1)
   (require :packer_compiled))
+
+;; Mappings
+(require :core.keymaps)
+
+
+
+
