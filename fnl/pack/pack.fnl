@@ -4,7 +4,7 @@
 (local {: init} (require :packer))
 (init {:autoremove true
        :git {:clone_timeout 300}
-       :profile {:enable true :threshold 0}
+       ;; :profile {:enable true :threshold 0}
        :compile_path (.. (vim.fn.stdpath :config)
                          :/lua/packer_compiled.lua)
        :display {:header_lines 2
@@ -25,7 +25,9 @@
 
 ;; lispy configs
 (use-package! :rktjmp/hotpot.nvim)
-(use-package! :Olical/conjure {:branch :develop :ft lisp-ft})
+(use-package! :Olical/conjure {:branch :develop :ft lisp-ft 
+                               :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
+
 (use-package! :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
 
 ;; File navigation
