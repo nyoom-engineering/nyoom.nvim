@@ -2,7 +2,7 @@
 (λ key [tbl prop] [(. tbl prop) prop])
 
 ;; easier command line mode
-(which-key.register {";" {":" "vim-ex"}})
+(which-key.register {";" [":" "vim-ex"]})
 
 ;; Visuals
 (which-key.register {"<leader>t" {:name "Visuals"

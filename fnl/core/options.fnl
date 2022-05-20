@@ -4,9 +4,6 @@
 (let! mapleader " ")
 (let! maplocalleader " m")
 
-;; theme
-(set! background :dark)
-
 ;; Don't wrap text
 (set! nowrap)
 
