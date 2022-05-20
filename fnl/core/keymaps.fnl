@@ -1,5 +1,11 @@
+(import-macros {: let!} :macros.option-macros)
+
 (local which-key (require :which-key))
 (λ key [tbl prop] [(. tbl prop) prop])
+
+;; set leader key
+(let! mapleader " ")
+(let! maplocalleader " m")
 
 ;; easier command line mode
 (which-key.register {";" [":" "vim-ex"]})

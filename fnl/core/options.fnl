@@ -1,12 +1,5 @@
 (require-macros :macros.option-macros)
 
-;; set leader key
-(let! mapleader " ")
-(let! maplocalleader " m")
-
-;; Don't wrap text
-(set! nowrap)
-
 ;; improve updatetime for quicker refresh + gitsigns
 (set! updatetime 200)
 (set! timeoutlen 500)
@@ -36,14 +29,8 @@
 ;; Use clipboard outside Neovim
 (set! clipboard :unnamedplus)
 
-;; Better guifont
-(set! guifont "Liga SFMono Nerd Font:h15")
-
 ;; Enable mouse input
 (set! mouse :a)
-
-;; Faster macros
-(set! lazyredraw)
 
 ;; Disable swapfiles and enable undofiles
 (set! undofile)
@@ -54,9 +41,6 @@
 
 ;; Numbering
 (set! nonumber)
-
-;; True-color
-(set! termguicolors)
 
 ;; Cols and chars
 (set! foldcolumn "auto:3")

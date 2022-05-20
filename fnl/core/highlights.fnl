@@ -2,7 +2,9 @@
 (import-macros {: set!} :macros.option-macros)
 
 ;; theme
+(set! termguicolors)
 (set! background :dark)
+(set! guifont "Liga SFMono Nerd Font:h15")
 
 ;; Losely based off of IBM Carbon Palette [https://www.ibm.com/brand/experience-guides/developer/brand/color/)
 (local carbon (or (and (= vim.o.background :dark)

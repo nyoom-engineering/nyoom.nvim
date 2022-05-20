@@ -1,5 +1,3 @@
-(require-macros :macros.option-macros)
-
 ;; Disable some built-in Neovim plugins and unneeded providers
 (let [built-ins [:gzip
                  :zip
@@ -26,5 +24,12 @@
   (each [_ v (ipairs providers)]
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
+
+;; delay shada loading
+(vim.schedule (fn []
+                (set vim.opt.shadafile
+                     (.. (vim.fn.expand :$HOME)
+                         :/.local/share/nvim/shada/main.shada))
+                (vim.cmd " silent! rsh ")))                                                                                      	
 
 
