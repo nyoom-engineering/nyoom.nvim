@@ -1,5 +1,3 @@
-(import-macros {: set!} :macros.option-macros)
-
 ;; Icons/text for each mode 
 (local modes {:n :RW
               :no :RO
@@ -52,8 +50,6 @@
                                         " %l:%c "])))
 
 ;; And to just set that global statusline, showmode is now redundant
-(set! noshowmode)
-(set! laststatus 3)
-(set! statusline "%!v:lua.Statusline.active()")
-
-
+(set vim.opt.showmode false)
+(set vim.opt.laststatus 3)
+(set vim.opt.statusline "%!v:lua.Statusline.active()")
