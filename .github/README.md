@@ -44,7 +44,8 @@ Install the following dependencies:
 git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git ~/.config/nvim 
 nvim
 ```
-Optionally run `:FnlCompile!` (the fennel is precompiled, but you can do it for fun!), then run `:PackerSync`
+If you're using hotpot (default), enter neovim, exit neovim, enter it again, then run `:PackerSync`. (The restart is nessecary for neovim to load the newly compiled code). 
+If you're using tangerine, run `:FnlCompile!`, then run `:PackerSync`
 
 ### Using nix: 
 
@@ -79,7 +80,15 @@ However, it also disagrees with some of those ideals
 - [Oliver Caldwell](https://github.com/Olical/) For his excellent work on Aniseed, Conjure, and making fennel feel like a first class language in neovim
 
 ## Changelog
-v0.3.3 - Released 5/10/2022
+v0.3.4 - Released 5/22/2022
+- Colorscheme: Automatically changes based on `vim.opt.background`. Light palette added
+- Macros: Added event/command macros. Minor adjustments to packer macros
+- Bindings: Small fix for normal-mode bindings
+- Loading: Fixes to bootstrapping and loading order. Defer lsp/lspinstaller. Add option to use tangerine.nvim
+- Lsp: Add nvim-lsp-installer. Cleanups
+- Packer: Automatically compile & require compiled file from within pack.fnl. 
+
+v0.3.3 - Released 5/14/2022
 - Colorscheme: Rewrite in fennel + macros using nvim api
 - Macros: Rewrite of options macros. Replace keymap macros with which-key
 - Bindings: Conjure/hotpot/fennel compilation and evalulation. Use Which-Key
@@ -96,7 +105,6 @@ v0.3.2 - Released 5/08/2022
 - Macro updates and optimizations
 
 v0.3.1 - Released 5/03/2022
-- Removed options for fennel compilers and switched solely to ~~Tangerine~~ Hotpot. Fennel is still seamlessly automatically. 
 - More fennel! ~~Init is rewritten in fennel~~ (update: This caused the config to load after runtime files, which meant that `filetype.lua` stopped working. I've sinced reverted back to `init.lua` for now), and lua dependencies (md5 lib) were removed.
 - Refactored the entire config. New directory structure, parted out macros, and cleaned up code. 
 - Statusline has been added! Thin and light global statusline to align with nyoom's philosphies.
@@ -105,8 +113,6 @@ v0.3.1 - Released 5/03/2022
 - Improved startuptime by 20-30ms: decreased lazy loading and optimized code. 
 - Improved keybinding support: macros for buffer-local mappings and which-key documentation have been added. Nyoom default bindings are now documented within which-key
 - Improved treesitter integration. Textobjects and support for conjure evaluation using treesitter have been added. 
-
-Note: The reasoning for the change in compiler support is that its far more seamless for the user, it implements a lua bytecode cache (removing the need for impatient.nvim), and its still faster than tangerine or aniseed. Users are welcome to paste in some code from an older version of Nyoom and adjust the compiler to their liking. In fact, I encourage you to try it out if you prefer tangerine or aniseed, its a great intro into basic fennel syntax!
 
 ## Showcase
 

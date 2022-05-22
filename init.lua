@@ -28,24 +28,25 @@ local function bootstrap(plugin)
 	end
 end
 
--- Bootstrap tangerine & plugins
-bootstrap("wbthomason/packer.nvim")
-bootstrap("rktjmp/hotpot.nvim")
+-- global variable to set the user's fennel compiler
+fennel_compiler = "hotpot"
 
--- setup hotspot
-require("hotpot").setup() 
-
--- require core config
-require("core")
-
-
-
-
-
-
-
-
-
-
-
+if fennel_compiler == "hotpot" then
+   bootstrap("rktjmp/hotpot.nvim")
+   require[[hotpot]].setup()
+   require[[core]]
+elseif fennel_compiler == "tangerine" then
+   bootstrap("lewis6991/impatient.nvim")
+   bootstrap("udayvir-singh/tangerine.nvim")
+   bootstrap("lewis6991/impatient.nvim")
+   require[[impatient]]
+   require[[tangerine]].setup {
+     compiler = {
+       hooks = {}
+     }
+   }
+   require[[core]]
+else
+   error[[Unknown compiler]]
+end
 

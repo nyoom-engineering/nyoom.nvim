@@ -35,17 +35,20 @@
                           :hint_scheme :DiagnosticSignInfo}
                          bufnr)))
 
-;;; Capabilities
+;; What should the lsp be demanded of? Normally this would
 (local capabilities (vim.lsp.protocol.make_client_capabilities))
-(set capabilities.textDocument.completion.completionItem.documentationFormat {1 :markdown 2 :plaintext})
-(set capabilities.textDocument.completion.completionItem.snippetSupport true)
-(set capabilities.textDocument.completion.completionItem.preselectSupport true)
-(set capabilities.textDocument.completion.completionItem.insertReplaceSupport true)
-(set capabilities.textDocument.completion.completionItem.labelDetailsSupport true)
-(set capabilities.textDocument.completion.completionItem.deprecatedSupport true)
-(set capabilities.textDocument.completion.completionItem.commitCharactersSupport true)
-(set capabilities.textDocument.completion.completionItem.tagSupport {:valueSet {1 1}})
-(set capabilities.textDocument.completion.completionItem.resolveSupport {:properties {1 :documentation 2 :detail 3 :additionalTextEdits}})
+(set capabilities.textDocument.completion.completionItem
+     {:documentationFormat [:markdown :plaintext]
+      :snippetSupport true
+      :preselectSupport true
+      :insertReplaceSupport true
+      :labelDetailsSupport true
+      :deprecatedSupport true
+      :commitCharactersSupport true
+      :tagSupport {:valueSet {1 1}}
+      :resolveSupport {:properties [:documentation
+                                    :detail
+                                    :additionalTextEdits]}})
 
 ;;; Setup servers
 (local defaults {:on_attach on-attach
@@ -57,12 +60,12 @@
 ;;   (lsp.tsserver.setup defaults))
 
 ;; clojure
-(when (= (vim.fn.executable :clojure-lsp) 1)
-  (lsp.clojure_lsp.setup defaults))
+;; (when (= (vim.fn.executable :clojure-lsp) 1)
+;;   (lsp.clojure_lsp.setup defaults))
 
 ;; nix
-(when (= (vim.fn.executable :rnix-lsp) 1)
-  (lsp.rnix.setup defaults))
+;; (when (= (vim.fn.executable :rnix-lsp) 1)
+;;   (lsp.rnix.setup defaults))
 
 ;; rust
 (when (= (vim.fn.executable :rust-analyzer) 1)
@@ -77,5 +80,3 @@
                                                                  (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
                                                        :maxPreload 100000
                                                        :preloadFileSize 10000}}}}))
-
-

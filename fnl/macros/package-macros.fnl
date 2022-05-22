@@ -1,6 +1,7 @@
 (local {: format} string)
 (local {: insert} table)
 
+;; local to keep packages together to send to packer
 (local pkgs [])
 
 (fn str? [x]
@@ -15,6 +16,7 @@
   "Check if given parameter is nil"
   (= :nil x))
 
+;; emacs-isms
 (λ pack [identifier ?options]
   "Return a mixed table with the identifier as the first sequential element
   and options as hash-table items"
@@ -30,7 +32,28 @@
                   "expected nil or table for options" ?options)
   (insert pkgs (pack identifier ?options)))
 
+;; make life easier
+(fn load-file [name]
+  "To config a plugin: load a file from pack/ folder."
+  `#(require ,(.. "pack." name)))
 
+(fn call-setup [name config]
+  "To config a plugin: call the setup function."
+  `(λ []
+      ((. (require ,name) :setup)
+       ,config)))
+
+(fn defer! [name timer]
+  "To load a plugin after vim has started"
+  `(λ []
+      (vim.defer_fn (fn []
+                      ((. (require :packer) :loader) ,name))
+                    ,timer)
+      (vim.defer_fn (fn []
+                      (vim.cmd "if &ft == \"packer\" | echo \"\" | else | silent! e %"))
+                    0)))
+
+;; pack it all up
 (λ unpack! []
   "Initializes the plugin manager with the previously declared plugins and
   their options."
@@ -40,17 +63,8 @@
       (fn [,(sym :use)]
           ,(unpack (icollect [_ v (ipairs packs)] v))))))
 
-(fn call-setup [name config]
-  "To config a plugin: call the setup function."
-  `(λ []
-      ((. (require ,name) :setup)
-       ,config)))
-
-(fn load-file [name]
-  "To config a plugin: load a file from pack/ folder."
-  `#(require ,(.. "pack." name)))
-
 {: pack
+ : defer!
  : unpack!
  : load-file
  : call-setup

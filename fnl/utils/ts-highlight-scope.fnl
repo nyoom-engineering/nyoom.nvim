@@ -1,6 +1,5 @@
 (local locals (require :nvim-treesitter.locals))
 (local ts-utils (require :nvim-treesitter.ts_utils))
-
 (local ns (vim.api.nvim_create_namespace "ts-highlight-scope"))
 
 (fn buf-augroup [buf]

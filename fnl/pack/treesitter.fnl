@@ -1,9 +1,7 @@
-(local {: lazy-require!} (require :utils.lazy-require))
-
-(local ts (lazy-require! :nvim-treesitter))
-(local tsq (lazy-require! :nvim-treesitter.query))
-(local tsp (lazy-require! :nvim-treesitter.parsers))
-(local {: setup} (lazy-require! :nvim-treesitter.configs))
+(local ts (require :nvim-treesitter))
+(local tsq (require :nvim-treesitter.query))
+(local tsp (require :nvim-treesitter.parsers))
+(local {: setup} (require :nvim-treesitter.configs))
 
 ;;; Extra parsers
 (local parser-config (tsp.get_parser_configs))
@@ -65,6 +63,3 @@
                                                    "[[" "@class.outer"}
                              :goto_previous_end {"[M" "@function.outer"
                                                  "[]" "@class.outer"}}}})  
-
-
-      	

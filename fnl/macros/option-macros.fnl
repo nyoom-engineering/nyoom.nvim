@@ -1,4 +1,4 @@
-(local {:sumhexa md5} (require :utils.md5))
+(local {:sumhexa md5} (require :md5))
 (local {: format} string)
 
 (fn ->str [x]

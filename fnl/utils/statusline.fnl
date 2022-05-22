@@ -49,7 +49,25 @@
                                         (color)
                                         " %l:%c "])))
 
-;; And to just set that global statusline, showmode is now redundant
-(set vim.opt.showmode false)
+(fn nightly? []
+   "Check if using Neovim nightly (0.8)"
+   (let [nightly (vim.fn.has :nvim-0.8.0)]
+     (= nightly 1)))
+
+;; Use statusline as winbar if on nightly
+;; (if (= true (nightly?))
+;;    (set vim.opt.laststatus 0)
+;;    (set vim.opt.laststatus 3))
+
+;; (if (= true (nightly?))
+;;    (set vim.opt.winbar "%!v:lua.Statusline.active()")
+;;    (set vim.opt.statusline "%!v:lua.Statusline.active()"))
+
 (set vim.opt.laststatus 3)
+(set vim.opt.showmode false)
 (set vim.opt.statusline "%!v:lua.Statusline.active()")
+
+
+
+
+

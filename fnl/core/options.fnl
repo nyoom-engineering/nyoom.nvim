@@ -8,7 +8,7 @@
 (set! inccommand :split)
 
 ;; Set shortmess
-(set! shortmess :filnxtToOFatsc)
+(set! shortmess :filnxtToOFatsIc)
 
 ;; fillchar setup
 (set! fillchars {:eob " "

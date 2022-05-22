@@ -214,8 +214,9 @@
 (custom-set-face! TermCursorNC [:nil] {:fg carbon.base00 :bg carbon.base04})
 
 ;; minimal statusline
-(custom-set-face! StatusLine [:none] {:fg carbon.base03 :bg carbon.none})
-(custom-set-face! StatusNormal [:underline] {:fg carbon.base03} :bg carbon.none)
+(custom-set-face! StatusLine [:nil] {:fg carbon.base03 :bg carbon.none})
+;; (custom-set-face! StatusNormal [:underline] {:fg carbon.base03 :bg carbon.none})
+(vim.cmd "hi StatusNormal gui=underline guifg=#525252 guibg=#161616")
 (custom-set-face! StatusReplace [:nil] {:fg carbon.base00 :bg carbon.base08})
 (custom-set-face! StatusInsert [:nil] {:fg carbon.base00 :bg carbon.base11})
 (custom-set-face! StatusVisual [:nil] {:fg carbon.base00 :bg carbon.base14})

@@ -1,19 +1,21 @@
 (require-macros :macros.package-macros)
 
+;; custom compile-path under lua/, so impatient & hotpot can cache it. 
+(local compile-path (.. (vim.fn.stdpath :config)
+                        "/lua/packer_compiled.lua"))
+
 ;; Setup packer
 (local {: init} (require :packer))
 (init {:autoremove true
-       :git {:clone_timeout 300}
-       :profile {:enable true}
-       :compile_path (.. (vim.fn.stdpath :config)
-                         :/lua/packer_compiled.lua)
-       :display {:header_lines 2
-                 :title " packer.nvim"
-                 :open_fn (λ open_fn []
-                            (local {: float} (require :packer.util))
-                            (float {:border :solid}))}})
- 
-
+              :git {:clone_timeout 300}
+              :profile {:enable true}
+              :compile_path compile-path
+              :display {:header_lines 2
+                        :title " packer.nvim"
+                        :open_fn (λ open_fn []
+                                   (local {: float} (require :packer.util))
+                                   (float {:border :solid}))}})
+       
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
@@ -24,9 +26,13 @@
 (use-package! :folke/which-key.nvim {:config (call-setup :which-key)})
 
 ;; lispy configs
-(use-package! :rktjmp/hotpot.nvim)
-(use-package! :Olical/conjure {:branch :develop :ft lisp-ft 
-                               :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
+(use-package! :Olical/conjure
+              {:branch :develop
+               :ft lisp-ft
+               :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)
+               :requires [(match fennel_compiler
+                             :hotpot (pack :rktjmp/hotpot.nvim {:branch :master})
+                             :tangerine (pack :udayvir-singh/tangerine.nvim {:requires [(pack :lewis6991/impatient.nvim)]}))]})
 
 (use-package! :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
 
@@ -44,15 +50,25 @@
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
+               :event [:BufRead :BufNewFile]
                :config (load-file :treesitter)
-               :requires [(pack :p00f/nvim-ts-rainbow)
-                          (pack :nvim-treesitter/nvim-treesitter-textobjects)
-                          (pack :nvim-treesitter/playground {:cmd :TSPlayground})]})
+               :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
+                          (pack :p00f/nvim-ts-rainbow {:after :nvim-treesitter})
+                          (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})]})
 
 ;; lsp
-(use-package! :neovim/nvim-lspconfig {:config (load-file :lsp)}) 
-(use-package! :folke/trouble.nvim {:cmd :Trouble :config (call-setup :trouble)})
+(use-package! :williamboman/nvim-lsp-installer {:opt true
+                                                :setup (defer! :nvim-lsp-installer 0)})
+
+
+(use-package! :neovim/nvim-lspconfig {:after :nvim-lsp-installer
+                                      :module :lspconfig
+                                      :config (fn []
+                                                (require :pack.lspinstall)
+                                                (require :pack.lsp))}) 
+
 (use-package! :ray-x/lsp_signature.nvim {:module :lsp_signature})
+(use-package! :folke/trouble.nvim {:cmd :Trouble :config (call-setup :trouble)})
 (use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :config (call-setup :fidget)})
 
 ;; git
@@ -82,8 +98,8 @@
 
 ;; aesthetics
 (use-package! :rcarriga/nvim-notify {:config (load-file :notify)})
-(use-package! :monkoose/matchparen.nvim {:config (load-file :matchparen)})
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
+(use-package! :monkoose/matchparen.nvim {:config (load-file :matchparen)})
 (use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config (load-file :truezen)})
 (use-package! :akinsho/bufferline.nvim {:event :BufEnter :config (load-file :bufferline)})
 (use-package! :norcalli/nvim-colorizer.lua {:config (load-file :colorizer) :event [:BufRead :BufNewFile]})
@@ -94,12 +110,9 @@
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)
 
-
-
-
-
-
-
-
-
-
+;; Make sure packer is all ready to go
+(let [compiled? (= (vim.fn.filereadable compile-path) 1)
+      load-compiled #(require :packer_compiled)]
+ (if compiled?
+     (load-compiled)
+     (. (require :packer) :sync)))
