@@ -42,10 +42,6 @@
 ;; Numbering
 (set! nonumber)
 
-;; Cols and chars
-(set! foldcolumn "auto:3")
-(set! signcolumn "auto:1-3")
-
 ;; Smart search
 (set! smartcase)
 

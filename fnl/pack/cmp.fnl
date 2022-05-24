@@ -12,6 +12,7 @@
 
 (local types (lazy-require! :cmp.types))
 (local under-compare (lazy-require! :cmp-under-comparator))
+
 (local {: lsp_expand : expand_or_jump : expand_or_jumpable : jump : jumpable} (lazy-require! :luasnip))
 
 ;; default icons (lspkind)
@@ -24,8 +25,8 @@
               :Class "ﴯ"
               :Interface ""
               :Module ""
-              :Property "ﰠ"
               :Unit "塞"
+              :Property "ﰠ"
               :Value ""
               :Enum ""
               :Keyword "廓"

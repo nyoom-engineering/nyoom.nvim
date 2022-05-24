@@ -33,6 +33,15 @@
         (set mode-color "%#StatusTerminal#"))
     mode-color))
 
+;; get git status via gitsigns
+(fn get-git-status []
+  (let [branch (or vim.b.gitsigns_status_dict
+                   {:head ""})
+        is-head-empty (not= branch.head "")]
+    (or (and is-head-empty
+             (string.format "(#%s)"
+                            (or branch.head "")))
+        "")))
 ;; Normally we would have an inactive and a short section as well, but since we have a global statusline now I removed them
 (global Statusline {})
 (set Statusline.active (fn []
@@ -44,15 +53,15 @@
                                            :upper)
                                         "%#StatusLine#"
                                         " %f "
+                                        (get-git-status)
                                         "%="
-                                        " %Y "
-                                        (color)
+                                        "%#StatusPosition#"
                                         " %l:%c "])))
 
-(fn nightly? []
-   "Check if using Neovim nightly (0.8)"
-   (let [nightly (vim.fn.has :nvim-0.8.0)]
-     (= nightly 1)))
+;; (fn nightly? []
+;;    "Check if using Neovim nightly (0.8)"
+;;    (let [nightly (vim.fn.has :nvim-0.8.0)]
+;;      (= nightly 1))
 
 ;; Use statusline as winbar if on nightly
 ;; (if (= true (nightly?))

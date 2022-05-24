@@ -32,11 +32,12 @@ end
 fennel_compiler = "hotpot"
 
 if fennel_compiler == "hotpot" then
+   bootstrap("wbthomason/packer.nvim")
    bootstrap("rktjmp/hotpot.nvim")
    require[[hotpot]].setup()
    require[[core]]
 elseif fennel_compiler == "tangerine" then
-   bootstrap("lewis6991/impatient.nvim")
+   bootstrap("wbthomason/packer.nvim")
    bootstrap("udayvir-singh/tangerine.nvim")
    bootstrap("lewis6991/impatient.nvim")
    require[[impatient]]

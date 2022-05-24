@@ -60,7 +60,6 @@
 (use-package! :williamboman/nvim-lsp-installer {:opt true
                                                 :setup (defer! :nvim-lsp-installer 0)})
 
-
 (use-package! :neovim/nvim-lspconfig {:after :nvim-lsp-installer
                                       :module :lspconfig
                                       :config (fn []
@@ -73,6 +72,7 @@
 
 ;; git
 (use-package! :TimUntersberger/neogit {:config (call-setup :neogit) :cmd :Neogit})
+(use-package! :lewis6991/gitsigns.nvim {:opt true :setup (defer! :gitsigns.nvim 0) :config (call-setup :gitsigns)})
 
 ;; completion/copilot
 (use-package! :zbirenbaum/copilot.lua
@@ -93,8 +93,7 @@
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
                                                    :config (load-file :luasnip)
-                                                   :requires [(pack :rafamadriz/friendly-snippets
-                                                                    {:opt false})]})]})
+                                                   :requires [(pack :rafamadriz/friendly-snippets)]})]})
 
 ;; aesthetics
 (use-package! :rcarriga/nvim-notify {:config (load-file :notify)})

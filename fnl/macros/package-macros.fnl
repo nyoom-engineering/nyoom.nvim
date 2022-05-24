@@ -51,7 +51,7 @@
                     ,timer)
       (vim.defer_fn (fn []
                       (vim.cmd "if &ft == \"packer\" | echo \"\" | else | silent! e %"))
-                    0)))
+                    ,timer)))
 
 ;; pack it all up
 (λ unpack! []

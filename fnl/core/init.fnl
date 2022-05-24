@@ -16,9 +16,6 @@
 ;; load packer
 (require :pack.pack)
 
-;; Mappings
+;; Mappings. Needs to be loaded after plugins as it depends on which-key
 (require :core.keymaps)
-
-
-
 

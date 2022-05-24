@@ -68,8 +68,8 @@
 ;;   (lsp.rnix.setup defaults))
 
 ;; rust
-(when (= (vim.fn.executable :rust-analyzer) 1)
-  (lsp.rust_analyzer.setup defaults))
+;; (when (= (vim.fn.executable :rust-analyzer) 1)
+;;   (lsp.rust_analyzer.setup defaults))
 
 ;; for trickier servers you can change up the defaults
 (when (= (vim.fn.executable :lua-language-server) 1)

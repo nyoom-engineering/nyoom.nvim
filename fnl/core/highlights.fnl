@@ -1,5 +1,5 @@
 (require-macros :macros.highlight-macros)
-(import-macros {: set!} :macros.option-macros)
+(import-macros {: set! : let!} :macros.option-macros)
 
 ;; theme
 (set! termguicolors)
@@ -44,7 +44,25 @@
                 :base15 "#B48EAD" ;; A book must be an ice axe to break the seas frozen inside our soul
                 :blend  "#FAFAFA" ;; Blend of #000000 & base00 for darker accents 
                 :none :NONE}))
-   
+  
+;; terminal 
+(let! terminal_color_0 carbon.base01)
+(let! terminal_color_1 carbon.base11)
+(let! terminal_color_2 carbon.base14)
+(let! terminal_color_3 carbon.base13)
+(let! terminal_color_4 carbon.base09)
+(let! terminal_color_5 carbon.base15)
+(let! terminal_color_6 carbon.base08)
+(let! terminal_color_7 carbon.base05)
+(let! terminal_color_8 carbon.base03)
+(let! terminal_color_9 carbon.base11)
+(let! terminal_color_10 carbon.base14)
+(let! terminal_color_11 carbon.base13)
+(let! terminal_color_12 carbon.base09)
+(let! terminal_color_13 carbon.base15)
+(let! terminal_color_14 carbon.base07)
+(let! terminal_color_15 carbon.base06)
+
 ;; editor
 (custom-set-face! ColorColumn [:nil] {:fg carbon.none :bg carbon.base01})
 (custom-set-face! Cursor [:nil] {:fg carbon.base00 :bg carbon.base04})
@@ -52,6 +70,7 @@
 (custom-set-face! CursorLineNr [:nil] {:fg carbon.base04 :bg carbon.none})
 (custom-set-face! Error [:nil] {:fg carbon.base04 :bg carbon.base11})
 (custom-set-face! LineNr [:nil] {:fg carbon.base03 :bg carbon.none})
+(custom-set-face! MatchParen [:underline] {:bg carbon.base01})
 (custom-set-face! MatchParen [:underline] {:bg carbon.base01})
 (custom-set-face! NonText [:nil] {:fg carbon.base02 :bg carbon.none})
 (custom-set-face! Normal [:nil] {:fg carbon.base04 :bg carbon.base00})
@@ -214,9 +233,9 @@
 (custom-set-face! TermCursorNC [:nil] {:fg carbon.base00 :bg carbon.base04})
 
 ;; minimal statusline
-(custom-set-face! StatusLine [:nil] {:fg carbon.base03 :bg carbon.none})
-;; (custom-set-face! StatusNormal [:underline] {:fg carbon.base03 :bg carbon.none})
-(vim.cmd "hi StatusNormal gui=underline guifg=#525252 guibg=#161616")
+(custom-set-face! StatusLine [:nil] {:fg carbon.base04 :bg carbon.base01})
+(custom-set-face! StatusPosition [:nil] {:fg :#a2a9b0 :bg carbon.base01})
+(custom-set-face! StatusNormal [:nil] {:fg carbon.base04 :bg carbon.base01})
 (custom-set-face! StatusReplace [:nil] {:fg carbon.base00 :bg carbon.base08})
 (custom-set-face! StatusInsert [:nil] {:fg carbon.base00 :bg carbon.base11})
 (custom-set-face! StatusVisual [:nil] {:fg carbon.base00 :bg carbon.base14})
@@ -278,3 +297,18 @@
 (custom-set-face! BufferLineTabClose [:nil] {:fg carbon.base03 :bg carbon.blend})
 (custom-set-face! BufferLineSeparator [:nil] {:fg carbon.base00 :bg carbon.blend})
 (custom-set-face! BufferLineCloseButton [:nil] {:fg carbon.base03 :bg carbon.blend})
+
+;; neogit
+(custom-set-face! NeogitBranch [:nil] {:fg carbon.base10 :bg carbon.none})
+(custom-set-face! NeogitRemote [:nil] {:fg carbon.base09 :bg carbon.none})
+(custom-set-face! NeogitDiffAddHighlight [:nil] {:fg carbon.base13 :bg carbon.base02})
+(custom-set-face! NeogitDiffDeleteHighlight [:nil] {:fg carbon.base19 :bg carbon.base02})
+(custom-set-face! NeogitDiffContextHighlight [:nil] {:fg carbon.base04 :bg carbon.base01})
+(custom-set-face! NeogitHunkHeader [:nil] {:fg carbon.base04 :bg carbon.base02})
+(custom-set-face! NeogitHunkHeaderHighlight [:nil] {:fg carbon.base04 :bg carbon.base03})
+
+;; gitsigns
+(custom-set-face! GitSignsAdd [:nil] {:fg carbon.base08 :bg carbon.none})
+(custom-set-face! GitSignsChange [:nil] {:fg carbon.base09 :bg carbon.none})
+(custom-set-face! GitSignsDelete [:nil] {:fg carbon.base14 :bg carbon.none})
+

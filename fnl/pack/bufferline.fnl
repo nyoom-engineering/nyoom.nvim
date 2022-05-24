@@ -1,7 +1,5 @@
 (local {: format} string)
-(local {: lazy-require!} (require :utils.lazy-require))
-
-(local {: setup} (lazy-require! :bufferline))
+(local {: setup} (require :bufferline))
 
 ;;; Setup bufferline
 (setup {:options {:numbers :none
@@ -14,19 +12,8 @@
                   :max_name_length 14
                   :max_prefix_length 13
                   :tab_size 20
-                  :show_buffer_close_icons true
                   :always_show_bufferline false
-                  :custom_filter (fn [buf-number]
-                                   (local (present-type type)
-                                          (pcall (fn []
-                                                   (vim.api.nvim_buf_get_var buf-number
-                                                                             :term_type))))
-                                   (when present-type
-                                     (if (= type :vert)
-                                         (lua "return false")
-                                         (= type :hori)
-                                         (lua "return false"))
-                                     (lua "return true"))
-                                   true)}})  
+                  :show_buffer_close_icons true}})
+
 
 
