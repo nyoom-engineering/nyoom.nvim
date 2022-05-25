@@ -31,23 +31,31 @@ end
 -- global variable to set the user's fennel compiler
 fennel_compiler = "hotpot"
 
+-- nessecary plugins
+bootstrap("folke/which-key.nvim")
+bootstrap("wbthomason/packer.nvim")
+
+-- We only want impatient if the compiler is aniseed/tangerine
+-- Hotpot has its own caching feature
 if fennel_compiler == "hotpot" then
-   bootstrap("wbthomason/packer.nvim")
    bootstrap("rktjmp/hotpot.nvim")
    require[[hotpot]].setup()
-   require[[core]]
-elseif fennel_compiler == "tangerine" then
-   bootstrap("wbthomason/packer.nvim")
-   bootstrap("udayvir-singh/tangerine.nvim")
+   require[[init]]
+elseif fennel_compiler == "aniseed" then
    bootstrap("lewis6991/impatient.nvim")
+   bootstrap("olical/aniseed")
+   require[[impatient]]
+   vim.g["aniseed#env"] = true
+elseif fennel_compiler == "tangerine" then
+   bootstrap("lewis6991/impatient.nvim")
+   bootstrap("udayvir-singh/tangerine.nvim")
    require[[impatient]]
    require[[tangerine]].setup {
      compiler = {
        hooks = {}
      }
    }
-   require[[core]]
+   require[[init]]
 else
    error[[Unknown compiler]]
 end
-

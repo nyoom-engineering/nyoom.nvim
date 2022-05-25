@@ -1,4 +1,5 @@
-(local {: setup} (require :gitsigns))
+(local {: lazy-require!} (require :utils.lazy-require))
+(local {: setup } (lazy-require! :gitsigns))
 
 (setup {:signs {:add {:text "│"}
                 :change {:text "│"}

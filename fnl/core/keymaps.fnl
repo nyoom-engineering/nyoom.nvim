@@ -69,29 +69,3 @@
                                   "r" ["<cmd>Telescope old_files<cr>" "Recent Files"]}})
 
 {: set-lsp-keys!}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

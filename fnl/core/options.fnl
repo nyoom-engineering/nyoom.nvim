@@ -64,8 +64,9 @@
 ;; Enable concealing
 (set! conceallevel 2)
 
-;; Enable cursorline
+;; Enable cursorline/column
 (set! cursorline)
+(set! nocursorcolumn)
 
 ;; Automatic split locations
 (set! splitright)
