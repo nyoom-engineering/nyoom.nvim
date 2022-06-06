@@ -1,7 +1,7 @@
 (local {: lazy-require!} (require :utils.lazy-require))
 (local {: setup : load_extension} (lazy-require! :telescope))
 
-(setup {:defaults {:prompt_prefix "   "
+(setup {:defaults {:prompt_prefix ""
                    :selection_caret "  "
                    :entry_prefix "  "
                    :sorting_strategy :ascending

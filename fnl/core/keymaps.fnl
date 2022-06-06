@@ -19,6 +19,9 @@
 
 ;; NvimTree
 (which-key.register {"<leader>op" ["<cmd>NvimTreeToggle<CR>" "nvimtree"]})
+;; (which-key.register {"<leader>on" ["<cmd>ToggleNNN<cr>" "nnn"]})
+(which-key.register {"<leader>oN" ["<cmd>ToggleNBB<cr>" "Toggle nbb"]})
+(which-key.register {"<leader>ob" ["<cmd>ToggleBTOP<cr>" "Toggle nbb"]})
 
 ;; Conjure
 (which-key.register {"<localleader>E" "eval motion"
@@ -29,7 +32,7 @@
 
 ;; Lsp
 (λ set-lsp-keys! [bufnr]
-  (which-key.register {"<leader>d" {:name "lsp"
+  (which-key.register {"<leader>c" {:name "lsp"
                                     ; inspect
                                     "d" (key vim.lsp.buf :definition)
                                     "D" (key vim.lsp.buf :declaration)
@@ -66,6 +69,6 @@
 (which-key.register {"<leader><space>" ["<cmd>Telescope find_files<CR>" "Project Files"]})
 (which-key.register {"<leader>f" {:name "Files"
                                   "f" ["<cmd>Telescope current_buffer_fuzzy_find<cr>" "Grep Buffer"]
-                                  "r" ["<cmd>Telescope old_files<cr>" "Recent Files"]}})
+                                  "r" ["<cmd>Telescope oldfiles<cr>" "Recent Files"]}})
 
 {: set-lsp-keys!}

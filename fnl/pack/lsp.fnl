@@ -69,8 +69,8 @@
 
 ;; for simple servers jsut add them to the list
 (let [servers [:clojure_lsp
-               :rust_analyzer
-               :rnix
+               :jsonls
+               :lemminx
                :pyright]]
   (each [_ server (ipairs servers)]
     ((. (. lsp server) :setup) defaults)))

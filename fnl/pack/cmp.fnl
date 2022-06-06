@@ -102,6 +102,6 @@
                                vim-item)}})
 
 ;; cmdline setup
-(setup.cmdline ":"
-               {:view {:separator "|"}
-                :sources [{:name :path} {:name :cmdline}]})
+;; (setup.cmdline ":"
+;;                {:view {:separator "|"}
+;;                 :sources [{:name :path} {:name :cmdline}]})

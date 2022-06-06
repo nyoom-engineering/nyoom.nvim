@@ -13,13 +13,30 @@
                                    (float {:border :solid}))}})
        
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
-(local lisp-ft [:fennel :clojure :lisp :racket :scheme])
+(local lisp-ft [:fennel :clojure :lisp])
 
 ;; Packer can manage itself
 (use-package! :wbthomason/packer.nvim)
 
 ;; Mapping and Documentation
-(use-package! :folke/which-key.nvim {:config (call-setup :which-key)})
+(use-package! :folke/which-key.nvim {:config (load-file :which-key)})
+
+;; Navigation
+(use-package! :ggandor/lightspeed.nvim)
+;; Terminal
+(use-package! :voldikss/vim-floaterm)
+(use-package! :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)})
+(use-package! :tpope/vim-surround)
+(use-package! :numToStr/Comment.nvim {:config (call-setup :Comment)})
+(use-package! :akinsho/toggleterm.nvim {:config (load-file :toggleterm)})
+(use-package! :jose-elias-alvarez/null-ls.nvim {:config (load-file :null-ls)})
+(use-package! :lukas-reineke/indent-blankline.nvim {:config (load-file :indent-blankline)})
+(use-package! :luukvbaal/nnn.nvim {:config (load-file :nnn)})
+(use-package! :pwntester/octo.nvim
+              {:config (call-setup :octo)
+               :requires [(pack :nvim-lua/plenary.nvim)
+                          (pack :nvim-telescope/telescope.nvim)
+                          (pack :kyazdani42/nvim-web-devicons)]})
 
 ;; lispy configs
 (use-package! :Olical/conjure
@@ -64,7 +81,7 @@
                                                 (require :pack.lsp))}) 
 
 (use-package! :ray-x/lsp_signature.nvim {:module :lsp_signature})
-(use-package! :folke/trouble.nvim {:cmd :Trouble :config (call-setup :trouble)})
+(use-package! :folke/trouble.nvim {:cmd :TroubleToggle :config (call-setup :trouble)})
 (use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :config (call-setup :fidget)})
 
 ;; git
@@ -78,10 +95,10 @@
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file :cmp)
                :wants [:LuaSnip]
-               :event [:InsertEnter :CmdlineEnter]
+               :event [:InsertEnter]
                :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
+                          ;; (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
                           (pack :PaterJason/cmp-conjure {:after :conjure})
                           (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
