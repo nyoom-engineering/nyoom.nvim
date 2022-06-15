@@ -1,22 +1,44 @@
-(fn ->str [x]
-  "Convert given parameter into a string"
-  (tostring x))
-
-(fn tbl? [x]
-  "Check if given parameter is a table"
-  (= :table (type x)))
+(local {: ->str : tbl?} (require :macros.lib.types))
 
 (λ custom-set-face! [name attributes colors]
-  "Defines a highlight group using the vim API.
-  e.g. (highlight! Error [:bold] {:fg :hex})"
+  "Sets a highlight group globally using the vim.api.nvim_set_hl API.
+  Accepts the following arguments:
+  name -> a symbol.
+  attributes -> a list of boolean attributes:
+    - bold
+    - italic
+    - reverse
+    - inverse
+    - standout
+    - underline
+    - underlineline
+    - undercurl
+    - underdot
+    - underdash
+    - strikethrough
+    - default
+  colors -> a table of colors:
+    - fg
+    - bg
+    - ctermfg
+    - ctermbg
+  Example of use:
+  ```fennel
+  (custom-set-face! Error [:bold] {:fg \"#ff0000\"})
+  ```
+  That compiles to:
+  ```fennel
+  (vim.api.nvim_set_hl 0 \"Error\" {:fg \"#ff0000\"
+                                    :bold true})
+  ```"
   (assert-compile (sym? name) "expected symbol for name" name)
   (assert-compile (tbl? attributes) "expected table for attributes" attributes)
   (assert-compile (tbl? colors) "expected colors for colors" colors)
   (let [name (->str name)
-        colors (collect [_ v (ipairs attributes) :into colors]
-                 (->str v)
-                 true)]
-    `(vim.api.nvim_set_hl 0 ,name ,colors)))
+        definition (collect [_ attr (ipairs attributes)
+                             :into colors]
+                     (->str attr) true)]
+    `(vim.api.nvim_set_hl 0 ,name ,definition)))
 
 (λ link! [new to old]
   "Defines a highlight group using the vim API.

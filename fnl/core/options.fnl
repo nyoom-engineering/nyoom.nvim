@@ -77,3 +77,12 @@
 
 ;; cmp options
 (set! completeopt [:menu :menuone :preview :noinsert])
+
+;; cmdhieght 0 is a nightly option
+(fn nightly? []
+   "Check if using Neovim nightly (0.8)"
+   (let [nightly (vim.fn.has :nvim-0.8.0)]
+     (= nightly 1)))
+
+(if (= true (nightly?))
+   (set! cmdheight 0))

@@ -1,4 +1,4 @@
-(import-macros {: let!} :macros.option-macros)
+(import-macros {: let!} :macros.variable-macros)
 
 (local which-key (require :which-key))
 (λ key [tbl prop] [(. tbl prop) prop])

@@ -1,5 +1,6 @@
 (require-macros :macros.highlight-macros)
-(import-macros {: set! : let!} :macros.option-macros)
+(import-macros {: set!} :macros.option-macros)
+(import-macros {: let!} :macros.variable-macros)
 
 ;; theme
 (set! termguicolors)
@@ -71,7 +72,8 @@
 (custom-set-face! CursorLineNr [:nil] {:fg carbon.base04 :bg carbon.none})
 (custom-set-face! Error [:nil] {:fg carbon.base04 :bg carbon.base11})
 (custom-set-face! LineNr [:nil] {:fg carbon.base03 :bg carbon.none})
-(custom-set-face! MatchParen [:underline] {:bg carbon.base02})
+;; (custom-set-face! MatchParen [:underline] {:bg carbon.base02})
+(vim.cmd "hi MatchParen gui=underline guibg=#393939")
 (custom-set-face! NonText [:nil] {:fg carbon.base02 :bg carbon.none})
 (custom-set-face! Normal [:nil] {:fg carbon.base04 :bg carbon.base00})
 (custom-set-face! Pmenu [:nil] {:fg carbon.base04 :bg carbon.base01})
@@ -233,10 +235,9 @@
 (custom-set-face! TermCursorNC [:nil] {:fg carbon.base00 :bg carbon.base04})
 
 ;; minimal highlights
-(custom-set-face! WinBarAccent [:nil] {:fg carbon.base04 :bg carbon.base01})
 (custom-set-face! StatusLine [:nil] {:fg carbon.base04 :bg carbon.base00})
 (custom-set-face! StatusPosition [:nil] {:fg :#a2a9b0 :bg carbon.base00})
-(custom-set-face! StatusNormal [:nil] {:fg carbon.base01 :bg carbon.base04})
+(custom-set-face! StatusNormal [:nil] {:fg carbon.base00 :bg carbon.base09})
 (custom-set-face! StatusReplace [:nil] {:fg carbon.base00 :bg carbon.base08})
 (custom-set-face! StatusInsert [:nil] {:fg carbon.base00 :bg carbon.base11})
 (custom-set-face! StatusVisual [:nil] {:fg carbon.base00 :bg carbon.base14})

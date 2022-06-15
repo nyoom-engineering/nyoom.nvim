@@ -1,36 +1,46 @@
-(local {: format} string)
-(local {: insert} table)
+(local {: str? : nil? : tbl?} (require :macros.lib.types))
 
-;; local to keep packages together to send to packer
-(local pkgs [])
+(tset _G :nyoom/pack [])
+(tset _G :nyoom/rock [])
 
-(fn str? [x]
-  "Check if given parameter is a string"
-  (= :string (type x)))
 
-(fn tbl? [x]
-  "Check if given parameter is a table"
-  (= :table (type x)))
-
-(fn nil? [x]
-  "Check if given parameter is nil"
-  (= :nil x))
-
-;; emacs-isms
 (λ pack [identifier ?options]
-  "Return a mixed table with the identifier as the first sequential element
-  and options as hash-table items"
+  "Return a mixed table with the identifier as the first sequential element and
+  options as hash-table items.
+  See https://github.com/wbthomason/packer.nvim for information about the
+  options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (assert-compile (or (not (nil? ?options)) (tbl? ?options)) "expected nil or table for options" ?options)
-  (doto (or ?options {})
-    (tset 1 identifier)))
+  (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
+  (let [options (or ?options {})]
+    (doto options (tset 1 identifier))))
+
+(λ rock [identifier ?options]
+  "Return a mixed table with the identifier as the first sequential element and
+  options as hash-table items.
+  See https://github.com/wbthomason/packer.nvim for information about the
+  options."
+  (assert-compile (str? identifier) "expected string for identifier" identifier)
+  (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
+  (let [options (or ?options {})]
+    (doto options (tset 1 identifier))))
 
 (λ use-package! [identifier ?options]
-  "Declares a plugin with its options. Saved on the global compile-time variable pkgs"
+  "Declares a plugin with its options. This macro adds it to the nyoom/pack
+  global table to later be used in the `unpack!` macro.
+  See https://github.com/wbthomason/packer.nvim for information about the
+  options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (assert-compile (or (not (nil? ?options)) (tbl? ?options))
-                  "expected nil or table for options" ?options)
-  (insert pkgs (pack identifier ?options)))
+  (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
+  (table.insert _G.nyoom/pack (pack identifier ?options)))
+
+(λ rock! [identifier ?options]
+  "Declares a rock with its options. This macro adds it to the nyoom/rock
+  global table to later be used in the `unpack!` macro.
+  See https://github.com/wbthomason/packer.nvim for information about the
+  options."
+  (assert-compile (str? identifier) "expected string for identifier" identifier)
+  (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
+  (table.insert _G.nyoom/rock (rock identifier ?options)))
 
 ;; make life easier
 (fn load-file [name]
@@ -53,19 +63,22 @@
                       (vim.cmd "if &ft == \"packer\" | echo \"\" | else | silent! e %"))
                     ,timer)))
 
-;; pack it all up
 (λ unpack! []
-  "Initializes the plugin manager with the previously declared plugins and
-  their options."
-  (let [packs (icollect [_ v (ipairs pkgs)]
-                `(use ,v))]
+  "Initializes the plugin manager with the plugins previously declared and
+  their respective options."
+  (let [packs (icollect [_ v (ipairs _G.nyoom/pack)] `(use ,v))
+        rocks (icollect [_ v (ipairs _G.nyoom/rock)] `(use_rocks ,v))]
+    (tset _G :nyoom/pack [])
+    (tset _G :nyoom/rock [])
     `((. (require :packer) :startup)
-      (fn [,(sym :use)]
-          ,(unpack (icollect [_ v (ipairs packs)] v))))))
+      (fn []
+        ,(unpack (icollect [_ v (ipairs packs) :into rocks] v))))))
 
-{: pack
- : defer!
- : unpack!
+{: rock
+ : pack
+ : rock!
+ : use-package!
  : load-file
  : call-setup
- : use-package!}
+ : defer!
+ : unpack!}

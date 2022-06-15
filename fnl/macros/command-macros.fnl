@@ -1,50 +1,80 @@
-(local {: format} string)
+(local {: args->tbl} (require :macros.lib.helpers))
+(local {: ->str : str? : nil?} (require :macros.lib.types))
+(local {: fn? : quoted? : quoted->fn : quoted->str} (require :macros.lib.compile-time))
 
-(fn empty? [xs]
-  (= 0 (length xs)))
-
-(fn nil? [x]
-  (= nil x))
-
-(fn str? [x]
-  (= :string (type x)))
-
-(fn ->str [x]
-  (tostring x))
-
-(fn head [xs]
-  (. xs 1))
-
-(fn fn? [x]
-  "Returns whether the parameter(s) is a function.
-  A function is defined as any list with 'fn or 'hashfn as their first
-  element."
-  (and
-    (list? x)
-    (or (= 'fn (head x))
-        (= 'hashfn (head x)))))
-
-(λ command! [name expr ?desc]
-  "Define a user command using the lua API.
-  See the help for nvim_add_user_command for more information."
-  (assert-compile (or (str? name) (sym? name)) "expected string or symbol for name" name)
-  (assert-compile (or (str? expr) (fn? expr) (sym? expr)) "expected string or function or symbol for expr" expr)
-  (assert-compile (or (nil? ?desc) (str? ?desc)) "expected string or nil for description" ?desc)
+(λ command! [name command ...]
+  "Create a new user command using the vim.api.nvim_create_user_command API.
+  Accepts the following arguments:
+  name -> must be a symbol.
+  command -> can be an string, a symbol, a function or a quoted expression.
+  ... -> a list of options. The valid boolean options are the following:
+         - force
+         - bang
+         - bar
+         - register
+         - keepscript
+         These options can be prepended by 'no' to set them to false.
+         The last option that doesn't have a pair and is not boolean will become the description.
+  Example of use:
+  ```fennel
+  (command! Salute '(print \"Hello World\")
+            :bang \"This is a description\")
+  ```
+  That compiles to:
+  ```fennel
+  (vim.api.nvim_create_user_command \"Salute\" (fn [] (print \"Hello World\"))
+                                    {:bang true
+                                     :desc \"This is a description\"})
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (assert-compile (or (str? command) (sym? command) (fn? command) (quoted? command)) "expected string, symbol, function or quoted expression for command" command)
   (let [name (->str name)
-        desc (if (and (not ?desc) (or (fn? expr) (sym? expr))) (view expr)
-               ?desc)]
-    `(vim.api.nvim_create_user_command ,name ,expr {:desc ,desc})))
+        options (args->tbl [...] {:booleans [:force :bang :bar :register :keepscript]
+                                  :last :desc})
+        options (if (nil? options.desc)
+                  (doto options (tset :desc (if (quoted? command) (quoted->str command)
+                                              (str? command) command
+                                              (view command))))
+                  options)
+        command (if (quoted? command) (quoted->fn command) command)]
+    `(vim.api.nvim_create_user_command ,name ,command ,options)))
 
-(λ local-command! [name expr ?desc]
-  "Define a user command using the lua API.
-  See the help for nvim_add_user_command for more information."
-  (assert-compile (or (str? name) (sym? name)) "expected string or symbol for name" name)
-  (assert-compile (or (str? expr) (fn? expr) (sym? expr)) "expected string or function or symbol for expr" expr)
-  (assert-compile (or (nil? ?desc) (str? ?desc)) "expected string or nil for description" ?desc)
+(λ local-command! [name command ...]
+  "Create a new user command using the vim.api.nvim_buf_create_user_command API.
+  Accepts the following arguments:
+  name -> must be a symbol.
+  command -> can be an string, a symbol, a function or a quoted expression.
+  ... -> a list of options. The valid boolean options are the following:
+         - force
+         - bang
+         - bar
+         - register
+         - keepscript
+         These options can be prepended by 'no' to set them to false.
+         The last option that doesn't have a pair and is not boolean will become the description.
+  Example of use:
+  ```fennel
+  (local-command! Salute '(print \"Hello World\")
+            :bang \"This is a description\")
+  ```
+  That compiles to:
+  ```fennel
+  (vim.api.nvim_buf_create_user_command \"Salute\" (fn [] (print \"Hello World\"))
+                                    {:bang true
+                                     :desc \"This is a description\"})
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (assert-compile (or (str? command) (sym? command) (fn? command) (quoted? command)) "expected string, symbol, function or quoted expression for command" command)
   (let [name (->str name)
-        desc (if (and (not ?desc) (or (fn? expr) (sym? expr))) (view expr)
-               ?desc)]
-    `(vim.api.nvim_buf_create_user_command ,name ,expr {:desc ,desc})))
+        options (args->tbl [...] {:booleans [:force :bang :bar :register :keepscript]
+                                  :last :desc})
+        options (if (nil? options.desc)
+                  (doto options (tset :desc (if (quoted? command) (quoted->str command)
+                                              (str? command) command
+                                              (view command))))
+                  options)
+        command (if (quoted? command) (quoted->fn command) command)]
+    `(vim.api.nvim_buf_create_user_command ,name ,command ,options)))
 
 {: command!
  : local-command!}
