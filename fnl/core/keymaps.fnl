@@ -15,13 +15,21 @@
                                   "h" ["<cmd>TSHighlightCapturesUnderCursor<cr>" "Capture Highlight"]
                                   "p" ["<cmd>TSPlayground<cr>" "Playground"]
                                   "w" ["<cmd>set wrap!<cr>" "linewrap"]
-                                  "z" ["<cmd>TZAtaraxis<cr>" "truezen"]}})
+                                  "z" ["<cmd>TZAtaraxis<cr>" "truezen"]
+                                  "f" ["<cmd>FloatToggle<cr>" "Toggle term float"]}})
 
 ;; NvimTree
 (which-key.register {"<leader>op" ["<cmd>NvimTreeToggle<CR>" "nvimtree"]})
 ;; (which-key.register {"<leader>on" ["<cmd>ToggleNNN<cr>" "nnn"]})
 (which-key.register {"<leader>oN" ["<cmd>ToggleNBB<cr>" "Toggle nbb"]})
 (which-key.register {"<leader>ob" ["<cmd>ToggleBTOP<cr>" "Toggle nbb"]})
+(which-key.register {"<leader>o-" ["<cmd>NnnPicker %:p:h<cr>" "Nnn Picker"]})
+(which-key.register {"<leader>ot" ["<cmd>exe v:count1.'ToggleTerm'<cr>" "Open term"]})
+
+(which-key.register {"<leader>sp" ["<cmd>Telescope live_grep<cr>" "Search project"]})
+(which-key.register {"<leader>sb" ["<cmd>Telescope current_buffer_fuzzy_find<cr>" "Search in open buffer"]})
+
+(which-key.register {"<leader>gg" ["<cmd>ToggleLazygit<cr>" "Open lazygit"]})
 
 ;; Conjure
 (which-key.register {"<localleader>E" "eval motion"
