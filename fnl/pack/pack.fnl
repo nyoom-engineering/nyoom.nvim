@@ -24,6 +24,7 @@
 ;; Navigation
 (use-package! :ggandor/lightspeed.nvim)
 ;; Terminal
+;; (use-package! :hkupty/nvimux {:config (call-setup :nvimux)})
 (use-package! :voldikss/vim-floaterm)
 (use-package! :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)})
 (use-package! :tpope/vim-surround)
@@ -89,20 +90,20 @@
 (use-package! :lewis6991/gitsigns.nvim {:opt true :setup (defer! :gitsigns.nvim 0) :config (call-setup :gitsigns)})
 
 ;; completion/copilot
-(use-package! :zbirenbaum/copilot.lua
-              {:event :InsertEnter})
+;; (use-package! :zbirenbaum/copilot.lua
+;;               {:event :InsertEnter})
 
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file :cmp)
                :wants [:LuaSnip]
-               :event [:InsertEnter]
+               :event [:InsertEnter :CmdlineEnter]
                :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
-                          ;; (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
+                          (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
                           (pack :PaterJason/cmp-conjure {:after :conjure})
                           (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
-                          (pack :zbirenbaum/copilot-cmp {:after :copilot.lua})
+                          ;; (pack :zbirenbaum/copilot-cmp {:after :copilot.lua})
                           (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
