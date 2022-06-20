@@ -26,6 +26,10 @@
 ;; Terminal
 ;; (use-package! :hkupty/nvimux {:config (call-setup :nvimux)})
 (use-package! :voldikss/vim-floaterm)
+(use-package! :kevinhwang91/promise-async)
+(use-package! :kevinhwang91/nvim-ufo
+              {:config (load-file :ufo)
+               :require [(pack :kevinhwang91/promise-async)]})
 (use-package! :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)})
 (use-package! :tpope/vim-surround)
 (use-package! :numToStr/Comment.nvim {:config (call-setup :Comment)})
