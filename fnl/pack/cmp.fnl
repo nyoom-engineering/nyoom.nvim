@@ -84,7 +84,7 @@
         :sources [{:name :nvim_lsp}
                   {:name :luasnip}
                   {:name :path}
-                  {:name :buffer}
+                  {:name :buffer :option {:keyword_pattern "\\k\\+"}}
                   {:name :conjure}
                   {:name :copilot}]
         :sorting {:comparators [compare.offset
@@ -100,8 +100,3 @@
                                (set vim-item.menu vim-item.kind)
                                (set vim-item.kind (. icons vim-item.kind))
                                vim-item)}})
-
-;; cmdline setup
-(setup.cmdline ":"
-               {:view {:separator "|"}
-                :sources [{:name :path} {:name :cmdline}]})

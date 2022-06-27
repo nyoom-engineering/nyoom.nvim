@@ -53,16 +53,6 @@
       ((. (require ,name) :setup)
        ,config)))
 
-(fn defer! [name timer]
-  "To load a plugin after vim has started"
-  `(λ []
-      (vim.defer_fn (fn []
-                      ((. (require :packer) :loader) ,name))
-                    ,timer)
-      (vim.defer_fn (fn []
-                      (vim.cmd "if &ft == \"packer\" | echo \"\" | else | silent! e %"))
-                    ,timer)))
-
 (λ unpack! []
   "Initializes the plugin manager with the plugins previously declared and
   their respective options."
@@ -80,5 +70,7 @@
  : use-package!
  : load-file
  : call-setup
- : defer!
  : unpack!}
+
+
+

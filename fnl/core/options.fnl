@@ -4,6 +4,14 @@
 (set! updatetime 200)
 (set! timeoutlen 500)
 
+;; guicursor tweaks 
+(set! guicursor "n-v-sm:block,i-c-ci-ve:ver25,r-cr-o:hor20")
+
+;; use treesitter for folding
+(set! foldlevel 100)
+(set! foldmethod :expr) 
+(set! foldexpr "nvim_treesitter#foldexpr()")
+
 ;; Show regex differences in a split
 (set! inccommand :split)
 
@@ -25,6 +33,10 @@
                  :foldsep "│"
                  :foldopen "▾"
                  :foldclose "▸"})
+
+;; and the same treatment for trailing characters
+(set! list)
+(set! listchars {:tab "> " :nbsp "␣" :trail "-"})
 
 ;; Use clipboard outside Neovim
 (set! clipboard :unnamedplus)
