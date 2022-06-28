@@ -24,7 +24,8 @@
 (which-key.register {"<leader>oN" ["<cmd>ToggleNBB<cr>" "Toggle nbb"]})
 (which-key.register {"<leader>ob" ["<cmd>ToggleBTOP<cr>" "Toggle nbb"]})
 (which-key.register {"<leader>o-" ["<cmd>NnnPicker %:p:h<cr>" "Nnn Picker"]})
-(which-key.register {"<leader>ot" ["<cmd>exe v:count1.'ToggleTerm'<cr>" "Open term"]})
+(which-key.register {"<leader>ot" ["<cmd>exe v:count1 . 'ToggleTerm'<cr>" "Open term"]})
+(which-key.register {"<leader>oT" ["<cmd>ToggleTerm  direction=tab<cr>" "Open term"]})
 
 (which-key.register {"<leader>sp" ["<cmd>Telescope live_grep<cr>" "Search project"]})
 (which-key.register {"<leader>sb" ["<cmd>Telescope current_buffer_fuzzy_find<cr>" "Search in open buffer"]})
@@ -55,8 +56,9 @@
                                     "w" (key vim.diagnostic :open_float)
                                     "q" (key vim.diagnostic :setloclist)
                                     ; code
-                                    "r" (key vim.lsp.buf :rename)
-                                    "a" (key vim.lsp.buf :code_action)
+                                    ;; "r" (key vim.lsp.buf :rename)
+                                    ;; "a" (key vim.lsp.buf :code_action)
+                                    "a" ["<cmd>Lspsaga code_action<cr>" "code action"]
                                     "f" (key vim.lsp.buf :formatting)}
                        "<leader>W" {:name "lsp workspace"
                                     "a" (key vim.lsp.buf :add_workspace_folder)
@@ -64,7 +66,13 @@
                                     "l" [(fn [] (print (vim.inspect (vim.lsp.buf.list_workspace_folders))))
                                          "list_workspace_folders"]}
                        ; reassgn some builtin mappings
-                       "K"  (key vim.lsp.buf :hover)
+                       ;; "K"  (key vim.lsp.buf :hover)
+                       ;; "K"  ["<cmd>Lspsaga hover_doc<cr>" "Documentation"]
+                       "<C-j>" ["<cmd>Lspsaga disgnostic_jump_next<cr>" "Jump to next diagnostics"]
+                       "<C-k>" ["<cmd>Lspsaga signature_help<cr>" "Signature help"]
+                       "gh" ["<cmd>Lspsaga lsp_finder<cr>" "LSP Finder"]
+                       "gp" ["<cmd>Lspsaga preview_definition<cr>" "Preview Definition"]
+                       "gr" ["<cmd>Lspsaga rename<cr>" "LSP rename"]
                        "gd" (key vim.lsp.buf :definition)
                        "gD" (key vim.lsp.buf :declaration)}
                ; only for one buffer

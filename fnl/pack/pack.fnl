@@ -26,10 +26,21 @@
 ;; Terminal
 ;; (use-package! :hkupty/nvimux {:config (call-setup :nvimux)})
 (use-package! :voldikss/vim-floaterm)
-(use-package! :kevinhwang91/promise-async)
+;; (use-package! :ray-x/navigator.lua
+;;               {:config (call-setup :navigator)
+;;                :requires [(pack :ray-x/guihua.lua {:run "cd lua/fzy && make"})
+;;                           (pack :neovim/nvim-lspconfig)]})
+(use-package! :anuvyklack/hydra.nvim
+              {:requires [(pack :anuvyklack/keymap-layer.nvim)]})
+(use-package! :sindrets/diffview.nvim
+              {:config (call-setup :diffview)
+               :requires [(pack :nvim-lua/plenary.nvim)]})
 (use-package! :kevinhwang91/nvim-ufo
               {:config (load-file :ufo)
-               :require [(pack :kevinhwang91/promise-async)]})
+               :requires [(pack :kevinhwang91/promise-async)]})
+(use-package! :glepnir/lspsaga.nvim
+              {:branch :main 
+               :config (load-file :lspsaga)})
 (use-package! :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)})
 (use-package! :tpope/vim-surround)
 (use-package! :numToStr/Comment.nvim {:config (call-setup :Comment)})
