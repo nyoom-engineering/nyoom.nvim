@@ -7,8 +7,10 @@
 (let! mapleader " ")
 (let! maplocalleader " m")
 
-;; easier command line mode
-(which-key.register {";" [":" "vim-ex"]})
+;; easier command line mode + floating menu
+(λ set-cmdline-keys! []
+  (which-key.register {";" [":" "vim-ex"]})
+  (which-key.register {":" ["<cmd>FineCmdline<CR>" "vim-ex"]}))
 
 ;; Visuals
 (which-key.register {"<leader>t" {:name "Visuals"
@@ -87,4 +89,5 @@
                                   "f" ["<cmd>Telescope current_buffer_fuzzy_find<cr>" "Grep Buffer"]
                                   "r" ["<cmd>Telescope oldfiles<cr>" "Recent Files"]}})
 
-{: set-lsp-keys!}
+{: set-lsp-keys!
+ : set-cmdline-keys!}

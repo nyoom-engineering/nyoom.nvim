@@ -3,7 +3,7 @@
         : second} (require :macros.lib.seq))
 (local {: djb2} (require :macros.lib.crypt))
 
-(λ expr->str [expr]
+(lambda expr->str [expr]
   `(macrodebug ,expr nil))
 
 (fn fn? [x]
@@ -20,19 +20,19 @@
   (and (list? x)
        (= 'quote (first x))))
 
-(λ quoted->fn [expr]
+(lambda quoted->fn [expr]
   "Converts an expression like `(quote (+ 1 1))` into `(fn [] (+ 1 1))`."
   (assert-compile (quoted? expr) "expected quoted expression for expr" expr)
   (let [non-quoted (second expr)]
     `(fn [] ,non-quoted)))
 
-(λ quoted->str [expr]
+(lambda quoted->str [expr]
   "Converts a quoted expression like `(quote (+ 1 1))` into an string with its shorthand form."
   (assert-compile (quoted? expr) "expected quoted expression for expr" expr)
   (let [non-quoted (second expr)]
     (.. "'" (view non-quoted))))
 
-(λ expand-exprs [exprs]
+(lambda expand-exprs [exprs]
   "Converts a list of expressions into either an expression - if only one
   expression is in the list - or a do-expression containing the expressions."
   (if (> (length exprs) 1)
@@ -40,7 +40,7 @@
        ,(unpack exprs))
     (first exprs)))
 
-(λ gensym-checksum [x ?options]
+(lambda gensym-checksum [x ?options]
   "Generates a new symbol from the checksum of the object passed as a parameter
   after it is casted into an string using the `view` function.
   You can also pass a prefix or a suffix into the options optional table.
@@ -48,9 +48,9 @@
   (let [options (or ?options {})
         prefix (or options.prefix "")
         suffix (or options.suffix "")]
-    (sym (.. prefix (string.format "%x" (djb2 (view x))) suffix))))
+    (sym (.. prefix (djb2 (view x)) suffix))))
 
-(λ vlua [x]
+(lambda vlua [x]
   "Return a symbol mapped to `v:lua.%s()` where `%s` is the symbol."
   (assert-compile (sym? x) "expected symbol for x" x)
   (string.format "v:lua.%s()" (->str x)))

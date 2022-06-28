@@ -1,5 +1,4 @@
 (local lsp (require :lspconfig))
-(local {: set-lsp-keys!} (require :core.keymaps))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
@@ -23,6 +22,7 @@
        (with handlers.hover {:border :solid})))
 
 (fn on-attach [client bufnr]
+  (local {: set-lsp-keys!} (require :core.keymaps))
   ;; set keymaps via which-key
   (set-lsp-keys! bufnr)
    ;; lsp_signature on attaching the server
@@ -40,12 +40,16 @@
   (local {: contains?} (require :macros.lib.seq))
   (when (client.supports_method "textDocument/formatting")
     (augroup! lsp-format-before-saving
-      (clear! :buffer bufnr)
+      (clear! {:buffer bufnr})
       (autocmd! BufWritePre <buffer>
-        '(vim.lsp.buf.format {:filter #(not (contains? [:jsonls :tsserver] $)) ;; add servers you don't want to format
+        '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
                               :bufnr bufnr})
-        :buffer bufnr))))
-
+        {:buffer bufnr})))
+  ;; Display hints on hover
+  (local {:inlay_hints inlay-hints!} (require :lsp_extensions))
+  (augroup! lsp-display-hints
+    (autocmd! [CursorHold CursorHoldI] *.rs
+      '(inlay-hints! {}))))
 
 ;; What should the lsp be demanded of? Normally this would
 (local capabilities (vim.lsp.protocol.make_client_capabilities))

@@ -85,6 +85,9 @@
                   {:name :path}
                   {:name :buffer}
                   {:name :conjure}]
+                  {:name :buffer :option {:keyword_pattern "\\k\\+"}}
+                  {:name :conjure}
+                  {:name :copilot}]
         :sorting {:comparators [compare.offset
                                 compare.exact
                                 compare.score
