@@ -7,9 +7,11 @@
 (let! mapleader " ")
 (let! maplocalleader " m")
 
-;; easier command line mode + floating menu
+;; easier command line mode + 
+(which-key.register {";" [":" "vim-ex"]})
+
+;; floating menu
 (λ set-cmdline-keys! []
-  (which-key.register {";" [":" "vim-ex"]})
   (which-key.register {":" ["<cmd>FineCmdline<CR>" "vim-ex"]}))
 
 ;; Visuals
