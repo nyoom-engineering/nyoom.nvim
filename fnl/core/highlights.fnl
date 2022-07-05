@@ -7,6 +7,11 @@
 (set! background :dark)
 (set! guifont "Liga SFMono Nerd Font:h15")
 
+;; neovide options
+(let! neovide_cursor_vfx_mode :pixiedust)
+(let! neovide_floating_blur_amount_x 5.0)
+(let! neovide_floating_blur_amount_y 5.0)
+
 ;; Losely based off of IBM Carbon Palette [https://www.ibm.com/brand/experience-guides/developer/brand/color/)
 (local carbon (or (and (= vim.o.background :dark)
                    {:base00 "#161616" ;; The origin color or the Carbon palette
