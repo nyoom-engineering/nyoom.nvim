@@ -38,13 +38,13 @@
   ;; Format buffer before saving
   (import-macros {: autocmd! : augroup! : clear!} :macros.event-macros)
   (local {: contains?} (require :macros.lib.seq))
-  (when (client.supports_method "textDocument/formatting")
-    (augroup! lsp-format-before-saving
-      (clear! {:buffer bufnr})
-      (autocmd! BufWritePre <buffer>
-        '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
-                              :bufnr bufnr})
-        {:buffer bufnr})))
+  ;; (when (client.supports_method "textDocument/formatting")
+  ;;   (augroup! lsp-format-before-saving
+  ;;     (clear! {:buffer bufnr})
+  ;;     (autocmd! BufWritePre <buffer>
+  ;;       '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
+  ;;                             :bufnr bufnr})
+  ;;       {:buffer bufnr})))
   ;; Display hints on hover
   (local {:inlay_hints inlay-hints!} (require :lsp_extensions))
   (augroup! lsp-display-hints
@@ -73,8 +73,8 @@
 
 ;; for simple servers jsut add them to the list
 (let [servers [:clojure_lsp
-               :jsonls
-               :lemminx
+               :rust_analyzer
+               :rnix
                :pyright]]
   (each [_ server (ipairs servers)]
     ((. (. lsp server) :setup) defaults)))

@@ -70,14 +70,16 @@
 (use-package! :jose-elias-alvarez/null-ls.nvim {:config (load-file :null-ls)})
 (use-package! :lukas-reineke/indent-blankline.nvim {:config (load-file :indent-blankline)})
 (use-package! :luukvbaal/nnn.nvim {:config (load-file :nnn)})
-(use-package! :pwntester/octo.nvim
-              {:config (call-setup :octo)
-               :requires [(pack :nvim-lua/plenary.nvim)
-                          (pack :nvim-telescope/telescope.nvim)
-                          (pack :kyazdani42/nvim-web-devicons)]})
+(use-package! :shaunsingh/nord.nvim)
+;; (use-package! :potamides/pantran.nvim {:config (load-file :pantran)})
+;; (use-package! :pwntester/octo.nvim
+;;               {:config (call-setup :octo)
+;;                :requires [(pack :nvim-lua/plenary.nvim)
+;;                           (pack :nvim-telescope/telescope.nvim)
+;;                           (pack :kyazdani42/nvim-web-devicons)]})
 
 ;; lispy configs
-(use-package! :rktjmp/hotpot.nvim {:branch :nightly})
+(use-package! :rktjmp/hotpot.nvim)
 (use-package! :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
 (use-package! :Olical/conjure {:branch :develop
                                :ft lisp-ft
@@ -89,6 +91,7 @@
               {:config (load-file :telescope)
                :cmd :Telescope
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})
+                          (pack :nvim-telescope/telescope-ghq.nvim)
                           (pack :nvim-telescope/telescope-project.nvim
                                 {:module :telescope._extensions.project})
                           (pack :nvim-telescope/telescope-fzf-native.nvim
@@ -122,10 +125,6 @@
                                                 (require :pack.lspinstall)
                                                 (require :pack.lsp))}) 
 
-(use-package! :ray-x/lsp_signature.nvim {:module :lsp_signature})
-(use-package! :folke/trouble.nvim {:cmd :TroubleToggle :config (call-setup :trouble)})
-(use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :config (call-setup :fidget)})
-
 ;; git
 (use-package! :TimUntersberger/neogit {:config (call-setup :neogit) :cmd :Neogit})
 (use-package! :lewis6991/gitsigns.nvim {:opt true
@@ -141,12 +140,13 @@
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file :cmp)
                :wants :LuaSnip
-               :event :InsertEnter
+               :event [:InsertEnter :CmdLineEnter]
                :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
                           (pack :PaterJason/cmp-conjure {:after :conjure})
                           (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
+                          (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
                           ;; (pack :zbirenbaum/copilot-cmp {:after :copilot.lua})
                           (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
@@ -185,7 +185,7 @@
 ;;                                               :requires [(pack :MunifTanjim/nui.nvim)]})
 
 ;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. 
-(use-package! :nvim-neorg/neorg {:config (load-file :neorg) :ft :norg :after :nvim-treesitter})
+;; (use-package! :nvim-neorg/neorg {:config (load-file :neorg) :ft :norg :after :nvim-treesitter})
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)
