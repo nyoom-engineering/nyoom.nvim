@@ -1,7 +1,3 @@
--- use opt-in filetype.lua instead of vimscript default
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
-
 -- A function that applies passes the output of string.format to the print
 -- function
 ---@param string string #template string

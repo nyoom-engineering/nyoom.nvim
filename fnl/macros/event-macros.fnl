@@ -2,7 +2,7 @@
 (local {: ->str : nil? : tbl? : str?} (require :macros.lib.types))
 (local {: fn? : quoted? : quoted->fn : quoted->str : expand-exprs} (require :macros.lib.compile-time))
 
-(lambda autocmd! [event pattern command ?options]
+(λ autocmd! [event pattern command ?options]
   "Create an autocommand using the nvim_create_autocmd API.
 
   Accepts the following arguments:
@@ -56,7 +56,7 @@
                   options)]
     `(vim.api.nvim_create_autocmd ,event ,options)))
 
-(lambda augroup! [name ...]
+(λ augroup! [name ...]
   "Create an augroup using the nvim_create_augroup API.
   Accepts either a name or a name and a list of autocmd statements.
 
@@ -88,7 +88,7 @@
           (let [[_ ?options] expr]
             `(clear! ,name ,?options)))))))
 
-(lambda clear! [name ?options]
+(λ clear! [name ?options]
   "Clears an augroup using the nvim_clear_autocmds API.
 
   Example of use:

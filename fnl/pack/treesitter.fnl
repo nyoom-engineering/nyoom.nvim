@@ -29,7 +29,8 @@
                       :disable []
                       :is_supported tsq.has_locals}}})
 ;; the usual
-(setup {:ensure_installed [:lua :vim :fennel :markdown :nix]
+(setup {:ensure_installed :all
+        :ignore_install [:phpdoc :norg]
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
         :rainbow {:enable true 

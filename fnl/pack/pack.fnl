@@ -1,16 +1,17 @@
 (require-macros :macros.package-macros)
 
 ;; Setup packer
-(local {: init} (require :packer))
-(init {:autoremove true
-              :git {:clone_timeout 300}
-              :profile {:enable true}
-              :compile_path (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")
-              :display {:header_lines 2
-                        :title " packer.nvim"
-                        :open_fn (λ open_fn []
-                                   (local {: float} (require :packer.util))
-                                   (float {:border :solid}))}})
+(let [packer (require :packer)]
+   (packer.init {:max_jobs 50
+                 :autoremove true
+                 :git {:clone_timeout 300}
+                 :profile {:enable true}
+                 :compile_path (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")
+                 :display {:header_lines 2
+                           :title " packer.nvim"
+                           :open_fn (λ open_fn []
+                                      (local {: float} (require :packer.util))
+                                      (float {:border :solid}))}}))
 
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])

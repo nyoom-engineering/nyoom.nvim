@@ -86,6 +86,25 @@
                                             "%#StatusPosition#"
                                             " %l:%c "])))
 
+(set Statusline.winbar (fn []
+                         (table.concat ["%#WinBar#"
+                                        " %f "
+                                        "%="
+                                        "%#StatusPosition#"
+                                        (color)
+                                        " %l:%c "])))
+
 (set! noshowmode)
 (set! laststatus 3)
 (set! statusline "%!v:lua.Statusline.statusline()")
+
+;; winbar is a nightly option
+(fn nightly? []
+   "Check if using Neovim nightly (0.8)"
+   (let [nightly (vim.fn.has :nvim-0.8.0)]
+     (= nightly 1)))
+
+(if (= true (nightly?))
+   (set! winbar "%!v:lua.Statusline.winbar()"))
+ 
+ 
