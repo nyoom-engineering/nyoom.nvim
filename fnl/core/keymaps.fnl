@@ -59,6 +59,7 @@
                                     "j" (key vim.diagnostic :goto_next)
                                     "w" (key vim.diagnostic :open_float)
                                     "q" (key vim.diagnostic :setloclist)
+                                    "x" ["<cmd>TroubleToggle document_diagnostics<cr>" "Diagnostics"]
                                     ; code
                                     ;; "r" (key vim.lsp.buf :rename)
                                     ;; "a" (key vim.lsp.buf :code_action)
