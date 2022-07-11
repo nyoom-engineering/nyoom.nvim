@@ -7,12 +7,7 @@
 (set! background :dark)
 (set! guifont "Liga SFMono Nerd Font:h15")
 
-;; neovide options
-(let! neovide_cursor_vfx_mode :pixiedust)
-(let! neovide_floating_blur_amount_x 5.0)
-(let! neovide_floating_blur_amount_y 5.0)
-
-;; Losely based off of IBM Carbon Palette [https://www.ibm.com/brand/experience-guides/developer/brand/color/)
+;; Losely based off of IBM Carbon Palette (https://www.ibm.com/brand/experience-guides/developer/brand/color/)
 (local carbon (or (and (= vim.o.background :dark)
                    {:base00 "#161616" ;; The origin color or the Carbon palette
                     :base01 "#262626" ;; A brighter shade color based on base00
@@ -23,34 +18,34 @@
                     :base06 "#ffffff" ;; The brightest shade color based on base04
                     :base07 "#08bdba" ;; A calm and highly contrasted color reminiscent of glowing ice
                     :base08 "#3ddbd9" ;; The bright and shiny primary accent color reminiscent of pure and clear energy
-                    :base09 "#ff7eb6" ;; A more darkened and less saturated color reminiscent of cherry blossoms
+                    :base09 "#78a9ff" ;; And the sky was never quite the same shade of blue again
                     :base10 "#ee5396" ;; A dark and intensive color reminiscent of the withering flowers come fall
                     :base11 "#33b1ff" ;; But never have I been a blue calm sea. I have always been a storm
-                    :base12 "#78a9ff" ;; And the sky was never quite the same shade of blue again
+                    :base12 "#ff7eb6" ;; A more darkened and less saturated color reminiscent of cherry blossoms
                     :base13 "#42be65" ;; Nature in her green, tranquil woods heals and soothes all afflictions
                     :base14 "#be95ff" ;; I want to watch wisteria grow right over my bare feet
                     :base15 "#82cfff" ;; A book must be an ice axe to break the seas frozen inside our soul
                     :blend  "#131313" ;; Blend of #000000 & base00 for darker accents 
                     :none :NONE})
-               {:base00 "#ECEFF4" ;; The origin color or the Carbon palette
-                :base01 "#E5E9F0" ;; A brighter shade color based on base00
-                :base02 "#D8DEE9" ;; An even more brighter shade color of base00
-                :base03 "#4C566A" ;; The brightest shade color based on base00
-                :base04 "#434C5E" ;; The origin color or the Snow Storm sequence.
-                :base05 "#3B4252" ;; A brighter shade color of base04
-                :base06 "#2E3440" ;; The brightest shade color based on base04
-                :base07 "#8FBCBB" ;; A calm and highly contrasted color reminiscent of glowing ice
-                :base08 "#88C0D0" ;; The bright and shiny primary accent color reminiscent of pure and clear energy
-                :base09 "#81A1C1" ;; A more darkened and less saturated color reminiscent of cherry blossoms
-                :base10 "#5E81AC" ;; A dark and intensive color reminiscent of the withering flowers come fall
-                :base11 "#BF616A" ;; But never have I been a blue calm sea. I have always been a storm
-                :base12 "#D08770" ;; And the sky was never quite the same shade of blue again
-                :base13 "#EBCB8B" ;; Nature in her green, tranquil woods heals and soothes all afflictions
-                :base14 "#A3BE8C" ;; I want to watch wisteria grow right over my bare feet
-                :base15 "#B48EAD" ;; A book must be an ice axe to break the seas frozen inside our soul
-                :blend  "#FAFAFA" ;; Blend of #000000 & base00 for darker accents 
+               {:base00 "#FFFFFF" ;; The origin color or the Carbon palette
+                :base01 "#FAFAFA" ;; A brighter shade color based on base00
+                :base02 "#ECEFF1" ;; An even more brighter shade color of base00
+                :base03 "#161616" ;; The brightest shade color based on base00
+                :base04 "#37474F" ;; The origin color or the Snow Storm sequence.
+                :base05 "#90A4AE" ;; A brighter shade color of base04
+                :base06 "#525252" ;; The brightest shade color based on base04
+                :base07 "#08bdba" ;; A calm and highly contrasted color reminiscent of glowing ice
+                :base08 "#ff7eb6" ;; The bright and shiny primary accent color reminiscent of pure and clear energy
+                :base09 "#ee5396" ;; A more darkened and less saturated color reminiscent of cherry blossoms
+                :base10 "#FF6F00" ;; A dark and intensive color reminiscent of the withering flowers come fall
+                :base11 "#0f62fe" ;; But never have I been a blue calm sea. I have always been a storm
+                :base12 "#673AB7" ;; And the sky was never quite the same shade of blue again
+                :base13 "#42be65" ;; Nature in her green, tranquil woods heals and soothes all afflictions
+                :base14 "#be95ff" ;; I want to watch wisteria grow right over my bare feet
+                :base15 "#FFAB91" ;; A book must be an ice axe to break the seas frozen inside our soul
+                :blend  "#FAFAFA" ;; Blend of #FFFFFF & base00 for darker accents 
                 :none :NONE}))
-  
+
 ;; terminal 
 (let! terminal_color_0 carbon.base01)
 (let! terminal_color_1 carbon.base11)
@@ -190,7 +185,7 @@
 (custom-set-face! TSException [] {:fg carbon.base15 :bg carbon.none})
 (custom-set-face! TSField [] {:fg carbon.base04 :bg carbon.none})
 (custom-set-face! TSFloat [] {:fg carbon.base15 :bg carbon.none})
-(custom-set-face! TSFunction [] {:fg carbon.base12})
+(custom-set-face! TSFunction [:bold] {:fg carbon.base12})
 (custom-set-face! TSFuncBuiltin [] {:fg carbon.base12 :bg carbon.none})
 (custom-set-face! TSFuncMacro [] {:fg carbon.base07 :bg carbon.none})
 (custom-set-face! TSInclude [] {:fg carbon.base09 :bg carbon.none})
@@ -212,7 +207,7 @@
 (custom-set-face! TSString [] {:fg carbon.base14 :bg carbon.none})
 (custom-set-face! TSStringRegex [] {:fg carbon.base07 :bg carbon.none})
 (custom-set-face! TSStringEscape [] {:fg carbon.base15 :bg carbon.none})
-(custom-set-face! TSSymbol [] {:fg carbon.base15})
+(custom-set-face! TSSymbol [:bold] {:fg carbon.base15})
 (custom-set-face! TSTag [] {:fg carbon.base04 :bg carbon.none})
 (custom-set-face! TSTagDelimiter [] {:fg carbon.base15 :bg carbon.none})
 (custom-set-face! TSText [] {:fg carbon.base04 :bg carbon.none})
@@ -239,13 +234,14 @@
 (custom-set-face! TermCursorNC [] {:fg carbon.base00 :bg carbon.base04})
 
 ;; minimal highlights
-(custom-set-face! StatusLine [] {:fg carbon.base04 :bg carbon.base00})
+(custom-set-face! StatusLine [] {:fg carbon.base03 :bg carbon.base00})
+(custom-set-face! WinBar [] {:fg :#a2a9b0 :bg carbon.base00})
+(custom-set-face! StatusNormal [:underline] {:fg :#a2a9b0 :bg carbon.base00})
 (custom-set-face! StatusPosition [] {:fg :#a2a9b0 :bg carbon.base00})
-(custom-set-face! StatusNormal [] {:fg carbon.base00 :bg carbon.base09})
 (custom-set-face! StatusReplace [] {:fg carbon.base00 :bg carbon.base08})
-(custom-set-face! StatusInsert [] {:fg carbon.base00 :bg carbon.base11})
+(custom-set-face! StatusInsert [] {:fg carbon.base00 :bg carbon.base12})
 (custom-set-face! StatusVisual [] {:fg carbon.base00 :bg carbon.base14})
-(custom-set-face! StatusTerminal [] {:fg carbon.base00 :bg carbon.base15})
+(custom-set-face! StatusTerminal [] {:fg carbon.base00 :bg carbon.base11})
 (custom-set-face! StatusLineDiagnosticWarn [:bold] {:fg carbon.base14 :bg carbon.base00})
 (custom-set-face! StatusLineDiagnosticError [:bold] {:fg carbon.base09 :bg carbon.base00})
 (link! StatusCommand => StatusNormal)
