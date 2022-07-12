@@ -72,7 +72,7 @@
 (use-package! :lukas-reineke/indent-blankline.nvim {:config (load-file :indent-blankline)})
 (use-package! :luukvbaal/nnn.nvim {:config (load-file :nnn)})
 (use-package! :shaunsingh/nord.nvim)
-;; (use-package! :potamides/pantran.nvim {:config (load-file :pantran)})
+(use-package! :potamides/pantran.nvim {:config (load-file :pantran)})
 ;; (use-package! :pwntester/octo.nvim
 ;;               {:config (call-setup :octo)
 ;;                :requires [(pack :nvim-lua/plenary.nvim)
@@ -126,6 +126,11 @@
                                                 (require :pack.lspinstall)
                                                 (require :pack.lsp))}) 
 
+;; Debug
+(use-package! :rcarriga/nvim-dap-ui
+             {:requires [(pack :mfussenegger/nvim-dap)]})
+(use-package! :theHamsta/nvim-dap-virtual-text {:config (call-setup :nvim-dap-virtual-text)})
+(use-package! :Pocco81/dap-buddy.nvim)
 ;; git
 (use-package! :TimUntersberger/neogit {:config (call-setup :neogit) :cmd :Neogit})
 (use-package! :lewis6991/gitsigns.nvim {:opt true

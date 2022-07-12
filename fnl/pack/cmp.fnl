@@ -62,23 +62,23 @@
                   :<C-e> (mapping.abort)
                   :<C-n> (mapping (mapping.select_next_item {:behavior insert-behavior}) [:i :s])
                   :<C-p> (mapping (mapping.select_prev_item {:behavior insert-behavior}) [:i :s])
-                  :<Tab> (mapping (fn [fallback]
-                                    (if (visible)
-                                        (mapping.select_next_item {:behavior insert-behavior})
-                                        (expand_or_jumpable)
-                                        (expand_or_jump)
-                                        (has-words-before)
-                                        (vim.fn.feedkeys (replace-termcodes :<Tab>)
-                                                         :n)
-                                        (fallback)))
-                                  [:i :s :c])
-                  :<S-Tab> (mapping (fn [fallback]
-                                      (if (visible)
-                                          (mapping.select_prev_item {:behavior insert-behavior})
-                                          (jumpable -1)
-                                          (jump -1)
-                                          (fallback)))
-                                    [:i :s :c])
+                  ;; :<Tab> (mapping (fn [fallback]
+                  ;;                   (if (visible)
+                  ;;                       (mapping.select_next_item {:behavior insert-behavior})
+                  ;;                       (expand_or_jumpable)
+                  ;;                       (expand_or_jump)
+                  ;;                       (has-words-before)
+                  ;;                       (vim.fn.feedkeys (replace-termcodes :<Tab>)
+                  ;;                                        :n)
+                  ;;                       (fallback)))
+                  ;;                 [:i :s :c])
+                  ;; :<S-Tab> (mapping (fn [fallback]
+                  ;;                     (if (visible)
+                  ;;                         (mapping.select_prev_item {:behavior insert-behavior})
+                  ;;                         (jumpable -1)
+                  ;;                         (jump -1)
+                  ;;                         (fallback)))
+                  ;;                   [:i :s :c])
                   :<C-Space> (mapping.confirm {:select true})}
         :sources [{:name :nvim_lsp}
                   {:name :luasnip}

@@ -1,3 +1,3 @@
 (local setup (require :pantran))
 
-(setup {:engines {:default_engine :google}})
+(setup {:engines {:default_engine "google"}})
