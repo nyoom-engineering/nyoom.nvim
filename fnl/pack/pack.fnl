@@ -65,14 +65,15 @@
               {:branch :main 
                :config (load-file :lspsaga)})
 (use-package! :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)})
-(use-package! :tpope/vim-surround)
+(use-package! :kylechui/nvim-surround {:config (call-setup :nvim-surround)})
 (use-package! :numToStr/Comment.nvim {:config (call-setup :Comment)})
 (use-package! :akinsho/toggleterm.nvim {:config (load-file :toggleterm)})
 (use-package! :jose-elias-alvarez/null-ls.nvim {:config (load-file :null-ls)})
 (use-package! :lukas-reineke/indent-blankline.nvim {:config (load-file :indent-blankline)})
 (use-package! :luukvbaal/nnn.nvim {:config (load-file :nnn)})
-(use-package! :shaunsingh/nord.nvim)
-(use-package! :potamides/pantran.nvim {:config (load-file :pantran)})
+(use-package! :folke/tokyonight.nvim)
+(use-package! "https://gitlab.com/yorickpeterse/nvim-window.git")
+;; (use-package! :potamides/pantran.nvim {:config (load-file :pantran)})
 ;; (use-package! :pwntester/octo.nvim
 ;;               {:config (call-setup :octo)
 ;;                :requires [(pack :nvim-lua/plenary.nvim)

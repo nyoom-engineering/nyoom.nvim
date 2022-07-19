@@ -21,7 +21,9 @@
                                   "w" ["<cmd>set wrap!<cr>" "linewrap"]
                                   "z" ["<cmd>TZAtaraxis<cr>" "truezen"]
                                   "f" ["<cmd>FloatToggle<cr>" "Toggle term float"]}})
-
+;; window management
+(which-key.register {"<leader>w" {:name "Windows"
+                                  "<C-w>" ["<cmd>lua require('nvim-window').pick()<cr>" "nvim window"]}})
 ;; NvimTree
 (which-key.register {"<leader>op" ["<cmd>NvimTreeToggle<CR>" "nvimtree"]})
 ;; (which-key.register {"<leader>on" ["<cmd>ToggleNNN<cr>" "nnn"]})
