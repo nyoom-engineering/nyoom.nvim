@@ -37,6 +37,8 @@
 (which-key.register {"<leader>sb" ["<cmd>Telescope current_buffer_fuzzy_find<cr>" "Search in open buffer"]})
 
 (which-key.register {"<leader>gg" ["<cmd>ToggleLazygit<cr>" "Open lazygit"]})
+(which-key.register {"<C-c>" {:name "Projects"
+                              "<C-g>" ["<cmd>Telescope ghq list<cr>" "GHQ projects"]}})
 
 ;; Conjure
 (which-key.register {"<localleader>E" "eval motion"
@@ -87,7 +89,7 @@
 
 ;; Telescope
 (which-key.register {"<leader>bb" ["<cmd>Telescope buffers<CR>" "Buffers"]})
-(which-key.register {"<leader>pp" ["<cmd>lua require('telescope').extensions.project.project({ display_type = 'full' })<CR>" "Projects"]})
+(which-key.register {"<leader>pp" ["<cmd>Telescope project<CR>" "Projects"]})
 (which-key.register {"<leader>:" ["<cmd>Telescope commands<CR>" "M-x"]})
 (which-key.register {"<leader><space>" ["<cmd>Telescope find_files<CR>" "Project Files"]})
 (which-key.register {"<leader>f" {:name "Files"

@@ -45,7 +45,7 @@
 (use-package! :folke/which-key.nvim {:config (load-file :which-key)})
 
 ;; Navigation
-(use-package! :ggandor/lightspeed.nvim)
+(use-package! :ggandor/leap.nvim)
 ;; Terminal
 ;; (use-package! :hkupty/nvimux {:config (call-setup :nvimux)})
 (use-package! :voldikss/vim-floaterm)
@@ -129,7 +129,8 @@
 
 ;; Debug
 (use-package! :rcarriga/nvim-dap-ui
-             {:requires [(pack :mfussenegger/nvim-dap)]})
+             {:requires [(pack :mfussenegger/nvim-dap {:config (load-file :dap)})]
+              :config (call-setup :dapui)})
 (use-package! :theHamsta/nvim-dap-virtual-text {:config (call-setup :nvim-dap-virtual-text)})
 (use-package! :Pocco81/dap-buddy.nvim)
 ;; git
