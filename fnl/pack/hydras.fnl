@@ -1,4 +1,5 @@
 (import-macros {: set!} :macros.option-macros)
+(import-macros {: colorscheme} :macros.highlight-macros)
 (local Hydra (require :hydra))
 
 ;; Git
@@ -121,6 +122,7 @@
   _c_ %{cul} cursor line
   _n_ %{nu} number
   _r_ %{rnu} relative number
+  _b_ Toggle Background
   ^
        ^^^^              _<Esc>_
 
@@ -133,7 +135,14 @@
                  :hint {:border :solid :position :middle}}
         :mode [:n :x]
         :body :<leader>o
-        :heads [[:n
+        :heads [[:b
+                 (fn []
+                   (if (= vim.o.background :dark) 
+                       (set! background :light)
+                       (set! background :dark))
+                   (colorscheme carbon)) 
+                 {:desc :Background}]
+                [:n
                  (fn []
                    (if (= vim.o.number true) 
                        (set! nonumber)
@@ -255,12 +264,11 @@
 
 ;; Visuals
 (local visuals-hint "
-  ^ ^      פּ Visuals
+  ^ ^     פּ Visuals
   ^
-  _b_ Toggle Light/Dark Mode 
   _z_ TrueZen Ataraxis
   _p_ TS Playground
-  _h_ TS Highlight Capture
+  _h_ TS Highlight Capture  
   ^
   ^^^^              _<Esc>_
 
@@ -273,12 +281,7 @@
                  :hint {:border :solid :position :middle}}
         :mode [:n :x]
         :body :<leader>z
-        :heads [[:b
-                 (fn []
-                   (if (= vim.o.background :dark) 
-                       (set! background :light)
-                       (set! background :dark)))]
-                [:z
+        :heads [[:z
                  (fn []
                    (vim.cmd :TZAtaraxis))]
                 [:p
