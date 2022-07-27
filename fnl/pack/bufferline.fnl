@@ -1,7 +1,5 @@
 (local {: format} string)
-
-(local {: lazy-require!} (require :utils.lazy-require))
-(local {: setup } (lazy-require! :bufferline))
+(local {: setup } (require :bufferline))
 
 ;;; Setup bufferline
 (setup {:options {:numbers :none

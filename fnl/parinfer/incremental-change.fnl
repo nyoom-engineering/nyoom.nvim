@@ -50,7 +50,6 @@
 ;; needs to be able to handle cases where one line is replaced with two
 ;; or two lines replaced with one, etc. (actually maybe it doesn't need
 ;; to be able to handle that)
-;; TODO: investigate whether parinfer will ever entirely delete a line
 (fn buf-apply-diff [buf prev prevLines text textLines]
   (ieach^ [[hl hn hle hne] (diff prev text d-opts)
            l (hunk2lines hl hn)

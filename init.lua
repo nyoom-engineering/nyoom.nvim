@@ -39,7 +39,6 @@ local function assert_installed_plugin(plugin, branch)
 end
 
 -- Install essential plugins
-assert_installed_plugin("folke/which-key.nvim")
 assert_installed_plugin("wbthomason/packer.nvim")
 assert_installed_plugin("rktjmp/hotpot.nvim", "nightly")
 
