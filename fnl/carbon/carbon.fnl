@@ -233,8 +233,8 @@
 
 ;; Neovim-specific
 (custom-set-face! NvimInternalError [] {:fg carbon.base00 :bg carbon.base08})
-(custom-set-face! NormalFloat [] {:fg carbon.base05 :bg carbon.base00})
-(custom-set-face! FloatBorder [] {:fg carbon.base05 :bg carbon.base00})
+(custom-set-face! NormalFloat [] {:fg carbon.base05 :bg carbon.blend})
+(custom-set-face! FloatBorder [] {:fg carbon.blend :bg carbon.blend})
 (custom-set-face! NormalNC [] {:fg carbon.base05 :bg carbon.base00})
 (custom-set-face! TermCursor [] {:fg carbon.base00 :bg carbon.base04})
 (custom-set-face! TermCursorNC [] {:fg carbon.base00 :bg carbon.base04})

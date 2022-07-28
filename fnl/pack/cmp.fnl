@@ -5,8 +5,7 @@
         : complete
         :config {: compare : disable}
         :ItemField {:Kind kind :Abbr abbr :Menu menu}
-        :SelectBehavior {:Insert insert-behavior :Select select-behavior}
-        : event} (require :cmp))
+        :SelectBehavior {:Insert insert-behavior :Select select-behavior}} (require :cmp))
 
 (local types (require :cmp.types))
 (local under-compare (require :cmp-under-comparator))
@@ -86,7 +85,8 @@
                   {:name :luasnip}
                   {:name :path}
                   {:name :buffer :option {:keyword_pattern "\\k\\+"}}
-                  {:name :conjure}]
+                  {:name :conjure}
+                  {:name :crates}]
         :sorting {:comparators [compare.offset
                                 compare.exact
                                 compare.score

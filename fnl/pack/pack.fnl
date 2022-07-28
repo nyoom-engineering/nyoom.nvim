@@ -32,16 +32,8 @@
 ;; The package manager can manage itself
 (use-package! :wbthomason/packer.nvim)
 
-;; testing
-(use-package! :tweekmonster/startuptime.vim {:cmd :St})
-
-;; Mappings
-(use-package! :anuvyklack/hydra.nvim {:keys :<space> :config (load-file :hydras)})
-(use-package! :ggandor/leap.nvim {:setup (fn []
-                                          ((. (require :utils.lazy-load)
-                                              :load-on-file-open!) :leap.nvim))
-                                  :config (fn []
-                                            ((. (require :leap) :set_default_keymaps)))})
+;; Used by quite a few plugins
+(use-package! :nvim-lua/plenary.nvim {:module :plenary})
 
 ;; lispy configs
 (use-package! :rktjmp/hotpot.nvim {:branch :nightly})
@@ -50,14 +42,24 @@
                                :ft lisp-ft
                                :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
 
+;; Mappings
+(use-package! :anuvyklack/hydra.nvim {:keys :<space> :config (load-file hydras)})
+(use-package! :windwp/nvim-autopairs {:event :InsertEnter :config (load-file autopairs)})
+(use-package! :ggandor/leap.nvim {:setup (fn []
+                                          ((. (require :utils.lazy-load)
+                                              :load-on-file-open!) :leap.nvim))
+                                  :config (fn []
+                                            ((. (require :leap) :set_default_keymaps)))})
+
 ;; File navigation
-(use-package! :kyazdani42/nvim-tree.lua {:cmd :NvimTreeToggle :config (load-file :nvimtree)})
+(use-package! :kyazdani42/nvim-tree.lua {:cmd :NvimTreeToggle :config (load-file nvimtree)})
 (use-package! :nvim-lua/telescope.nvim
               {:cmd :Telescope
-               :config (load-file :telescope)
-               :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})
-                          (pack :nvim-telescope/telescope-project.nvim
+               :config (load-file telescope)
+               :requires [(pack :nvim-telescope/telescope-project.nvim
                                 {:module :telescope._extensions.project})
+                          (pack :nvim-telescope/telescope-ui-select.nvim
+                                {:module :telescope._extensions.ui-select})
                           (pack :nvim-telescope/telescope-fzf-native.nvim
                                 {:module :telescope._extensions.fzf
                                  :run :make})]})
@@ -66,7 +68,7 @@
               {:run ":TSUpdate"
                :cmd treesitter_cmds
                :module :nvim-treesitter
-               :config (load-file :treesitter)
+               :config (load-file treesitter)
                :setup (fn []
                        ((. (require :utils.lazy-load)
                            :load-on-file-open!) :nvim-treesitter))
@@ -76,7 +78,7 @@
                           (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})]})
 
 ;; lsp
-(use-package! :williamboman/mason.nvim {:cmd mason-cmds :config (load-file :mason)})
+(use-package! :williamboman/mason.nvim {:cmd mason-cmds :config (load-file mason)})
 (use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :config (call-setup :fidget)})
 (use-package! :folke/trouble.nvim {:cmd :Trouble :module :trouble :config (call-setup :trouble)})
 (use-package! "https://git.sr.ht/~whynothugo/lsp_lines.nvim" {:after :nvim-lspconfig :config (call-setup :lsp_lines)})
@@ -84,7 +86,12 @@
                                       :setup (fn []
                                               ((. (require :utils.lazy-load)
                                                   :load-on-file-open!) :nvim-lspconfig))
-                                      :config (load-file :lsp)}) 
+                                      :config (load-file lsp)}) 
+
+;; Language-specific functionality
+;; (use-package! :mfussenegger/nvim-jdtls {:ft :java :config (load-lang java)})
+(use-package! :saecki/crates.nvim {:event ["BufRead Cargo.toml"] :config (call-setup :crates)})
+(use-package! :simrat39/rust-tools.nvim {:ft :rust :branch :modularize_and_inlay_rewrite :config (load-lang rust)}) 
 
 ;; git
 (use-package! :TimUntersberger/neogit {:config (call-setup :neogit) :cmd :Neogit})
@@ -96,7 +103,7 @@
 
 ;; completion
 (use-package! :hrsh7th/nvim-cmp
-              {:config (load-file :cmp)
+              {:config (load-file cmp)
                :wants :LuaSnip
                :event :InsertEnter
                :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
@@ -107,15 +114,14 @@
                           (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
-                                                   :config (load-file :luasnip)
+                                                   :config (load-file luasnip)
                                                    :requires [(pack :rafamadriz/friendly-snippets)]})]})
 
 ;; aesthetics
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
-;; (use-package! :akinsho/bufferline.nvim {:config (load-file :bufferline)}) 
-(use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config (load-file :truezen)})
+(use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config (load-file truezen)})
 (use-package! :monkoose/matchparen.nvim {:opt true
-                                         :config (load-file :matchparen)
+                                         :config (load-file matchparen)
                                          :setup (fn []
                                                   ((. (require :utils.lazy-load)
                                                       :load-on-file-open!) :matchparen.nvim))})
@@ -127,13 +133,13 @@
                                                      (set vim.notify (require :notify))
                                                      (vim.notify msg level opts))))})
 (use-package! :norcalli/nvim-colorizer.lua {:opt true
-                                            :config (load-file :colorizer)
+                                            :config (load-file colorizer)
                                             :setup (fn []
                                                      ((. (require :utils.lazy-load)
                                                          :load-on-file-open!) :nvim-colorizer.lua))})
 
 ;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. Feel free to add back org-mode if you want to though!
-(use-package! :nvim-neorg/neorg {:config (load-file :neorg) :ft :norg :after :nvim-treesitter})
+(use-package! :nvim-neorg/neorg {:config (load-file neorg) :ft :norg :after :nvim-treesitter})
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)

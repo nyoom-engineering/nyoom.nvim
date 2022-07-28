@@ -1,5 +1,4 @@
 (local lsp (require :lspconfig))
-(set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
@@ -90,7 +89,6 @@
 
 ;; for simple servers jsut add them to the list
 (let [servers [:clojure_lsp
-               :rust_analyzer
                :rnix
                :jdtls
                :pyright]]

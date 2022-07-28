@@ -233,8 +233,8 @@
 
 
  vim.api.nvim_set_hl(0, "NvimInternalError", {fg = carbon.base00, bg = carbon.base08})
- vim.api.nvim_set_hl(0, "NormalFloat", {fg = carbon.base05, bg = carbon.base00})
- vim.api.nvim_set_hl(0, "FloatBorder", {fg = carbon.base05, bg = carbon.base00})
+ vim.api.nvim_set_hl(0, "NormalFloat", {fg = carbon.base05, bg = carbon.blend})
+ vim.api.nvim_set_hl(0, "FloatBorder", {fg = carbon.blend, bg = carbon.blend})
  vim.api.nvim_set_hl(0, "NormalNC", {fg = carbon.base05, bg = carbon.base00})
  vim.api.nvim_set_hl(0, "TermCursor", {fg = carbon.base00, bg = carbon.base04})
  vim.api.nvim_set_hl(0, "TermCursorNC", {fg = carbon.base00, bg = carbon.base04})

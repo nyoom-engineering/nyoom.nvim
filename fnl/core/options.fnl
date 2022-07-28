@@ -1,6 +1,9 @@
 (import-macros {: set!} :macros.option-macros)
 (import-macros {: colorscheme} :macros.highlight-macros)
 
+;; add Mason to path
+(set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
+
 ;; improve updatetime for quicker refresh + gitsigns
 (set! updatetime 200)
 (set! timeoutlen 500)
@@ -10,17 +13,17 @@
 
 ;; fillchar setup
 (set! fillchars {:eob " "
-                 :horiz "─"
-                 :horizup "┴"
-                 :horizdown "┬"
-                 :vert "│"
-                 :vertleft "┤"
-                 :vertright "├"
-                 :verthoriz "┼"
+                 :horiz " "
+                 :horizup " "
+                 :horizdown " "
+                 :vert " "
+                 :vertleft " "
+                 :vertright " "
+                 :verthoriz " "
                  :fold " "
                  :diff "─"
                  :msgsep "‾"
-                 :foldsep "│"
+                 :foldsep " "
                  :foldopen "▾"
                  :foldclose "▸"})
 

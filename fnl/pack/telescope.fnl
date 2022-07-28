@@ -18,3 +18,4 @@
 ;; Load extensions
 (load_extension :fzf)
 (load_extension :project)
+(load_extension :ui-select)
