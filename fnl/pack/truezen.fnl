@@ -1,5 +1,4 @@
-(local {: lazy-require!} (require :utils.lazy-require))
-(local {: setup} (lazy-require! :true-zen))
+(local {: setup} (require :true-zen))
 
 (setup {:ui {:bottom {:cmdheight 1
                       :laststatus 0

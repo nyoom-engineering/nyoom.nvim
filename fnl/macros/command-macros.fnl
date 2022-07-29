@@ -1,7 +1,7 @@
 (local {: ->str : str? : nil? : tbl?} (require :macros.lib.types))
 (local {: fn? : quoted? : quoted->fn : quoted->str} (require :macros.lib.compile-time))
 
-(lambda shared-command! [api-function name command ?options]
+(λ shared-command! [api-function name command ?options]
   (assert-compile (sym? api-function) "expected symbol for api-function" api-function)
   (assert-compile (sym? name) "expected symbol for name" name)
   (assert-compile (or (str? command) (sym? command) (fn? command) (quoted? command)) "expected string, symbol, function or quoted expression for command" command)
@@ -16,7 +16,7 @@
         command (if (quoted? command) (quoted->fn command) command)]
     `(,api-function ,name ,command ,options)))
 
-(lambda command! [name command ?options]
+(λ command! [name command ?options]
   "Create a new user command using the vim.api.nvim_create_user_command API.
 
   Accepts the following arguments:
@@ -38,7 +38,7 @@
   ```"
   (shared-command! 'vim.api.nvim_create_user_command name command ?options))
 
-(lambda local-command! [name command ?options]
+(λ local-command! [name command ?options]
   "Create a new user command using the vim.api.nvim_buf_create_user_command API.
 
   Accepts the following arguments:

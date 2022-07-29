@@ -68,8 +68,6 @@
 
 ;; Normally we would have an inactive and a short section as well, but since we have a global statusline now I removed them
 (global Statusline {})
-
-;; Statusline
 (set Statusline.statusline (fn []
                              (table.concat [(color)
                                             (: (string.format " %s "
@@ -88,23 +86,7 @@
 
 (set Statusline.winbar (fn []
                          (table.concat ["%#WinBar#"
-                                        " %f "
-                                        "%="
-                                        "%#StatusPosition#"
-                                        (color)
-                                        " %l:%c "])))
+                                        " %f "])))
 
-(set! noshowmode)
-(set! laststatus 3)
+(set! winbar "%!v:lua.Statusline.winbar()")
 (set! statusline "%!v:lua.Statusline.statusline()")
-
-;; winbar is a nightly option
-(fn nightly? []
-   "Check if using Neovim nightly (0.8)"
-   (let [nightly (vim.fn.has :nvim-0.8.0)]
-     (= nightly 1)))
-
-(if (= true (nightly?))
-   (set! winbar "%!v:lua.Statusline.winbar()"))
- 
- 

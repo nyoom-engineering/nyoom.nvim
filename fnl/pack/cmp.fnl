@@ -1,19 +1,19 @@
-(local {: lazy-require!} (require :utils.lazy-require))
-
 (local {: insert} table)
 (local {: setup
         : mapping
         : visible
         : complete
-        :config {: compare : disable : window}
+        :config {: compare : disable}
         :ItemField {:Kind kind :Abbr abbr :Menu menu}
-        :SelectBehavior {:Insert insert-behavior :Select select-behavior}
-        : event} (lazy-require! :cmp))
+        :SelectBehavior {:Insert insert-behavior :Select select-behavior}} (require :cmp))
 
-(local types (lazy-require! :cmp.types))
-(local under-compare (lazy-require! :cmp-under-comparator))
-
-(local {: lsp_expand : expand_or_jump : expand_or_jumpable : jump : jumpable} (lazy-require! :luasnip))
+(local types (require :cmp.types))
+(local under-compare (require :cmp-under-comparator))
+(local {: lsp_expand 
+        : expand_or_jump 
+        : expand_or_jumpable 
+        : jump 
+        : jumpable} (require :luasnip))
 
 ;; default icons (lspkind)
 (local icons {:Text ""
@@ -51,10 +51,11 @@
 (fn replace-termcodes [code]
   (vim.api.nvim_replace_termcodes code true true true))
 
+
 ;;; Setup
 (setup {:preselect types.cmp.PreselectMode.None
         :experimental {:ghost_text true}
-        :window {:documentation {:border :rounded} :completion {:border :rounded}}
+        :window {:documentation {:border :solid} :completion {:border :solid}}
         :snippet {:expand (fn [args]
                             (lsp_expand args.body))}
         :mapping {:<C-b> (mapping.scroll_docs -4)
@@ -84,7 +85,8 @@
                   {:name :luasnip}
                   {:name :path}
                   {:name :buffer :option {:keyword_pattern "\\k\\+"}}
-                  {:name :conjure}]
+                  {:name :conjure}
+                  {:name :crates}]
         :sorting {:comparators [compare.offset
                                 compare.exact
                                 compare.score
