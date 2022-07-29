@@ -1,5 +1,17 @@
 (local {: ->str : tbl?} (require :macros.lib.types))
 
+(λ colorscheme [scheme]
+  "Set a colorscheme using the vim.api.nvim_cmd API.
+  Accepts the following arguements:
+  scheme -> a symbol.
+  Example of use:
+  ```fennel
+  (colorscheme carbon)
+  ```"
+  (assert-compile (sym? scheme) "expected symbol for name" scheme)
+  (let [scheme (->str scheme)]
+    `(vim.api.nvim_cmd {:cmd :colorscheme :args [,scheme]} {})))
+
 (λ custom-set-face! [name attributes colors]
   "Sets a highlight group globally using the vim.api.nvim_set_hl API.
   Accepts the following arguments:
@@ -50,5 +62,6 @@
         old (->str old)]
     `(vim.api.nvim_set_hl 0 ,new {:link ,old})))
 
-{: custom-set-face!
+{: colorscheme
+ : custom-set-face!
  : link!}

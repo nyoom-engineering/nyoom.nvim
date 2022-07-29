@@ -5,7 +5,7 @@
       {: sign_define} vim.fn]
   (config {:underline {:severity {:min severity.INFO}}
            :signs {:severity {:min severity.INFO}}
-           :virtual_text false
+           :virtual_text false ;; lsp_lines handles this
            :update_in_insert true
            :severity_sort true
            :float {:show_header false :border :rounded}})
@@ -22,36 +22,52 @@
        (with handlers.hover {:border :solid})))
 
 (fn on-attach [client bufnr]
-  (local {: set-lsp-keys!} (require :core.keymaps))
-  ;; set keymaps via which-key
-  (set-lsp-keys! bufnr)
-   ;; lsp_signature on attaching the server
-  (let [signature (require :lsp_signature)]
-    (signature.on_attach {:bind true
-                          :fix_pos true
-                          :floating_window_above_cur_line true
-                          :doc_lines 0
-                          :hint_enable false
-                          :hint_prefix "● "
-                          :hint_scheme :DiagnosticSignInfo}
-                         bufnr))
-  ;; Format buffer before saving
+  (import-macros {: buf-map!} :macros.keybind-macros)
   (import-macros {: autocmd! : augroup! : clear!} :macros.event-macros)
-  (local {: contains?} (require :macros.lib.seq))
-  ;; (when (client.supports_method "textDocument/formatting")
-  ;;   (augroup! lsp-format-before-saving
-  ;;     (clear! {:buffer bufnr})
-  ;;     (autocmd! BufWritePre <buffer>
-  ;;       '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
-  ;;                             :bufnr bufnr})
-  ;;       {:buffer bufnr})))
-  ;; Display hints on hover
-  (local {:inlay_hints inlay-hints!} (require :lsp_extensions))
-  (augroup! lsp-display-hints
-    (autocmd! [CursorHold CursorHoldI] *.rs
-      '(inlay-hints! {}))))
 
-;; What should the lsp be demanded of? Normally this would
+  ;; Keybindings
+  (local {:hover open-doc-float!
+          :declaration goto-declaration!
+          :definition goto-definition!
+          :type_definition goto-type-definition!
+          :code_action open-code-action-float!
+          :rename rename!} vim.lsp.buf)
+  (local {:open_float open-line-diag-float!
+          :goto_prev goto-diag-prev!
+          :goto_next goto-diag-next!} vim.diagnostic)
+  (local {:lsp_implementations open-impl-float!
+          :lsp_references open-ref-float!
+          :diagnostics open-diag-float!
+          :lsp_document_symbols open-local-symbol-float!
+          :lsp_workspace_symbols open-workspace-symbol-float!} (require :telescope.builtin))
+
+  (buf-map! [n] "K" open-doc-float!)
+  (buf-map! [nv] "<leader>a" open-code-action-float!)
+  (buf-map! [nv] "<leader>rn" rename!)
+  (buf-map! [n] "<leader>d" open-line-diag-float!)
+  (buf-map! [n] "[d" goto-diag-prev!)
+  (buf-map! [n] "]d" goto-diag-next!)
+  (buf-map! [n] "<leader>gD" goto-declaration!)
+  (buf-map! [n] "<leader>gd" goto-definition!)
+  (buf-map! [n] "<leader>gt" goto-type-definition!)
+  (buf-map! [n] "<leader>li" open-impl-float!)
+  (buf-map! [n] "<leader>lr" open-ref-float!)
+  (buf-map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))
+  (buf-map! [n] "<leader>lD" open-diag-float!)
+  (buf-map! [n] "<leader>ls" open-local-symbol-float!)
+  (buf-map! [n] "<leader>lS" open-workspace-symbol-float!)
+
+  ;; Format buffer before saving
+  (local {: contains?} (require :macros.lib.seq))
+  (when (client.supports_method "textDocument/formatting")
+    (augroup! lsp-format-before-saving
+      (clear! {:buffer bufnr})
+      (autocmd! BufWritePre <buffer>
+        '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
+                              :bufnr bufnr})
+        {:buffer bufnr}))))
+
+;; What should the lsp be demanded of?
 (local capabilities (vim.lsp.protocol.make_client_capabilities))
 (set capabilities.textDocument.completion.completionItem
      {:documentationFormat [:markdown :plaintext]
@@ -75,6 +91,8 @@
 (let [servers [:clojure_lsp
                :jsonls
                :lemminx
+               :rnix
+               :jdtls
                :pyright]]
   (each [_ server (ipairs servers)]
     ((. (. lsp server) :setup) defaults)))

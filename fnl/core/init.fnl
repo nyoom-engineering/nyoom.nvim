@@ -1,21 +1,14 @@
-;; Speed up Neovim
-(require :core.optimise-builtins)
+;; load keybinds
+(require :core.keybinds)
 
-;; Set vim options
+;; load vim options
 (require :core.options)
 
-;; Commands
+;; load user commands
 (require :core.commands)
 
-;; Autocommands
+;; load user autocommands
 (require :core.events)
 
-;; Colorscheme
-(require :core.highlights)
-
-;; Mappings
-(require :core.keymaps)
-
-;; Statusline
+;; load statusline
 (require :core.statusline)
-

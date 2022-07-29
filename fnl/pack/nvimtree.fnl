@@ -1,6 +1,6 @@
 (local {: setup} (require :nvim-tree))
 
-(setup {:view {:side :left :width 25 :hide_root_folder true}
+(setup {:view {:side :left :width 25 :hide_root_folder true :adaptive_size true}
         :disable_netrw true
         :hijack_netrw true
         :hijack_cursor true
