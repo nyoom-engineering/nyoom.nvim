@@ -14,7 +14,7 @@
 ;; fillchar setup
 (set! fillchars {:eob " "
                  :horiz " "
-                 :horizup " "
+                :horizup " "
                  :horizdown " "
                  :vert " "
                  :vertleft " "
@@ -29,7 +29,7 @@
 
 ;; and the same treatment for trailing characters
 (set! list)
-(set! listchars {:tab "> " :nbsp "␣" :trail "-"})
+;; (set! listchars {:tab "> " :nbsp "␣" :trail "-"})
 
 ;; don't wrap text
 (set! nowrap)
@@ -38,7 +38,7 @@
 (set! clipboard :unnamedplus)
 
 ;; Enable mouse input
-(set! mouse :a)
+;(set! mouse :a)
 
 ;; Disable swapfiles and enable undofiles
 (set! undofile)
@@ -54,7 +54,7 @@
 (set! laststatus 3)
 
 ;; low cmdheight
-(set! cmdheight 0)
+;(set! cmdheight 0)  ;;comment due to a problem - nagivate number
 
 ;; Numbering
 (set! nonumber)
@@ -92,6 +92,5 @@
 ;; colorscheme
 (set! termguicolors)
 (set! background :dark)
-(set! guifont "Liga SFMono Nerd Font:h15")
-(colorscheme carbon)
-
+;; (set! guifont "Liga SFMono Nerd Font:h15")
+(vim.cmd "colorscheme tokyonight")

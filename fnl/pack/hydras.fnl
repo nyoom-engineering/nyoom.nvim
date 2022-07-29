@@ -213,46 +213,46 @@
         :body :<Leader>f
         :heads [[:f 
                  (fn []
-                   (vim.cmd.Telescope :find_files))]
+                   (vim.cmd "Telescope find_files"))]
                 [:g 
                  (fn []
-                   (vim.cmd.Telescope :live_grep))]
+                   (vim.cmd "Telescope live_grep"))]
                 [:o
                  (fn []
-                   (vim.cmd.Telescope :oldfiles))
+                   (vim.cmd "Telescope oldfiles"))
                  {:desc "recently opened files"}]
                 [:h 
                  (fn []
-                   (vim.cmd.Telescope :help_tags))
+                   (vim.cmd "Telescope help_tags"))
                  {:desc "vim help"}]
                 [:k 
                  (fn []
-                   (vim.cmd.Telescope :keymaps))]
+                   (vim.cmd "Telescope keymaps"))]
                 [:O 
                  (fn []
-                   (vim.cmd.Telescope :vim_options))]
+                   (vim.cmd "Telescope vim_options"))]
                 [:r 
                  (fn []
-                   (vim.cmd.Telescope :resume))]
+                   (vim.cmd "Telescope resume"))]
                 [:p 
                  (fn []
                    ((. (. (. (require :telescope) :extensions) :project) :project) {:display_type :full}))
                  {:desc :projects}]
                 ["/"
                  (fn []
-                   (vim.cmd.Telescope :current_buffer_fuzzy_find))
+                   (vim.cmd "Telescope current_buffer_fuzzy_find"))
                  {:desc "search in file"}]
                 ["?"
                  (fn []
-                   (vim.cmd.Telescope :search_history))
+                   (vim.cmd "Telescope search_history"))
                  {:desc "search history"}]
                 [";"
                  (fn []
-                   (vim.cmd.Telescope :command_history))
+                   (vim.cmd "Telescope command_history"))
                  {:desc "command-line history"}]
                 [:c
                  (fn []
-                   (vim.cmd.Telescope :commands))
+                   (vim.cmd "Telescope commands"))
                  {:desc "execute command"}]
                 [:<Enter>
                  (fn []
@@ -295,79 +295,79 @@
                  {:exit true}]]})
 
 ;; Rust
-(local rust-hint "
-
-                  Rust
-
-  _r_: runnables      _m_: expand macro
-  _d_: debugabbles    _c_: open cargo
-  _s_: rustssr        _p_: parent module
-  _h_: hover actions  _w_: reload workspace
-  _D_: open docs      _g_: view create graph  
-^
-  _i_: Toggle Inlay Hints     _q_: Exit
-
-")
-
-(Hydra {:name :Rust
-        :hint rust-hint
-        :config {:color :red
-                 :invoke_on_body true
-                 :hint {:position :middle :border :solid}}
-        :mode :n
-        :body :<Leader>r
-        :heads [[:r 
-                 (fn []
-                   (vim.cmd.RustRunnables))
-                 {:exit true}]
-                [:d 
-                 (fn []
-                   (vim.cmd.RustDebuggables))
-                 {:exit true}]
-                [:s
-                 (fn []
-                   (vim.cmd.RustSSR))
-                 {:exit true}]
-                [:h 
-                 (fn []
-                   (vim.cmd.RustHoverActions))
-                 {:exit true}]
-                [:D 
-                 (fn []
-                   (vim.cmd.RustOpenExternalDocs))
-                 {:exit true}]
-                [:m 
-                 (fn []
-                   (vim.cmd.RustExpandMacro))
-                 {:exit true}]
-                [:c 
-                 (fn []
-                   (vim.cmd.RustOpenCargo))
-                 {:exit true}]
-                [:p 
-                 (fn []
-                   (vim.cmd.RustParentModule))
-                 {:exit true}]
-                [:w
-                 (fn []
-                   (vim.cmd.RustReloadWorkspace))
-                 {:exit true}]
-                [:g
-                 (fn []
-                   (vim.cmd.RustViewCrateGraph))
-                 {:exit true}]
-                [:i
-                 (fn []
-                   (vim.cmd.RustToggleInlayHints))]
-                [:q
-                 nil 
-                 {:exit true :nowait true}]]})
-
-
-
-
-
-
-
-
-
+;; (local rust-hint "
+;;
+;;                   Rust
+;;
+;;   _r_: runnables      _m_: expand macro
+;;   _d_: debugabbles    _c_: open cargo
+;;   _s_: rustssr        _p_: parent module
+;;   _h_: hover actions  _w_: reload workspace
+;;   _D_: open docs      _g_: view create graph  
+;; ^
+;;   _i_: Toggle Inlay Hints     _q_: Exit
+;;
+;; ")
+;;
+;; (Hydra {:name :Rust
+;;         :hint rust-hint
+;;         :config {:color :red
+;;                  :invoke_on_body true
+;;                  :hint {:position :middle :border :solid}}
+;;         :mode :n
+;;         :body :<Leader>r
+;;         :heads [[:r 
+;;                  (fn []
+;;                    (vim.cmd.RustRunnables))
+;;                  {:exit true}]
+;;                 [:d 
+;;                  (fn []
+;;                    (vim.cmd.RustDebuggables))
+;;                  {:exit true}]
+;;                 [:s
+;;                  (fn []
+;;                    (vim.cmd.RustSSR))
+;;                  {:exit true}]
+;;                 [:h 
+;;                  (fn []
+;;                    (vim.cmd.RustHoverActions))
+;;                  {:exit true}]
+;;                 [:D 
+;;                  (fn []
+;;                    (vim.cmd.RustOpenExternalDocs))
+;;                  {:exit true}]
+;;                 [:m 
+;;                  (fn []
+;;                    (vim.cmd.RustExpandMacro))
+;;                  {:exit true}]
+;;                 [:c 
+;;                  (fn []
+;;                    (vim.cmd.RustOpenCargo))
+;;                  {:exit true}]
+;;                 [:p 
+;;                  (fn []
+;;                    (vim.cmd.RustParentModule))
+;;                  {:exit true}]
+;;                 [:w
+;;                  (fn []
+;;                    (vim.cmd.RustReloadWorkspace))
+;;                  {:exit true}]
+;;                 [:g
+;;                  (fn []
+;;                    (vim.cmd.RustViewCrateGraph))
+;;                  {:exit true}]
+;;                 [:i
+;;                  (fn []
+;;                    (vim.cmd.RustToggleInlayHints))]
+;;                 [:q
+;;                  nil 
+;;                  {:exit true :nowait true}]]})
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;

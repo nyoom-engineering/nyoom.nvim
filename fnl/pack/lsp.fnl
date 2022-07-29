@@ -91,7 +91,6 @@
 (let [servers [:clojure_lsp
                :jsonls
                :lemminx
-               :rnix
                :jdtls
                :pyright]]
   (each [_ server (ipairs servers)]

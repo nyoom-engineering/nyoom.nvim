@@ -315,5 +315,4 @@
 (custom-set-face! GitSignsAdd [] {:fg carbon.base08 :bg carbon.none})
 (custom-set-face! GitSignsChange [] {:fg carbon.base09 :bg carbon.none})
 (custom-set-face! GitSignsDelete [] {:fg carbon.base14 :bg carbon.none})
-(vim.cmd "colorscheme tokyonight")
 

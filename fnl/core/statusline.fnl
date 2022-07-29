@@ -84,9 +84,9 @@
                                             "%#StatusPosition#"
                                             " %l:%c "])))
 
-(set Statusline.winbar (fn []
-                         (table.concat ["%#WinBar#"
-                                        " %f "])))
+;;(set Statusline.winbar (fn []
+;;                         (table.concat ["%#WinBar#"
+;;                                        " %f "])))
 
-(set! winbar "%!v:lua.Statusline.winbar()")
-(set! statusline "%!v:lua.Statusline.statusline()")
+;;(set! winbar "%!v:lua.Statusline.winbar()")
+;;(set! statusline "%!v:lua.Statusline.statusline()")

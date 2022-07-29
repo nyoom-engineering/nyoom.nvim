@@ -59,7 +59,8 @@
                :requires [(pack :nvim-telescope/telescope-project.nvim
                                 {:module :telescope._extensions.project})
                           (pack :nvim-telescope/telescope-ui-select.nvim
-                                {:module :telescope._extensions.ui-select})
+                               {:module :telescope._extensions.ui-select})
+                          (pack :nvim-telescope/telescope-ghq.nvim)
                           (pack :nvim-telescope/telescope-fzf-native.nvim
                                 {:module :telescope._extensions.fzf
                                  :run :make})]})
@@ -140,6 +141,32 @@
 
 ;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. Feel free to add back org-mode if you want to though!
 (use-package! :nvim-neorg/neorg {:config (load-file neorg) :ft :norg :after :nvim-treesitter})
+
+;; custom plugin
+(use-package! :numToStr/Comment.nvim {:config (call-setup :Comment)})
+(use-package! :luukvbaal/nnn.nvim {:config (load-file nnn)})
+(use-package! :akinsho/toggleterm.nvim {:config (load-file toggleterm)})
+(use-package! :kylechui/nvim-surround {:config (load-file nvim-surround)})
+(use-package! "https://gitlab.com/yorickpeterse/nvim-window.git")
+(use-package! :folke/tokyonight.nvim)
+
+(use-package! :rcarriga/nvim-dap-ui
+             {:requires [(pack :mfussenegger/nvim-dap {:config (load-file dap)})]
+              :config (call-setup :dapui)})
+;; (use-package! :sindrets/diffview.nvim
+;;               {:config (call-setup :diffview)
+;;                :requires [(pack :nvim-lua/plenary.nvim)]})
+(use-package! :kevinhwang91/nvim-ufo
+              {:config (load-file ufo)
+               :requires [(pack :kevinhwang91/promise-async)]})
+(use-package! :glepnir/lspsaga.nvim
+              {:branch :main 
+               :config (load-file lspsaga)})
+(use-package! :jose-elias-alvarez/null-ls.nvim {:config (load-file null-ls)})
+(use-package! :lukas-reineke/indent-blankline.nvim {:config (load-file indent-blankline)})
+(use-package! :theHamsta/nvim-dap-virtual-text {:config (call-setup :nvim-dap-virtual-text)})
+(use-package! :Pocco81/dap-buddy.nvim)
+;; custom plugin end
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)
