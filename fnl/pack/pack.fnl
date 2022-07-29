@@ -140,7 +140,9 @@
                                         :setup (fn []
                                                  ((. (require :utils.lazy-load)
                                                      :load-gitsigns)))})
-
+(use-package! :nvim-lualine/lualine.nvim {:requires [(pack :kyazdani42/nvim-web-devicons {:opt true})]
+                                          :config (call-setup :lualine)})
+                                          
 ;; completion/copilot
 ;; (use-package! :zbirenbaum/copilot.lua
 ;;               {:event :InsertEnter})
@@ -177,11 +179,11 @@
                                                      ((. (require :packer) :loader) :nvim-notify)
                                                      (set vim.notify (require :notify))
                                                      (vim.notify msg level opts))))})
-(use-package! :akinsho/bufferline.nvim {:opt true
-                                        :config (load-file :bufferline) 
-                                        :setup (fn []
-                                                 ((. (require :utils.lazy-load)
-                                                     :load-bufferline)))})
+;; (use-package! :akinsho/bufferline.nvim {:opt true
+;;                                         :config (load-file :bufferline) 
+;;                                         :setup (fn []
+;;                                                  ((. (require :utils.lazy-load)
+;;                                                      :load-bufferline)))})
 (use-package! :norcalli/nvim-colorizer.lua {:opt true
                                             :config (load-file :colorizer) 
                                             :setup (fn []

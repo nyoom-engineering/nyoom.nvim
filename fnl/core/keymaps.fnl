@@ -24,6 +24,11 @@
 ;; window management
 (which-key.register {"<leader>w" {:name "Windows"
                                   "<C-w>" ["<cmd>lua require('nvim-window').pick()<cr>" "nvim window"]}})
+
+;; help
+(which-key.register {"<leader>h" {:name "Help"
+                                  "t" ["<cmd>Telescope help_tags<cr>" "Search tags"]
+                                  "k" ["<cmd>Telescope keymaps<cr>" "Keymaps"]}})
 ;; NvimTree
 (which-key.register {"<leader>op" ["<cmd>NvimTreeToggle<CR>" "nvimtree"]})
 ;; (which-key.register {"<leader>on" ["<cmd>ToggleNNN<cr>" "nnn"]})

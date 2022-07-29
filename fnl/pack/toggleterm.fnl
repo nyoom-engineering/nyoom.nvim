@@ -11,7 +11,7 @@
 ;; (vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()")
 (vim.cmd "autocmd! TermEnter term://*toggleterm#* lua set_terminal_keymaps()")
 (local Terminal (. (require :toggleterm.terminal) :Terminal))
-(local lazygit (Terminal:new {:cmd :lazygit :dir (vim.fn.expand "%:p:h") :direction :float :hidden true}))
+(local lazygit (Terminal:new {:cmd :lazygit :dir "git_dir" :direction :float :hidden true}))
 (local btop (Terminal:new {:cmd :btop :direction :float :hidden true}))
 ;; (local nnn (Terminal:new {:cmd :nnn :dir (vim.fn.expand "%:p:h") :direction :float :hidden true :env ["EDITOR:nvim"]}))
 ;; (local nnn (Terminal:new {:cmd :nnn :dir (vim.fn.expand "%:p:h") :direction :float :hidden true}))
@@ -27,8 +27,8 @@
 ;; (fn _nnn_toggle []
 ;;  (nnn:toggle))
 
-(fn _nvim_toggle []
- (nvim-headless:toggle))
+;; (fn _nvim_toggle []
+;;  (nvim-headless:toggle))
 
 (fn _nbb_toggle []
  (nbb:toggle))
