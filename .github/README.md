@@ -32,6 +32,21 @@ I recommend not to clone and directly install this config, but to fork it, inspe
 ## Changelog
 Moved to [CHANGELOG.md](CHANGELOG.md)
 
+## Feature Overview
+
+- Fast (avg. 30ms) loading and a declarative package manage system using Nyoom! macros and [Packer.nvim](https://github.com/wbthomason/packer.nvim).
+- Lispy editing with [Conjure](https://github.com/Olical/conjure), [Hotpot](https://github.com/rktjmp/hotpot.nvim), and [Parinfennel](https://github.com/shaunsingh/nyoom.nvim/tree/main/fnl/parinfer) a custom ffi & vim.json wrapper around [parinfer-rust](https://github.com/eraserhd/parinfer-rust) written in fennel
+- An "oxidized" Rust version of the [IBM Carbon](https://carbondesignsystem.com/guidelines/color/overview/#themes) light & dark colorschemes using [Nvim-Oxi](https://github.com/noib3/nvim-oxi)
+- Easy to use mappings, motions, and hydras with [Hydra](https://github.com/anuvyklack/hydra.nvim) and [Leap](https://github.com/ggandor/leap.nvim). Don't worry, the heads don't bite!
+- Fuzzy file navigation and selections with [Telescope](https://github.com/nvim-telescope/telescope.nvim), [Fzf-Native](https://github.com/nvim-telescope/telescope-fzf-native.nvim), and [Nvim-Tree](https://github.com/kyazdani42/nvim-tree.lua)
+- Syntax highlighting, smarter textobjects, distinctive parenthesis, and better refactoring with [Nvim-Treesitter](https://github.com/nvim-treesitter/nvim-treesitter), [Nvim-Ts-Rainbow](https://github.com/p00f/nvim-ts-rainbow) and [Nvim-Treesitter-Textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
+- Beautiful diagnostics and easy to use lsp with [Mason](https://github.com/williamboman/mason.nvim), [Fidget](https://github.com/j-hui/fidget.nvim), [Trouble](https://github.com/folke/trouble.nvim), [Lsp-Lines](https://git.sr.ht/~whynothugo/lsp_lines.nvim), and [Lspconfig](https://github.com/neovim/nvim-lspconfig)
+- Dedicated support for rust tooling and crates.io with [Rust-Tools](https://github.com/simrat39/rust-tools.nvim) and [Crates](https://github.com/Saecki/crates.nvim)
+- Featureful emacs-like git integration with [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) and [Neogit](https://github.com/TimUntersberger/neogit)
+- Extensible and modular completion and snippet support with [Cmp](https://github.com/hrsh7th/nvim-cmp) and [Luasnip](https://github.com/L3MON4D3/LuaSnip)
+- Notetaking with [Neorg](https://github.com/nvim-neorg/neorg)
+- Miscellaneous UI improvements with [Nvim-Notify](https://github.com/rcarriga/nvim-notify), [TrueZen](https://github.com/Pocco81/true-zen.nvim), [Nvim-Colorizer](https://github.com/norcalli/nvim-colorizer.lua), and [Matchparen](https://github.com/monkoose/matchparen.nvim)  
+
 ## Showcase
 
 Will update soon
