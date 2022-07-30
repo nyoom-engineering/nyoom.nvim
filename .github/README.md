@@ -45,11 +45,21 @@ Moved to [CHANGELOG.md](CHANGELOG.md)
 - Featureful emacs-like git integration with [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) and [Neogit](https://github.com/TimUntersberger/neogit)
 - Extensible and modular completion and snippet support with [Cmp](https://github.com/hrsh7th/nvim-cmp) and [Luasnip](https://github.com/L3MON4D3/LuaSnip)
 - Notetaking with [Neorg](https://github.com/nvim-neorg/neorg)
-- Miscellaneous UI improvements with [Nvim-Notify](https://github.com/rcarriga/nvim-notify), [TrueZen](https://github.com/Pocco81/true-zen.nvim), [Nvim-Colorizer](https://github.com/norcalli/nvim-colorizer.lua), and [Matchparen](https://github.com/monkoose/matchparen.nvim)  
+- Lightweight statusline written in fennel and miscellaneous UI improvements with [Nvim-Notify](https://github.com/rcarriga/nvim-notify), [TrueZen](https://github.com/Pocco81/true-zen.nvim), [Nvim-Colorizer](https://github.com/norcalli/nvim-colorizer.lua), and [Matchparen](https://github.com/monkoose/matchparen.nvim)
 
 ## Showcase
 
-Will update soon
+https://user-images.githubusercontent.com/71196912/181876431-ebef3a0b-15fc-46dc-b86e-6b1ab240cbdf.mov
+
+![image](https://user-images.githubusercontent.com/71196912/181876381-3dd7fcef-d978-4ecf-8a2f-4e2b3e6c22aa.png)
+
+![image](https://user-images.githubusercontent.com/71196912/181876393-dbd61663-663c-492f-9844-740382b1080e.png)
+
+![image](https://user-images.githubusercontent.com/71196912/181876396-162040bc-1eda-42a5-acd6-f481d85a2950.png)
+
+![image](https://user-images.githubusercontent.com/71196912/181876493-bb23362a-ec16-420e-bace-1aa3a166e7d9.png)
+
+![image](https://user-images.githubusercontent.com/71196912/181876571-7c8e5587-cea9-48c4-a4b9-a81ad0e0ea0e.png)
 
 ## Install
 
