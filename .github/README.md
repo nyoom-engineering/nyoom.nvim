@@ -57,7 +57,7 @@ https://user-images.githubusercontent.com/71196912/181876431-ebef3a0b-15fc-46dc-
 
 ### Dependencies
 
-The only dependencies are `neovim-nightly` (of course), `cargo/rustc` (for the rust modules and parinfer-rust),  and `git`. Optionally, you can install `ripgrep` for `:Telescope live_grep` support and `neovide for a nice gui.
+The only dependencies are `neovim-nightly` (of course), `cargo/rustc` (for the rust modules and parinfer-rust),  and `git`. Optionally, you can install `ripgrep` for `:Telescope live_grep` support and `neovide` for a nice gui.
 
 ### Regular:
 
