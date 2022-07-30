@@ -5,11 +5,14 @@
    (packer.init {:git {:clone_timeout 300}
                  :profile {:enable true}
                  :compile_path (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")
+                 ;; :snapshot (.. (vim.fn.stdpath :config) :/packer.lock)
+                 ;; :snapshot_path (vim.fn.stdpath :config)
                  :display {:header_lines 2
                            :title " packer.nvim"
                            :open_fn (λ open_fn []
                                       (local {: float} (require :packer.util))
                                       (float {:border :solid}))}}))
+
 
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])

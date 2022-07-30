@@ -68,13 +68,13 @@
 ;; core
 (require :core)
 
-;; load plugins
-(require :pack.pack)
-
 ;; colorscheme
 (require :oxocarbon)
 
 ;; statusline
 (require :utils.statusline)
+
+;; load plugins
+(require :pack.pack)
 
 
