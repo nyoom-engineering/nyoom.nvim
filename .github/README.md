@@ -20,6 +20,8 @@
 > Elegant weapons for a more... civilized age.  
 — [xkcd/297](https://xkcd.com/297/)
 
+<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/181879362-a7ff68d0-2f81-463a-8851-ec73d0a18841.png">
+
 Nyoom.nvim was an answer to abstracted and complex codebases that take away end-user extensibility, try to be a one-size-fits-all config, and needlessly lazy load *everything*. Nyoon.nvim provides a solution to these problems by providing easily readable and easy to work with code in order to make a functioning configuration. The end goal of nyoom.nvim is to be used as a base config for users to extend and add upon, leading to a more unique editing experience. Its relatively small and simple, offers the bare minimum needed plugins to have a powerful config, and is suited to my needs, but can just as easily be suited to yours!
 
 I recommend not to clone and directly install this config, but to fork it, inspect the code, and adjust it to your liking. The best neovim configuration is what *you* make, and this config is only supposed to provide you the tools to do so.
