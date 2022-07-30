@@ -9,6 +9,3 @@
 
 ;; load user autocommands
 (require :core.events)
-
-;; load statusline
-(require :core.statusline)

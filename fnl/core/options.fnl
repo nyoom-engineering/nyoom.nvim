@@ -1,8 +1,4 @@
 (import-macros {: set!} :macros.option-macros)
-(import-macros {: colorscheme} :macros.highlight-macros)
-
-;; add Mason to path
-(set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
 ;; improve updatetime for quicker refresh + gitsigns
 (set! updatetime 200)
@@ -11,23 +7,7 @@
 ;; Set shortmess
 (set! shortmess :filnxtToOFatsIc)
 
-;; fillchar setup
-(set! fillchars {:eob " "
-                 :horiz " "
-                 :horizup " "
-                 :horizdown " "
-                 :vert " "
-                 :vertleft " "
-                 :vertright " "
-                 :verthoriz " "
-                 :fold " "
-                 :diff "─"
-                 :msgsep "‾"
-                 :foldsep " "
-                 :foldopen "▾"
-                 :foldclose "▸"})
-
-;; and the same treatment for trailing characters
+;; trailing characters setup
 (set! list)
 (set! listchars {:tab "> " :nbsp "␣" :trail "-"})
 
@@ -90,8 +70,6 @@
 (set! completeopt [:menu :menuone :preview :noinsert])
 
 ;; colorscheme
-(set! termguicolors)
 (set! background :dark)
 (set! guifont "Liga SFMono Nerd Font:h15")
-(colorscheme carbon)
 

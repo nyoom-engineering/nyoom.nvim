@@ -140,7 +140,8 @@
                    (if (= vim.o.background :dark) 
                        (set! background :light)
                        (set! background :dark))
-                   (colorscheme carbon)) 
+                  (require :oxocarbon))
+ 
                  {:desc :Background}]
                 [:n
                  (fn []
