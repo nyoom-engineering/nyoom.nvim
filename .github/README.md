@@ -20,7 +20,7 @@
 > Elegant weapons for a more... civilized age.  
 — [xkcd/297](https://xkcd.com/297/)
 
-<img width="1450" alt="image" src="https://user-images.githubusercontent.com/71196912/181879362-a7ff68d0-2f81-463a-8851-ec73d0a18841.png">
+![nyoombottomtext](https://user-images.githubusercontent.com/71196912/181908773-f7d7a700-d60d-47d2-a3db-3a2bbc6cd1aa.png)
 
 Nyoom.nvim was an answer to abstracted and complex codebases that take away end-user extensibility, try to be a one-size-fits-all config, and needlessly lazy load *everything*. Nyoon.nvim provides a solution to these problems by providing easily readable and easy to work with code in order to make a functioning configuration. The end goal of nyoom.nvim is to be used as a base config for users to extend and add upon, leading to a more unique editing experience. Its relatively small and simple, offers the bare minimum needed plugins to have a powerful config, and is suited to my needs, but can just as easily be suited to yours!
 
@@ -52,16 +52,6 @@ Moved to [CHANGELOG.md](CHANGELOG.md)
 ## Showcase
 
 https://user-images.githubusercontent.com/71196912/181876431-ebef3a0b-15fc-46dc-b86e-6b1ab240cbdf.mov
-
-![image](https://user-images.githubusercontent.com/71196912/181876381-3dd7fcef-d978-4ecf-8a2f-4e2b3e6c22aa.png)
-
-![image](https://user-images.githubusercontent.com/71196912/181876393-dbd61663-663c-492f-9844-740382b1080e.png)
-
-![image](https://user-images.githubusercontent.com/71196912/181876396-162040bc-1eda-42a5-acd6-f481d85a2950.png)
-
-![image](https://user-images.githubusercontent.com/71196912/181876493-bb23362a-ec16-420e-bace-1aa3a166e7d9.png)
-
-![image](https://user-images.githubusercontent.com/71196912/181876571-7c8e5587-cea9-48c4-a4b9-a81ad0e0ea0e.png)
 
 ## Install
 
