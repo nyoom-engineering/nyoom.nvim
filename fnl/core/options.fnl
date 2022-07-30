@@ -1,5 +1,8 @@
 (import-macros {: set!} :macros.option-macros)
 
+;; add Mason to path
+(set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
+
 ;; improve updatetime for quicker refresh + gitsigns
 (set! updatetime 200)
 (set! timeoutlen 500)

@@ -1,5 +1,3 @@
-use nvim_oxi::{self as oxi, api, opts::*};
-
 /*
                              O X O C A R B O N
        _..._         _..._         _..._         _..._         _..._
@@ -17,6 +15,8 @@ use nvim_oxi::{self as oxi, api, opts::*};
   https://www.ibm.com/brand/experience-guides/developer/brand/color/)
 
 */
+
+use nvim_oxi::{self as oxi, api, opts::*};
 
 #[oxi::module]
 fn oxocarbon() -> oxi::Result<String> {
@@ -1840,7 +1840,7 @@ fn oxocarbon() -> oxi::Result<String> {
         "CmpItemAbbr",
         Some(
             &SetHighlightOpts::builder()
-                .fg(oxocarbon[3])
+                .fg("#adadad")
                 .bg(oxocarbon[17])
                 .build(),
         ),
@@ -1852,6 +1852,7 @@ fn oxocarbon() -> oxi::Result<String> {
             &SetHighlightOpts::builder()
                 .fg(oxocarbon[5])
                 .bg(oxocarbon[17])
+                .bold(true)
                 .build(),
         ),
     )?;
@@ -1861,6 +1862,86 @@ fn oxocarbon() -> oxi::Result<String> {
         Some(
             &SetHighlightOpts::builder()
                 .fg(oxocarbon[4])
+                .bg(oxocarbon[17])
+                .build(),
+        ),
+    )?;
+    api::set_hl(
+        0,
+        "CmpItemKindInterface",
+        Some(
+            &SetHighlightOpts::builder()
+                .fg(oxocarbon[11])
+                .bg(oxocarbon[17])
+                .build(),
+        ),
+    )?;
+    api::set_hl(
+        0,
+        "CmpItemKindText",
+        Some(
+            &SetHighlightOpts::builder()
+                .fg(oxocarbon[8])
+                .bg(oxocarbon[17])
+                .build(),
+        ),
+    )?;
+    api::set_hl(
+        0,
+        "CmpItemKindVariable",
+        Some(
+            &SetHighlightOpts::builder()
+                .fg(oxocarbon[13])
+                .bg(oxocarbon[17])
+                .build(),
+        ),
+    )?;
+    api::set_hl(
+        0,
+        "CmpItemKindProperty",
+        Some(
+            &SetHighlightOpts::builder()
+                .fg(oxocarbon[10])
+                .bg(oxocarbon[17])
+                .build(),
+        ),
+    )?;
+    api::set_hl(
+        0,
+        "CmpItemKindKeyword",
+        Some(
+            &SetHighlightOpts::builder()
+                .fg(oxocarbon[9])
+                .bg(oxocarbon[17])
+                .build(),
+        ),
+    )?;
+    api::set_hl(
+        0,
+        "CmpItemKindUnit",
+        Some(
+            &SetHighlightOpts::builder()
+                .fg(oxocarbon[14])
+                .bg(oxocarbon[17])
+                .build(),
+        ),
+    )?;
+    api::set_hl(
+        0,
+        "CmpItemKindFunction",
+        Some(
+            &SetHighlightOpts::builder()
+                .fg(oxocarbon[12])
+                .bg(oxocarbon[17])
+                .build(),
+        ),
+    )?;
+    api::set_hl(
+        0,
+        "CmpItemKindMethod",
+        Some(
+            &SetHighlightOpts::builder()
+                .fg(oxocarbon[7])
                 .bg(oxocarbon[17])
                 .build(),
         ),

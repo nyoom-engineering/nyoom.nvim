@@ -1,3 +1,11 @@
+v0.4.0
+Sorry, haven't done one of these in a while! Lots of fixes
+- Colorscheme: Rewrite in rust and general improvements to plugin support and to the light theme
+- Macros: Remove Md5 dependency. General improvements to package, keybinding, event, and other macros.
+- Bindings: Added support for hydra and deprecated which-key.nvim
+- Loading: Improve lazy loading, clean up config, remove bootstrap lua filetype by default
+- Lsp: cmp improvements, replace nvim-lsp-installer with mason.nvim, and general bugfixes. Added support for off-spec lsp servers (jdtls & rust-analyzer)
+
 v0.3.4
 - Colorscheme: Automatically changes based on `vim.opt.background`. Light palette added
 - Macros: Added event/command macros. Minor adjustments to packer macros

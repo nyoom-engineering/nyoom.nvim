@@ -74,14 +74,13 @@
                            :load-on-file-open!) :nvim-treesitter))
                :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
                           (pack :p00f/nvim-ts-rainbow {:after :nvim-treesitter})
-                          (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
                           (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})]})
 
 ;; lsp
 (use-package! :williamboman/mason.nvim {:cmd mason-cmds :config (load-file mason)})
-(use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :config (call-setup :fidget)})
-(use-package! :folke/trouble.nvim {:cmd :Trouble :module :trouble :config (call-setup :trouble)})
-(use-package! "https://git.sr.ht/~whynothugo/lsp_lines.nvim" {:after :nvim-lspconfig :config (call-setup :lsp_lines)})
+(use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :config (call-setup fidget)})
+(use-package! :folke/trouble.nvim {:cmd :Trouble :module :trouble :config (call-setup trouble)})
+(use-package! "https://git.sr.ht/~whynothugo/lsp_lines.nvim" {:after :nvim-lspconfig :config (call-setup lsp_lines)})
 (use-package! :neovim/nvim-lspconfig {:opt true
                                       :setup (fn []
                                               ((. (require :utils.lazy-load)
@@ -90,13 +89,13 @@
 
 ;; Language-specific functionality
 ;; (use-package! :mfussenegger/nvim-jdtls {:ft :java :config (load-lang java)})
-(use-package! :saecki/crates.nvim {:event ["BufRead Cargo.toml"] :config (call-setup :crates)})
+(use-package! :saecki/crates.nvim {:event ["BufRead Cargo.toml"] :config (call-setup crates)})
 (use-package! :simrat39/rust-tools.nvim {:ft :rust :branch :modularize_and_inlay_rewrite :config (load-lang rust)}) 
 
 ;; git
-(use-package! :TimUntersberger/neogit {:config (call-setup :neogit) :cmd :Neogit})
+(use-package! :TimUntersberger/neogit {:config (call-setup neogit) :cmd :Neogit})
 (use-package! :lewis6991/gitsigns.nvim {:ft :gitcommit
-                                        :config (call-setup :gitsigns)
+                                        :config (call-setup gitsigns)
                                         :setup (fn []
                                                  ((. (require :utils.lazy-load)
                                                      :load-gitsigns)))})
@@ -119,7 +118,7 @@
 
 ;; aesthetics
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
-(use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config (load-file truezen)})
+(use-package! :Pocco81/true-zen.nvim {:cmd :TZAtaraxis :config (load-file truezen)})
 (use-package! :monkoose/matchparen.nvim {:opt true
                                          :config (load-file matchparen)
                                          :setup (fn []
