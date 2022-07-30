@@ -122,6 +122,7 @@
 ;; aesthetics
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
 (use-package! :Pocco81/true-zen.nvim {:cmd :TZAtaraxis :config (load-file truezen)})
+(use-package! :shaunsingh/oxocarbon.nvim {:run :./install.sh}) 
 (use-package! :monkoose/matchparen.nvim {:opt true
                                          :config (load-file matchparen)
                                          :setup (fn []
