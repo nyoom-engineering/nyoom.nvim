@@ -5,22 +5,22 @@
         : continue} (require :dap))
 (local {: open
         : close} (require :dapui))
-(local hydra (require :hydra))
+;; (local hydra (require :hydra))
 
 
-(local dap_hint (.. 
-                 "  Breakpoint     \n"
-                 "-----------------\n"
-                 "_s_: add breakpoint\n"
-                 "_r_: Run DAP"))
+;; (local dap_hint (.. 
+;;                  "  Breakpoint     \n"
+;;                  "-----------------\n"
+;;                  "_s_: add breakpoint\n"
+;;                  "_r_: Run DAP"))
 
-(hydra {:name "DAP"
-        :hint dap_hint
-        :config {:invoke_on_body true :hint {:border "rounded" :offset -1}}
-        :mode "n"
-        :body "<leader>d"
-        :heads [["s" toggle_breakpoint]
-                ["r" continue]]})
+;; (hydra {:name "DAP"
+;;         :hint dap_hint
+;;         :config {:invoke_on_body true :hint {:border "rounded" :offset -1}}
+;;         :mode "n"
+;;         :body "<leader>d"
+;;         :heads [["s" toggle_breakpoint]
+;;                 ["r" continue]]})
         
 
 (tset listeners.after :event_initialized :dapui_config open)

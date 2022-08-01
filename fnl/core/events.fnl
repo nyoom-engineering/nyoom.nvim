@@ -1,12 +1,8 @@
 (require-macros :macros.event-macros)
+(import-macros {: set!} :macros.option-macros)
 
 (local {: line} vim.fn)
 (fn cmd! [...] (vim.cmd ...))
-
-;; Resize splits when window is resized
-(augroup! resize-splits-on-resize
-          (autocmd! VimResized * "wincmd ="))
-(import-macros {: set!} :macros.option-macros)
 
 ;; Restore cursor on exit
 (augroup! restore-cursor-on-exit

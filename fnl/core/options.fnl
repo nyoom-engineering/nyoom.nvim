@@ -75,4 +75,4 @@
 ;; colorscheme
 (set! background :dark)
 ;; (set! guifont "Liga SFMono Nerd Font:h15")
-(vim.cmd "colorscheme tokyonight")
+;; (vim.cmd "colorscheme tokyonight")
