@@ -1,6 +1,7 @@
+(local {: extend-keep} (require :macros.lib.sriapi))
+
 (local incr-bst (require :parinfer.incremental-change))
 (local {:run run-parinfer} (require :parinfer.lib))
-(local {: extend-keep} (require :parinfer.util))
 (local {: get-options : get-buf-options : update-option :setup opts-setup}
        (require :parinfer.options))
 

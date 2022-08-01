@@ -1,4 +1,7 @@
-;; Disable some built-in Neovim plugins and unneeded providers
+(require-macros :macros.event-macros)
+(import-macros {: colorscheme} :macros.highlight-macros)
+
+;; disable some built-in Neovim plugins and unneeded providers
 (let [built-ins [:gzip
                  :zip
                  :zipPlugin
@@ -25,7 +28,7 @@
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
 
-;; Make sure packer is all ready to go
+;; make sure packer is all ready to go
 (let [compiled? (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
       load-compiled #(require :packer_compiled)]
  (if compiled?
@@ -35,8 +38,13 @@
 ;; core
 (require :core)
 
-;; build carbon colorscheme
-(require :carbon.build)
+;; statusline
+(require :utils.statusline)
 
-;; Load plugins
+;; load plugins
 (require :pack.pack)
+
+;; colorscheme
+(colorscheme oxocarbon)
+
+

@@ -23,7 +23,6 @@
            :janetLongStrings true}
    :yuck {:stringDelimiters ["\"" "'" "`"]}})
 
-;; "scoped" as in g:/b:-scoped
 (local scoped-opts*
   {:mode "mode"
    :enabled "enabled"
