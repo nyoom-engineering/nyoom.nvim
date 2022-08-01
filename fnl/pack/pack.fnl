@@ -61,6 +61,7 @@
                           (pack :nvim-telescope/telescope-ui-select.nvim
                                {:module :telescope._extensions.ui-select})
                           (pack :nvim-telescope/telescope-ghq.nvim)
+                          (pack :nvim-telescope/telescope-file-browser.nvim)
                           (pack :nvim-telescope/telescope-fzf-native.nvim
                                 {:module :telescope._extensions.fzf
                                  :run :make})]})

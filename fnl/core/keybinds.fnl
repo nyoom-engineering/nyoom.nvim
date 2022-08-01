@@ -22,6 +22,7 @@
 (map! [n] "<C-c><C-g>" "<cmd>Telescope ghq list<CR>")
 (map! [n] "<leader>bb" "<cmd>Telescope buffers<CR>")
 (map! [n] "<leader>pp" "<cmd>Telescope project<CR>")
+(map! [n] "<leader>pf" "<cmd>Telescope file_browser<CR>")
 
 ;; Window
 (map! [n] "<C-w><C-w>" "<cmd>lua require('nvim-window').pick()<CR>")
