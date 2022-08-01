@@ -32,9 +32,6 @@
 (fn parinfer-rust-loaded? []
   (< 0 (length (get_runtime_file "target/release/*parinfer_rust.*" true))))
 
-; packadd! parinfer-rust will add the plugin to runtimepath without
-; sourcing plugin/parinfer.vim. this way the library can still be
-; located but parinfer.vim won't interfere
 (fn setup []
   (when (and (= 0 (vim.fn.exists "g:parinfer_dont_load_rust"))
              (not (parinfer-rust-loaded?)))

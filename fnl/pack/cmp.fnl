@@ -1,3 +1,5 @@
+(import-macros {: set!} :macros.option-macros)
+
 (local {: insert} table)
 (local {: setup
         : mapping
@@ -42,6 +44,8 @@
               :Operator ""
               :TypeParameter ""})
 
+;; cmp options
+(set! completeopt [:menu :menuone :preview :noinsert])
 ;;; Supertab functionality utility functions
 (fn has-words-before []
   (let [col (- (vim.fn.col ".") 1)
