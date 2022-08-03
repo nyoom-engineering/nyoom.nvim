@@ -39,7 +39,10 @@
 (map! [n] "<leader>sb" "<cmd>Telescope current_buffer_fuzzy_find<cr>")
 (map! [n] "<leader>sp" "<cmd>Telescope live_grep<cr>")
 
-
 ;; Git
 (map! [n] "<leader>gg" "<cmd>ToggleLazygit<cr>")
+
+;; WIndow
+(map! [in] "<C-x>0" "<cmd>bd<cr>")
+(map! [in] "<C-x>1" "<cmd>only<cr>")
 ;; <

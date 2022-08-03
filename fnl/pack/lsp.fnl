@@ -42,8 +42,8 @@
           :lsp_workspace_symbols open-workspace-symbol-float!} (require :telescope.builtin))
 
   (buf-map! [n] "K" open-doc-float!)
-  (buf-map! [nv] "<leader>a" open-code-action-float!)
-  (buf-map! [nv] "<leader>rn" rename!)
+  (buf-map! [nv] "<leader>ca" open-code-action-float!)
+  (buf-map! [nv] "<leader>cr" rename!)
   (buf-map! [n] "<leader>d" open-line-diag-float!)
   (buf-map! [n] "[d" goto-diag-prev!)
   (buf-map! [n] "]d" goto-diag-next!)

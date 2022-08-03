@@ -93,9 +93,9 @@
                                       :config (load-file lsp)}) 
 
 ;; Language-specific functionality
-;; (use-package! :mfussenegger/nvim-jdtls {:ft :java :config (load-lang java)})
-(use-package! :saecki/crates.nvim {:event ["BufRead Cargo.toml"] :config (call-setup crates)})
-(use-package! :simrat39/rust-tools.nvim {:ft :rust :branch :modularize_and_inlay_rewrite :config (load-lang rust)}) 
+(use-package! :mfussenegger/nvim-jdtls {:ft :java :config (load-lang java)})
+;; (use-package! :saecki/crates.nvim {:event ["BufRead Cargo.toml"] :config (call-setup crates)})
+;; (use-package! :simrat39/rust-tools.nvim {:ft :rust :branch :modularize_and_inlay_rewrite :config (load-lang rust)}) 
 
 ;; git
 (use-package! :TimUntersberger/neogit {:config (call-setup neogit) :cmd :Neogit})
