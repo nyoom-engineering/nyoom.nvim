@@ -44,6 +44,7 @@
   (buf-map! [n] "K" open-doc-float!)
   (buf-map! [nv] "<leader>ca" open-code-action-float!)
   (buf-map! [nv] "<leader>cr" rename!)
+  (buf-map! [nv] "<leader>cf" vim.lsp.buf.formatting {:noremap true :silent true})
   (buf-map! [n] "<leader>d" open-line-diag-float!)
   (buf-map! [n] "[d" goto-diag-prev!)
   (buf-map! [n] "]d" goto-diag-next!)
@@ -55,17 +56,17 @@
   (buf-map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))
   (buf-map! [n] "<leader>lD" open-diag-float!)
   (buf-map! [n] "<leader>ls" open-local-symbol-float!)
-  (buf-map! [n] "<leader>lS" open-workspace-symbol-float!)
+  (buf-map! [n] "<leader>lS" open-workspace-symbol-float!))
 
   ;; Format buffer before saving
-  (local {: contains?} (require :macros.lib.seq))
-  (when (client.supports_method "textDocument/formatting")
-    (augroup! lsp-format-before-saving
-      (clear! {:buffer bufnr})
-      (autocmd! BufWritePre <buffer>
-        '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
-                              :bufnr bufnr})
-        {:buffer bufnr}))))
+  ;; (local {: contains?} (require :macros.lib.seq))
+  ;; (when (client.supports_method "textDocument/formatting")
+  ;;   (augroup! lsp-format-before-saving
+  ;;     (clear! {:buffer bufnr})
+  ;;     (autocmd! BufWritePre <buffer>
+  ;;       '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
+  ;;                             :bufnr bufnr})
+  ;;       {:buffer bufnr}))))
 
 ;; What should the lsp be demanded of?
 (local capabilities (vim.lsp.protocol.make_client_capabilities))

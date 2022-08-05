@@ -6,9 +6,7 @@
  (vim.api.nvim_buf_set_keymap 0 :t :<C-h> "<C-\\><C-n><C-W>h" {:noremap true :silent true})
  (vim.api.nvim_buf_set_keymap 0 :t :<C-j> "<C-\\><C-n><C-W>j" {:noremap true :silent true}))
  
-(setup
- {:open_mapping :<C-\>})
-;; (vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()")
+(setup)
 (vim.cmd "autocmd! TermEnter term://*toggleterm#* lua set_terminal_keymaps()")
 (local Terminal (. (require :toggleterm.terminal) :Terminal))
 (local lazygit (Terminal:new {:cmd :lazygit :dir "git_dir" :direction :float :hidden true}))
@@ -23,12 +21,6 @@
 
 (fn _btop_toggle []
  (btop:toggle))
-
-;; (fn _nnn_toggle []
-;;  (nnn:toggle))
-
-;; (fn _nvim_toggle []
-;;  (nvim-headless:toggle))
 
 (fn _nbb_toggle []
  (nbb:toggle))

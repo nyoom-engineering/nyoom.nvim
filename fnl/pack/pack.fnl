@@ -170,6 +170,8 @@
 (use-package! :lukas-reineke/indent-blankline.nvim {:config (load-file indent-blankline)})
 (use-package! :theHamsta/nvim-dap-virtual-text {:config (call-setup nvim-dap-virtual-text)})
 (use-package! :Pocco81/dap-buddy.nvim)
+(use-package! :hlucco/nvim-eswpoch)
+ 
 ; custom plugin end
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
