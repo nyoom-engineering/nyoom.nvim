@@ -60,5 +60,21 @@
   ```"
   (shared-command! 'vim.api.nvim_buf_create_user_command name command ?options))
 
-{: command!
+(λ cmd! [cmd value]
+  "Runs a vimscript command using the vim.api.nvim_cmd API.
+  Accepts the following arguements:
+  cmd -> a symbol.
+  value -> a symbol.
+  Example of use:
+  ```fennel
+  (cmd! Packadd packer.nvim)
+  ```"
+  (assert-compile (sym? cmd) "expected symbol for cmd" cmd)
+  (assert-compile (sym? value) "expected symbol for value" value)
+  (let [cmd (->str cmd)
+        value (->str value)]
+    `(vim.api.nvim_cmd {:cmd ,cmd :args [,value]} {})))
+
+{: cmd!
+ : command!
  : local-command!}

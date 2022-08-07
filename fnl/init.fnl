@@ -1,4 +1,5 @@
 (require-macros :macros.event-macros)
+(import-macros {: cmd!} :macros.command-macros)
 (import-macros {: colorscheme} :macros.highlight-macros)
 
 ;; disable some built-in Neovim plugins and unneeded providers
@@ -28,11 +29,17 @@
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
 
-;; make sure packer is all ready to go
+;; add Mason to path
+(set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
+
+;; only load packer if you need to sync it
 (let [compiled? (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
       load-compiled #(require :packer_compiled)]
  (if compiled?
-     (load-compiled)
+     (load-compiled))
+ (when (not compiled?)
+     (cmd! packadd packer.nvim)
+     (require :pack.pack)
      (. (require :packer) :sync)))
 
 ;; core
@@ -40,9 +47,6 @@
 
 ;; statusline
 (require :utils.statusline)
-
-;; load plugins
-(require :pack.pack)
 
 ;; colorscheme
 (colorscheme oxocarbon)

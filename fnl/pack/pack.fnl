@@ -5,17 +5,26 @@
    (packer.init {:git {:clone_timeout 300}
                  :profile {:enable true}
                  :compile_path (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")
-                 ;; :snapshot (.. (vim.fn.stdpath :config) :/packer.lock)
-                 ;; :snapshot_path (vim.fn.stdpath :config)
                  :display {:header_lines 2
                            :title " packer.nvim"
                            :open_fn (λ open_fn []
                                       (local {: float} (require :packer.util))
                                       (float {:border :solid}))}}))
 
-
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
+
+(local packer-cmds [:PackerSnapshot
+                    :PackerSnapshotRollback
+                    :PackerSnapshotDelete
+                    :PackerInstall
+                    :PackerUpdate
+                    :PackerSync
+                    :PackerClean
+                    :PackerCompile
+                    :PackerStatus
+                    :PackerProfile
+                    :PackerLoad])
 
 (local treesitter-cmds [:TSInstall
                         :TSBufEnable
@@ -31,19 +40,26 @@
                    :MasonUninstallAll
                    :MasonLog])
 
-
 ;; The package manager can manage itself
-(use-package! :wbthomason/packer.nvim)
+(use-package! :wbthomason/packer.nvim {:cmds packer-cmds})
 
 ;; Used by quite a few plugins
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 
+;; profiling
+;; (use-package! :stevearc/profile.nvim {:config (load-file profile)})
+
 ;; lispy configs
-(use-package! :rktjmp/hotpot.nvim {:branch :nightly})
-(use-package! :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
 (use-package! :Olical/conjure {:branch :develop
                                :ft lisp-ft
-                               :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
+                               :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)
+                               :requires [(pack :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
+                                          (match fennel_compiler
+                                            :aniseed (pack :Olical/aniseed {:branch :develop})
+                                            :hotpot (pack :rktjmp/hotpot.nvim {:branch :nightly}))
+                                          (let [aniseed? (= (FENNEL_COMPILER :aniseed))]
+                                           (if aniseed?
+                                              (pack :lewis6991/impatient.nvim {:module :impatient})))]})
 
 ;; Mappings
 (use-package! :anuvyklack/hydra.nvim {:keys :<space> :config (load-file hydras)})
@@ -123,11 +139,6 @@
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
 (use-package! :Pocco81/true-zen.nvim {:cmd :TZAtaraxis :config (load-file truezen)})
 (use-package! :shaunsingh/oxocarbon.nvim {:run :./install.sh}) 
-(use-package! :monkoose/matchparen.nvim {:opt true
-                                         :config (load-file matchparen)
-                                         :setup (fn []
-                                                  ((. (require :utils.lazy-load)
-                                                      :load-on-file-open!) :matchparen.nvim))})
 (use-package! :rcarriga/nvim-notify {:opt true
                                      :setup (fn []
                                               (set vim.notify
@@ -135,6 +146,11 @@
                                                      ((. (require :packer) :loader) :nvim-notify)
                                                      (set vim.notify (require :notify))
                                                      (vim.notify msg level opts))))})
+(use-package! :monkoose/matchparen.nvim {:opt true
+                                         :config (load-file matchparen)
+                                         :setup (fn []
+                                                  ((. (require :utils.lazy-load)
+                                                      :load-on-file-open!) :matchparen.nvim))})
 (use-package! :norcalli/nvim-colorizer.lua {:opt true
                                             :config (load-file colorizer)
                                             :setup (fn []

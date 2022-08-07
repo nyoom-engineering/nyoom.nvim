@@ -66,18 +66,6 @@
   (let [lang (->str lang)]
     `#(require (.. "lang." ,lang))))
 
-(λ load-lang [lang]
-  "Configure a language-specific plugin by loading a file from the lang/ folder
-  Accepts the following arguements:
-  lang -> a symbol.
-  Example of use:
-  ```fennel
-  (use-package! :mfussenegger/nvim-jdtls {:ft :java :config (load-lang java)})
-  ```"
-  (assert-compile (sym? lang) "expected symbol for lang" lang)
-  (let [lang (->str lang)]
-    `#(require (.. "lang." ,lang))))
-
 (λ call-setup [name]
  "Configures a plugin by calling its setup function
   name -> a symbol.
