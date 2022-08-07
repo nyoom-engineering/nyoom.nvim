@@ -4,6 +4,8 @@
 (local {: setup
         : mapping
         : visible
+        : select_prev_item
+        : select_next_item
         : complete
         :config {: compare : disable}
         :ItemField {:Kind kind :Abbr abbr :Menu menu}
@@ -11,10 +13,10 @@
 
 (local types (require :cmp.types))
 (local under-compare (require :cmp-under-comparator))
-(local {: lsp_expand 
-        : expand_or_jump 
-        : expand_or_jumpable 
-        : jump 
+(local {: lsp_expand
+        : expand_or_jump
+        : expand_or_jumpable
+        : jump
         : jumpable} (require :luasnip))
 
 ;; default icons (lspkind)
@@ -69,7 +71,7 @@
                   :<C-p> (mapping (mapping.select_prev_item {:behavior insert-behavior}) [:i :s])
                   :<Tab> (mapping (fn [fallback]
                                     (if (visible)
-                                        (mapping.select_next_item {:behavior insert-behavior})
+                                        (select_next_item {:behavior insert-behavior})
                                         (expand_or_jumpable)
                                         (expand_or_jump)
                                         (has-words-before)
@@ -79,7 +81,7 @@
                                   [:i :s :c])
                   :<S-Tab> (mapping (fn [fallback]
                                       (if (visible)
-                                          (mapping.select_prev_item {:behavior insert-behavior})
+                                          (select_prev_item {:behavior insert-behavior})
                                           (jumpable -1)
                                           (jump -1)
                                           (fallback)))
