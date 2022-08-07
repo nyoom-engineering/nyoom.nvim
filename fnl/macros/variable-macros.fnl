@@ -1,4 +1,4 @@
-(local {: str? : ->str} (require :macros.lib.types))
+(local {: str? : ->str} (require :macros.types-macros))
 
 (λ let-with-scope! [[scope] name value]
   (assert-compile (or (str? scope) (sym? scope)) "expected string or symbol for scope" scope)

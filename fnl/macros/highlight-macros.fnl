@@ -1,4 +1,4 @@
-(local {: ->str : tbl?} (require :macros.lib.types))
+(local {: ->str : tbl?} (require :macros.types-macros))
 
 (λ colorscheme [scheme]
   "Set a colorscheme using the vim.api.nvim_cmd API.

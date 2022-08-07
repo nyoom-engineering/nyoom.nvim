@@ -1,7 +1,7 @@
-(local {: ->str} (require :macros.lib.types))
+(local {: ->str} (require :macros.types-macros))
 (local {: first
-        : second} (require :macros.lib.seq))
-(local {: djb2} (require :macros.lib.crypt))
+        : second} (require :macros.seq-macros))
+(local {: djb2} (require :macros.crypt-macros))
 
 (λ expr->str [expr]
   `(macrodebug ,expr nil))

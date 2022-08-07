@@ -1,4 +1,4 @@
-(local {: str? : nil? : tbl? : ->str} (require :macros.lib.types))
+(local {: str? : nil? : tbl? : ->str} (require :macros.types-macros))
 
 (tset _G :nyoom/pack [])
 (tset _G :nyoom/rock [])

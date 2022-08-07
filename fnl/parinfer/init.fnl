@@ -1,4 +1,4 @@
-(local {: extend-keep} (require :macros.lib.sriapi))
+(local {: extend-keep} (require :parinfer.sriapi))
 
 (local incr-bst (require :parinfer.incremental-change))
 (local {:run run-parinfer} (require :parinfer.lib))

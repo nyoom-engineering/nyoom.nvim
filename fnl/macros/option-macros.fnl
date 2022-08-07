@@ -1,10 +1,10 @@
-(local {: ->str : nil?} (require :macros.lib.types))
-(local {: begins-with?} (require :macros.lib.string))
+(local {: ->str : nil?} (require :macros.types-macros))
+(local {: begins-with?} (require :macros.string-macros))
 (local {: quoted? : fn?
         : quoted->fn
         : gensym-checksum
         : expand-exprs
-        : vlua} (require :macros.lib.compile-time))
+        : vlua} (require :macros.compile-time-macros))
 
 (λ set! [name ?value]
   "Set a vim option using the vim.opt.<name> API.

@@ -1,5 +1,4 @@
 (require-macros :macros.event-macros)
-(import-macros {: cmd!} :macros.command-macros)
 (import-macros {: colorscheme} :macros.highlight-macros)
 
 ;; disable some built-in Neovim plugins and unneeded providers
@@ -38,7 +37,6 @@
  (if compiled?
      (load-compiled))
  (when (not compiled?)
-     (cmd! packadd packer.nvim)
      (require :pack.pack)
      (. (require :packer) :sync)))
 

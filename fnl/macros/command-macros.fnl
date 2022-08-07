@@ -1,5 +1,5 @@
-(local {: ->str : str? : nil? : tbl?} (require :macros.lib.types))
-(local {: fn? : quoted? : quoted->fn : quoted->str} (require :macros.lib.compile-time))
+(local {: ->str : str? : nil? : tbl?} (require :macros.types-macros))
+(local {: fn? : quoted? : quoted->fn : quoted->str} (require :macros.compile-time-macros))
 
 (λ shared-command! [api-function name command ?options]
   (assert-compile (sym? api-function) "expected symbol for api-function" api-function)

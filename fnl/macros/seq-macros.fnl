@@ -1,4 +1,4 @@
-(local {: tbl? : nil? : num?} (require :macros.lib.types))
+(local {: tbl? : nil? : num?} (require :macros.types-macros))
 
 (λ empty? [xs]
   (= 0 (length xs)))

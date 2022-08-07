@@ -1,6 +1,6 @@
-(local {: all? : first} (require :macros.lib.seq))
-(local {: ->str : nil? : tbl? : str?} (require :macros.lib.types))
-(local {: fn? : quoted? : quoted->fn : quoted->str : expand-exprs} (require :macros.lib.compile-time))
+(local {: all? : first} (require :macros.seq-macros))
+(local {: ->str : nil? : tbl? : str?} (require :macros.types-macros))
+(local {: fn? : quoted? : quoted->fn : quoted->str : expand-exprs} (require :macros.compile-time-macros))
 
 (λ autocmd! [event pattern command ?options]
   "Create an autocommand using the nvim_create_autocmd API.

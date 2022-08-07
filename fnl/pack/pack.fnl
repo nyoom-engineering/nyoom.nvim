@@ -1,9 +1,12 @@
 (require-macros :macros.package-macros)
+(import-macros {: cmd!} :macros.command-macros)
+
+;; Load packer from opt
+(cmd! packadd packer.nvim)
 
 ;; Setup packer
 (let [packer (require :packer)]
    (packer.init {:git {:clone_timeout 300}
-                 :profile {:enable true}
                  :compile_path (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")
                  :display {:header_lines 2
                            :title " packer.nvim"
@@ -13,18 +16,6 @@
 
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
-
-(local packer-cmds [:PackerSnapshot
-                    :PackerSnapshotRollback
-                    :PackerSnapshotDelete
-                    :PackerInstall
-                    :PackerUpdate
-                    :PackerSync
-                    :PackerClean
-                    :PackerCompile
-                    :PackerStatus
-                    :PackerProfile
-                    :PackerLoad])
 
 (local treesitter-cmds [:TSInstall
                         :TSBufEnable
@@ -41,7 +32,7 @@
                    :MasonLog])
 
 ;; The package manager can manage itself
-(use-package! :wbthomason/packer.nvim {:cmds packer-cmds})
+(use-package! :wbthomason/packer.nvim {:opt true})
 
 ;; Used by quite a few plugins
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
@@ -54,12 +45,11 @@
                                :ft lisp-ft
                                :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)
                                :requires [(pack :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
-                                          (match fennel_compiler
+                                          (match FENNEL_COMPILER
                                             :aniseed (pack :Olical/aniseed {:branch :develop})
                                             :hotpot (pack :rktjmp/hotpot.nvim {:branch :nightly}))
-                                          (let [aniseed? (= (FENNEL_COMPILER :aniseed))]
-                                           (if aniseed?
-                                              (pack :lewis6991/impatient.nvim {:module :impatient})))]})
+                                          (match FENNEL_COMPILER
+                                            :aniseed (pack :lewis6991/impatient.nvim {:module :impatient}))]})
 
 ;; Mappings
 (use-package! :anuvyklack/hydra.nvim {:keys :<space> :config (load-file hydras)})
@@ -122,18 +112,17 @@
 ;; completion
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file cmp)
-               :wants :LuaSnip
-               :event :InsertEnter
-               :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
+               :after :friendly-snippets
+               :requires [(pack :hrsh7th/cmp-path {:after :cmp-buffer})
+                          (pack :hrsh7th/cmp-buffer {:after :cmp-nvim-lsp})
+                          (pack :hrsh7th/cmp-nvim-lsp {:after :cmp_luasnip})
                           (pack :PaterJason/cmp-conjure {:after :conjure})
-                          (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
-                          (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
+                          (pack :saadparwaiz1/cmp_luasnip {:after :LuaSnip})
+                          (pack :lukas-reineke/cmp-under-comparator {:after :friendly-snippets})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
                                                    :config (load-file luasnip)
-                                                   :requires [(pack :rafamadriz/friendly-snippets)]})]})
+                                                   :requires [(pack :rafamadriz/friendly-snippets {:module [:cmp :cmp_nvim_lsp] :event :InsertEnter})]})]})
 
 ;; aesthetics
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})

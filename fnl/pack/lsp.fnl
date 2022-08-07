@@ -58,7 +58,7 @@
   (buf-map! [n] "<leader>lS" open-workspace-symbol-float!)
 
   ;; Format buffer before saving
-  (local {: contains?} (require :macros.lib.seq))
+  (local {: contains?} (require :macros.seq-macros))
   (when (client.supports_method "textDocument/formatting")
     (augroup! lsp-format-before-saving
       (clear! {:buffer bufnr})
