@@ -1,16 +1,24 @@
 (local {: tbl? : nil? : num?} (require :macros.types-macros))
 
 (λ empty? [xs]
+  "Check if given table is empty"
+  (assert-compile (tbl? xs) "expected table for xs" xs)
   (= 0 (length xs)))
 
 (λ first [xs]
-  (?. xs 1))
+  "Get the first element in a list"
+  (assert-compile (tbl? xs) "expected table for xs" xs)
+  (. xs 1))
 
 (λ second [xs]
-  (?. xs 2))
+  "Get the second element in a list"
+  (assert-compile (tbl? xs) "expected table for xs" xs)
+  (. xs 2))
 
 (λ last [xs]
-  (?. xs (length xs)))
+  "Get the last element in a list"
+  (assert-compile (tbl? xs) "expected table for xs" xs)
+  (. xs (length xs)))
 
 (λ any? [pred xs]
   (accumulate [any? false

@@ -3,9 +3,6 @@
         : second} (require :macros.seq-macros))
 (local {: djb2} (require :macros.crypt-macros))
 
-(λ expr->str [expr]
-  `(macrodebug ,expr nil))
-
 (fn fn? [x]
   "Checks if `x` is a function definition.
   Cannot check if a symbol is a function in compile time."
@@ -55,8 +52,7 @@
   (assert-compile (sym? x) "expected symbol for x" x)
   (string.format "v:lua.%s()" (->str x)))
 
-{: expr->str
- : fn?
+{: fn?
  : quoted?
  : quoted->fn
  : quoted->str

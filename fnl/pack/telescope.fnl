@@ -1,3 +1,4 @@
+(import-macros {: map!} :macros.keybind-macros)
 (local {: setup : load_extension} (require :telescope))
 
 (setup {:defaults {:prompt_prefix "   "

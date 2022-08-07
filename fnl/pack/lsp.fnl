@@ -22,6 +22,7 @@
        (with handlers.hover {:border :solid})))
 
 (fn on-attach [client bufnr]
+  (import-macros {: cmd!} :macros.command-macros)
   (import-macros {: buf-map!} :macros.keybind-macros)
   (import-macros {: autocmd! : augroup! : clear!} :macros.event-macros)
 
@@ -32,24 +33,30 @@
           :type_definition goto-type-definition!
           :code_action open-code-action-float!
           :rename rename!} vim.lsp.buf)
+
+  (buf-map! [n] "K" open-doc-float!)
+  (buf-map! [n] "<leader>gD" goto-declaration!)
+  (buf-map! [n] "<leader>gd" goto-definition!)
+  (buf-map! [n] "<leader>gt" goto-type-definition!)
+  (buf-map! [nv] "<leader>a" open-code-action-float!)
+  (buf-map! [nv] "<leader>rn" rename!)
+
   (local {:open_float open-line-diag-float!
           :goto_prev goto-diag-prev!
           :goto_next goto-diag-next!} vim.diagnostic)
+
+  (buf-map! [n] "<leader>d" open-line-diag-float!)
+  (buf-map! [n] "[d" goto-diag-prev!)
+  (buf-map! [n] "]d" goto-diag-next!)
+
+  (cmd! packadd packer.nvim)
+  ((. (require :packer) :loader) :telescope.nvim)
   (local {:lsp_implementations open-impl-float!
           :lsp_references open-ref-float!
           :diagnostics open-diag-float!
           :lsp_document_symbols open-local-symbol-float!
           :lsp_workspace_symbols open-workspace-symbol-float!} (require :telescope.builtin))
 
-  (buf-map! [n] "K" open-doc-float!)
-  (buf-map! [nv] "<leader>a" open-code-action-float!)
-  (buf-map! [nv] "<leader>rn" rename!)
-  (buf-map! [n] "<leader>d" open-line-diag-float!)
-  (buf-map! [n] "[d" goto-diag-prev!)
-  (buf-map! [n] "]d" goto-diag-next!)
-  (buf-map! [n] "<leader>gD" goto-declaration!)
-  (buf-map! [n] "<leader>gd" goto-definition!)
-  (buf-map! [n] "<leader>gt" goto-type-definition!)
   (buf-map! [n] "<leader>li" open-impl-float!)
   (buf-map! [n] "<leader>lr" open-ref-float!)
   (buf-map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))

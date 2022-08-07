@@ -39,6 +39,7 @@
 
 ;; profiling
 ;; (use-package! :stevearc/profile.nvim {:config (load-file profile)})
+(use-package! :dstein64/vim-startuptime {:cmd :StartupTime})
 
 ;; lispy configs
 (use-package! :Olical/conjure {:branch :develop
@@ -112,13 +113,13 @@
 ;; completion
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file cmp)
-               :after :friendly-snippets
+               :after :cmp-under-comparator
                :requires [(pack :hrsh7th/cmp-path {:after :cmp-buffer})
                           (pack :hrsh7th/cmp-buffer {:after :cmp-nvim-lsp})
                           (pack :hrsh7th/cmp-nvim-lsp {:after :cmp_luasnip})
                           (pack :PaterJason/cmp-conjure {:after :conjure})
                           (pack :saadparwaiz1/cmp_luasnip {:after :LuaSnip})
-                          (pack :lukas-reineke/cmp-under-comparator {:after :friendly-snippets})
+                          (pack :lukas-reineke/cmp-under-comparator {:module [:cmp :cmp_nvim_lsp] :event :InsertEnter})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
                                                    :config (load-file luasnip)
