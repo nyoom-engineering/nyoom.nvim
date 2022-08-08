@@ -4,6 +4,8 @@
 (local {: setup
         : mapping
         : visible
+        : select_prev_item
+        : select_next_item
         : complete
         :config {: compare : disable}
         :ItemField {:Kind kind :Abbr abbr :Menu menu}
@@ -11,10 +13,10 @@
 
 (local types (require :cmp.types))
 (local under-compare (require :cmp-under-comparator))
-(local {: lsp_expand 
-        : expand_or_jump 
-        : expand_or_jumpable 
-        : jump 
+(local {: lsp_expand
+        : expand_or_jump
+        : expand_or_jumpable
+        : jump
         : jumpable} (require :luasnip))
 
 ;; default icons (lspkind)
