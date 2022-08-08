@@ -152,7 +152,7 @@
 (use-package! :akinsho/toggleterm.nvim {:config (load-file toggleterm)})
 (use-package! :kylechui/nvim-surround {:config (load-file nvim-surround)})
 (use-package! "https://gitlab.com/yorickpeterse/nvim-window.git")
-(use-package! :folke/tokyonight.nvim {:config (load-file tokyonight)})
+;; (use-package! :folke/tokyonight.nvim {:config (load-file tokyonight)})
 
 (use-package! :rcarriga/nvim-dap-ui
             {:requires [(pack :mfussenegger/nvim-dap {:config (load-file dap)})]
