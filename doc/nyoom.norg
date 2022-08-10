@@ -1,0 +1,87 @@
+@document.meta
+    title: Nyoom help-page
+    description: the Nyoom.nvim help-page
+    author: Shaunsingh 
+    categories: docs
+    created: 2022-08-07
+    version: 0.1
+@end
+
+= TOC
+
+* Introduction 
+
+  > These are your father's parentheses.
+  > Elegant weapons for a more... civilized age.
+  > — xkcd/297
+
+  Nyoom.nvim was an answer to abstracted and complex codebases that take away end-user extensibility, try to be a one-size-fits-all config, and needlessly lazy load everything. Nyoon.nvim provides a solution to these problems by providing easily readable and easy to work with code in order to make a functioning configuration. The end goal of nyoom.nvim is to be used as a base config for users to extend and add upon, leading to a more unique editing experience. Its relatively small and simple, offers the bare minimum needed plugins to have a powerful config, and is suited to my needs, but can just as easily be suited to yours!
+
+  I recommend not to clone and directly install this config, but to fork it, inspect the code, and adjust it to your liking. The best neovim configuration is what you make, and this config is only supposed to provide you the tools to do so.
+
+  This document is going to get you started with Nyoom, Fennel, Nyoom's macros, as well as everything you need to know to make your own fennel-baesd config!
+
+  Remember, this file is editable so feel free to mark off the todo list as you go along.
+
+* Tasks
+  Remember, this file is editable so feel free to mark off the todo list as you go along.
+  - [ ] Reading: What is Nyoom?
+  - [ ] Fork Nyoom
+  - [ ] Install your fork
+  - [ ] Reading: Get started with Fennel
+
+* What is Nyoom?
+  Nyoom is an extensible Fennel-based config for the Neovim editor. It is designed the mantras of {https://github.com/doomemacs/doomemacs}[doom-emacs], and is supposed to be easy to get started with for both emacs refugees, lisp fanatics, and neovim newbies. 
+
+** Mantras 
+   Here are the mantras around which Nyoom is designed
+   - Gotta go fast. Startup and run-time performance are priorities.
+   - Close to metal. There's less between you and vanilla neovim by design. That's less to grok and less to work around when you tinker.
+   - Opinionated, but not stubborn. Nyoom (and Doom) are about reasonable defaults and curated opinions, but use as little or as much of it as you like.
+   - Your system, your rules. You know better. At least, Nyoom hopes so! There are no external dependencies (apart from rust), and never will be.
+
+   It also aligns with many of Doom's features:
+   - Minimalistic good looks inspired by modern editors.
+   - A modular organizational structure for separating concerns in your config.
+   - A standard library designed to simplify your fennel bike shedding.
+   - A declarative package management system (inspired by use-package, powered by Packer.nvim). Install packages from anywhere, and pin them to any commit.
+   - A Space(vim)-esque keybinding scheme, centered around leader and localleader prefix keys (SPC and SPCm).
+   - Project search (and replace) utilities, powered by ripgrep, and telescope.
+
+   However, it also disagrees with some of those ideals
+   - Packages are not pinned to commits by default. Unlike Doom, this configuration includes fewer than 20 packages by default and breaking changes are usually few and far between. Everything is rolling release, and if a breaking change does occur I will push a fix within a day (pinky promise!). Of course, you are free to pin packages yourself (and use :PackerSnapshot).
+
+   It's expected that while working on your own config, you try to keep these goals in mind. 
+
+* Fork Nyoom
+  Forking Nyoom is as simple as forking any repository. That being said, {https://docs.github.com/en/get-started/quickstart/fork-a-repo}[fork-a-repo] can help you out if you get stuck. After you fork Nyoom, simply clone your fork and we can get started
+  
+* Install your fork 
+  Once you have cloned your fork, we need to get our development enviornment set up.
+
+** Aniseed vs Hotpot
+   In the neovim plugin ecosystem there are four main options to interface neovim with fennel
+   1. hotpot
+   2. aniseed
+   3. tangerine
+   4. plain fennel
+
+   Of these options, we're going to ignore "plain fennel" (just calling `fennel.lua` yourself) because of its performance issues, and we're also going to ignore tangerine because at the moment its incompatible with how Nyoom works. 
+
+   Aniseed bridges the gap between Fennel and Neovim, Allowing you to easily write plugins or configuration in a Clojure-like Lisp with great runtime performance. As opposed to hotpot, aniseed provides macros, is slightly faster and more featureful, compiles fennel files to the lua/ directory, and has better integration with conjure. It aims to provide a more clojure-like experience, and behaves as a superset of fennel.
+
+   On the other hand, Hotpot will transparently compile your Fennel code into Lua and then return the compiled module. Future calls to require (including in future Neovim sessions) will skip the compile step unless it's stale. Only compiles and caches fennel files, providing a more native experience for the user. On the other hand, it is slightly slower and less developed. Users looking for macros can use the builtin macros defined in macros.fnl, or the zest.nvim library.
+
+In init.lua, you can set the compiler to aniseed/hotpot, and nyoom will handle the rest. All the current configuration is hotpot-compatible, so it doesn't use any aniseed macros by default. However, you are free to use them yourself.
+
+
+* Get started with Fennel
+** Why fennel
+** Learning Fennel
+** Conjure 
+** Hotpot
+** Antifennel
+
+
+
+

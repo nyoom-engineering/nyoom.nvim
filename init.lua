@@ -1,10 +1,8 @@
-FENNEL_COMPILER = [[hotpot]]
-if FENNEL_COMPILER == [[hotpot]] then
-    require [[hotpot]].setup()
-    require [[init]]
-elseif FENNEL_COMPILER == [[aniseed]] then
-    require [[impatient]]
-    vim.g["aniseed#env"] = true
+require[[hotpot]].setup()
+local compiled = (vim.fn.filereadable((vim.fn.stdpath("config") .. "/lua/packer_compiled.lua")) == 1)
+if compiled then
+  require[[packer_compiled]]
 else
-    error [[Unknown compiler]]
+  require[[core.sync]]
 end
+require[[core]]

@@ -41,30 +41,17 @@
   (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
   (table.insert _G.nyoom/rock (rock identifier ?options)))
 
-;; make life easier
-(λ load-file [file]
-  "Configure a plugin by loading a file from the pack/ folder
+(λ load-module [module]
+  "Configure a module by loading its config file 
   Accepts the following arguements:
-  file -> a symbol.
+  module -> a symbol.
   Example of use:
   ```fennel
-  (use-package! :anuvyklack/hydra.nvim {:config (load-file hydras)})
+  (use-package! :anuvyklack/hydra.nvim {:config (load-module tool.hydras)})
   ```"
-  (assert-compile (sym? file) "expected symbol for file" file)
-  (let [file (->str file)]
-    `#(require (.. "pack." ,file))))
-
-(λ load-lang [lang]
-  "Configure a language-specific plugin by loading a file from the lang/ folder
-  Accepts the following arguements:
-  lang -> a symbol.
-  Example of use:
-  ```fennel
-  (use-package! :mfussenegger/nvim-jdtls {:ft :java :config (load-lang java)})
-  ```"
-  (assert-compile (sym? lang) "expected symbol for lang" lang)
-  (let [lang (->str lang)]
-    `#(require (.. "lang." ,lang))))
+  (assert-compile (sym? module) "expected symbol for module" module)
+  (let [module (->str module)]
+    `#(require (.. "modules." ,module ".config"))))
 
 (λ call-setup [name]
  "Configures a plugin by calling its setup function
@@ -89,12 +76,24 @@
       (fn []
         ,(unpack (icollect [_ v (ipairs packs) :into rocks] v))))))
 
+(λ packadd! [package]
+  "Loads a package using the vim.api.nvim_cmd API.
+  Accepts the following arguements:
+  package -> a symbol.
+  Example of use:
+  ```fennel
+  (packadd! packer.nvim)
+  ```"
+  (assert-compile (sym? package) "expected symbol for package" package)
+  (let [package (->str package)]
+    `(vim.api.nvim_cmd {:cmd :packadd :args [,package]} {})))
+
 {: rock
  : pack
  : rock!
  : use-package!
- : load-file
- : load-lang
+ : packadd!
+ : load-module
  : call-setup
  : unpack!}
 
