@@ -3,6 +3,7 @@
         : visible
         : select_prev_item
         : select_next_item
+        :config {: sources}
         :ItemField {:Kind kind :Abbr abbr :Menu menu}
         :SelectBehavior {:Insert insert-behavior :Select select-behavior}} (require :cmp))
 
@@ -88,3 +89,12 @@
                                (set vim-item.menu vim-item.kind)
                                (set vim-item.kind (. icons vim-item.kind))
                                vim-item)}})
+
+ ;; Enable command-line completions
+ (setup.cmdline "/" {:mapping (mapping.preset.cmdline)
+                     :sources [{:name :buffer}]})
+
+ ;; Enable search completions
+ (setup.cmdline ":" {:mapping (mapping.preset.cmdline)
+                     :sources (sources [{:name :path}
+                                        {:name :cmdline}])})

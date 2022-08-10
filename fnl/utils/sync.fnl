@@ -1,8 +1,9 @@
-(import-macros {: packadd! : use-package!} :macros.package-macros)
+(import-macros {: packadd! : use-package! : unpack!} :macros.package-macros)
 
 (packadd! packer.nvim)
 
 (let [packer (require :packer)]
+   (packer.reset)
    (packer.init {:git {:clone_timeout 300}
                  :profile {:enable true}
                  :compile_path (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")
@@ -10,16 +11,14 @@
                            :title " packer.nvim"
                            :open_fn (λ open_fn []
                                       (local {: float} (require :packer.util))
-                                      (float {:border :solid}))}}))
+                                      (float {:border :solid}))}})
 
-;; TODO add package docs 
-(use-package! :wbthomason/packer.nvim {:opt true})
-(use-package! :rktjmp/hotpot.nvim {:branch :nightly})
-(use-package! :nvim-lua/plenary.nvim {:module :plenary})
+   ;; TODO add package docs 
+   (use-package! :wbthomason/packer.nvim {:opt true})
+   (use-package! :rktjmp/hotpot.nvim {:branch :nightly})
+   (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 
-(include :fnl.modules)
-(include :fnl.packages)
+   (include :fnl.modules)
+   (include :fnl.packages)
 
-(let [packer (require :packer)]
-   (packer.reset)
    (packer.sync))
