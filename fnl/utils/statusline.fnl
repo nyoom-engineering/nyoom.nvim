@@ -47,16 +47,10 @@
 
 ;; vim.diagnostic integration
 (fn get-lsp-diagnostic []
-  (local buf-clients (vim.lsp.buf_get_clients 0))
-  (local next next)
-  (when (= (next buf-clients) nil)
+  (when (not (rawget vim :lsp))
     (lua "return \"\""))
 
-  (local diagnostics (vim.diagnostic.get 0))
   (local count [0 0 0 0])
-
-  (each [_ diagnostic (ipairs diagnostics)]
-    (tset count diagnostic.severity (+ (. count diagnostic.severity) 1)))
 
   (local result {:errors (. count vim.diagnostic.severity.ERROR)
                  :warnings (. count vim.diagnostic.severity.WARN)

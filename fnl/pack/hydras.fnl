@@ -4,10 +4,8 @@
 
 ;; Git
 ;; We only want to load the git integration when a git repo is detected
-(local loader (. (require :packer) :loader))
 (local gitrepo (vim.fn.isdirectory :.git/index))
 (when gitrepo
-  (loader "gitsigns.nvim")
   (local {: toggle_linehl
           : toggle_deleted
           : next_hunk

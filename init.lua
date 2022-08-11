@@ -1,2 +1,2 @@
-require [[hotpot]].setup()
-require [[init]]
+require [[hotpot]].setup({modules = {correlate = true}})
+require [[core]]

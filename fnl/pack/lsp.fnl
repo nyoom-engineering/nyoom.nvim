@@ -22,8 +22,12 @@
        (with handlers.hover {:border :solid})))
 
 (fn on-attach [client bufnr]
+  (import-macros {: packadd!} :macros.package-macros)
   (import-macros {: buf-map!} :macros.keybind-macros)
   (import-macros {: autocmd! : augroup! : clear!} :macros.event-macros)
+
+  (packadd! packer.nvim)
+  ((. (require :packer) :loader) :telescope.nvim)
 
   ;; Keybindings
   (local {:hover open-doc-float!

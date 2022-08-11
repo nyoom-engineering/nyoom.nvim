@@ -1,18 +1,17 @@
 (require-macros :macros.package-macros)
 
+(packadd! packer.nvim)
+
 ;; Setup packer
 (let [packer (require :packer)]
    (packer.init {:git {:clone_timeout 300}
                  :profile {:enable true}
                  :compile_path (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")
-                 ;; :snapshot (.. (vim.fn.stdpath :config) :/packer.lock)
-                 ;; :snapshot_path (vim.fn.stdpath :config)
                  :display {:header_lines 2
                            :title " packer.nvim"
                            :open_fn (λ open_fn []
                                       (local {: float} (require :packer.util))
                                       (float {:border :solid}))}}))
-
 
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
@@ -33,10 +32,13 @@
 
 
 ;; The package manager can manage itself
-(use-package! :wbthomason/packer.nvim)
+(use-package! :wbthomason/packer.nvim {:opt true})
 
 ;; Used by quite a few plugins
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
+
+;; testing
+;; (use-package! :stevearc/profile.nvim {:config (load-file profile)})
 
 ;; lispy configs
 (use-package! :rktjmp/hotpot.nvim {:branch :nightly})
@@ -48,7 +50,8 @@
 ;; Mappings
 (use-package! :anuvyklack/hydra.nvim {:keys :<space> :config (load-file hydras)})
 (use-package! :windwp/nvim-autopairs {:event :InsertEnter :config (load-file autopairs)})
-(use-package! :ggandor/leap.nvim {:setup (fn []
+(use-package! :ggandor/leap.nvim {:opt true
+                                  :setup (fn []
                                           ((. (require :utils.lazy-load)
                                               :load-on-file-open!) :leap.nvim))
                                   :config (fn []
@@ -80,7 +83,7 @@
                           (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})]})
 
 ;; lsp
-(use-package! :williamboman/mason.nvim {:cmd mason-cmds :config (load-file mason)})
+(use-package! :williamboman/mason.nvim {:cmd mason-cmds :config (call-setup mason)})
 (use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :config (call-setup fidget)})
 (use-package! :folke/trouble.nvim {:cmd :Trouble :module :trouble :config (call-setup trouble)})
 (use-package! "https://git.sr.ht/~whynothugo/lsp_lines.nvim" {:after :nvim-lspconfig :config (call-setup lsp_lines)})
@@ -106,22 +109,23 @@
 ;; completion
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file cmp)
-               :wants :LuaSnip
-               :event :InsertEnter
-               :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
+               :after :friendly-snippets
+               :requires [(pack :hrsh7th/cmp-path {:after :cmp-buffer})
+                          (pack :hrsh7th/cmp-buffer {:after :cmp-nvim-lsp})
+                          (pack :hrsh7th/cmp-nvim-lsp {:after :cmp_luasnip})
+                          (pack :hrsh7th/cmp-cmdline {:after :cmp-nvim-lsp})
                           (pack :PaterJason/cmp-conjure {:after :conjure})
-                          (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
-                          (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
-                          (pack :L3MON4D3/LuaSnip {:event :InsertEnter
+                          (pack :saadparwaiz1/cmp_luasnip {:after :LuaSnip})
+                          (pack :rafamadriz/friendly-snippets {:module [:cmp :cmp_nvim_lsp] :event [:InsertEnter :CmdlineEnter]})
+                          (pack :L3MON4D3/LuaSnip {:event [:InsertEnter :CmdlineEnter]
                                                    :wants :friendly-snippets
-                                                   :config (load-file luasnip)
-                                                   :requires [(pack :rafamadriz/friendly-snippets)]})]})
+                                                   :config (fn []
+                                                             (local {: lazy_load} (require :luasnip/loaders/from_vscode))
+                                                             (lazy_load))})]})
 
 ;; aesthetics
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
-(use-package! :Pocco81/true-zen.nvim {:cmd :TZAtaraxis :config (load-file truezen)})
+(use-package! :Pocco81/true-zen.nvim {:cmd :TZAtaraxis :config (call-setup truezen)})
 (use-package! :shaunsingh/oxocarbon.nvim {:run :./install.sh}) 
 (use-package! :monkoose/matchparen.nvim {:opt true
                                          :config (load-file matchparen)
@@ -135,11 +139,11 @@
                                                      ((. (require :packer) :loader) :nvim-notify)
                                                      (set vim.notify (require :notify))
                                                      (vim.notify msg level opts))))})
-(use-package! :norcalli/nvim-colorizer.lua {:opt true
-                                            :config (load-file colorizer)
-                                            :setup (fn []
-                                                     ((. (require :utils.lazy-load)
-                                                         :load-on-file-open!) :nvim-colorizer.lua))})
+
+;; (use-package! :brenoprata10/nvim-highlight-colors {:opt true
+;;                                                    :config (call-setup nvim-highlight-colors)
+;;                                                    :setup (load-on-file-open! nvim-highlight-colors)})
+
 
 ;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. Feel free to add back org-mode if you want to though!
 (use-package! :nvim-neorg/neorg {:config (load-file neorg) :ft :norg :after :nvim-treesitter})
