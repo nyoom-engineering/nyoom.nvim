@@ -61,9 +61,10 @@
   (use-package! :j-hui/fidget.nvim {:config (call-setup :fidget)})
   ```"
   (assert-compile (sym? name) "expected symbol for lang" name)
-  (let [name (->str name)]
+  (let [strname (->str name)]
     `(λ []
-        ((. (require ,name) :setup)))))
+        (import ,strname (fn [,name]
+                           (. (,name) :setup))))))
 
 (λ unpack! []
   "Initializes the plugin manager with the plugins previously declared and
@@ -88,6 +89,35 @@
   (let [package (->str package)]
     `(vim.api.nvim_cmd {:cmd :packadd :args [,package]} {})))
 
+(λ load-on-file-open! [name]
+ "loads a plugin when a file is opened
+  name -> a symbol.
+  Example of use:
+  ```fennel
+  (use-package! :j-hui/fidget.nvim {:setup (load-on-file-open! fidget.nvim)})
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (let [name (->str name)]
+    `(λ []
+       (vim.api.nvim_create_autocmd [:BufRead :BufWinEnter :BufNewFile]
+               {:group (vim.api.nvim_create_augroup (.. :BeLazyOnFileOpen ,name) {})
+                :callback (fn []
+                            (when (fn []
+                                     (local file (vim.fn.expand "%"))
+                                     (and (and (not= file :NvimTree_1)
+                                               (not= file "[packer]"))
+                                          (not= file "")))
+                              (vim.api.nvim_del_augroup_by_name (.. :BeLazyOnFileOpen ,name))
+                              (if (not= ,name :nvim-treesitter)
+                                  (vim.defer_fn (fn []
+                                                  ((. (require :packer)
+                                                      :loader) ,name)
+                                                  (when (= ,name 
+                                                           :nvim-lspconfig)
+                                                    (vim.cmd "silent! e %")))
+                                                0)
+                                  ((. (require :packer) :loader) ,name))))}))))
+
 {: rock
  : pack
  : rock!
@@ -95,6 +125,7 @@
  : packadd!
  : load-module
  : call-setup
+ : load-on-file-open!
  : unpack!}
 
 

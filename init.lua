@@ -1,8 +1,7 @@
-require[[hotpot]].setup({provide_require_fennel = true})
+require('import')
+require('hotpot').setup({ provide_require_fennel = true })
 local compiled = (vim.fn.filereadable((vim.fn.stdpath("config") .. "/lua/packer_compiled.lua")) == 1)
 if compiled then
-  require[[packer_compiled]]
-else
-  require[[utils.sync]]
+    import('packer_compiled')
 end
-require[[core]]
+import('core')

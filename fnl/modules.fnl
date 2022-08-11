@@ -27,7 +27,6 @@
 (include :fnl.modules.tools.treesitter)
 
 ;; ui 
-(include :fnl.modules.ui.gitsigns)
 (include :fnl.modules.ui.notify)
 (include :fnl.modules.ui.nvimtree)
 (include :fnl.modules.ui.truezen)
