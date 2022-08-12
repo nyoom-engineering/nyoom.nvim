@@ -1,5 +1,5 @@
-(require-macros :macros.lib.ieach)
-(local {: merge : sriapi} (require :macros.lib.sriapi))
+(import-macros {: ieach^} :macros)
+(local {: merge : sriapi} (require :parinfer.sriapi))
 
 (local (t/ins t/cat) (values table.insert table.concat))
 

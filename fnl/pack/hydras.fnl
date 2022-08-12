@@ -1,9 +1,7 @@
-(import-macros {: set!} :macros.option-macros)
-(import-macros {: colorscheme} :macros.highlight-macros)
+(import-macros {: set! : colorscheme} :macros)
 (local Hydra (require :hydra))
 
 ;; Git
-;; We only want to load the git integration when a git repo is detected
 (local gitrepo (vim.fn.isdirectory :.git/index))
 (when gitrepo
   (local {: toggle_linehl

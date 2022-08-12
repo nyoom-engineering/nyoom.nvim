@@ -1,2 +1,3 @@
-target/
 lua/
+plugin/
+profile.json

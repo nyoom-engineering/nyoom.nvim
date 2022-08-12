@@ -1,7 +1,6 @@
-(local ts (require :nvim-treesitter))
-(local tsq (require :nvim-treesitter.query))
 (local tsp (require :nvim-treesitter.parsers))
 (local {: setup} (require :nvim-treesitter.configs))
+(local {: treesitter-filetypes} (require :ft))
 
 ;;; Extra parsers
 (local parser-config (tsp.get_parser_configs))
@@ -21,16 +20,9 @@
                      :files [:src/parser.c]
                      :branch :main}})
 
-;; WIP highlight/parse only buffer scope
-(ts.define_modules
-  {:nyoom-ts
-   {:highlight_scope {:module_path :utils.ts-highlight-scope
-                      :enable false
-                      :disable []
-                      :is_supported tsq.has_locals}}})
-;; the usual
-(setup {:ensure_installed :all
-        :ignore_install [:phpdoc :norg]
+; the usual
+(setup {:ensure_installed treesitter-filetypes
+        :sync_install true
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
         :rainbow {:enable true 
@@ -42,7 +34,6 @@
                            :#8f8b8b
                            :#ada8a8
                            :#878d96]}
-        :nyoom-ts {:highlight_scope {:enable true}}
         :incremental_selection {:enable true
                                 :keymaps {:init_selection :gnn
                                           :node_incremental :grn

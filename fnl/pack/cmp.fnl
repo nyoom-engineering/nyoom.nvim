@@ -8,7 +8,6 @@
         :config {: sources}
         :ItemField {:Kind kind :Abbr abbr :Menu menu}
         :SelectBehavior {:Insert insert-behavior :Select select-behavior}} (require :cmp))
-
 (local {: lsp_expand
         : expand_or_jump
         : expand_or_jumpable
@@ -50,7 +49,6 @@
 
 (fn replace-termcodes [code]
   (vim.api.nvim_replace_termcodes code true true true))
-
 
 ;;; Setup
 (setup {:experimental {:ghost_text true}

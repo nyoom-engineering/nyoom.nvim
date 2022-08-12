@@ -1,4 +1,4 @@
-(import-macros {: set!} :macros.option-macros)
+(import-macros {: set! : colorscheme} :macros)
 
 ;; add Mason to path
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
@@ -75,4 +75,4 @@
 ;; colorscheme
 (set! background :dark)
 (set! guifont "Liga SFMono Nerd Font:h15")
-
+(colorscheme oxocarbon)

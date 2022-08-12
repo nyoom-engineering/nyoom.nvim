@@ -1,4 +1,4 @@
-(import-macros {: map!} :macros.keybind-macros)
+(import-macros {: map!} :macros)
 
 (local should-profile (os.getenv :NVIM_PROFILE))
 

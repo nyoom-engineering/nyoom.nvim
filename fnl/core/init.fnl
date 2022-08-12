@@ -1,4 +1,4 @@
-;; disable some built-in Neovim plugins and unneeded providers
+
 (let [built-ins [:gzip
                  :zip
                  :zipPlugin
@@ -25,7 +25,16 @@
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
 
-;; load keybinds
+;; make sure packer is all ready to go
+(let [compiled? (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
+      load-compiled #(require :packer_compiled)]
+ (if compiled?
+   (load-compiled)
+   (do
+     (require :pack)
+     (. (require :packer) :sync))))
+
+; load keybinds
 (require :core.keybinds)
 
 ;; load vim options
@@ -37,12 +46,5 @@
 ;; load autocommands
 (require :core.events)
 
-;; packages
-(require :packer_compiled)
-
 ;; statusline
-(require :utils.statusline)
-
-;; load user config 
-(require :config)
-
+(require :core.statusline)
