@@ -1,3 +1,7 @@
+## Note
+
+The direction of the config is changing a bit, checkout [config.fnl](https://github.com/shaunsingh/nyoom.nvim/tree/main/fnl/config.fnl) for more info on how and why nyoom is changing the way it is, and the roadmap for the future!
+
 # Nyoom.nvim
 
 <div align="center">

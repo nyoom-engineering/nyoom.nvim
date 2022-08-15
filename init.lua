@@ -8,5 +8,5 @@ vim.g["aniseed#env"] = {
 --]]
 
 -- hotpot
-require("hotpot").setup({modules = {correlate = true}})
+require("hotpot").setup({ modules = { correlate = true } })
 require("core")

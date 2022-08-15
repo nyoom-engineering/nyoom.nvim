@@ -1,21 +1,49 @@
 (import-macros {: set! : colorscheme} :macros)
 
-;; add Mason to path
+;; add Mason to path. This replaces the need to use `mason-lspconfig`
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
 ;; improve updatetime for quicker refresh + gitsigns
-(set! updatetime 200)
+(set! updatetime 500)
 (set! timeoutlen 500)
 
 ;; Set shortmess
-(set! shortmess :filnxtToOFatsIc)
+(set! shortmess+ :cI)
 
-;; trailing characters setup
+;; Show whitespace characters
 (set! list)
-(set! listchars {:tab "> " :nbsp "␣" :trail "-"})
+
+;; Define characters to show
+(set! listchars {:trail "·"
+                 :tab "→ "
+                 :nbsp "·"})
+
+;; Fold column characters
+(set! fillchars {:eob " "
+                 :fold " "
+                 :foldopen ""
+                 :foldsep " "})
+
+;; Sign column
+(set! signcolumn "yes:1")
 
 ;; don't wrap text
 (set! nowrap)
+
+;; Substitution
+(set! gdefault)
+
+;; Do not break words at the middle
+(set! linebreak)
+
+;; Maintain indentation on break
+(set! breakindent)
+
+;; Add characters after wrap
+(set! breakindentopt ["shift:2"])
+
+;; Show character after wrap
+(set! showbreak "↳ ")
 
 ;; Use clipboard outside Neovim
 (set! clipboard :unnamedplus)
@@ -30,13 +58,21 @@
 ;; Disable ruler
 (set! noruler)
 
+;; Lazy redraw
+(set! lazyredraw)
+
+;; Spell checking 
+;; (set! spell)
+;; (set! spelllang [:en])
+;; (set! spelloptions [:camel])
+
 ;; Disable showing mode 
 (set! noshowmode)
 
 ;; Global statusline
 (set! laststatus 3)
 
-;; low cmdheight
+;; Only show commandline when you need to
 (set! cmdheight 0)
 
 ;; Numbering
@@ -60,7 +96,6 @@
 
 ;; Enable cursorline/column
 (set! cursorline)
-(set! nocursorcolumn)
 
 ;; Automatic split locations
 (set! splitright)
@@ -72,7 +107,15 @@
 ;; cmp options
 (set! completeopt [:menu :menuone :preview :noinsert])
 
+;; Diff-mode
+(set! diffopt [:filler :internal :indent-heuristic :algorithm:histogram])
+
+;; Grep
+(set! grepprg "rg --vimgrep")
+(set! grepformat "%f:%l:%c:%m")
+
 ;; colorscheme
 (set! background :dark)
 (set! guifont "Liga SFMono Nerd Font:h15")
 (colorscheme oxocarbon)
+

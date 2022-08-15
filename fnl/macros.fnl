@@ -442,10 +442,32 @@
   "Return a mixed table with the identifier as the first sequential element and
   options as hash-table items.
   See https://github.com/wbthomason/packer.nvim for information about the
-  options."
+  options.
+  Additional to those options are some use-package-isms and custom keys:
+  :defer to defer loading a plugin until a file is loaded 
+  :call-setup to call require(%s).setup()
+  :load-file to call require(pack.%s)
+  :load-lang to call require(lang.%s)"
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
-  (let [options (or ?options {})]
+  (let [options (or ?options {})
+        options (collect [k v (pairs options)]
+                  (match k
+                    :call-setup (values :config (string.format "require(\"%s\").setup()" (->str v)))
+                    :load-file (values :config (string.format "require(\"pack.%s\")" (->str v)))
+                    :load-lang (values :config (string.format "require(\"lang.%s\")" (->str v)))
+                    :defer (values :setup (let [package (->str v)]
+                                            `(λ []
+                                              (vim.api.nvim_create_autocmd [:BufRead :BufWinEnter :BufNewFile]
+                                                       {:group (vim.api.nvim_create_augroup ,package {})
+                                                        :callback (fn []
+                                                                    (if (not= vim.fn.expand "%" "")
+                                                                      (vim.defer_fn (fn []
+                                                                                      ((. (require :packer) :loader) ,package)
+                                                                                      (if (= ,package :nvim-lspconfig)
+                                                                                        (vim.cmd "silent! do FileType")))
+                                                                                    0)))}))))
+                    _ (values k v)))]
     (doto options (tset 1 identifier))))
 
 (λ rock [identifier ?options]
@@ -476,43 +498,6 @@
   (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
   (table.insert _G.nyoom/rock (rock identifier ?options)))
 
-;; make life easier
-(λ load-file [file]
-  "Configure a plugin by loading a file from the pack/ folder
-  Accepts the following arguements:
-  file -> a symbol.
-  Example of use:
-  ```fennel
-  (use-package! :anuvyklack/hydra.nvim {:config (load-file hydras)})
-  ```"
-  (assert-compile (sym? file) "expected symbol for file" file)
-  (let [file (->str file)]
-    `#(require (.. "pack." ,file))))
-
-(λ load-lang [lang]
-  "Configure a language-specific plugin by loading a file from the lang/ folder
-  Accepts the following arguements:
-  lang -> a symbol.
-  Example of use:
-  ```fennel
-  (use-package! :mfussenegger/nvim-jdtls {:ft :java :config (load-lang java)})
-  ```"
-  (assert-compile (sym? lang) "expected symbol for lang" lang)
-  (let [lang (->str lang)]
-    `#(require (.. "lang." ,lang))))
-
-(λ call-setup [name]
- "Configures a plugin by calling its setup function
-  name -> a symbol.
-  Example of use:
-  ```fennel
-  (use-package! :j-hui/fidget.nvim {:config (call-setup :fidget)})
-  ```"
-  (assert-compile (sym? name) "expected symbol for name" name)
-  (let [name (->str name)]
-    `(λ []
-       ((. (require ,name) :setup)))))
-
 (λ unpack! []
   "Initializes the plugin manager with the plugins previously declared and
   their respective options."
@@ -537,26 +522,36 @@
   (let [package (->str package)]
     `(vim.api.nvim_cmd {:cmd :packadd :args [,package]} {})))
 
-(λ defer! [package]
-  "To load a plugin after vim has started
+(λ load-module [name]
+  "Load a module by its name
   Accepts the following arguements:
-  package -> a symbol.
+  name -> a symbol.
   Example of use:
   ```fennel
-  (use-package! :nvim-lspconfig {:opt true :setup (defer! nvim-lspconfig)})
+  (load-module tools.treesitter)
   ```"
-  (assert-compile (sym? package) "expected symbol for package" package)
-  (let [package (->str package)]
-    `(λ []
-      (vim.api.nvim_create_autocmd [:BufRead :BufWinEnter :BufNewFile]
-               {:group (vim.api.nvim_create_augroup ,package {})
-                :callback (fn []
-                            (if (not= vim.fn.expand "%" "")
-                              (vim.defer_fn (fn []
-                                              ((. (require :packer) :loader) ,package)
-                                              (if (= ,package :nvim-lspconfig)
-                                                (vim.cmd "silent! do FileType")))
-                                            0)))}))))
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (let [name (.. :fnl.modules. (->str name))]
+    `(include ,name)))
+
+(fn nyoom! [...]
+  "Load nyoom's modules
+  Example of use:
+  ```fennel
+  (nyoom! tools.treesitter
+          lang.rust
+          ui.gitsigns)
+  ```"
+  (fn exprs [...]
+    (match [...]
+      (where [& rest] (empty? rest)) []
+      [name & rest] [(load-module name)
+                     (unpack (exprs (unpack rest)))]
+      _ []))
+  (let [exprs (exprs ...)]
+    (if (> (length exprs) 1)
+      `(do ,(unpack exprs))
+      (unpack exprs))))
 
 (λ map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.
@@ -670,7 +665,6 @@
      _ (error "expected let! to have at least two arguments: name value")))
 
 {: contains?
- : colorscheme
  : custom-set-face!
  : set!
  : local-set!
@@ -683,11 +677,9 @@
  : pack
  : rock!
  : use-package!
- : defer!
- : load-file
- : load-lang
- : call-setup
+ : nyoom!
  : packadd!
+ : colorscheme
  : unpack!
  : map!
  : buf-map!
