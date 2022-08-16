@@ -1,5 +1,3 @@
-(import-macros {: set!} :macros.option-macros)
-
 (local {: insert} table)
 (local {: setup
         : mapping
@@ -7,12 +5,9 @@
         : select_prev_item
         : select_next_item
         : complete
-        :config {: compare : disable}
+        :config {: sources}
         :ItemField {:Kind kind :Abbr abbr :Menu menu}
         :SelectBehavior {:Insert insert-behavior :Select select-behavior}} (require :cmp))
-
-(local types (require :cmp.types))
-(local under-compare (require :cmp-under-comparator))
 (local {: lsp_expand
         : expand_or_jump
         : expand_or_jumpable
@@ -46,8 +41,6 @@
               :Operator ""
               :TypeParameter ""})
 
-;; cmp options
-(set! completeopt [:menu :menuone :preview :noinsert])
 ;;; Supertab functionality utility functions
 (fn has-words-before []
   (let [col (- (vim.fn.col ".") 1)
@@ -57,10 +50,8 @@
 (fn replace-termcodes [code]
   (vim.api.nvim_replace_termcodes code true true true))
 
-
 ;;; Setup
-(setup {:preselect types.cmp.PreselectMode.None
-        :experimental {:ghost_text true}
+(setup {:experimental {:ghost_text true}
         :window {:documentation {:border :solid} :completion {:border :solid}}
         :snippet {:expand (fn [args]
                             (lsp_expand args.body))}
@@ -93,22 +84,17 @@
                   {:name :buffer :option {:keyword_pattern "\\k\\+"}}
                   {:name :conjure}
                   {:name :crates}]
-        :sorting {:comparators [compare.offset
-                                compare.exact
-                                compare.score
-                                under-compare.under
-                                compare.kind
-                                compare.sort_text
-                                compare.length
-                                compare.order]}
         :formatting {:fields {1 :kind 2 :abbr 3 :menu}
                      :format (fn [_ vim-item]
                                (set vim-item.menu vim-item.kind)
                                (set vim-item.kind (. icons vim-item.kind))
-                               vim-item)}})
-                
-;; cmdline setup
-(setup.cmdline ":"
-               {:view {:separator "|"}
-                :mappping (mapping.preset.cmdline)
-                :sources [{:name :path} {:name :cmdline}]})
+                               vim-item)}}
+
+ ;; Enable command-line completions
+ (setup.cmdline "/" {:mapping (mapping.preset.cmdline)
+                     :sources [{:name :buffer}]})
+
+ ;; Enable search completions
+ (setup.cmdline ":" {:mapping (mapping.preset.cmdline)
+                     :sources (sources [{:name :path}
+                                        {:name :cmdline}])}))

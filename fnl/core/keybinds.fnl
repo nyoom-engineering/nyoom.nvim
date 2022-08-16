@@ -1,5 +1,4 @@
-(import-macros {: map!} :macros.keybind-macros)
-(import-macros {: let!} :macros.variable-macros)
+(import-macros {: map! : let!} :macros)
 
 ;; set leader key
 (let! mapleader " ")

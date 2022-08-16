@@ -1,3 +1,7 @@
+## Note
+
+The direction of the config is changing a bit, checkout [config.fnl](https://github.com/shaunsingh/nyoom.nvim/tree/main/fnl/config.fnl) for more info on how and why nyoom is changing the way it is, and the roadmap for the future!
+
 # Nyoom.nvim
 
 <div align="center">
@@ -64,39 +68,16 @@ The only dependencies are `neovim-nightly` (of course), `cargo/rustc` (for the r
 ```bash
 git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git ~/.config/nvim 
 cd ~/.config/nvim/
-./install.sh
-```
-
-### Manually: 
-```bash
-git clone -q --depth 1 https://github.com/wbthomason/packer.nvim\
-  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-git clone -q -b nightly --single-branch https://github.com/rktjmp/hotpot.nvim\
-  ~/.local/share/nvim/site/pack/packer/start/hotpot.nvim
-
-cargo build --release --manifest-path=fnl/oxocarbon/Cargo.toml
-mkdir lua
-
-echo "Copying Libraries"
-
-if [ "$(uname)" == "Darwin" ]; then
-    mv ~/.config/nvim/fnl/oxocarbon/target/release/liboxocarbon.dylib ~/.config/nvim/lua/oxocarbon.so
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    mv ~/.config/nvim/fnl/oxocarbon/target/release/liboxocarbon.so ~/.config/nvim/lua/oxocarbon.so
-elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    mv ~/.config/nvim/fnl/oxocarbon/target/release/oxocarbon.dll ~/.config/nvim/lua/oxocarbon.dll
-fi
-
+make hotpot
+make compile
+nvim
+# exit out of neovim
 nvim -c 'PackerSync'
 ```
 
 ### Using nix: 
 
-Requires nix version > 21.11, with experimental features `flakes` and `nix-commands` enabled
-```bash
-git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git && cd nyoom.nvim
-nix develop
-```
+(under construction)
 
 ## Design 
 Nyoom.nvim is designed against the mantras of [doom-emacs](https://github.com/hlissner/doom-emacs): (shamelessly copy pasted)
@@ -148,12 +129,6 @@ If you have trouble configuring neovim to your needs, check out [Antifennel](htt
  1. evaluate form you just written (`<localleader>er`, by default `<space>mer`)
  2. evaluate buffer (`<localleader>eb`, by default `<space>meb`)
  3. start another neovim with a vim command: `:!neovim --headless +PlugSync`
-
-### Why Rust?
-
-I'm sure one of the thousands of rustaceans can tell you all about how excellent rust is. In the context of neovim, I just wanted to try something new. Ideally in the future I'd like to write some of the more performance sensitive parts (e.g. completion) fully in rust.
-
-That and now I can add a rust tag to my repository. Someone told me that gets github stars
 
 ## Notes
 

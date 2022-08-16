@@ -1,4 +1,5 @@
 (local lsp (require :lspconfig))
+(local {: lsp-servers} (require :ft))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
@@ -15,15 +16,16 @@
   (sign_define :DiagnosticSignHint {:text "" :texthl :DiagnosticSignHint}))
 
 ;;; Improve UI
-(let [{: with : handlers} vim.lsp]
-  (set vim.lsp.handlers.textDocument/signatureHelp
-       (with handlers.signature_help {:border :solid}))
-  (set vim.lsp.handlers.textDocument/hover
-       (with handlers.hover {:border :solid})))
+(set vim.lsp.handlers.textDocument/signatureHelp
+      (vim.lsp.with vim.lsp.handlers.signature_help {:border :solid}))
+(set vim.lsp.handlers.textDocument/hover
+     (vim.lsp.with vim.lsp.handlers.hover {:border :solid}))
 
 (fn on-attach [client bufnr]
-  (import-macros {: buf-map!} :macros.keybind-macros)
-  (import-macros {: autocmd! : augroup! : clear!} :macros.event-macros)
+  (import-macros {: packadd! : buf-map! : autocmd! : augroup! : clear! : contains?} :macros)
+
+  (packadd! packer.nvim)
+  ((. (require :packer) :loader) :telescope.nvim)
 
   ;; Keybindings
   (local {:hover open-doc-float!
@@ -58,7 +60,6 @@
   (buf-map! [n] "<leader>lS" open-workspace-symbol-float!)
 
   ;; Format buffer before saving
-  (local {: contains?} (require :macros.lib.seq))
   (when (client.supports_method "textDocument/formatting")
     (augroup! lsp-format-before-saving
       (clear! {:buffer bufnr})
@@ -87,13 +88,8 @@
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
-;; for simple servers jsut add them to the list
-(let [servers [:clojure_lsp
-               :jsonls
-               :lemminx
-               :rnix
-               :jdtls
-               :pyright]]
+;; for simple servers just use the defaults
+(let [servers lsp-servers]
   (each [_ server (ipairs servers)]
     ((. (. lsp server) :setup) defaults)))
 
