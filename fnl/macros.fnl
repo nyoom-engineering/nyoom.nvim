@@ -1,5 +1,6 @@
 (tset _G :nyoom/pack [])
 (tset _G :nyoom/rock [])
+(tset _G :nyoom/modules [])
 
 (λ expr->str [expr]
   `(macrodebug ,expr nil))
@@ -446,16 +447,14 @@
   Additional to those options are some use-package-isms and custom keys:
   :defer to defer loading a plugin until a file is loaded 
   :call-setup to call require(%s).setup()
-  :load-file to call require(pack.%s)
-  :load-lang to call require(lang.%s)"
+  :nyoom-module to call require(module.%s.config)"
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
   (let [options (or ?options {})
         options (collect [k v (pairs options)]
                   (match k
                     :call-setup (values :config (string.format "require(\"%s\").setup()" (->str v)))
-                    :load-file (values :config (string.format "require(\"pack.%s\")" (->str v)))
-                    :load-lang (values :config (string.format "require(\"lang.%s\")" (->str v)))
+                    :nyoom-module (values :config (string.format "require(\"modules.%s.config\")" (->str v)))
                     :defer (values :setup (let [package (->str v)]
                                             `(λ []
                                               (vim.api.nvim_create_autocmd [:BufRead :BufWinEnter :BufNewFile]
@@ -504,8 +503,8 @@
   (let [packs (icollect [_ v (ipairs _G.nyoom/pack)] `(use ,v))
         rocks (icollect [_ v (ipairs _G.nyoom/rock)] `(use_rocks ,v))
         use-sym (sym :use)]
-    (tset _G :themis/pack [])
-    (tset _G :themis/rock [])
+    (tset _G :nyoom/pack [])
+    (tset _G :nyoom/rock [])
     `((. (require :packer) :startup)
       (fn [,use-sym]
         ,(unpack (icollect [_ v (ipairs packs) :into rocks] v))))))
@@ -522,17 +521,45 @@
   (let [package (->str package)]
     `(vim.api.nvim_cmd {:cmd :packadd :args [,package]} {})))
 
-(λ load-module [name]
-  "Load a module by its name
+(fn autoload [name]
+  "Autoload for vimscript (for fennel)"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (let [res {:nyoom/autoload-enabled? true
+             :nyoom/autoload-module false}
+        name (->str name)]
+    (fn ensure []
+      (if (. res :nyoom/autoload-module)
+        (. res :nyoom/autoload-module)
+        (let [m (require name)]
+          (tset res :nyoom/autoload-module m)
+          m)))
+    (setmetatable
+      res
+      {:__call
+       (fn [t ...]
+         ((ensure) ...))
+       :__index
+       (fn [t k]
+         (. (ensure) k))
+       :__newindex
+       (fn [t k v]
+         (tset (ensure) k v))})))
+
+(λ nyoom-module-set [name]
+  "Load a module by its name and adds it to the list of enabled modules
   Accepts the following arguements:
   name -> a symbol.
   Example of use:
   ```fennel
-  (load-module tools.treesitter)
+  (nyoom-module-set tools.treesitter)
   ```"
   (assert-compile (sym? name) "expected symbol for name" name)
-  (let [name (.. :fnl.modules. (->str name))]
-    `(include ,name)))
+  (table.insert _G.nyoom/modules name)
+  (let [include-path (.. :fnl.modules. (->str name))
+        config-path (.. :modules. (->str name) :.config)]
+    `(do
+      (include ,include-path)
+      (pcall require ,config-path))))
 
 (fn nyoom! [...]
   "Load nyoom's modules
@@ -545,13 +572,25 @@
   (fn exprs [...]
     (match [...]
       (where [& rest] (empty? rest)) []
-      [name & rest] [(load-module name)
+      [name & rest] [(nyoom-module-set name)
                      (unpack (exprs (unpack rest)))]
       _ []))
   (let [exprs (exprs ...)]
     (if (> (length exprs) 1)
       `(do ,(unpack exprs))
       (unpack exprs))))
+
+(λ nyoom-module-p! [name config]
+  "Checks if a module is enabled
+  Accepts the following arguements:
+  name -> a symbol.
+  Example of use:
+  ```fennel
+  (nyoom-module-p tools.treesitter)
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (when (contains? _G.nyoom/modules name)
+    `,config))
 
 (λ map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.
@@ -664,6 +703,21 @@
      [name value] (let-global! name value)
      _ (error "expected let! to have at least two arguments: name value")))
 
+(λ echo! [msg]
+  "Print a vim message without any format."
+  (assert-compile (str? msg) "expected string for msg" msg)
+  `(vim.notify ,msg vim.log.levels.INFO))
+
+(λ warn! [msg]
+  "Print a vim message with a warning format."
+  (assert-compile (str? msg) "expected string for msg" msg)
+  `(vim.notify ,msg vim.log.levels.WARN))
+
+(λ err! [msg]
+  "Print a vim message with an error format."
+  (assert-compile (str? msg) "expected string for msg" msg)
+  `(vim.notify ,msg vim.log.levels.ERROR))
+
 {: contains?
  : custom-set-face!
  : set!
@@ -678,12 +732,16 @@
  : rock!
  : use-package!
  : nyoom!
+ : nyoom-module-p!
  : packadd!
  : colorscheme
  : unpack!
  : map!
  : buf-map!
  : let!
+ : echo!
+ : warn!
+ : err!
  :ieach^ ieach}
 
 
