@@ -16,7 +16,7 @@ case "${1:-}" in
     ;;
   sync)
     nvim --version | sed '/^$/,$d'
-    echo "running: $(basename "$0") sync on version $(git log --pretty=tformat:"%h" -n)"
+    echo "running: $(basename "$0") sync on version $(git log --pretty=tformat:"%h" -n1)"
     rm -rf ~/.cache/nvim/
     rm -rf ~/.config/nvim/lua/
     exec nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require[[packages]]' -c 'lua require("packer").sync()'
