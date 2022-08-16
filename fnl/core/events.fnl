@@ -1,8 +1,4 @@
-(require-macros :macros.event-macros)
-(import-macros {: set!} :macros.option-macros)
-
-(local {: line} vim.fn)
-(fn cmd! [...] (vim.cmd ...))
+(import-macros {: set! : augroup! : autocmd!} :macros)
 
 ;; Restore cursor on exit
 (augroup! restore-cursor-on-exit

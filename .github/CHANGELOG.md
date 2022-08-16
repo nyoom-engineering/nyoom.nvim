@@ -1,3 +1,12 @@
+v0.4.1
+- Colorscheme: Move colorscheme into its own plugin, simplify colorscheme macros
+- Macros: Add aniseed support, fixes left and right, move packer macros into the main pack! statement as additional keys. Initial support for modules/after macros
+- Bindings: Add autopairs support, fix tabs, add more mappings and hydras
+- Loading: remove lazy-loading utils in favor of new keys and defer support.  
+- Lsp: Add support for off-spec lsp servers (java/rust). Improve loading and updates 
+- Packer: Added :defer key ala use-package, as a result of macro improvements, improve startuptime by an additional 5-10ms or so. Not much but still nice 
+- Other notes: lots of misc improvements here and there, especially to grep and spell. Check out the diff!
+
 v0.4.0
 Sorry, haven't done one of these in a while! Lots of fixes
 - Colorscheme: Rewrite in rust and general improvements to plugin support and to the light theme
