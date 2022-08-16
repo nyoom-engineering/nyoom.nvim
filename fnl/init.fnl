@@ -69,7 +69,7 @@
 (require :core)
 
 ;; colorscheme
-(require :oxocarbon)
+;; (require :oxocarbon)
 
 ;; statusline
 (require :utils.statusline)
