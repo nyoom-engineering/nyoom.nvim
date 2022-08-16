@@ -39,6 +39,9 @@
 ;; statusline
 (require :core.statusline)
 
+;; userconfig
+(require :config)
+
 ;; load packer if its available
 (if (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
   (require :packer_compiled))

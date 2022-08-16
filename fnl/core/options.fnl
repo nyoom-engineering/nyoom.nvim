@@ -1,4 +1,4 @@
-(import-macros {: set! : colorscheme} :macros)
+(import-macros {: set!} :macros)
 
 ;; add Mason to path. This replaces the need to load mason at startup 
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
@@ -70,9 +70,6 @@
 ;; Only show commandline when you need to
 (set! cmdheight 0)
 
-;; Numbering
-(set! nonumber)
-
 ;; Smart search
 (set! smartcase)
 
@@ -105,4 +102,3 @@
 
 ;; colorscheme
 (set! background :dark)
-(colorscheme oxocarbon)

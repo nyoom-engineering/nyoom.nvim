@@ -1,11 +1,7 @@
 (import-macros {: map! : let!} :macros)
 
-;; set leader key
+;; Set leader to space by default
 (let! mapleader " ")
-(let! maplocalleader " m")
-
-;; Disable highlight on escape
-(map! [n] "<esc>" "<esc><cmd>noh<cr>")
 
 ;; Easier command-line mode
 (map! [n] ";" ":")

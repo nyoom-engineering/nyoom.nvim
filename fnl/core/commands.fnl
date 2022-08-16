@@ -1,4 +1,5 @@
 (import-macros {: command! : warn!} :macros)
+
 ;; Replace Packer usage
 (command! PackerSync '(warn! "Please use the bin/nyoom script instead of PackerSync"))
 (command! PackerInstall '(warn! "Please use the bin/nyoom script instead of PackerInstall"))
