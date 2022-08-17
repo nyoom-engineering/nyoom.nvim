@@ -1,5 +1,4 @@
 (import-macros {: packadd! : pack : rock : use-package! : rock! : unpack! : echo!} :macros)
-
 ;; Load packer
 (echo! "Loading Packer")
 (packadd! packer.nvim)
@@ -18,12 +17,6 @@
                            :open_fn (λ open_fn []
                                       (local {: float} (require :packer.util))
                                       (float {:border :solid}))}}))
-
-;; Core packages
-(use-package! :wbthomason/packer.nvim {:opt true})
-(use-package! :nvim-lua/plenary.nvim {:module :plenary})
-
-;;; fnl/packages.fnl
 
 ;; To install a package with Doom you must declare them here and run 'nyoom sync'
 ;; on the command line, then restart nvim for the changes to take effect
@@ -44,9 +37,6 @@
 ;;                               :config (fn [])})
 ;;                                        ;; same as config with packer.nvim)})
 
-
-;; User plugins
-(echo! "Loading User Plugins")
 
 ;; ---------------------
 ;; Put your plugins here

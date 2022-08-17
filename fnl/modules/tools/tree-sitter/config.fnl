@@ -1,7 +1,12 @@
-
-
-(import-macros {: packadd! : nyoom-module-p!} :macros)
+(import-macros {: packadd! : nyoom-module-p! : map!} :macros)
 (local {: setup} (require :nvim-treesitter.configs))
+
+;; Conditionally enable leap-ast
+(nyoom-module-p! config.bindings
+  (do
+    (packadd! leap-ast.nvim)
+    (let [leap-ast (require :leap-ast)]
+     (map! [nxo] :gs '(leap-ast.leap) {:desc "Leap AST"}))))
 
 (local treesitter-filetypes [:comment
                              :help

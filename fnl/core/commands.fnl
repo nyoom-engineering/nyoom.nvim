@@ -9,6 +9,3 @@
 
 ;; Scratch 
 (command! Scratch "lua require('utils.scratch').scratch()")
-
-;; antifennel. TODO use macro
-(vim.api.nvim_exec "command! -bar -range=% Antifennel lua require('utils.antifennel').run(<line1>, <line2>" true)

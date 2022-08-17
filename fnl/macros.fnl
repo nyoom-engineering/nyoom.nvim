@@ -29,6 +29,22 @@
 (fn ->bool [x]
   (if x true false))
 
+(fn keys [t]
+  (let [result []]
+    (when t
+      (each [k _ (pairs t)]
+        (table.insert result k)))
+    result))
+
+(fn count [xs]
+  (if
+    (table? xs) (let [maxn (table.maxn xs)]
+                  (if (= 0 maxn)
+                    (table.maxn (keys xs))
+                    maxn))
+    (not xs) 0
+    (length xs)))
+
 (λ empty? [xs]
   "Check if given table is empty"
   (assert-compile (tbl? xs) "expected table for xs" xs)
@@ -503,8 +519,6 @@
   (let [packs (icollect [_ v (ipairs _G.nyoom/pack)] `(use ,v))
         rocks (icollect [_ v (ipairs _G.nyoom/rock)] `(use_rocks ,v))
         use-sym (sym :use)]
-    (tset _G :nyoom/pack [])
-    (tset _G :nyoom/rock [])
     `((. (require :packer) :startup)
       (fn [,use-sym]
         ,(unpack (icollect [_ v (ipairs packs) :into rocks] v))))))
@@ -586,11 +600,34 @@
   name -> a symbol.
   Example of use:
   ```fennel
-  (nyoom-module-p tools.treesitter)
+  (nyoom-module-p! tools.tree-sitter)
   ```"
   (assert-compile (sym? name) "expected symbol for name" name)
   (when (contains? _G.nyoom/modules name)
     `,config))
+
+(λ nyoom-module-ensure! [name]
+  "Ensure a module is enabled
+  Accepts the following arguements:
+  name -> a symbol.
+  Example of use:
+  ```fennel
+  (nyoom-module-ensure! tools.tree-sitter)
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (when (not (contains? _G.nyoom/modules name))
+    (let [msg (.. "One of your installed modules depends on " (->str name) ". Please enable it")]
+     `(vim.notify ,msg vim.log.levels.WARN))))
+
+;; These shouldn't be macros. However I kindof messed up by making all my 
+;; globals compile-time. So now we're sticking with it
+(λ nyoom-package-count []
+  (let [packagecount (count _G.nyoom/pack)]
+    `,packagecount))
+
+(λ nyoom-module-count []
+  (let [modulecount (count _G.nyoom/modules)]
+    `,modulecount))
 
 (λ map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.
@@ -733,7 +770,11 @@
  : use-package!
  : nyoom!
  : nyoom-module-p!
+ : nyoom-module-ensure!
+ : nyoom-package-count
+ : nyoom-module-count
  : packadd!
+ : autoload
  : colorscheme
  : unpack!
  : map!
@@ -743,5 +784,3 @@
  : warn!
  : err!
  :ieach^ ieach}
-
-

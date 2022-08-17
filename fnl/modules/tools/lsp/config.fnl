@@ -91,6 +91,9 @@
 ;; conditional lsp servesr
 (local lsp-servers [])
 
+(nyoom-module-p! lang.java
+  (table.insert lsp-servers :jdtls))
+
 (nyoom-module-p! lang.sh
   (table.insert lsp-servers :bashls))
 
@@ -107,6 +110,30 @@
 (let [servers lsp-servers]
   (each [_ server (ipairs servers)]
     ((. (. lsp server) :setup) defaults)))
+
+;; formatting through null-ls
+(nyoom-module-p! editor.format
+  (do
+    (packadd! null-ls.nvim)
+    (local null-ls-sources [])
+    (local {: setup
+            :builtins {: formatting
+                       : diagnostics}} (require :null-ls))
+
+    (nyoom-module-p! lang.java
+      (table.insert null-ls-sources formatting.clang_format))
+
+    (nyoom-module-p! lang.markdown
+      (table.insert null-ls-sources formatting.markdownlint))
+
+    (nyoom-module-p! lang.rust
+      (table.insert null-ls-sources formatting.rustfmt))
+
+    (nyoom-module-p! lang.sh
+      (table.insert null-ls-sources formatting.shfmt))
+
+    (setup {: null-ls-sources
+            :on_attach on-attach})))
 
 ;; for trickier servers you can change up the defaults
 (lsp.sumneko_lua.setup {:on_attach on-attach

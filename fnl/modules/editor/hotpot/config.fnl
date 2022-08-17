@@ -1,15 +1,4 @@
-(import-macros {: map! : let!} :macros)
-
-;; Set leader to space by default
-(let! mapleader " ")
-
-;; Easier command-line mode
-(map! [n] ";" ":")
-
-;; Some keybindings stolen from doom
-(map! [n] "<leader><space>" "<cmd>Telescope find_files<CR>")
-(map! [n] "<leader>bb" "<cmd>Telescope buffers<CR>")
-(map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
+(import-macros {: map! : nyoom-module-p!} :macros)
 
 ;; hotpot fun
 (local reflect-session {:id nil :mode :compile})
@@ -34,8 +23,6 @@
                        (reflect.set-mode session-id reflect-session.mode)
                        (reflect.attach-input session-id 0)))))
 
-(vim.keymap.set :v :hr new-or-attach-reflect)
-
 (fn swap-reflect-mode []
   (let [reflect (require :hotpot.api.reflect)]
     (when reflect-session.id
@@ -44,6 +31,7 @@
         (set reflect-session.mode :compile))
       (reflect.set-mode reflect-session.id reflect-session.mode))))
 
-
-(map! [n] "<space>hr" '(new-or-attach-reflect))
-(map! [n] "<space>hx" '(swap-reflect-mode))
+(nyoom-module-p! config.bindings
+  (do
+   (map! [v] "<space>hr" '(new-or-attach-reflect))
+   (map! [n] "<space>hx" '(swap-reflect-mode))))

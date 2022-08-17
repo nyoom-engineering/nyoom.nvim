@@ -6,6 +6,7 @@
 
 (local mason-tools [:lua-language-server])
 
+;; language servers
 (nyoom-module-p! lang.java
   (table.insert mason-tools :jdtls))
 
@@ -23,5 +24,15 @@
 
 (nyoom-module-p! lang.sh
   (table.insert mason-tools :bash-language-server))
+
+;; formatters
+(nyoom-module-p! lang.java
+  (table.insert mason-tools :clang-format))
+
+(nyoom-module-p! lang.markdown
+  (table.insert mason-tools :markdownlint))
+
+(nyoom-module-p! lang.sh
+  (table.insert mason-tools :shfmt))
 
 (vim.cmd (.. "MasonInstall " (table.concat mason-tools " ")))

@@ -1,3 +1,4 @@
+(import-macros {: nyoom-module-p!} :macros)
 (local {: setup} (require :neorg))
 
 (setup {:load {:core.defaults {}
@@ -8,3 +9,20 @@
                :core.norg.dirman {:config {:workspaces {:main "~/org/neorg"}
                                            :autodetect true
                                            :autochdir true}}}})
+
+(nyoom-module-p! config.literate
+  (do
+    (fn tangle-config []
+      (let [literatefile (.. (vim.fn.stdpath :config) "/fnl/config.norg")]
+        (vim.cmd.Neorg (.. "tangle" literatefile))))
+    
+    (let [uv vim.loop]
+      (setup {:provide_require_fennel true
+              :compiler {:modules {:correlate true}
+                         :macros {:env :_COMPILER
+                                  :compilerEnv _G
+                                  :allowedGlobals false}}})
+      (let [handle (uv.new_fs_event)
+            path (vim.fn.expand "~/.config/nvim/fnl/config.norg")]
+        (uv.fs_event_start handle path {} #(vim.schedule tangle-config))
+        (vim.api.nvim_create_autocmd :VimLeavePre {:callback #(uv.close handle)})))))

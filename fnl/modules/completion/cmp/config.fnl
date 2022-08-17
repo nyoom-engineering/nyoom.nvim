@@ -1,38 +1,8 @@
-(import-macros {: packadd! : set!} :macros)
+(import-macros {: set!} :macros)
+(local cmp (require :cmp))
+(local luasnip (require :luasnip))
 
-;; cmp options
-(set! completeopt [:menu :menuone :preview :noinsert])
-
-;; load sources
-(packadd! cmp-path)
-(packadd! cmp-buffer)
-(packadd! cmp-nvim-lsp)
-(packadd! cmp-cmdline)
-
-(local {: insert} table)
-(local {: setup
-        : mapping
-        : visible
-        : select_prev_item
-        : select_next_item
-        : complete
-        :config {: sources}
-        :ItemField {:Kind kind :Abbr abbr :Menu menu}
-        :SelectBehavior {:Insert insert-behavior :Select select-behavior}} (require :cmp))
-
-;; load snippets
-(packadd! friendly-snippets)
-(packadd! LuaSnip)
-(packadd! cmp_luasnip)
-
-(local {: lsp_expand
-        : expand_or_jump
-        : expand_or_jumpable
-        : jump
-        : jumpable} (require :luasnip))
-(local {: lazy_load} (require :luasnip/loaders/from_vscode))
-
-(lazy_load)
+(set! completeopt [:menu :menuone :noselect])
 
 ;; default icons (lspkind)
 (local icons {:Text ""
@@ -61,60 +31,49 @@
               :Operator ""
               :TypeParameter ""})
 
-;;; Supertab functionality utility functions
-(fn has-words-before []
-  (let [col (- (vim.fn.col ".") 1)
-        ln (vim.fn.getline ".")]
-    (or (= col 0) (string.match (string.sub ln col col) "%s"))))
+(cmp.setup {:experimental {:ghost_text true}
+            :window {:documentation {:border :solid} :completion {:border :solid}}
+            :preselect cmp.PreselectMode.None
+            :snippet {:expand (fn [args] (luasnip.lsp_expand args.body))}
+            :mapping {"<C-b>" (cmp.mapping.scroll_docs -4)
+                      "<C-f>" (cmp.mapping.scroll_docs 4)
+                      "<C-space>" (cmp.mapping.complete)
+                      "<C-e>" (cmp.mapping.close)
+                      "<up>" cmp.config.disable
+                      "<down>" cmp.config.disable
+                      "<Tab>" (cmp.mapping
+                                (fn [fallback]
+                                  (if (cmp.visible) (cmp.select_next_item)
+                                    (luasnip.expand_or_jumpable) (luasnip.expand_or_jump)
+                                    (fallback)))
+                                [:i :s])
+                      "<S-Tab>" (cmp.mapping
+                                  (fn [fallback]
+                                    (if (cmp.visible) (cmp.select_prev_item)
+                                      (luasnip.jumpable -1) (luasnip.jump -1)
+                                      (fallback)))
+                                  [:i :s])
+                      "<space>" (cmp.mapping.confirm {:select false})}
+            :sources [{:name :nvim_lsp}
+                      {:name :luasnip}
+                      {:name :conjure}
+                      {:name :crates}
+                      {:name :buffer}
+                      {:name :path}]
+            :formatting {:fields {1 :kind 2 :abbr 3 :menu}
+                         :format (fn [_ vim-item]
+                                   (set vim-item.menu vim-item.kind)
+                                   (set vim-item.kind (. icons vim-item.kind))
+                                   vim-item)}})
 
-(fn replace-termcodes [code]
-  (vim.api.nvim_replace_termcodes code true true true))
+;; Enable command-line completions
+(cmp.setup.cmdline "/" {:mapping (cmp.mapping.preset.cmdline)
+                        :sources [{:name :buffer}]})
 
-;;; Setup
-(setup {:experimental {:ghost_text true}
-        :window {:documentation {:border :solid} :completion {:border :solid}}
-        :snippet {:expand (fn [args]
-                            (lsp_expand args.body))}
-        :mapping {:<C-b> (mapping.scroll_docs -4)
-                  :<C-f> (mapping.scroll_docs 4)
-                  :<C-e> (mapping.abort)
-                  :<C-n> (mapping (mapping.select_next_item {:behavior insert-behavior}) [:i :s])
-                  :<C-p> (mapping (mapping.select_prev_item {:behavior insert-behavior}) [:i :s])
-                  :<Tab> (mapping (fn [fallback]
-                                    (if (visible)
-                                        (select_next_item {:behavior insert-behavior})
-                                        (expand_or_jumpable)
-                                        (expand_or_jump)
-                                        (has-words-before)
-                                        (vim.fn.feedkeys (replace-termcodes :<Tab>)
-                                                         :n)
-                                        (fallback)))
-                                  [:i :s :c])
-                  :<S-Tab> (mapping (fn [fallback]
-                                      (if (visible)
-                                          (select_prev_item {:behavior insert-behavior})
-                                          (jumpable -1)
-                                          (jump -1)
-                                          (fallback)))
-                                    [:i :s :c])
-                  :<C-Space> (mapping.confirm {:select true})}
-        :sources [{:name :nvim_lsp}
-                  {:name :luasnip}
-                  {:name :path}
-                  {:name :buffer :option {:keyword_pattern "\\k\\+"}}
-                  {:name :conjure}
-                  {:name :crates}]
-        :formatting {:fields {1 :kind 2 :abbr 3 :menu}
-                     :format (fn [_ vim-item]
-                               (set vim-item.menu vim-item.kind)
-                               (set vim-item.kind (. icons vim-item.kind))
-                               vim-item)}}
+;; Enable search completions
+(cmp.setup.cmdline ":" {:mapping (cmp.mapping.preset.cmdline)
+                        :sources [{:name :path}
+                                  {:name :cmdline}]})
 
- ;; Enable command-line completions
- (setup.cmdline "/" {:mapping (mapping.preset.cmdline)
-                     :sources [{:name :buffer}]})
-
- ;; Enable search completions
- (setup.cmdline ":" {:mapping (mapping.preset.cmdline)
-                     :sources (sources [{:name :path}
-                                        {:name :cmdline}])}))
+;; snippets
+((. (require "luasnip.loaders.from_vscode") :lazy_load))

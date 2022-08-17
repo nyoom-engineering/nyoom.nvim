@@ -1,4 +1,4 @@
-(import-macros {: map!} :macros)
+(import-macros {: map! : nyoom-module-p!} :macros)
 
 (local should-profile (os.getenv :NVIM_PROFILE))
 
@@ -22,4 +22,5 @@
                             (vim.notify (string.format "Wrote %s" filename))))))
         (prof.start "*"))))
 
-(map! [n] :<f1> toggle-profile)
+(nyoom-module-p! config.bindings
+  (map! [n] :<f1> toggle-profile))
