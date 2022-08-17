@@ -15,13 +15,7 @@
     (fn tangle-config []
       (let [literatefile (.. (vim.fn.stdpath :config) "/fnl/config.norg")]
         (vim.cmd.Neorg (.. "tangle" literatefile))))
-    
     (let [uv vim.loop]
-      (setup {:provide_require_fennel true
-              :compiler {:modules {:correlate true}
-                         :macros {:env :_COMPILER
-                                  :compilerEnv _G
-                                  :allowedGlobals false}}})
       (let [handle (uv.new_fs_event)
             path (vim.fn.expand "~/.config/nvim/fnl/config.norg")]
         (uv.fs_event_start handle path {} #(vim.schedule tangle-config))
