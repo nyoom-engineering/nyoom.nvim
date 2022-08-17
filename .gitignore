@@ -1,3 +1,5 @@
 lua/
 plugin/
 profile.json
+
+lua/md5.lua

@@ -20,6 +20,7 @@
 (packadd! telescope-project.nvim)
 (packadd! telescope-ui-select.nvim)
 (packadd! telescope-fzf-native.nvim)
+(packadd! telescope-ghq.nvim)
 
 (load_extension :fzf)
 (load_extension :project)
