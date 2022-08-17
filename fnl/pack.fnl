@@ -64,11 +64,7 @@
 (use-package! :windwp/nvim-autopairs {:load-file autopairs
                                       :event :InsertEnter})
 ; intuitive motions
-(use-package! :ggandor/leap.nvim {:opt true
-                                  :defer leap.nvim
-                                  :config (fn []
-                                            (. (require :leap) :set_default_keymaps))})
-;; File navigation
+(use-package! :ggandor/leap.nvim {:load-file leap}) ;; File navigation
 ; filetree
 (use-package! :kyazdani42/nvim-tree.lua {:load-file nvimtree
                                          :cmd :NvimTreeToggle})
@@ -80,6 +76,8 @@
                                 {:module :telescope._extensions.project})
                           (pack :nvim-telescope/telescope-ui-select.nvim    ;; telescope for ui.select
                                 {:module :telescope._extensions.ui-select})
+                          (pack :nvim-telescope/telescope-ghq.nvim
+                                {:module :telescope._extensions.ghq})
                           (pack :nvim-telescope/telescope-fzf-native.nvim   ;; more performant fuzzy finder 
                                 {:module :telescope._extensions.fzf
                                  :run :make})]})
@@ -207,6 +205,34 @@
 (use-package! :nvim-neorg/neorg {:load-file neorg 
                                  :ft :norg 
                                  :after :nvim-treesitter})
+
+;; custom plugin
+(use-package! :numToStr/Comment.nvim {:call-setup Comment})
+;; (use-package! :luukvbaal/nnn.nvim {:load-file nnn})
+(use-package! :akinsho/toggleterm.nvim {:load-file toggleterm})
+(use-package! :kylechui/nvim-surround {:load-file nvim-surround})
+(use-package! "https://gitlab.com/yorickpeterse/nvim-window.git")
+(use-package! :folke/tokyonight.nvim {:load-file tokyonight})
+
+(use-package! :rcarriga/nvim-dap-ui
+            {:requires [(pack :mfussenegger/nvim-dap {:load-file dap})]
+             :call-setup dapui})
+;; (use-package! :sindrets/diffview.nvim
+;;               {:setup diffview
+;;                :requires [(pack :nvim-lua/plenary.nvim)]})
+(use-package! :kevinhwang91/nvim-ufo
+             {:load-file ufo
+              :requires [(pack :kevinhwang91/promise-async)]})
+(use-package! :glepnir/lspsaga.nvim
+             {:branch :main 
+              :load-file lspsaga})
+(use-package! :jose-elias-alvarez/null-ls.nvim {:load-file null-ls})
+(use-package! :lukas-reineke/indent-blankline.nvim {:load-file indent-blankline})
+(use-package! :theHamsta/nvim-dap-virtual-text {:call-setup nvim-dap-virtual-text})
+(use-package! :Pocco81/dap-buddy.nvim)
+(use-package! :hlucco/nvim-eswpoch)
+ 
+; custom plugin end
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and 
 ;; pass each package to packer 
