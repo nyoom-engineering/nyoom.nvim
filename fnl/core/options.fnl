@@ -67,8 +67,8 @@
 ;; Global statusline
 (set! laststatus 3)
 
-;; low cmdheight
-;(set! cmdheight 0)  ;;comment due to a problem - nagivate number
+;; Only show commandline when you need to
+(set! cmdheight 0)
 
 ;; Smart search
 (set! smartcase)
