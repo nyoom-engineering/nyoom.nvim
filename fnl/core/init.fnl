@@ -1,4 +1,3 @@
-
 (let [built-ins [:gzip
                  :zip
                  :zipPlugin
@@ -25,26 +24,24 @@
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
 
-;; make sure packer is all ready to go
-(let [compiled? (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
-      load-compiled #(require :packer_compiled)]
- (if compiled?
-   (load-compiled)
-   (do
-     (require :pack)
-     (. (require :packer) :sync))))
-
-; load keybinds
-(require :core.keybinds)
-
-;; load vim options
-(require :core.options)
-
 ;; load commands
 (require :core.commands)
 
 ;; load autocommands
 (require :core.events)
 
+;; load keybinds
+(require :core.keybinds)
+
+;; load vim options
+(require :core.options)
+
 ;; statusline
 (require :core.statusline)
+
+;; userconfig
+(require :config)
+
+;; load packer if its available
+(if (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
+  (require :packer_compiled))

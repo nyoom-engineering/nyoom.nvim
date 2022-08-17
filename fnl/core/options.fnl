@@ -1,6 +1,6 @@
-(import-macros {: set! : colorscheme} :macros)
+(import-macros {: set!} :macros)
 
-;; add Mason to path. This replaces the need to use `mason-lspconfig`
+;; add Mason to path. This replaces the need to load mason at startup 
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
 ;; improve updatetime for quicker refresh + gitsigns
@@ -61,11 +61,6 @@
 ;; Lazy redraw
 (set! lazyredraw)
 
-;; Spell checking 
-;; (set! spell)
-;; (set! spelllang [:en])
-;; (set! spelloptions [:camel])
-
 ;; Disable showing mode 
 (set! noshowmode)
 
@@ -74,9 +69,6 @@
 
 ;; low cmdheight
 ;(set! cmdheight 0)  ;;comment due to a problem - nagivate number
-
-;; Numbering
-(set! nonumber)
 
 ;; Smart search
 (set! smartcase)
@@ -104,17 +96,9 @@
 ;; Scroll off
 (set! scrolloff 8)
 
-;; cmp options
-(set! completeopt [:menu :menuone :preview :noinsert])
-
-;; Diff-mode
-(set! diffopt [:filler :internal :indent-heuristic :algorithm:histogram])
-
 ;; Grep
 (set! grepprg "rg --vimgrep")
 (set! grepformat "%f:%l:%c:%m")
 
 ;; colorscheme
 (set! background :dark)
-;; (set! guifont "Liga SFMono Nerd Font:h15")
-;; (vim.cmd "colorscheme tokyonight")

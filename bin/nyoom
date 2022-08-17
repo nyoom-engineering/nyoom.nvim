@@ -1,0 +1,44 @@
+#!/bin/bash
+set -o errexit -o pipefail -o nounset
+
+case "${1:-}" in
+  "")
+    printf "%s\n%s\n  %s\n%s\n" \
+      "usage: $(basename "$0") [options] [script [args]]" \
+      "Available options are:" \
+      "install  install required plugins" \
+      "sync  sync nyoom modules and plugins" \
+    ;;
+  install)
+    echo "Installing Required Plugins"
+    git clone -q --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/opt/packer.nvim
+    git clone -q -b nightly --single-branch https://github.com/rktjmp/hotpot.nvim.git ~/.local/share/nvim/site/pack/packer/start/hotpot.nvim
+    echo "Building Colorscheme"
+    git clone -q --depth 1 https://github.com/shaunsingh/oxocarbon.nvim.git ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
+    cd ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
+    cargo build --release 
+    mkdir -p lua
+    if [ "$(uname)" == "Darwin" ]; then
+        mv target/release/liboxocarbon.dylib lua/oxocarbon.so
+    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+        mv target/release/liboxocarbon.so lua/oxocarbon.so
+    elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
+        mv target/release/oxocarbon.dll lua/oxocarbon.dll
+    fi
+    cd ~/.config/nvim
+    ;;
+  sync)
+    nvim --version | sed '/^$/,$d'
+    echo "running: $(basename "$0") sync on version $(git log --pretty=tformat:"%h" -n1)"
+    rm -rf ~/.cache/nvim/
+    rm -rf ~/.config/nvim/lua/
+    exec nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require[[packages]]' -c 'lua require("packer").sync()'
+    ;;
+  *)
+    exec nvim --headless -S "$1" -i NONE -n -c 'echo""|qall!' -- "${@:2}"
+esac
+
+
+
+
+
