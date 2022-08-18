@@ -20,9 +20,9 @@ case "${1:-}" in
     mkdir -p lua
     if [ "$(uname)" == "Darwin" ]; then
         mv target/release/liboxocarbon.dylib lua/oxocarbon.so
-    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    elif [ "$(expr substr "$(uname -s)" 1 5)" == "Linux" ]; then
         mv target/release/liboxocarbon.so lua/oxocarbon.so
-    elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
+    elif [ "$(expr substr "$(uname -s)" 1 10)" == "MINGW64_NT" ]; then
         mv target/release/oxocarbon.dll lua/oxocarbon.dll
     fi
     cd ~/.config/nvim
@@ -36,7 +36,7 @@ case "${1:-}" in
     ;;
   *)
     exec nvim --headless -S "$1" -i NONE -n -c 'echo""|qall!' -- "${@:2}"
-esac
+;; esac
 
 
 
