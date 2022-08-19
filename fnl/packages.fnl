@@ -18,7 +18,7 @@
                                       (local {: float} (require :packer.util))
                                       (float {:border :solid}))}}))
 
-;; To install a package with Doom you must declare them here and run 'nyoom sync'
+;; To install a package with Nyoom you must declare them here and run 'nyoom sync'
 ;; on the command line, then restart nvim for the changes to take effect
 ;; The syntax is as follows: 
 
