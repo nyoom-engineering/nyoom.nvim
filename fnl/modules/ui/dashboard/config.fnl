@@ -1,6 +1,26 @@
 (import-macros {: nyoom-package-count : nyoom-module-count} :macros)
 (local {: setup} (require :alpha))
 
+;; truncate a number to a certain decimal
+(fn truncate [num digits]
+  (let [mult (^ 10 digits)]
+    (/ (math.modf (* num mult)) mult)))
+
+;; read startuptime, only if the file exists
+(local startup-file :/tmp/nvim-startuptime)
+(local startup-time-pattern "([%d.]+)  [%d.]+: [-]+ NVIM STARTED [-]+")
+(local startup-time-file (: (io.open startup-file) :read :*all))
+(local startup-time (truncate (* (tonumber (startup-time-file:match "([%d.]+)  [%d.]+: [-]+ NVIM STARTED [-]+")) 0.001) 3))
+(: (io.open startup-file :w) :close)
+
+;; Honestly I can't think of a better way to do this. 
+;; On average, compiling took 0.2+ and loading took 0.03+ so, I think its good for now
+(local compiled-or-loaded
+   (if (< startup-time 0.2)
+       "loaded "
+       "compiled "))
+
+;; setup alpha
 (fn button [sc txt keybind]
   (let [sc- (: (sc:gsub "%s" "") :gsub :SPC :<leader>)
         opts {:position :center
@@ -22,8 +42,7 @@
 
 (local bottom-text (if (= (nyoom-package-count) 0)
                      "Nyoom is in an incomplete state. Please run 'nyoom sync'" 
-                     (.. "Nyoom loaded " (nyoom-package-count) " packages across " (nyoom-module-count) " modules in 0.0326s")))
-
+                     (.. "Nyoom " compiled-or-loaded (nyoom-package-count) " packages across " (nyoom-module-count) " modules in " startup-time :s)))
 
 (var options {:header {:type :text
                        :val ["   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          "

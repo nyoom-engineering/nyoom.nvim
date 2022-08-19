@@ -24,9 +24,6 @@
 (fn on-attach [client bufnr]
   (import-macros {: buf-map! : autocmd! : augroup! : clear! : contains?} :macros)
 
-  (packadd! packer.nvim)
-  ((. (require :packer) :loader) :telescope.nvim)
-
   ;; Keybindings
   (local {:hover open-doc-float!
           :declaration goto-declaration!
@@ -37,11 +34,6 @@
   (local {:open_float open-line-diag-float!
           :goto_prev goto-diag-prev!
           :goto_next goto-diag-next!} vim.diagnostic)
-  (local {:lsp_implementations open-impl-float!
-          :lsp_references open-ref-float!
-          :diagnostics open-diag-float!
-          :lsp_document_symbols open-local-symbol-float!
-          :lsp_workspace_symbols open-workspace-symbol-float!} (require :telescope.builtin))
 
   (buf-map! [n] "K" open-doc-float!)
   (buf-map! [nv] "<leader>a" open-code-action-float!)
@@ -52,21 +44,16 @@
   (buf-map! [n] "<leader>gD" goto-declaration!)
   (buf-map! [n] "<leader>gd" goto-definition!)
   (buf-map! [n] "<leader>gt" goto-type-definition!)
-  (buf-map! [n] "<leader>li" open-impl-float!)
-  (buf-map! [n] "<leader>lr" open-ref-float!)
-  (buf-map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))
-  (buf-map! [n] "<leader>lD" open-diag-float!)
-  (buf-map! [n] "<leader>ls" open-local-symbol-float!)
-  (buf-map! [n] "<leader>lS" open-workspace-symbol-float!)
 
   ;; Format buffer before saving
-  (when (client.supports_method "textDocument/formatting")
-    (augroup! lsp-format-before-saving
-      (clear! {:buffer bufnr})
-      (autocmd! BufWritePre <buffer>
-        '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
-                              :bufnr bufnr})
-        {:buffer bufnr}))))
+  (nyoom-module-p! editor.format
+    (when (client.supports_method "textDocument/formatting")
+      (augroup! lsp-format-before-saving
+        (clear! {:buffer bufnr})
+        (autocmd! BufWritePre <buffer>
+          '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
+                                :bufnr bufnr})
+          {:buffer bufnr})))))
 
 ;; What should the lsp be demanded of?
 (local capabilities (vim.lsp.protocol.make_client_capabilities))
@@ -87,29 +74,6 @@
 (local defaults {:on_attach on-attach
                  : capabilities
                  :flags {:debounce_text_changes 150}})
-
-;; conditional lsp servesr
-(local lsp-servers [])
-
-(nyoom-module-p! lang.java
-  (table.insert lsp-servers :jdtls))
-
-(nyoom-module-p! lang.sh
-  (table.insert lsp-servers :bashls))
-
-(nyoom-module-p! lang.julia
-  (table.insert lsp-servers :julials))
-
-(nyoom-module-p! lang.markdown
-  (table.insert lsp-servers :marksman))
-
-(nyoom-module-p! lang.nix
-  (table.insert lsp-servers :rnix))
-
-;; Load lsp
-(let [servers lsp-servers]
-  (each [_ server (ipairs servers)]
-    ((. (. lsp server) :setup) defaults)))
 
 ;; formatting through null-ls
 (nyoom-module-p! editor.format
@@ -134,6 +98,29 @@
 
     (setup {: null-ls-sources
             :on_attach on-attach})))
+
+;; conditional lsp servesr
+(local lsp-servers [])
+
+(nyoom-module-p! lang.java
+  (table.insert lsp-servers :jdtls))
+
+(nyoom-module-p! lang.sh
+  (table.insert lsp-servers :bashls))
+
+(nyoom-module-p! lang.julia
+  (table.insert lsp-servers :julials))
+
+(nyoom-module-p! lang.markdown
+  (table.insert lsp-servers :marksman))
+
+(nyoom-module-p! lang.nix
+  (table.insert lsp-servers :rnix))
+
+;; Load lsp
+(let [servers lsp-servers]
+  (each [_ server (ipairs servers)]
+    ((. (. lsp server) :setup) defaults)))
 
 ;; for trickier servers you can change up the defaults
 (lsp.sumneko_lua.setup {:on_attach on-attach

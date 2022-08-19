@@ -1,4 +1,4 @@
-(import-macros {: packadd!} :macros)
+(import-macros {: packadd! : map! : nyoom-module-p!} :macros)
 (local {: setup : load_extension} (require :telescope))
 
 (setup {:defaults {:prompt_prefix "   "
@@ -24,3 +24,17 @@
 (load_extension :fzf)
 (load_extension :project)
 (load_extension :ui-select)
+
+(nyoom-module-p! tools.lsp
+  (do
+    (local {:lsp_implementations open-impl-float!
+            :lsp_references open-ref-float!
+            :diagnostics open-diag-float!
+            :lsp_document_symbols open-local-symbol-float!
+            :lsp_workspace_symbols open-workspace-symbol-float!} (require :telescope.builtin))
+    (map! [n] "<leader>li" open-impl-float!)
+    (map! [n] "<leader>lr" open-ref-float!)
+    (map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))
+    (map! [n] "<leader>lD" open-diag-float!)
+    (map! [n] "<leader>ls" open-local-symbol-float!)
+    (map! [n] "<leader>lS" open-workspace-symbol-float!)))

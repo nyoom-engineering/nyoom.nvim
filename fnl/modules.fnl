@@ -4,7 +4,7 @@
 ;; NOTE: Any module with a TODO either isn't ready or hasn't been implemented yet.
 
 (nyoom! completion.cmp             ; the ultimate code completion backend
-        ;;completion.compleet      ; TODO the *other* ultiamte code completion backend
+        ;;completion.compleet      ; TODO the *other* ultimate code completion backend
         ;;completion.fzf-lua       ; TODO a search engine for love and life
         completion.telescope       ; the search engine of the future
 
@@ -12,24 +12,25 @@
         ui.dashboard               ; a nifty splash screen for neovim
         ;;ui.nyoom-quit            ; TODO quit-message prompts when you quit Emacs
         ui.hydra                   ; the heads don't byte
-        ;;ui.indent-guides         ; TODO highlighted indent columns
+        ;;ui.indent-guides         ; highlighted indent columns
         ui.modeline                ; snazzy, nano-emacs-inspired modeline
         ;;ui.nvimtree              ; a project drawer, like NERDTree for vim
-        ;;ui.tabs                  ; TODO a tab bar for Neovim
+        ;;ui.tabs                  ; a tab bar for Neovim
         ui.vc-gutter               ; vcs diff in the fringe
+        ;ui.vi-tilde-fringe        ; fringe tildes to mark beyond EOB
         ;;ui.window-select         ; visually switch windows
-        ui.zen                     ; distraction-free coding or writing
+        ;;ui.zen                   ; distraction-free coding or writing
         ui.notify                  ; pretty notifications for neovim
 
-        ;;editor.fold              ; TODO (nigh) universal code folding
-        editor.format              ; automated prettiness
+        ;;editor.fold              ; (nigh) universal code folding
+        ;;editor.format            ; automated prettiness
         ;;editor.multiple-cursors  ; TODO editing in many places at once
         editor.parinfer            ; turn lisp into python, sort of
         editor.parens              ; basic parenthesis management
         editor.hotpot              ; lets get cooking
-        ;;editor.word-wrap         ; TODO soft wrapping with language-aware indent
+        ;;editor.word-wrap         ; soft wrapping with language-aware indent
 
-        ;;term.nshell              ; TODO the fennel shell that works everywhere
+        ;;term.fshell              ; the fennel shell that works everywhere
         ;;term.toggleterm          ; persistant/floating terminal wrapper for :term
 
         ;;checkers.spell           ; tasing you for misspelling mispelling
@@ -56,6 +57,6 @@
         lang.rust                  ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
         ;;lang.sh                  ; she sells {ba,z,fi}sh shells on the C xor
 
-        config.default             ; sensible defaults
+        config.default             ; Don't disable this!
         config.bindings)           ; intuitive motions
         ;;config.literate          ; literate configurations for neovim

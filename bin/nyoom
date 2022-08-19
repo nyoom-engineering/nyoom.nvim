@@ -32,7 +32,7 @@ case "${1:-}" in
     echo "running: $(basename "$0") sync on version $(git log --pretty=tformat:"%h" -n1)"
     rm -rf ~/.cache/nvim/
     rm -rf ~/.config/nvim/lua/
-    exec nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require[[packages]]' -c 'lua require("packer").sync()'
+    exec nvim --startuptime /tmp/nvim-startuptime --headless -c 'autocmd User PackerComplete quitall' -c 'lua require[[packages]]' -c 'lua require("packer").sync()'
     ;;
   *)
     exec nvim --headless -S "$1" -i NONE -n -c 'echo""|qall!' -- "${@:2}"

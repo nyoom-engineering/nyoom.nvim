@@ -11,40 +11,37 @@
 ;; Set shortmess
 (set! shortmess+ :cI)
 
+;; No eob by default
+(set! fillchars {:eob " "})
+
+(nyoom-module-p! ui.vi-tilde-fringe
+  (set! fillchars {:eob "~"}))
+
 ;; Show whitespace characters
-(set! list)
-
-;; Define characters to show
-(set! listchars {:trail "·"
-                 :tab "→ "
-                 :nbsp "·"})
-
-;; Fold column characters
-(set! fillchars {:eob " "
-                 :fold " "
-                 :foldopen ""
-                 :foldsep " "})
+(nyoom-module-p! ui.nyoom
+  (do
+    (set! list)
+    (set! listchars {:trail "·"
+                     :tab "→ "
+                     :nbsp "·"})))
 
 ;; Sign column
 (set! signcolumn "yes:1")
 
-;; don't wrap text
-(set! nowrap)
-
 ;; Substitution
 (set! gdefault)
 
-;; Do not break words at the middle
-(set! linebreak)
+;; By default no wrapping
+(set! nowrap)
 
-;; Maintain indentation on break
-(set! breakindent)
-
-;; Add characters after wrap
-(set! breakindentopt ["shift:2"])
-
-;; Show character after wrap
-(set! showbreak "↳ ")
+;; smart wrapping
+(nyoom-module-p! editor.wrap
+  (do
+    (set! wrap)
+    (set! linebreak)
+    (set! breakindent)
+    (set! breakindentopt ["shift:2"])
+    (set! showbreak "↳ ")))
 
 ;; Use clipboard outside Neovim
 (set! clipboard :unnamedplus)
@@ -58,12 +55,6 @@
 
 ;; Lazy redraw
 (set! lazyredraw)
-
-;; Global statusline
-(set! laststatus 3)
-
-;; Only show commandline when you need to
-(set! cmdheight 0)
 
 ;; Smart search
 (set! smartcase)
@@ -82,21 +73,24 @@
 (set! expandtab)
 
 ;; Enable cursorline/column
-(set! cursorline)
+(nyoom-module-p! ui.nyoom
+  (set! cursorline))
 
 ;; Automatic split locations
 (set! splitright)
 (set! splitbelow)
 
 ;; Scroll off
-(set! scrolloff 8)
+(nyoom-module-p! ui.nyoom
+  (set! scrolloff 4))
 
 ;; Grep
 (set! grepprg "rg --vimgrep")
 (set! grepformat "%f:%l:%c:%m")
 
 ;; colorscheme
-(set! background :dark)
+(nyoom-module-p! ui.nyoom
+  (set! background :dark))
 
 (nyoom-module-p! ui.modeline
   (do
@@ -172,5 +166,7 @@
    (set Statusline.winbar (fn []
                             (table.concat ["%#WinBar#"
                                            " %f "])))
+   (set! laststatus 3)
+   (set! cmdheight 0)
    (set! winbar "%!v:lua.Statusline.winbar()")
    (set! statusline "%!v:lua.Statusline.statusline()")))

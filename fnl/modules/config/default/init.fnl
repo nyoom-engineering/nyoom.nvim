@@ -5,5 +5,3 @@
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 (use-package! :kylechui/nvim-surround {:nyoom-module config.default
                                        :call-setup nvim-surround})
-
-

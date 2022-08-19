@@ -4,7 +4,7 @@
 (packadd! packer.nvim)
 
 ;; include modules
-(echo! "Compiling Module")
+(echo! "Compiling Modules")
 (include :fnl.modules)
 
 ;; Setup packer

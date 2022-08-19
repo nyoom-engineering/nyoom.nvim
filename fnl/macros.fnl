@@ -755,6 +755,20 @@
   (assert-compile (str? msg) "expected string for msg" msg)
   `(vim.notify ,msg vim.log.levels.ERROR))
 
+(λ sh [...]
+  "simple macro to run shell commands inside fennel"
+  `(let [str# 
+         ,(accumulate 
+            [str# ""  _ v# (ipairs [...])]
+            (if 
+              (in-scope? v#) `(.. ,str# " " ,v#)
+              (or (list? v#) (sym? v#)) (.. str# " " (tostring v#))
+              (= (type v#) "string") (.. str# " " (string.format "%q" v#))))
+         fd# (io.popen str#)
+         d# (fd#:read "*a")]
+     (fd#:close)
+     (string.sub d# 1 (- (length d#) 1))))
+
 {: contains?
  : custom-set-face!
  : set!
@@ -783,4 +797,5 @@
  : echo!
  : warn!
  : err!
+ : sh
  :ieach^ ieach}
