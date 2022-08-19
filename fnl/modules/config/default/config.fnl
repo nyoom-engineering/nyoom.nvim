@@ -72,10 +72,6 @@
 ;; Expand tabs
 (set! expandtab)
 
-;; Enable cursorline/column
-(nyoom-module-p! ui.nyoom
-  (set! cursorline))
-
 ;; Automatic split locations
 (set! splitright)
 (set! splitbelow)
