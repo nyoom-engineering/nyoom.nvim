@@ -1,3 +1,3 @@
 (import-macros {: nyoom-module!} :macros)
 
-(nyoom-module! config.literate)
+(nyoom-module! ui.not-vi-tilde-fringe)

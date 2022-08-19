@@ -29,22 +29,6 @@
 (fn ->bool [x]
   (if x true false))
 
-(fn keys [t]
-  (let [result []]
-    (when t
-      (each [k _ (pairs t)]
-        (table.insert result k)))
-    result))
-
-(fn count [xs]
-  (if
-    (table? xs) (let [maxn (table.maxn xs)]
-                  (if (= 0 maxn)
-                    (table.maxn (keys xs))
-                    maxn))
-    (not xs) 0
-    (length xs)))
-
 (λ empty? [xs]
   "Check if given table is empty"
   (assert-compile (tbl? xs) "expected table for xs" xs)
@@ -92,19 +76,6 @@
   "Return whether str begins with chars."
   (->bool (str:match (.. "^" chars))))
 
-(fn ieach-rec [i levels body]
-  (if (> i (length levels)) body
-      `(each [,(gensym) ,(. levels i 1) (ipairs ,(. levels i 2))]
-         ,(ieach-rec (+ 1 i) levels body))))
-
-(fn ieach [bindings body]
-  (local levels [])
-  (each [i form (ipairs bindings)]
-    (if (= 1 (% i 2))
-        (table.insert levels [form])
-        (table.insert (. levels (/ i 2)) form)))
-  (ieach-rec 1 levels body))
-
 (fn djb2 [str]
   "Implementation of the hash function djb2.
   Extracted the implementation from <https://theartincode.stanis.me/008-djb2/>."
@@ -114,8 +85,15 @@
                (+ byte hash (bit.lshift hash 5)))]
     (bit.tohex hash)))
 
-(λ expr->str [expr]
-  `(macrodebug ,expr nil))
+(λ gensym-checksum [x ?options]
+  "Generates a new symbol from the checksum of the object passed as a parameter
+  after it is casted into an string using the `view` function.
+  You can also pass a prefix or a suffix into the options optional table.
+  This function depends on the djb2 hash function."
+  (let [options (or ?options {})
+        prefix (or options.prefix "")
+        suffix (or options.suffix "")]
+    (sym (.. prefix (djb2 (view x)) suffix))))
 
 (fn fn? [x]
   "Checks if `x` is a function definition.
@@ -150,16 +128,6 @@
     `(do
        ,(unpack exprs))
     (first exprs)))
-
-(λ gensym-checksum [x ?options]
-  "Generates a new symbol from the checksum of the object passed as a parameter
-  after it is casted into an string using the `view` function.
-  You can also pass a prefix or a suffix into the options optional table.
-  This function depends on the djb2 hash function."
-  (let [options (or ?options {})
-        prefix (or options.prefix "")
-        suffix (or options.suffix "")]
-    (sym (.. prefix (djb2 (view x)) suffix))))
 
 (λ vlua [x]
   "Return a symbol mapped to `v:lua.%s()` where `%s` is the symbol."
@@ -559,76 +527,6 @@
        (fn [t k v]
          (tset (ensure) k v))})))
 
-(λ nyoom-module-set [name]
-  "Load a module by its name and adds it to the list of enabled modules
-  Accepts the following arguements:
-  name -> a symbol.
-  Example of use:
-  ```fennel
-  (nyoom-module-set tools.treesitter)
-  ```"
-  (assert-compile (sym? name) "expected symbol for name" name)
-  (table.insert _G.nyoom/modules name)
-  (let [include-path (.. :fnl.modules. (->str name))
-        config-path (.. :modules. (->str name) :.config)]
-    `(do
-      (include ,include-path)
-      (pcall require ,config-path))))
-
-(fn nyoom! [...]
-  "Load nyoom's modules
-  Example of use:
-  ```fennel
-  (nyoom! tools.treesitter
-          lang.rust
-          ui.gitsigns)
-  ```"
-  (fn exprs [...]
-    (match [...]
-      (where [& rest] (empty? rest)) []
-      [name & rest] [(nyoom-module-set name)
-                     (unpack (exprs (unpack rest)))]
-      _ []))
-  (let [exprs (exprs ...)]
-    (if (> (length exprs) 1)
-      `(do ,(unpack exprs))
-      (unpack exprs))))
-
-(λ nyoom-module-p! [name config]
-  "Checks if a module is enabled
-  Accepts the following arguements:
-  name -> a symbol.
-  Example of use:
-  ```fennel
-  (nyoom-module-p! tools.tree-sitter)
-  ```"
-  (assert-compile (sym? name) "expected symbol for name" name)
-  (when (contains? _G.nyoom/modules name)
-    `,config))
-
-(λ nyoom-module-ensure! [name]
-  "Ensure a module is enabled
-  Accepts the following arguements:
-  name -> a symbol.
-  Example of use:
-  ```fennel
-  (nyoom-module-ensure! tools.tree-sitter)
-  ```"
-  (assert-compile (sym? name) "expected symbol for name" name)
-  (when (not (contains? _G.nyoom/modules name))
-    (let [msg (.. "One of your installed modules depends on " (->str name) ". Please enable it")]
-     `(vim.notify ,msg vim.log.levels.WARN))))
-
-;; These shouldn't be macros. However I kindof messed up by making all my 
-;; globals compile-time. So now we're sticking with it
-(λ nyoom-package-count []
-  (let [packagecount (count _G.nyoom/pack)]
-    `,packagecount))
-
-(λ nyoom-module-count []
-  (let [modulecount (count _G.nyoom/modules)]
-    `,modulecount))
-
 (λ map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.
 
@@ -769,7 +667,133 @@
      (fd#:close)
      (string.sub d# 1 (- (length d#) 1))))
 
+(λ nyoom-module-set [name]
+  "Load a module by its name and adds it to the list of enabled modules
+  Accepts the following arguements:
+  name -> a symbol.
+  Example of use:
+  ```fennel
+  (nyoom-module-set tools.treesitter)
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (table.insert _G.nyoom/modules name)
+  (let [include-path (.. :fnl.modules. (->str name))
+        config-path (.. :modules. (->str name) :.config)]
+    `(do
+      (include ,include-path)
+      (pcall require ,config-path))))
+
+(fn nyoom! [...]
+  "Load nyoom's modules
+  Example of use:
+  ```fennel
+  (nyoom! tools.treesitter
+          lang.rust
+          ui.gitsigns)
+  ```"
+  (fn exprs [...]
+    (match [...]
+      (where [& rest] (empty? rest)) []
+      [name & rest] [(nyoom-module-set name)
+                     (unpack (exprs (unpack rest)))]
+      _ []))
+  (let [exprs (exprs ...)]
+    (if (> (length exprs) 1)
+      `(do ,(unpack exprs))
+      (unpack exprs))))
+
+(λ nyoom-module! [name]
+  "By default modules should be loaded through use-package!. Of course, not every
+  modules needs a package. Sometimes we just want to load `config.fnl`. In this 
+  case, we can hack onto packer.nvim, give it a fake package, and ask it to load a 
+  config file.
+  Example of use:
+  ```fennel
+  (nyoom-module! tools.tree-sitter)
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (let [name (->str name)]
+    (table.insert _G.nyoom/pack (pack name {:nyoom-module name}))))
+
+(λ nyoom-module-p! [name config]
+  "Checks if a module is enabled
+  Accepts the following arguements:
+  name -> a symbol.
+  Example of use:
+  ```fennel
+  (nyoom-module-p! tools.tree-sitter)
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (when (contains? _G.nyoom/modules name)
+    `,config))
+
+(λ nyoom-module-ensure! [name]
+  "Ensure a module is enabled
+  Accepts the following arguements:
+  name -> a symbol.
+  Example of use:
+  ```fennel
+  (nyoom-module-ensure! tools.tree-sitter)
+  ```"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (when (not (contains? _G.nyoom/modules name))
+    (let [msg (.. "One of your installed modules depends on " (->str name) ". Please enable it")]
+     `(vim.notify ,msg vim.log.levels.WARN))))
+
+;; These shouldn't be macros. However I kindof messed up by making all my 
+;; globals compile-time. So now we're sticking with it
+(fn keys [t]
+  (let [result []]
+    (when t
+      (each [k _ (pairs t)]
+        (table.insert result k)))
+    result))
+
+(fn count [xs]
+  "Count the number of items in a table"
+  (if
+    (table? xs) (let [maxn (table.maxn xs)]
+                  (if (= 0 maxn)
+                    (table.maxn (keys xs))
+                    maxn))
+    (not xs) 0
+    (length xs)))
+
+(λ nyoom-package-count []
+  (let [packagecount (count _G.nyoom/pack)]
+    `,packagecount))
+
+(λ nyoom-module-count []
+  (let [modulecount (count _G.nyoom/modules)]
+    `,modulecount))
+
 {: contains?
+ : expr->str
+ : nil?
+ : str?
+ : num?
+ : bool?
+ : fn?
+ : tbl?
+ : ->str
+ : ->bool
+ : empty?
+ : first
+ : second
+ : last
+ : any?
+ : all
+ : flatten
+ : begins-with?
+ : count
+ : gensym-checksum
+ : fn?
+ : quoted?
+ : quoted->fn
+ : quoted->str
+ : expand-exprs
+ : vlua
+ : colorscheme
  : custom-set-face!
  : set!
  : local-set!
@@ -778,19 +802,13 @@
  : autocmd!
  : augroup!
  : clear!
- : rock
  : pack
- : rock!
+ : rock
  : use-package!
- : nyoom!
- : nyoom-module-p!
- : nyoom-module-ensure!
- : nyoom-package-count
- : nyoom-module-count
+ : rock!
+ : unpack!
  : packadd!
  : autoload
- : colorscheme
- : unpack!
  : map!
  : buf-map!
  : let!
@@ -798,4 +816,9 @@
  : warn!
  : err!
  : sh
- :ieach^ ieach}
+ : nyoom!
+ : nyoom-module!
+ : nyoom-module-p!
+ : nyoom-module-ensure!
+ : nyoom-package-count
+ : nyoom-module-count}

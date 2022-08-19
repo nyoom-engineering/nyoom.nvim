@@ -10,14 +10,14 @@
 
         ui.nyoom                   ; what makes Nyoom look the way it does
         ui.dashboard               ; a nifty splash screen for neovim
-        ;;ui.nyoom-quit            ; quit-message prompts when you quit Neovim. 
+        ;;ui.nyoom-quit            ; (buggy) quit-message prompts when you quit Neovim. 
         ui.hydra                   ; the heads don't byte
         ;;ui.indent-guides         ; highlighted indent columns
         ui.modeline                ; snazzy, nano-emacs-inspired modeline
         ;;ui.nvimtree              ; a project drawer, like NERDTree for vim
         ;;ui.tabs                  ; a tab bar for Neovim
         ui.vc-gutter               ; vcs diff in the fringe
-        ;;ui.vi-tilde-fringe       ; fringe tildes to mark beyond EOB
+        ui.not-vi-tilde-fringe     ; disable fringe tildes to mark beyond EOB
         ;;ui.window-select         ; visually switch windows
         ;;ui.zen                   ; distraction-free coding or writing
         ui.notify                  ; pretty notifications for neovim
@@ -44,7 +44,7 @@
         tools.mason                ; setting your tools in stone
         tools.conjure              ; run code, run (also, repls)
         tools.antifennel           ; hate fennel? write lua and compile it back
-        ;;tools.pastebin           ; interacting with pastebin platforms
+        tools.pastebin             ; interacting with pastebin platforms
         tools.lsp                  ; :vscode 
         tools.neogit               ; a git porcelain for Neovim
         tools.rgb                  ; creating color strings

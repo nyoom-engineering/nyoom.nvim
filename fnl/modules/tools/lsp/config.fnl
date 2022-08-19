@@ -25,6 +25,14 @@
   (buf-map! [n] "<leader>gd" goto-definition!)
   (buf-map! [n] "<leader>gt" goto-type-definition!)
 
+  ;; Simple
+  (nyoom-module-p! completion.compl
+    (import-macros {: packadd!} :macros)
+    (packadd! LuaSnip)
+    ((. (require :modules.fnl.completion.compl.config)
+        :attach) client))
+
+  ;; Enable lsp formatting if available 
   (nyoom-module-p! editor.format
     (when (client.supports_method "textDocument/formatting")
       (augroup! lsp-format-before-saving
