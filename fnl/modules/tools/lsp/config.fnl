@@ -1,20 +1,6 @@
 (import-macros {: nyoom-module-p!} :macros)
 (local lsp (require :lspconfig))
 
-;;; Diagnostics configuration
-(let [{: config : severity} vim.diagnostic
-      {: sign_define} vim.fn]
-  (config {:underline {:severity {:min severity.INFO}}
-           :signs {:severity {:min severity.INFO}}
-           :virtual_text false ;; lsp_lines handles this
-           :update_in_insert true
-           :severity_sort true
-           :float {:show_header false :border :rounded}})
-  (sign_define :DiagnosticSignError {:text "" :texthl :DiagnosticSignError})
-  (sign_define :DiagnosticSignWarn {:text "" :texthl :DiagnosticSignWarn})
-  (sign_define :DiagnosticSignInfo {:text "" :texthl :DiagnosticSignInfo})
-  (sign_define :DiagnosticSignHint {:text "" :texthl :DiagnosticSignHint}))
-
 ;;; Improve UI
 (set vim.lsp.handlers.textDocument/signatureHelp
       (vim.lsp.with vim.lsp.handlers.signature_help {:border :solid}))
@@ -31,16 +17,10 @@
           :type_definition goto-type-definition!
           :code_action open-code-action-float!
           :rename rename!} vim.lsp.buf)
-  (local {:open_float open-line-diag-float!
-          :goto_prev goto-diag-prev!
-          :goto_next goto-diag-next!} vim.diagnostic)
 
   (buf-map! [n] "K" open-doc-float!)
   (buf-map! [nv] "<leader>a" open-code-action-float!)
   (buf-map! [nv] "<leader>rn" rename!)
-  (buf-map! [n] "<leader>d" open-line-diag-float!)
-  (buf-map! [n] "[d" goto-diag-prev!)
-  (buf-map! [n] "]d" goto-diag-next!)
   (buf-map! [n] "<leader>gD" goto-declaration!)
   (buf-map! [n] "<leader>gd" goto-definition!)
   (buf-map! [n] "<leader>gt" goto-type-definition!)

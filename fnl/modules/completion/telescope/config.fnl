@@ -34,7 +34,11 @@
             :lsp_workspace_symbols open-workspace-symbol-float!} (require :telescope.builtin))
     (map! [n] "<leader>li" open-impl-float!)
     (map! [n] "<leader>lr" open-ref-float!)
-    (map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))
-    (map! [n] "<leader>lD" open-diag-float!)
     (map! [n] "<leader>ls" open-local-symbol-float!)
     (map! [n] "<leader>lS" open-workspace-symbol-float!)))
+
+(nyoom-module-p! tools.diagnostics
+  (do
+    (local {:diagnostics open-diag-float!} (require :telescope.builtin))
+    (map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))
+    (map! [n] "<leader>lD" open-diag-float!)))

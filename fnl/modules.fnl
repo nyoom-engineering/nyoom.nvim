@@ -37,6 +37,7 @@
 
         ;;tools.profile            ; profile your configuration today
         ;;tools.debugger           ; FIXME stepping through code, to help you add bugs
+        tools.diagnostics          ; Configuratino of the vim.diagnostic api & linting support
         ;;tools.docker             ; row row row your boat
         ;;tools.editorconfig       ; let someone else argue about tabs vs spaces
         ;;tools.magma              ; tame Jupyter notebooks
