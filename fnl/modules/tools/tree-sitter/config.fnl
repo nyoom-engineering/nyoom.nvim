@@ -10,8 +10,7 @@
 
 (local treesitter-filetypes [:comment
                              :help
-                             :fennel
-                             :lua])
+                             :fennel])
 
 ;; conditionally install parsers
 (nyoom-module-p! lang.sh
@@ -25,6 +24,9 @@
 
 (nyoom-module-p! lang.java
   (table.insert treesitter-filetypes :java))
+
+(nyoom-module-p! lang.lua
+  (table.insert treesitter-filetypes :lua))
 
 (nyoom-module-p! lang.rust
   (do
@@ -50,10 +52,10 @@
     (set parser-config.norg_table
          {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
                          :files [:src/parser.c]
-                         :branch :main}})))
-    ;; (table.insert treesitter-filetypes :norg)
-    ;; (table.insert treesitter-filetypes :norg_table)
-    ;; (table.insert treesitter-filetypes :norg_meta)))
+                         :branch :main}})
+    (table.insert treesitter-filetypes :norg)
+    (table.insert treesitter-filetypes :norg_table)
+    (table.insert treesitter-filetypes :norg_meta)))
 
 ;; load dependencies
 (packadd! nvim-ts-rainbow)
@@ -94,23 +96,6 @@
                                                    "[[" "@class.outer"}
                              :goto_previous_end {"[M" "@function.outer"
                                                  "[]" "@class.outer"}}}})  
-
-;; Neorg parsers
-(nyoom-module-p! lang.neorg
-  (do
-    (local tsp (require :nvim-treesitter.parsers))
-    (local parser-config (tsp.get_parser_configs))
-    (set parser-config.norg {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg"
-                                            :files [:src/parser.c :src/scanner.cc]
-                                            :branch :main}})
-    (set parser-config.norg_meta
-         {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-meta"
-                         :files [:src/parser.c]
-                         :branch :main}})
-    (set parser-config.norg_table
-         {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
-                         :files [:src/parser.c]
-                         :branch :main}}))) 
 
 ;; load dependencies
 (packadd! nvim-ts-rainbow)

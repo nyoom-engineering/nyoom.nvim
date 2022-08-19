@@ -98,12 +98,13 @@
     ((. (. lsp server) :setup) defaults)))
 
 ;; for trickier servers you can change up the defaults
-(lsp.sumneko_lua.setup {:on_attach on-attach
-                        : capabilities
-                        :settings {:Lua {:diagnostics {:globals {1 :vim}}
-                                         :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
-                                                               (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
-                                                     :maxPreload 100000
-                                                     :preloadFileSize 10000}}}})
+(nyoom-module-p! lang.lua
+  (lsp.sumneko_lua.setup {:on_attach on-attach
+                          : capabilities
+                          :settings {:Lua {:diagnostics {:globals {1 :vim}}
+                                           :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
+                                                                 (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
+                                                       :maxPreload 100000
+                                                       :preloadFileSize 10000}}}}))
 
 {: on-attach}

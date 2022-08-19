@@ -10,14 +10,14 @@
 
         ui.nyoom                   ; what makes Nyoom look the way it does
         ui.dashboard               ; a nifty splash screen for neovim
-        ;;ui.nyoom-quit            ; TODO quit-message prompts when you quit Emacs
+        ;;ui.nyoom-quit            ; quit-message prompts when you quit Neovim. 
         ui.hydra                   ; the heads don't byte
         ;;ui.indent-guides         ; highlighted indent columns
         ui.modeline                ; snazzy, nano-emacs-inspired modeline
         ;;ui.nvimtree              ; a project drawer, like NERDTree for vim
         ;;ui.tabs                  ; a tab bar for Neovim
         ui.vc-gutter               ; vcs diff in the fringe
-        ;ui.vi-tilde-fringe        ; fringe tildes to mark beyond EOB
+        ;;ui.vi-tilde-fringe       ; fringe tildes to mark beyond EOB
         ;;ui.window-select         ; visually switch windows
         ;;ui.zen                   ; distraction-free coding or writing
         ui.notify                  ; pretty notifications for neovim
@@ -27,7 +27,7 @@
         ;;editor.multiple-cursors  ; TODO editing in many places at once
         editor.parinfer            ; turn lisp into python, sort of
         editor.parens              ; basic parenthesis management
-        editor.hotpot              ; lets get cooking
+        editor.hotpot              ; lets get cooking. please don't disable this
         ;;editor.word-wrap         ; soft wrapping with language-aware indent
 
         ;;term.fshell              ; the fennel shell that works everywhere
@@ -39,23 +39,24 @@
         ;;tools.debugger           ; FIXME stepping through code, to help you add bugs
         ;;tools.docker             ; row row row your boat
         ;;tools.editorconfig       ; let someone else argue about tabs vs spaces
-        ;;tools.magma              ; TODO tame Jupyter notebooks
+        ;;tools.magma              ; tame Jupyter notebooks
         tools.mason                ; setting your tools in stone
         tools.conjure              ; run code, run (also, repls)
         tools.antifennel           ; hate fennel? write lua and compile it back
-        tools.pastebin             ; interacting with pastebin platforms
+        ;;tools.pastebin           ; interacting with pastebin platforms
         tools.lsp                  ; :vscode 
         tools.neogit               ; a git porcelain for Neovim
         ;;tools.rgb                ; creating color strings
         tools.tree-sitter          ; syntax and parsing, sitting in a tree...
 
-        lang.java                  ; the poster child for carpal tunnel syndrome
+        ;;lang.java                ; the poster child for carpal tunnel syndrome
         ;;lang.julia               ; a better, faster MATLAB
+        lang.lua                   ; one-based indices? one-based indices
         lang.markdown              ; writing docs for people to ignore
-        lang.neorg                 ; organize your plain life in plain text
+        ;;lang.neorg               ; organize your plain life in plain text
         lang.nix                   ; I hereby declare "nix geht mehr!"
         lang.rust                  ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-        lang.sh                    ; she sells {ba,z,fi}sh shells on the C xor
+        ;;lang.sh                  ; she sells {ba,z,fi}sh shells on the C xor
 
         config.default             ; Don't disable this!
         config.bindings)           ; intuitive motions

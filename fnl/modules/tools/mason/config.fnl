@@ -4,7 +4,7 @@
 (local {: setup} (require :mason))
 (setup {:ui {:border :solid}})
 
-(local mason-tools [:lua-language-server :stylua])
+(local mason-tools [])
 
 ;; language servers
 (nyoom-module-p! tools.tree-sitter
@@ -14,6 +14,9 @@
 
     (nyoom-module-p! lang.julia
       (table.insert mason-tools :julia-lsp))
+
+    (nyoom-module-p! lang.lua
+      (table.insert mason-tools :lua-language-server))
 
     (nyoom-module-p! lang.markdown
       (table.insert mason-tools :marksman))
@@ -30,6 +33,9 @@
 ;; formatters
 (nyoom-module-p! editor.format
   (do
+    (nyoom-module-p! lang.lua
+      (table.insert mason-tools :stylua))
+
     (nyoom-module-p! lang.markdown
       (table.insert mason-tools :prettier))
 

@@ -1,8 +1,4 @@
-(import-macros {: nyoom-module-p! : set! : augroup! : autocmd!} :macros)
-(local {: setup} (require :nvim-surround))
-
-;; Setup surround
-(setup)
+(import-macros {: nyoom-module-p! : set! : augroup! : autocmd! : command!} :macros)
 
 ;; Restore cursor on exit
 (augroup! restore-cursor-on-exit
@@ -141,14 +137,11 @@
    (fn get-lsp-diagnostic []
      (when (not (rawget vim :lsp))
        (lua "return \"\""))
-   
      (local count [0 0 0 0])
-   
      (local result {:errors (. count vim.diagnostic.severity.ERROR)
                     :warnings (. count vim.diagnostic.severity.WARN)
                     :info (. count vim.diagnostic.severity.INFO)
                     :hints (. count vim.diagnostic.severity.HINT)})
-   
      (string.format " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s "
                     (or (. result :warnings) 0) (or (. result :errors) 0)))
    (global Statusline {})
