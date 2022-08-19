@@ -10,7 +10,7 @@
 
         ui.nyoom                   ; what makes Nyoom look the way it does
         ui.dashboard               ; a nifty splash screen for neovim
-        ;;ui.nyoom-quit            ; (buggy) quit-message prompts when you quit Neovim. 
+        ;;ui.nyoom-quit            ; buggy, terrible implementation of doom-quit. 
         ui.hydra                   ; the heads don't byte
         ;;ui.indent-guides         ; highlighted indent columns
         ui.modeline                ; snazzy, nano-emacs-inspired modeline
@@ -28,6 +28,7 @@
         editor.parinfer            ; turn lisp into python, sort of
         editor.parens              ; basic parenthesis management
         editor.hotpot              ; lets get cooking. please don't disable this
+        editor.scratch             ; emacs-like scratch buffer functionality
         ;;editor.word-wrap         ; soft wrapping with language-aware indent
 
         ;;term.fshell              ; the fennel shell that works everywhere
@@ -61,4 +62,4 @@
 
         config.default             ; Don't disable this!
         config.bindings)           ; intuitive motions
-        ;;config.literate          ; literate configurations for neovim
+        ;;config.literate)         ; literate configurations for neovim

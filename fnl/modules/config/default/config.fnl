@@ -1,8 +1,15 @@
-(import-macros {: nyoom-module-p! : set! : augroup! : autocmd!} :macros)
+(import-macros {: nyoom-module-p! : set! : augroup! : autocmd! : command! : warn!} :macros)
 
 ;; Restore cursor on exit
 (augroup! restore-cursor-on-exit
           (autocmd! VimLeave * '(set! guicursor ["a:ver100-blinkon0"])))
+
+;; Replace Packer usage
+(command! PackerSync '(warn! "Please use the bin/nyoom script instead of PackerSync"))
+(command! PackerInstall '(warn! "Please use the bin/nyoom script instead of PackerInstall"))
+(command! PackerUpdate '(warn! "Please use the bin/nyoom script instead of PackerUpdate"))
+(command! PackerCompile '(warn! "Please use the bin/nyoom script instead of PackerCompile"))
+(command! PackerStatus "lua require 'packages' require('packer').status()")
 
 ;; improve updatetime for quicker refresh + gitsigns
 (set! updatetime 250)

@@ -24,9 +24,6 @@
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
 
-;; load commands
-(require :core.commands)
-
 ;; add Mason to path. This replaces the need to load mason at startup 
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
