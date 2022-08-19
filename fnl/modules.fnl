@@ -46,7 +46,7 @@
         ;;tools.pastebin           ; interacting with pastebin platforms
         tools.lsp                  ; :vscode 
         tools.neogit               ; a git porcelain for Neovim
-        ;;tools.rgb                ; creating color strings
+        tools.rgb                  ; creating color strings
         tools.tree-sitter          ; syntax and parsing, sitting in a tree...
 
         ;;lang.java                ; the poster child for carpal tunnel syndrome

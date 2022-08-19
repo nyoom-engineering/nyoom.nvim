@@ -4,4 +4,4 @@
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
 (use-package! :mvllow/modes.nvim {:opt true
                                   :defer modes.nvim
-                                  :call-setup modes})
+                                  :nyoom-module ui.nyoom})
