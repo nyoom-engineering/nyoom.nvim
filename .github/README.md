@@ -101,7 +101,8 @@ bin/nyoom install
 bin/nyoom sync
 ```
 
-Its recommend you add `~/.config/nvim/bin/nyoom` to your shells `path
+Its recommend you add `~/.config/nvim/bin/nyoom` to your shells `path`
+
 
 ### Using nix: 
 
