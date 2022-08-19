@@ -33,11 +33,11 @@
         ;;term.fshell              ; the fennel shell that works everywhere
         ;;term.toggleterm          ; persistant/floating terminal wrapper for :term
 
+        checkers.syntax            ; tasing you for every semicolon you forget
         ;;checkers.spell           ; tasing you for misspelling mispelling
 
         ;;tools.profile            ; profile your configuration today
         ;;tools.debugger           ; FIXME stepping through code, to help you add bugs
-        tools.diagnostics          ; Configuratino of the vim.diagnostic api & linting support
         ;;tools.docker             ; row row row your boat
         ;;tools.editorconfig       ; let someone else argue about tabs vs spaces
         ;;tools.magma              ; tame Jupyter notebooks

@@ -113,12 +113,13 @@ If you have an issue with a plugin in Nyoom.nvim, first you should report it her
 ## Contribute
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 
+Checkout the [Module Guide](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/modules.md)
+
 + I love pull requests and bug reports!
 + Don't hesitate to [tell me my lisp-fu
   sucks](https://github.com/shaunsingh/nyoom.nvim/issues/new), but please tell me
   why.
-+ Don't see support for your language, or think it should be improved? Feel free to open an issue or PR with your changes
-
++ Don't see support for your language, or think it should be improved? Feel free to open an issue or PR with your changes.
 
 ## Adressing NvChad
 

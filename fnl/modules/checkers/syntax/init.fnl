@@ -1,6 +1,6 @@
 (import-macros {: use-package!} :macros)
 
-(use-package! :mfussenegger/nvim-lint {:nyoom-module tools.diagnostics
+(use-package! :mfussenegger/nvim-lint {:nyoom-module checkers.syntax
                                        :opt true
                                        :defer nvim-lint})
 

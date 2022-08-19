@@ -37,7 +37,7 @@
     (map! [n] "<leader>ls" open-local-symbol-float!)
     (map! [n] "<leader>lS" open-workspace-symbol-float!)))
 
-(nyoom-module-p! tools.diagnostics
+(nyoom-module-p! checkers.syntax
   (do
     (local {:diagnostics open-diag-float!} (require :telescope.builtin))
     (map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))
