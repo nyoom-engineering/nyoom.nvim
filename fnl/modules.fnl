@@ -23,7 +23,7 @@
         ui.notify                  ; pretty notifications for neovim
 
         ;;editor.fold              ; (nigh) universal code folding
-        ;;editor.format            ; automated prettiness
+        editor.format              ; automated prettiness
         ;;editor.multiple-cursors  ; TODO editing in many places at once
         editor.parinfer            ; turn lisp into python, sort of
         editor.parens              ; basic parenthesis management
@@ -55,7 +55,7 @@
         lang.neorg                 ; organize your plain life in plain text
         lang.nix                   ; I hereby declare "nix geht mehr!"
         lang.rust                  ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-        ;;lang.sh                  ; she sells {ba,z,fi}sh shells on the C xor
+        lang.sh                    ; she sells {ba,z,fi}sh shells on the C xor
 
         config.default             ; Don't disable this!
         config.bindings)           ; intuitive motions

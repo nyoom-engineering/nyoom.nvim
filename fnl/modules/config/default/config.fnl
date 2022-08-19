@@ -1,4 +1,8 @@
 (import-macros {: nyoom-module-p! : set! : augroup! : autocmd!} :macros)
+(local {: setup} (require :nvim-surround))
+
+;; Setup surround
+(setup)
 
 ;; Restore cursor on exit
 (augroup! restore-cursor-on-exit

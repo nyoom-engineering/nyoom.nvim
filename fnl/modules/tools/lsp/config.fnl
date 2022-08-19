@@ -1,4 +1,4 @@
-(import-macros {: packadd! : nyoom-module-p!} :macros)
+(import-macros {: nyoom-module-p!} :macros)
 (local lsp (require :lspconfig))
 
 ;;; Diagnostics configuration
@@ -45,7 +45,6 @@
   (buf-map! [n] "<leader>gd" goto-definition!)
   (buf-map! [n] "<leader>gt" goto-type-definition!)
 
-  ;; Format buffer before saving
   (nyoom-module-p! editor.format
     (when (client.supports_method "textDocument/formatting")
       (augroup! lsp-format-before-saving
@@ -74,30 +73,6 @@
 (local defaults {:on_attach on-attach
                  : capabilities
                  :flags {:debounce_text_changes 150}})
-
-;; formatting through null-ls
-(nyoom-module-p! editor.format
-  (do
-    (packadd! null-ls.nvim)
-    (local null-ls-sources [])
-    (local {: setup
-            :builtins {: formatting
-                       : diagnostics}} (require :null-ls))
-
-    (nyoom-module-p! lang.java
-      (table.insert null-ls-sources formatting.clang_format))
-
-    (nyoom-module-p! lang.markdown
-      (table.insert null-ls-sources formatting.markdownlint))
-
-    (nyoom-module-p! lang.rust
-      (table.insert null-ls-sources formatting.rustfmt))
-
-    (nyoom-module-p! lang.sh
-      (table.insert null-ls-sources formatting.shfmt))
-
-    (setup {: null-ls-sources
-            :on_attach on-attach})))
 
 ;; conditional lsp servesr
 (local lsp-servers [])
@@ -130,3 +105,5 @@
                                                                (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
                                                      :maxPreload 100000
                                                      :preloadFileSize 10000}}}})
+
+{: on-attach}
