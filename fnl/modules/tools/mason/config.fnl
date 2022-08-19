@@ -43,7 +43,7 @@
       (table.insert mason-tools :shfmt))))
 
 
-(nyoom-module-p! tools.diagnostics
+(nyoom-module-p! checkers.syntax
   (do
     (nyoom-module-p! lang.lua
       (table.insert mason-tools :selene))))
