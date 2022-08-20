@@ -141,7 +141,7 @@
                        (if (= vim.o.background :dark) 
                            (set! background :light)
                            (set! background :dark))
-                      (require :oxocarbon))
+                      (require :oxocarbon-lua))
      
                      {:desc :Background}]
                     [:n
