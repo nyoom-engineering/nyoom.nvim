@@ -5,7 +5,8 @@
                                   :after :nvim-lspconfig})
 
 ; easy to use configurations for language servers
-(use-package! :neovim/nvim-lspconfig {:defer nvim-lspconfig
+(use-package! :neovim/nvim-lspconfig {:opt true
+                                      :defer nvim-lspconfig
                                       :nyoom-module tools.lsp})
 
 

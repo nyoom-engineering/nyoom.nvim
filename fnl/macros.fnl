@@ -456,19 +456,17 @@
                   (match k
                     :call-setup (values :config (string.format "require(\"%s\").setup()" (->str v)))
                     :nyoom-module (values :config (string.format "require(\"modules.%s.config\")" (->str v)))
-                    :defer (do
-                            (values :opt true)
-                            (values :setup (let [package (->str v)]
-                                             `(λ []
-                                               (vim.api.nvim_create_autocmd [:BufRead :BufWinEnter :BufNewFile]
-                                                        {:group (vim.api.nvim_create_augroup ,package {})
-                                                         :callback (fn []
-                                                                     (if (not= vim.fn.expand "%" "")
-                                                                       (vim.defer_fn (fn []
-                                                                                       ((. (require :packer) :loader) ,package)
-                                                                                       (if (= ,package :nvim-lspconfig)
-                                                                                         (vim.cmd "silent! do FileType")))
-                                                                                     0)))})))))
+                    :defer (values :setup (let [package (->str v)]
+                                            `(λ []
+                                              (vim.api.nvim_create_autocmd [:BufRead :BufWinEnter :BufNewFile]
+                                                       {:group (vim.api.nvim_create_augroup ,package {})
+                                                        :callback (fn []
+                                                                    (if (not= vim.fn.expand "%" "")
+                                                                      (vim.defer_fn (fn []
+                                                                                      ((. (require :packer) :loader) ,package)
+                                                                                      (if (= ,package :nvim-lspconfig)
+                                                                                        (vim.cmd "silent! do FileType")))
+                                                                                    0)))}))))
                     _ (values k v)))]
     (doto options (tset 1 identifier))))
 

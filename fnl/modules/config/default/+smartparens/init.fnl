@@ -5,5 +5,6 @@
                                       :event :InsertEnter})
 
 ; lua-based matchparen alternative
-(use-package! :monkoose/matchparen.nvim {:defer matchparen.nvim
+(use-package! :monkoose/matchparen.nvim {:opt true
+                                         :defer matchparen.nvim
                                          :call-setup matchparen})

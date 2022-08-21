@@ -5,7 +5,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set 'colorscheme' or manually load a theme through
 ;; 'require' function. This is the default:
-(colorscheme oxocarbon-lua)
+(colorscheme oxocarbon)
 
 ;; The set! macro sets vim.opt options. By default it sets the option to true 
 ;; Appending `no` in front sets it to false. This determines the style of line 

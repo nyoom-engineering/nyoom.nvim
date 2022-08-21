@@ -1,6 +1,7 @@
 (import-macros {: use-package!} :macros)
 
 (use-package! :mfussenegger/nvim-lint {:nyoom-module checkers.syntax
+                                       :opt true
                                        :defer nvim-lint})
 
 ; view diagnostics ala vscode
