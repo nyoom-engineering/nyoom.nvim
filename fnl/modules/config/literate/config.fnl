@@ -1,6 +1,6 @@
 (import-macros {: nyoom-module-ensure!} :macros)
 
-(nyoom-module-ensure! lang.neorg)
+(nyoom-module-ensure! neorg)
 
 (fn tangle-config []
   (let [literatefile (.. (vim.fn.stdpath :config) "/fnl/config.norg")]

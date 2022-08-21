@@ -29,6 +29,13 @@
 (fn ->bool [x]
   (if x true false))
 
+(fn keys [t]
+  (let [result []]
+    (when t
+      (each [k _ (pairs t)]
+        (table.insert result k)))
+    result))
+
 (λ empty? [xs]
   "Check if given table is empty"
   (assert-compile (tbl? xs) "expected table for xs" xs)
@@ -48,6 +55,16 @@
   "Get the last element in a list"
   (assert-compile (tbl? xs) "expected table for xs" xs)
   (. xs (length xs)))
+
+(λ count [xs]
+  "Count the number of items in a table"
+  (if
+    (table? xs) (let [maxn (table.maxn xs)]
+                  (if (= 0 maxn)
+                    (table.maxn (keys xs))
+                    maxn))
+    (not xs) 0
+    (length xs)))
 
 (λ any? [pred xs]
   (accumulate [any? false
@@ -439,17 +456,19 @@
                   (match k
                     :call-setup (values :config (string.format "require(\"%s\").setup()" (->str v)))
                     :nyoom-module (values :config (string.format "require(\"modules.%s.config\")" (->str v)))
-                    :defer (values :setup (let [package (->str v)]
-                                            `(λ []
-                                              (vim.api.nvim_create_autocmd [:BufRead :BufWinEnter :BufNewFile]
-                                                       {:group (vim.api.nvim_create_augroup ,package {})
-                                                        :callback (fn []
-                                                                    (if (not= vim.fn.expand "%" "")
-                                                                      (vim.defer_fn (fn []
-                                                                                      ((. (require :packer) :loader) ,package)
-                                                                                      (if (= ,package :nvim-lspconfig)
-                                                                                        (vim.cmd "silent! do FileType")))
-                                                                                    0)))}))))
+                    :defer (do
+                            (values :opt true)
+                            (values :setup (let [package (->str v)]
+                                             `(λ []
+                                               (vim.api.nvim_create_autocmd [:BufRead :BufWinEnter :BufNewFile]
+                                                        {:group (vim.api.nvim_create_augroup ,package {})
+                                                         :callback (fn []
+                                                                     (if (not= vim.fn.expand "%" "")
+                                                                       (vim.defer_fn (fn []
+                                                                                       ((. (require :packer) :loader) ,package)
+                                                                                       (if (= ,package :nvim-lspconfig)
+                                                                                         (vim.cmd "silent! do FileType")))
+                                                                                     0)))})))))
                     _ (values k v)))]
     (doto options (tset 1 identifier))))
 
@@ -653,54 +672,48 @@
   (assert-compile (str? msg) "expected string for msg" msg)
   `(vim.notify ,msg vim.log.levels.ERROR))
 
-(λ sh [...]
-  "simple macro to run shell commands inside fennel"
-  `(let [str# 
-         ,(accumulate 
-            [str# ""  _ v# (ipairs [...])]
-            (if 
-              (in-scope? v#) `(.. ,str# " " ,v#)
-              (or (list? v#) (sym? v#)) (.. str# " " (tostring v#))
-              (= (type v#) "string") (.. str# " " (string.format "%q" v#))))
-         fd# (io.popen str#)
-         d# (fd#:read "*a")]
-     (fd#:close)
-     (string.sub d# 1 (- (length d#) 1))))
+(λ nyoom! [...]
+  "Recreation of the `doom!` macro for Nyoom
+  See modules.fnl for usage"
+  (var moduletag nil)
+  (fn nyoom-module-set [name]
+    (if (str? name)
+      (set moduletag name)
+      (if (sym? name)
+        (do
+          (table.insert _G.nyoom/modules name)
+          (let [name (->str name)
+                include-path (.. :fnl.modules. moduletag "." name)
+                config-path (.. :modules. moduletag "." name :.config)]
+            `(do
+               (include ,include-path)
+               (pcall require ,config-path))))
+        (do
+          (table.insert _G.nyoom/modules (first name))
+          (let [modulename (->str (first name))
+                include-path (.. :fnl.modules. moduletag "." modulename)
+                config-path (.. :modules. moduletag "." modulename :.config)
+                result `(do)]
+            (table.remove name 1)
+            (table.insert result `(include ,include-path))
+            (table.insert result `(pcall require ,config-path))
+            (each [_ v (ipairs name)]
+              (let [modulename (.. modulename "." (->str v))
+                    flag-include-path (.. include-path "." (->str v))
+                    flag-config-path (.. :modules. moduletag "." modulename :.config)]
 
-(λ nyoom-module-set [name]
-  "Load a module by its name and adds it to the list of enabled modules
-  Accepts the following arguements:
-  name -> a symbol.
-  Example of use:
-  ```fennel
-  (nyoom-module-set tools.treesitter)
-  ```"
-  (assert-compile (sym? name) "expected symbol for name" name)
-  (table.insert _G.nyoom/modules name)
-  (let [include-path (.. :fnl.modules. (->str name))
-        config-path (.. :modules. (->str name) :.config)]
-    `(do
-      (include ,include-path)
-      (pcall require ,config-path))))
-
-(fn nyoom! [...]
-  "Load nyoom's modules
-  Example of use:
-  ```fennel
-  (nyoom! tools.treesitter
-          lang.rust
-          ui.gitsigns)
-  ```"
-  (fn exprs [...]
+                (table.insert _G.nyoom/modules (sym modulename))
+                (table.insert result `(include ,flag-include-path))
+                (table.insert result `(pcall require ,flag-config-path))))
+            result)))))
+  (fn load-modules [...]
     (match [...]
       (where [& rest] (empty? rest)) []
       [name & rest] [(nyoom-module-set name)
-                     (unpack (exprs (unpack rest)))]
+                     (unpack (load-modules (unpack rest)))]
       _ []))
-  (let [exprs (exprs ...)]
-    (if (> (length exprs) 1)
-      `(do ,(unpack exprs))
-      (unpack exprs))))
+  (let [exprs (load-modules ...)]
+    (expand-exprs exprs)))
 
 (λ nyoom-module! [name]
   "By default modules should be loaded through use-package!. Of course, not every
@@ -721,7 +734,7 @@
   name -> a symbol.
   Example of use:
   ```fennel
-  (nyoom-module-p! tools.tree-sitter)
+  (nyoom-module-p! tree-sitter)
   ```"
   (assert-compile (sym? name) "expected symbol for name" name)
   (when (contains? _G.nyoom/modules name)
@@ -742,23 +755,6 @@
 
 ;; These shouldn't be macros. However I kindof messed up by making all my 
 ;; globals compile-time. So now we're sticking with it
-(fn keys [t]
-  (let [result []]
-    (when t
-      (each [k _ (pairs t)]
-        (table.insert result k)))
-    result))
-
-(fn count [xs]
-  "Count the number of items in a table"
-  (if
-    (table? xs) (let [maxn (table.maxn xs)]
-                  (if (= 0 maxn)
-                    (table.maxn (keys xs))
-                    maxn))
-    (not xs) 0
-    (length xs)))
-
 (λ nyoom-package-count []
   (let [packagecount (count _G.nyoom/pack)]
     `,packagecount))
@@ -815,7 +811,6 @@
  : echo!
  : warn!
  : err!
- : sh
  : nyoom!
  : nyoom-module!
  : nyoom-module-p!

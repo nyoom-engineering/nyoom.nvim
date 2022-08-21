@@ -1,3 +1,3 @@
 (import-macros {: nyoom-module!} :macros)
 
-(nyoom-module! config.default)
+(nyoom-module! editor.hotpot.+reflect)

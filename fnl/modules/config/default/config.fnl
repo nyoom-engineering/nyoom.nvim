@@ -19,7 +19,7 @@
 (set! shortmess+ :cI)
 
 ;; Show whitespace characters
-(nyoom-module-p! ui.nyoom
+(nyoom-module-p! nyoom
   (do
     (set! list)
     (set! listchars {:trail "·"
@@ -36,7 +36,7 @@
 (set! nowrap)
 
 ;; smart wrapping
-(nyoom-module-p! editor.wrap
+(nyoom-module-p! word-wrap
   (do
     (set! wrap)
     (set! linebreak)
@@ -78,7 +78,7 @@
 (set! splitbelow)
 
 ;; Scroll off
-(nyoom-module-p! ui.nyoom
+(nyoom-module-p! nyoom
   (set! scrolloff 4))
 
 ;; Grep
@@ -86,5 +86,5 @@
 (set! grepformat "%f:%l:%c:%m")
 
 ;; colorscheme
-(nyoom-module-p! ui.nyoom
+(nyoom-module-p! nyoom
   (set! background :dark))

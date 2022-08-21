@@ -1,4 +1,3 @@
-(import-macros {: nyoom-module-p!} :macros)
 (local {: setup} (require :neorg))
 
 (setup {:load {:core.defaults {}

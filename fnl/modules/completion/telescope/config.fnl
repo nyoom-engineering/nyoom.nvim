@@ -17,15 +17,18 @@
         :extensions {:project {:base_dirs ["~/.config/nvim"]}}})
 
 ;; Load extensions
-(packadd! telescope-project.nvim)
 (packadd! telescope-ui-select.nvim)
-(packadd! telescope-fzf-native.nvim)
-
-(load_extension :fzf)
-(load_extension :project)
 (load_extension :ui-select)
 
-(nyoom-module-p! tools.lsp
+(packadd! telescope-project.nvim)
+(load_extension :project)
+
+(nyoom-module-p! telescope.+native
+  (do
+    (packadd! telescope-fzf-native.nvim)
+    (load_extension :fzf)))
+
+(nyoom-module-p! lsp
   (do
     (local {:lsp_implementations open-impl-float!
             :lsp_references open-ref-float!
@@ -37,7 +40,7 @@
     (map! [n] "<leader>ls" open-local-symbol-float!)
     (map! [n] "<leader>lS" open-workspace-symbol-float!)))
 
-(nyoom-module-p! checkers.syntax
+(nyoom-module-p! syntax
   (do
     (local {:diagnostics open-diag-float!} (require :telescope.builtin))
     (map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))

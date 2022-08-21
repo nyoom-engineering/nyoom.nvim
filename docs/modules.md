@@ -98,6 +98,18 @@ This will load `fnl/modules/<catagory>/<modulename>/config.fnl` on Nyoom's start
 
 For Shim modules, you can just create `fnl/modules/<catagory>/<modulename>/init.fnl` and leave it empty
 
+## Module flags 
+
+Nyoom also supports adding flags to modules. With flags you can gate extra features that relate to a module, but aren't needed in the main modules and don't fit anywhere else. Flags are just modules within modules, named after the flag.
+
+For example, the `default` module has a `+bindings` flag, as you can see in `modules.fnl`. It looks like this
+```fennel
+(nyoom! :config
+        (default +bindings))
+```
+
+The code for that modules is stored under `fnl/modules/config/default/+bindings`, and it is loaded and/or configured the same as any other module
+
 ## Adding support for a language
 
 You're likely here because you want to add support for a language. For most languages you can use a Shim module, unless you need language-specific plugins (e.g. rust-tools). 

@@ -25,15 +25,8 @@
   (buf-map! [n] "<leader>gd" goto-definition!)
   (buf-map! [n] "<leader>gt" goto-type-definition!)
 
-  ;; Simple
-  (nyoom-module-p! completion.compl
-    (import-macros {: packadd!} :macros)
-    (packadd! LuaSnip)
-    ((. (require :modules.fnl.completion.compl.config)
-        :attach) client))
-
   ;; Enable lsp formatting if available 
-  (nyoom-module-p! editor.format
+  (nyoom-module-p! format.+onsave
     (when (client.supports_method "textDocument/formatting")
       (augroup! lsp-format-before-saving
         (clear! {:buffer bufnr})
@@ -65,19 +58,19 @@
 ;; conditional lsp servesr
 (local lsp-servers [])
 
-(nyoom-module-p! lang.java
+(nyoom-module-p! java
   (table.insert lsp-servers :jdtls))
 
-(nyoom-module-p! lang.sh
+(nyoom-module-p! sh
   (table.insert lsp-servers :bashls))
 
-(nyoom-module-p! lang.julia
+(nyoom-module-p! julia
   (table.insert lsp-servers :julials))
 
-(nyoom-module-p! lang.markdown
+(nyoom-module-p! markdown
   (table.insert lsp-servers :marksman))
 
-(nyoom-module-p! lang.nix
+(nyoom-module-p! nix
   (table.insert lsp-servers :rnix))
 
 ;; Load lsp
@@ -86,7 +79,7 @@
     ((. (. lsp server) :setup) defaults)))
 
 ;; for trickier servers you can change up the defaults
-(nyoom-module-p! lang.lua
+(nyoom-module-p! lua
   (lsp.sumneko_lua.setup {:on_attach on-attach
                           : capabilities
                           :settings {:Lua {:diagnostics {:globals {1 :vim}}

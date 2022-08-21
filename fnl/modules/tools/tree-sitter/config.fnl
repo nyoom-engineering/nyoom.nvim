@@ -2,7 +2,7 @@
 (local {: setup} (require :nvim-treesitter.configs))
 
 ;; Conditionally enable leap-ast
-(nyoom-module-p! config.bindings
+(nyoom-module-p! bindings
   (do
     (packadd! leap-ast.nvim)
     (let [leap-ast (require :leap-ast)]
@@ -13,32 +13,35 @@
                              :fennel])
 
 ;; conditionally install parsers
-(nyoom-module-p! lang.sh
+(nyoom-module-p! sh
   (table.insert treesitter-filetypes :bash))
 
-(nyoom-module-p! lang.nix
+(nyoom-module-p! sh.+fish
+  (table.insert treesitter-filetypes :fish))
+
+(nyoom-module-p! nix
   (table.insert treesitter-filetypes :nix))
 
-(nyoom-module-p! lang.julia
+(nyoom-module-p! julia
   (table.insert treesitter-filetypes :julia))
 
-(nyoom-module-p! lang.java
+(nyoom-module-p! java
   (table.insert treesitter-filetypes :java))
 
-(nyoom-module-p! lang.lua
+(nyoom-module-p! lua
   (table.insert treesitter-filetypes :lua))
 
-(nyoom-module-p! lang.rust
+(nyoom-module-p! rust
   (do
     (table.insert treesitter-filetypes :rust)
     (table.insert treesitter-filetypes :toml)))
 
-(nyoom-module-p! lang.markdown
+(nyoom-module-p! markdown
   (do
     (table.insert treesitter-filetypes :markdown)
     (table.insert treesitter-filetypes :markdown_inline)))
 
-(nyoom-module-p! lang.neorg
+(nyoom-module-p! neorg
   (do
     (local tsp (require :nvim-treesitter.parsers))
     (local parser-config (tsp.get_parser_configs))

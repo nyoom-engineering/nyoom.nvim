@@ -2,7 +2,7 @@
 (local dap (require :dap))
 
 ;; lua setup
-(nyoom-module-p! lang.lua
+(nyoom-module-p! lua
   (do
     (packadd! one-small-step-for-vimkind)
     (set dap.configurations.lua [{:host (fn []

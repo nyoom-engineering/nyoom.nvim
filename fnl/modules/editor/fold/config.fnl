@@ -11,6 +11,6 @@
 (map! [n] :zR '(openAllFolds))
 (map! [n] :zM '(closeAllFolds))
 
-(setup (nyoom-module-p! tools.tree-sitter
+(setup (nyoom-module-p! tree-sitter
             {:provider_selector (fn [bufnr filetype buftype]
                                   [:treesitter :indent])}))

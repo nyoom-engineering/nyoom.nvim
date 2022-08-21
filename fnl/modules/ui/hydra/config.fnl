@@ -2,7 +2,7 @@
 (local Hydra (require :hydra))
 
 ;; Git
-;; (nyoom-module-p! ui.vc-gutter
+;; (nyoom-module-p! vc-gutter
 ;;   (do
 ;;     (vim.fn.system (.. "git rev-parse 2>/dev/null "
 ;;                        (vim.fn.expand "%:p:h")))
@@ -111,7 +111,7 @@
 ;;                        {:exit true :nowait true :desc :exit}]]}))))
     
 ;; Vim options
-(nyoom-module-p! ui.nyoom
+(nyoom-module-p! nyoom
   (do
     (local options-hint "
       ^ ^        Options
@@ -193,7 +193,7 @@
                      {:exit true}]]})))
 
 ;; Telescope
-(nyoom-module-p! completion.telescope
+(nyoom-module-p! telescope
   (do
     (local telescope-hint "
            _o_: old files   _g_: live grep
@@ -266,7 +266,7 @@
                      {:exit true :nowait true}]]})))
   
 ;; Visuals
-(nyoom-module-p! tools.tree-sitter
+(nyoom-module-p! tree-sitter
   (do
     (local visuals-hint "
   ^ ^     פּ Visuals
@@ -299,7 +299,7 @@
                      {:exit true}]]})))
 
 ;; Rust
-(nyoom-module-p! lang.rust
+(nyoom-module-p! rust
   (do
     (local rust-hint "
 

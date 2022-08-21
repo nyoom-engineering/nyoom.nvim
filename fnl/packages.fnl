@@ -15,6 +15,10 @@
                  :auto_reload_compiled false
                  :display {:non_interactive true}}))
 
+;; Core packages
+(use-package! :wbthomason/packer.nvim {:opt true})
+(use-package! :nvim-lua/plenary.nvim {:module :plenary})
+
 ;; To install a package with Nyoom you must declare them here and run 'nyoom sync'
 ;; on the command line, then restart nvim for the changes to take effect
 ;; The syntax is as follows: 

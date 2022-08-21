@@ -25,7 +25,8 @@
 ;; easier command line mode + 
 (map! [n] ";" ":" {:desc "vim-ex"})
 
-(nyoom-module-p! completion.telescope
+;; telescope
+(nyoom-module-p! telescope
   (do
     (map! [n] "<leader><space>" "<cmd>Telescope find_files<CR>" {:desc "Find Files"})
     (map! [n] "<leader>bb" "<cmd>Telescope buffers<CR>" {:desc "Buffers"})

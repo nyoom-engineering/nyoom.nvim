@@ -15,7 +15,7 @@
   (sign_define :DiagnosticSignInfo {:text "" :texthl :DiagnosticSignInfo})
   (sign_define :DiagnosticSignHint {:text "" :texthl :DiagnosticSignHint}))
 
-(nyoom-module-p! config.bindings
+(nyoom-module-p! bindings
   (do
     (local {:open_float open-line-diag-float!
             :goto_prev goto-diag-prev!
@@ -25,7 +25,7 @@
     (map! [n] "]d" goto-diag-next!)))
 
 ;; Add linters. E.x.
-(nyoom-module-p! lang.lua
+(nyoom-module-p! lua
   (set linters_by_ft.lua [:selene]))
 
 ;; Lint on save

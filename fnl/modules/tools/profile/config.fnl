@@ -22,5 +22,5 @@
                             (vim.notify (string.format "Wrote %s" filename))))))
         (prof.start "*"))))
 
-(nyoom-module-p! config.bindings
+(nyoom-module-p! bindings
   (map! [n] :<f1> toggle-profile))
