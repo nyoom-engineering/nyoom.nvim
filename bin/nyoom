@@ -14,17 +14,18 @@ case "${1:-}" in
     git clone -q --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/opt/packer.nvim
     git clone -q -b nightly --single-branch https://github.com/rktjmp/hotpot.nvim.git ~/.local/share/nvim/site/pack/packer/start/hotpot.nvim
     echo "Building Colorscheme"
-    git clone -q --depth 1 https://github.com/shaunsingh/oxocarbon.nvim.git ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
-    cd ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
-    cargo build --release
-    mkdir -p lua
-    if [ "$(uname)" == "Darwin" ]; then
-      mv target/release/liboxocarbon.dylib lua/oxocarbon.so
-    elif [ "$(expr substr "$(uname -s)" 1 5)" == "Linux" ]; then
-      mv target/release/liboxocarbon.so lua/oxocarbon.so
-    elif [ "$(expr substr "$(uname -s)" 1 10)" == "MINGW64_NT" ]; then
-      mv target/release/oxocarbon.dll lua/oxocarbon.dll
-    fi
+    #git clone -q --depth 1 https://github.com/shaunsingh/oxocarbon.nvim.git ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
+    git clone -q --depth 1 https://github.com/B4mbus/oxocarbon-lua.nvim.git ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
+    #cd ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
+    #cargo build --release
+    #mkdir -p lua
+    #if [ "$(uname)" == "Darwin" ]; then
+    #  mv target/release/liboxocarbon.dylib lua/oxocarbon.so
+    #elif [ "$(expr substr "$(uname -s)" 1 5)" == "Linux" ]; then
+    #  mv target/release/liboxocarbon.so lua/oxocarbon.so
+    #elif [ "$(expr substr "$(uname -s)" 1 10)" == "MINGW64_NT" ]; then
+    #  mv target/release/oxocarbon.dll lua/oxocarbon.dll
+    #fi
     cd ~/.config/nvim
     ;;
   sync)
