@@ -4,14 +4,11 @@
 
 [Install](#install) • [Documentation] • [FAQ] • [Screenshots] • [Contribute](#contribute)
 
-
-[![Fennel](https://img.shields.io/badge/Made%20with%20Fennel-2C2D72?style=for-the-badge&logo=lua&logoColor=white)](https://fennel-lang.org)
-[![Rust](https://img.shields.io/badge/rustc-1.62+-b7410e?style=for-the-badge&logo=rust&logoColor=white)](https://www.rust-lang.org/)
-
 </div>
 
 <div align="center">
 
+[![Fennel](https://img.shields.io/badge/Made%20with%20Fennel-2C2D72?style=for-the-badge&logo=lua&logoColor=white)](https://fennel-lang.org)
 [![Stars](https://img.shields.io/github/stars/shaunsingh/nyoom.nvim?color=%23b66467&style=for-the-badge)](https://github.com/shaunsingh/nyoom.nvim/stargazers)
 [![GitHub Issues](https://img.shields.io/github/issues/shaunsingh/nyoom.nvim?color=%238c977d&style=for-the-badge)](https://github.com/shaunsingh/nyoom.nvim/issues)
 [![Forks](https://img.shields.io/github/forks/shaunsingh/nyoom.nvim?color=%23d9bc8c&logoColor=%23151515&style=for-the-badge)](https://github.com/shaunsingh/nyoom.nvim/network/members)
@@ -50,7 +47,7 @@ It also aligns with many of Doom's features:
 However, it also disagrees with some of those ideals
 - Packages are not pinned to commits *by default*. This configuration is still quite a bit simpler than doom emacs, and breaking changes are usually few and far between.  Of course, you are free to pin packages yourself (and use [:PackerSnapshot](https://github.com/wbthomason/packer.nvim/pull/370)). 
 
-For more info, checkout our [FAQ](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/faq.md)
+For more info, checkout our (under construction) [FAQ](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/faq.md)
 
 ## Credits
 
@@ -73,10 +70,6 @@ Moved to [changelog.md](https://github.com/shaunsingh/nyoom.nvim/blob/master/doc
 - Extensible and modular completion and snippet support with [Cmp](https://github.com/hrsh7th/nvim-cmp) and [Luasnip](https://github.com/L3MON4D3/LuaSnip)
 - Notetaking with [Neorg](https://github.com/nvim-neorg/neorg)
 - Lightweight statusline written in fennel and miscellaneous UI improvements with [Nvim-Notify](https://github.com/rcarriga/nvim-notify), [TrueZen](https://github.com/Pocco81/true-zen.nvim), [Nvim-Colorizer](https://github.com/norcalli/nvim-colorizer.lua), and [Matchparen](https://github.com/monkoose/matchparen.nvim)
-
-## Showcase
-
-https://user-images.githubusercontent.com/71196912/181876431-ebef3a0b-15fc-46dc-b86e-6b1ab240cbdf.mov
 
 ## Prerequisites
 
@@ -101,7 +94,8 @@ bin/nyoom install
 bin/nyoom sync
 ```
 
-Its recommend you add `~/.config/nvim/bin/nyoom` to your shells `path
+Its recommend you add `~/.config/nvim/bin/nyoom` to your shells `path`
+
 
 ### Using nix: 
 
@@ -119,12 +113,13 @@ If you have an issue with a plugin in Nyoom.nvim, first you should report it her
 ## Contribute
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 
+Checkout the [Module Guide](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/modules.md)
+
 + I love pull requests and bug reports!
 + Don't hesitate to [tell me my lisp-fu
-  sucks](https://github.com/shaunsingh/nyoon.nvim/issues/new), but please tell me
+  sucks](https://github.com/shaunsingh/nyoom.nvim/issues/new), but please tell me
   why.
-+ Don't see support for your language, or think it should be improved? Feel free to open an issue or PR with your changes
-
++ Don't see support for your language, or think it should be improved? Feel free to open an issue or PR with your changes.
 
 ## Adressing NvChad
 

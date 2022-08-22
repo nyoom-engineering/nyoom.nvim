@@ -1,7 +1,7 @@
 (import-macros {: use-package!} :macros)
 
-(use-package! :rcarriga/nvim-dap-ui {:opt true
-                                     :defer nvim-dap-ui
-                                     :call-setup nvim-dap-ui
-                                     :requires [(pack :mfussenegger/nvim-dap {:opt true
-                                                                              :defer nvim-dap})]})
+(use-package! :rcarriga/nvim-dap {:nyoom-module tools.debugger
+                                  :opt true
+                                  :defer nvim-dap
+                                  :requires [(pack :rcarriga/nvim-dap-ui {:opt true})
+                                             (pack :jbyuki/one-small-step-for-vimkind {:opt true})]})

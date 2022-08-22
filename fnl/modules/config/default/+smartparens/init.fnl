@@ -1,7 +1,7 @@
 (import-macros {: use-package!} :macros)
 
 ;; Simple parenthesis matching
-(use-package! :windwp/nvim-autopairs {:nyoom-module core.parens
+(use-package! :windwp/nvim-autopairs {:nyoom-module config.default.+smartparens
                                       :event :InsertEnter})
 
 ; lua-based matchparen alternative
