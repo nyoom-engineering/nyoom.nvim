@@ -1,4 +1,4 @@
-(import-macros {: set! : colorscheme : nyoom-module-p! : autoload} :macros)
+(import-macros {: set! : colorscheme : nyoom-module-p!} :macros)
 (local Hydra (require :hydra))
 
 ;; Git

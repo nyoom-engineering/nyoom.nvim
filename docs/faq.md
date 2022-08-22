@@ -10,10 +10,12 @@ If you don't mind tinkering with lisps, and don't want to start entirely from sc
 
 ### How does Nyoom compare to (insert premade configuration)
 
+(wip)
+
 - http://neovimcraft.com/plugin/siduck76/NvChad/index.html
+
 - http://neovimcraft.com/plugin/LunarVim/LunarVim/index.html
-- http://neovimcraft.com/plugin/AstroNvim/AstroNvim/index.html
-- http://neovimcraft.com/plugin/artart222/CodeArt/index.html
+
 - http://neovimcraft.com/plugin/NTBBloodbath/doom-nvim/index.html
 
 ## How does Nyoom work?
@@ -56,7 +58,7 @@ For example, here's a section from `tools.treesitter`:
                              :fennel
                              :lua])
 
-(nyoom-module-p! lang.neorg
+(nyoom-module-p! neorg
   (do
     (local tsp (require :nvim-treesitter.parsers))
     (local parser-config (tsp.get_parser_configs))
@@ -97,6 +99,9 @@ local treesitter_filetypes = {"comment", "help", "fennel", "lua"}
 ```
 
  Another example you disable the `lang.rust` module, Nyoom won't compile the rust-ui for the `ui.hydra` module, won't set up language servers for `tools.lsp` and `tools.mason`, and won't install the tree-sitter parser for the rust language. This structure allows Nyoom to feel just as fast as stock neovim, because in a way it is! The compiled lua code won't contain a trace of rust, anywhere!
+
+ You can check out our [Module Guide](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/modules.md) for more information on modules and how they work.
+
 
 ### Why is startuptime important?
 

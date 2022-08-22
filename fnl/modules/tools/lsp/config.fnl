@@ -58,6 +58,9 @@
 ;; conditional lsp servesr
 (local lsp-servers [])
 
+(nyoom-module-p! clojure
+  (table.insert lsp-servers :clojure-lsp))
+
 (nyoom-module-p! java
   (table.insert lsp-servers :jdtls))
 
@@ -67,11 +70,26 @@
 (nyoom-module-p! julia
   (table.insert lsp-servers :julials))
 
+(nyoom-module-p! kotlin
+  (table.insert lsp-servers :kotlin_language_server))
+
+(nyoom-module-p! latex
+  (table.insert lsp-servers :texlab))
+
 (nyoom-module-p! markdown
   (table.insert lsp-servers :marksman))
 
+(nyoom-module-p! nim
+  (table.insert lsp-servers :nimls))
+
 (nyoom-module-p! nix
   (table.insert lsp-servers :rnix))
+
+(nyoom-module-p! python
+  (table.insert lsp-servers :pyright))
+
+(nyoom-module-p! zig
+  (table.insert lsp-servers :zls))
 
 ;; Load lsp
 (let [servers lsp-servers]
