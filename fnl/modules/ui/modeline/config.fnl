@@ -1,6 +1,4 @@
 (import-macros {: set! : local-set!} :macros)
-
-;; Icons/text for each mode 
 (local modes {:n :RW
               :no :RO
               :v "**"
@@ -21,8 +19,6 @@
               :r? :r
               :! "!"
               :t :t})
-
-;; Make our statusline colourful
 (fn color []
   (let [mode (. (vim.api.nvim_get_mode) :mode)]
     (var mode-color "%#StatusLine#")
@@ -34,8 +30,6 @@
         (set mode-color "%#StatusCommand#") (= mode :t)
         (set mode-color "%#StatusTerminal#"))
     mode-color))
-
-;; get git status via gitsigns
 (fn get-git-status []
   (let [branch (or vim.b.gitsigns_status_dict
                    {:head ""})
@@ -44,23 +38,16 @@
              (string.format "(λ • #%s)"
                             (or branch.head "")))
         "")))
-
-;; vim.diagnostic integration
 (fn get-lsp-diagnostic []
   (when (not (rawget vim :lsp))
     (lua "return \"\""))
-
   (local count [0 0 0 0])
-
   (local result {:errors (. count vim.diagnostic.severity.ERROR)
                  :warnings (. count vim.diagnostic.severity.WARN)
                  :info (. count vim.diagnostic.severity.INFO)
                  :hints (. count vim.diagnostic.severity.HINT)})
-
   (string.format " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s "
                  (or (. result :warnings) 0) (or (. result :errors) 0)))
-
-;; Normally we would have an inactive and a short section as well, but since we have a global statusline now I removed them
 (global Statusline {})
 (set Statusline.statusline (fn []
                              (table.concat [(color)
@@ -77,10 +64,10 @@
                                             (get-lsp-diagnostic)
                                             "%#StatusPosition#"
                                             " %l:%c "])))
-
-;;(set Statusline.winbar (fn []
-;;                         (table.concat ["%#WinBar#"
-;;                                        " %f "])))
-
-;;(set! winbar "%!v:lua.Statusline.winbar()")
-;;(set! statusline "%!v:lua.Statusline.statusline()")
+(set Statusline.winbar (fn []
+                         (table.concat ["%#WinBar#"
+                                        " %f "])))
+(set! laststatus 3)
+(set! cmdheight 0)
+(set! winbar "%!v:lua.Statusline.winbar()")
+(set! statusline "%!v:lua.Statusline.statusline()")

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -o errexit -o pipefail -o nounset
 
 case "${1:-}" in
@@ -7,7 +7,7 @@ case "${1:-}" in
       "usage: $(basename "$0") [options] [script [args]]" \
       "Available options are:" \
       "install  install required plugins" \
-      "sync  sync nyoom modules and plugins" \
+      "sync  sync nyoom modules and plugins"
     ;;
   install)
     echo "Installing Required Plugins"
@@ -16,14 +16,14 @@ case "${1:-}" in
     echo "Building Colorscheme"
     git clone -q --depth 1 https://github.com/shaunsingh/oxocarbon.nvim.git ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
     cd ~/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim
-    cargo build --release 
+    cargo build --release
     mkdir -p lua
     if [ "$(uname)" == "Darwin" ]; then
-        mv target/release/liboxocarbon.dylib lua/oxocarbon.so
-    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-        mv target/release/liboxocarbon.so lua/oxocarbon.so
-    elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-        mv target/release/oxocarbon.dll lua/oxocarbon.dll
+      mv target/release/liboxocarbon.dylib lua/oxocarbon.so
+    elif [ "$(expr substr "$(uname -s)" 1 5)" == "Linux" ]; then
+      mv target/release/liboxocarbon.so lua/oxocarbon.so
+    elif [ "$(expr substr "$(uname -s)" 1 10)" == "MINGW64_NT" ]; then
+      mv target/release/oxocarbon.dll lua/oxocarbon.dll
     fi
     cd ~/.config/nvim
     ;;
@@ -32,13 +32,9 @@ case "${1:-}" in
     echo "running: $(basename "$0") sync on version $(git log --pretty=tformat:"%h" -n1)"
     rm -rf ~/.cache/nvim/
     rm -rf ~/.config/nvim/lua/
-    exec nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require[[packages]]' -c 'lua require("packer").sync()'
+    exec nvim --startuptime /tmp/nvim-startuptime --headless -c 'autocmd User PackerComplete quitall' -c 'lua require[[packages]]' -c 'lua require("packer").sync()'
     ;;
   *)
     exec nvim --headless -S "$1" -i NONE -n -c 'echo""|qall!' -- "${@:2}"
+    ;;
 esac
-
-
-
-
-
