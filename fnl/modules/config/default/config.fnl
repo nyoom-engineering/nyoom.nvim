@@ -87,4 +87,6 @@
 
 ;; colorscheme
 (nyoom-module-p! nyoom
-  (set! background :dark))
+ (do
+   (set! guifont "Liga SFMono Nerd Font:h15")
+   (set! background :dark)))
