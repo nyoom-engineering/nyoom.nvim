@@ -28,5 +28,8 @@
 (nyoom-module-p! lua
   (set linters_by_ft.lua [:selene]))
 
+(nyoom-module-p! python
+  (set linters_by_ft.python [:pylint]))
+
 ;; Lint on save
 (autocmd! [:BufAdd :BufWritePost] * '(try_lint))

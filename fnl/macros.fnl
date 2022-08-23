@@ -520,30 +520,6 @@
   (let [package (->str package)]
     `(vim.api.nvim_cmd {:cmd :packadd :args [,package]} {})))
 
-(fn autoload [name]
-  "Autoload for vimscript (for fennel)"
-  (assert-compile (sym? name) "expected symbol for name" name)
-  (let [res {:nyoom/autoload-enabled? true
-             :nyoom/autoload-module false}
-        name (->str name)]
-    (fn ensure []
-      (if (. res :nyoom/autoload-module)
-        (. res :nyoom/autoload-module)
-        (let [m (require name)]
-          (tset res :nyoom/autoload-module m)
-          m)))
-    (setmetatable
-      res
-      {:__call
-       (fn [t ...]
-         ((ensure) ...))
-       :__index
-       (fn [t k]
-         (. (ensure) k))
-       :__newindex
-       (fn [t k v]
-         (tset (ensure) k v))})))
-
 (λ map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.
 
@@ -672,7 +648,19 @@
 
 (λ nyoom! [...]
   "Recreation of the `doom!` macro for Nyoom
-  See modules.fnl for usage"
+  See modules.fnl for usage
+  Accepts the following arguments:
+  value -> anything.
+  Example of use:
+  ```fennel
+  (nyoom! :catagory
+          module
+          (module +with +flags
+
+          :anothercatagory
+          anothermodule
+          (module +with +more +flags)
+  ```"
   (var moduletag nil)
   (fn nyoom-module-set [name]
     (if (str? name)
@@ -699,7 +687,6 @@
               (let [modulename (.. modulename "." (->str v))
                     flag-include-path (.. include-path "." (->str v))
                     flag-config-path (.. :modules. moduletag "." modulename :.config)]
-
                 (table.insert _G.nyoom/modules (sym modulename))
                 (table.insert result `(include ,flag-include-path))
                 (table.insert result `(pcall require ,flag-config-path))))
@@ -763,29 +750,6 @@
 
 {: contains?
  : expr->str
- : nil?
- : str?
- : num?
- : bool?
- : fn?
- : tbl?
- : ->str
- : ->bool
- : empty?
- : first
- : second
- : last
- : any?
- : all
- : flatten
- : begins-with?
- : count
- : gensym-checksum
- : fn?
- : quoted?
- : quoted->fn
- : quoted->str
- : expand-exprs
  : vlua
  : colorscheme
  : custom-set-face!
@@ -802,7 +766,6 @@
  : rock!
  : unpack!
  : packadd!
- : autoload
  : map!
  : buf-map!
  : let!
