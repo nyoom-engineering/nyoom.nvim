@@ -66,45 +66,6 @@
                                    (set vim-item.kind (. icons vim-item.kind))
                                    vim-item)}})
 
-;;; Setup
-(setup {:experimental {:ghost_text true}
-        :window {:documentation {:border :solid} :completion {:border :solid}}
-        :snippet {:expand (fn [args]
-                            (lsp_expand args.body))}
-        :mapping {:<C-b> (mapping.scroll_docs -4)
-                  :<C-f> (mapping.scroll_docs 4)
-                  :<C-e> (mapping.abort)
-                  :<C-n> (mapping (mapping.select_next_item {:behavior insert-behavior}) [:i :s])
-                  :<C-p> (mapping (mapping.select_prev_item {:behavior insert-behavior}) [:i :s])
-                  ;; :<Tab> (mapping (fn [fallback]
-                  ;;                   (if (visible)
-                  ;;                       (mapping.select_next_item {:behavior insert-behavior})
-                  ;;                       (expand_or_jumpable)
-                  ;;                       (expand_or_jump)
-                  ;;                       (has-words-before)
-                  ;;                       (vim.fn.feedkeys (replace-termcodes :<Tab>)
-                  ;;                                        :n)
-                  ;;                       (fallback)))
-                  ;;                 [:i :s :c])
-                  ;; :<S-Tab> (mapping (fn [fallback]
-                  ;;                     (if (visible)
-                  ;;                         (mapping.select_prev_item {:behavior insert-behavior})
-                  ;;                         (jumpable -1)
-                  ;;                         (jump -1)
-                  ;;                         (fallback)))
-                  ;;                   [:i :s :c])
-                  :<C-Space> (mapping.confirm {:select true})}
-        :sources [{:name :nvim_lsp}
-                  {:name :luasnip}
-                  {:name :path}
-                  {:name :buffer :option {:keyword_pattern "\\k\\+"}}
-                  {:name :conjure}
-                  {:name :crates}]
-        :formatting {:fields {1 :kind 2 :abbr 3 :menu}
-                     :format (fn [_ vim-item]
-                               (set vim-item.menu vim-item.kind)
-                               (set vim-item.kind (. icons vim-item.kind))
-                               vim-item)}}
 ;; Enable command-line completions
 (cmp.setup.cmdline "/" {:mapping (cmp.mapping.preset.cmdline)
                         :sources [{:name :buffer}]})
@@ -116,3 +77,4 @@
 
 ;; snippets
 ((. (require "luasnip.loaders.from_vscode") :lazy_load))
+
