@@ -13,23 +13,46 @@
                              :fennel])
 
 ;; conditionally install parsers
+(nyoom-module-p! clojure
+  (table.insert treesitter-filetypes :clojure))
+
+(nyoom-module-p! common-lisp
+  (table.insert treesitter-filetypes :commonlisp))
+
+(nyoom-module-p! java
+  (table.insert treesitter-filetypes :java))
+
+(nyoom-module-p! julia
+  (table.insert treesitter-filetypes :julia))
+
+(nyoom-module-p! kotlin
+  (table.insert treesitter-filetypes :kotlin))
+
+(nyoom-module-p! latex
+  (table.insert treesitter-filetypes :latex))
+
+(nyoom-module-p! lua
+  (table.insert treesitter-filetypes :lua))
+
+(nyoom-module-p! nix
+  (table.insert treesitter-filetypes :nix))
+
+(nyoom-module-p! python
+  (table.insert treesitter-filetypes :python))
+
 (nyoom-module-p! sh
   (table.insert treesitter-filetypes :bash))
 
 (nyoom-module-p! sh.+fish
   (table.insert treesitter-filetypes :fish))
 
-(nyoom-module-p! nix
-  (table.insert treesitter-filetypes :nix))
+(nyoom-module-p! zig
+  (table.insert treesitter-filetypes :zig))
 
-(nyoom-module-p! julia
-  (table.insert treesitter-filetypes :julia))
-
-(nyoom-module-p! java
-  (table.insert treesitter-filetypes :java))
-
-(nyoom-module-p! lua
-  (table.insert treesitter-filetypes :lua))
+(nyoom-module-p! cc
+  (do
+    (table.insert treesitter-filetypes :c)
+    (table.insert treesitter-filetypes :cpp)))
 
 (nyoom-module-p! rust
   (do
