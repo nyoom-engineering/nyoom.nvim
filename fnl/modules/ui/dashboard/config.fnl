@@ -30,7 +30,7 @@
               :cursor 5
               :width 36
               :align_shortcut :right
-              :hl :alpha1}]
+              :hl :alpha2}]
     (when keybind
       (set opts.keymap [:n sc- keybind {:noremap true :silent true}]))
     {:type :button
@@ -58,7 +58,7 @@
                              " ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ "
                              "      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     "
                              "       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     "]
-                       :opts {:position :center :hl :alpha2}}
+                       :opts {:position :center :hl :alpha1}}
               :buttons {:type :group
                         :val [(button "SPC f f" "  Find File  "
                                       ":Telescope find_files<CR>")

@@ -264,7 +264,7 @@
     (custom-set-face! TelescopePromptNormal [] {:fg carbon.base05 :bg carbon.base02})
     (custom-set-face! TelescopePromptPrefix [] {:fg carbon.base08 :bg carbon.base02})
     (custom-set-face! TelescopeNormal [] {:fg carbon.none :bg carbon.blend})
-    (custom-set-face! TelescopePreviewTitle [] {:fg carbon.base02 :bg carbon.base011})
+    (custom-set-face! TelescopePreviewTitle [] {:fg carbon.base02 :bg carbon.base11})
     (custom-set-face! TelescopePromptTitle [] {:fg carbon.base02 :bg carbon.base08})
     (custom-set-face! TelescopeResultsTitle [] {:fg carbon.blend :bg carbon.blend})
     (custom-set-face! TelescopeSelection [] {:fg carbon.none :bg carbon.base02})
