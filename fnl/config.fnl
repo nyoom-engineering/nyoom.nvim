@@ -2,10 +2,9 @@
 ;; Place your private configuration here! Remember, you do not need to run 'nyoom
 ;; sync' after modifying this file!
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set 'colorscheme' or manually load a theme through
-;; 'require' function. This is the default:
-(colorscheme oxocarbon)
+;; You can use the `colorscheme` macro to load a custom theme, or load it manually
+;; via require. This is the default:
+(colorscheme carbon)
 
 ;; The set! macro sets vim.opt options. By default it sets the option to true 
 ;; Appending `no` in front sets it to false. This determines the style of line 

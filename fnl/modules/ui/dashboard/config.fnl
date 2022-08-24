@@ -30,7 +30,7 @@
               :cursor 5
               :width 36
               :align_shortcut :right
-              :hl :AlphaButtons}]
+              :hl :alpha1}]
     (when keybind
       (set opts.keymap [:n sc- keybind {:noremap true :silent true}]))
     {:type :button
@@ -58,7 +58,7 @@
                              " ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ "
                              "      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     "
                              "       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     "]
-                       :opts {:position :center :hl :Trailhighlight}}
+                       :opts {:position :center :hl :alpha2}}
               :buttons {:type :group
                         :val [(button "SPC f f" "  Find File  "
                                       ":Telescope find_files<CR>")
@@ -73,7 +73,7 @@
                         :opts {:spacing 1}}
               :footer {:type :text
                        :val bottom-text
-                       :opts {:position :center :hl :Trailhighlight}}})
+                       :opts {:position :center :hl :alpha3}}})
 
 (setup {:layout [{:type :padding :val 5}
                  options.header

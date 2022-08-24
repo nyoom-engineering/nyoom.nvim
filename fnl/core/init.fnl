@@ -32,5 +32,7 @@
   (require :packer_compiled))
 
 ;; userconfig
-(require :config)
-
+(local cli (os.getenv :NYOOM_CLI))
+(if cli
+  (require :packages)
+  (require :config))

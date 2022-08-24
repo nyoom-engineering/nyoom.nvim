@@ -64,6 +64,16 @@
     (table.insert treesitter-filetypes :markdown)
     (table.insert treesitter-filetypes :markdown_inline)))
 
+(nyoom-module-p! org
+  (do
+    (local tsp (require :nvim-treesitter.parsers))
+    (local parser-config (tsp.get_parser_configs))
+    (set parser-config.org {:filetype :org
+                            :install_info {:url "https://github.com/milisims/tree-sitter-org"
+                                           :files [:src/parser.c :src/scanner.cc]
+                                           :branch :main}})
+    (table.insert treesitter-filetypes :org)))
+
 (nyoom-module-p! neorg
   (do
     (local tsp (require :nvim-treesitter.parsers))

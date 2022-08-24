@@ -1,7 +1,3 @@
-(import-macros {: use-package!} :macros)
+(import-macros {: use-package! : nyoom-module!} :macros)
 
-(use-package! :shaunsingh/oxocarbon.nvim {:run :./install.sh})
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
-(use-package! :mvllow/modes.nvim {:opt true
-                                  :defer modes.nvim
-                                  :nyoom-module ui.nyoom})
