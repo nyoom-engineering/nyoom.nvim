@@ -43,7 +43,16 @@
 ;; ---------------------
 ;; Put your plugins here
 ;; ---------------------
-
+(use-package! :folke/tokyonight.nvim)
+(use-package! :numToStr/Comment.nvim)
+(use-package! :kylechui/nvim-surround {:config (fn []
+                                                 (local {: setup} (require :nvim-surround))
+                                                 (setup {:keymaps {:insert "ys"}}
+                                                        :insert_line "yss"
+                                                        :visual "S"
+                                                        :delete "ds"
+                                                        :change "cs"))})
+                                                
 ;; Send plugins to packer
 (echo! "Installing Packages")
 (unpack!)

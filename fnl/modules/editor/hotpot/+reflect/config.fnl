@@ -1,35 +1,6 @@
 (import-macros {: map! : nyoom-module-p!} :macros)
 
 
-;; >xiaobing add
-;; Telescope
-(map! [n] "<C-c><C-g>" "<cmd>Telescope ghq list<CR>")
-(map! [n] "<leader>bb" "<cmd>Telescope buffers<CR>")
-(map! [n] "<leader>pp" "<cmd>Telescope project<CR>")
-(map! [n] "<leader>pf" "<cmd>Telescope file_browser<CR>")
-
-;; Window
-(map! [n] "<C-w><C-w>" "<cmd>lua require('nvim-window').pick()<CR>")
-
-;; Explorer
-(map! [n] "<leader>op" "<cmd>NvimTreeToggle<CR>")
-(map! [n] "<leader>o-" "<cmd>NnnPicker %:p:h<CR>")
-
-;; Terminal
-(map! [n] "<leader>ot" "<cmd>exe v:count1 . 'ToggleTerm'<cr>")
-(map! [n] "<leader>oT" "<cmd>ToggleTerm  direction=tab<cr>")
-
-;; Search
-(map! [n] "<leader>sb" "<cmd>Telescope current_buffer_fuzzy_find<cr>")
-(map! [n] "<leader>sp" "<cmd>Telescope live_grep<cr>")
-
-;; Git
-(map! [n] "<leader>gg" "<cmd>ToggleLazygit<cr>")
-
-;; WIndow
-(map! [in] "<C-x>0" "<cmd>bd<cr>")
-(map! [in] "<C-x>1" "<cmd>only<cr>")
-;; <
 ;; hotpot fun
 (local reflect-session {:id nil :mode :compile})
 (fn new-or-attach-reflect []
