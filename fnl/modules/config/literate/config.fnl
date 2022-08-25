@@ -4,7 +4,7 @@
 
 (fn tangle-config []
   (let [literatefile (.. (vim.fn.stdpath :config) "/fnl/config.norg")]
-    (vim.cmd.Neorg (.. "tangle" literatefile))))
+    (vim.cmd.Neorg (.. "tangle " literatefile))))
 (let [uv vim.loop]
   (let [handle (uv.new_fs_event)
         path (vim.fn.expand "~/.config/nvim/fnl/config.norg")]
