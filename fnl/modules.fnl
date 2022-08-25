@@ -1,8 +1,5 @@
 (import-macros {: nyoom!} :macros)
-
-;;; fnl/modules.fnl 
-;; NOTE: Any module with an asterisk after it (*) either isn't ready or implemented yet.
-
+;; we shouldn't have to repeat the `nyoom!` calls but somethings buggy NOTE: Any module with a TODO either isn't ready or hasn't been implemented yet.
 (nyoom! :completion
         cmp                  ; the ultimate code completion backend
         ;;compleet           ; TODO the *other* ultimate code completion backend
@@ -42,8 +39,8 @@
 
 (nyoom! :tools
         mason                ; setting your tools in stone
-        conjure              ; run code, run (also, repls)
-        ;;tools.antifennel         ; hate fennel? write lua and compile it back*
+        eval                 ; run code, run (also, repls)
+        antifennel           ; hate fennel? write lua and compile it back
         pastebin             ; interacting with pastebin platforms
         lsp                  ; :vscode 
         (neogit +forge)               ; a git porcelain for Neovim
@@ -61,7 +58,8 @@
         lua                  ; one-based indices? one-based indices
         markdown             ; writing docs for people to ignore
         ;;nim                ; python + lisp at the speed of c
-        ;;neorg              ; organize your plain life in plain text TODO +export +present
+        ;;neorg              ; organize your plain life in plain text, the neovim way TODO +export +present
+        ;;(org +pretty)      ; organize your plain life in plain text, the emacs way
         nix                  ; I hereby declare "nix geht mehr!"
         ;;python             ; beautiful is better than ugly
         rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()

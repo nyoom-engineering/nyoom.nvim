@@ -61,7 +61,7 @@
         (set reflect-session.mode :compile))
       (reflect.set-mode reflect-session.id reflect-session.mode))))
 
-(nyoom-module-p! bindings
+(nyoom-module-p! default.+bindings
   (do
    (map! [v] "<space>hr" '(new-or-attach-reflect))
    (map! [n] "<space>hx" '(swap-reflect-mode))))

@@ -1,4 +1,4 @@
-(import-macros {: set! : local-set!} :macros)
+(import-macros {: set! : local-set! : nyoom-module-p!} :macros)
 (local modes {:n :RW
               :no :RO
               :v "**"
@@ -30,24 +30,36 @@
         (set mode-color "%#StatusCommand#") (= mode :t)
         (set mode-color "%#StatusTerminal#"))
     mode-color))
+
+;; by default these can be blank:
 (fn get-git-status []
-  (let [branch (or vim.b.gitsigns_status_dict
-                   {:head ""})
-        is-head-empty (not= branch.head "")]
-    (or (and is-head-empty
-             (string.format "(λ • #%s)"
-                            (or branch.head "")))
-        "")))
+  "")
 (fn get-lsp-diagnostic []
-  (when (not (rawget vim :lsp))
-    (lua "return \"\""))
-  (local count [0 0 0 0])
-  (local result {:errors (. count vim.diagnostic.severity.ERROR)
-                 :warnings (. count vim.diagnostic.severity.WARN)
-                 :info (. count vim.diagnostic.severity.INFO)
-                 :hints (. count vim.diagnostic.severity.HINT)})
-  (string.format " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s "
-                 (or (. result :warnings) 0) (or (. result :errors) 0)))
+  "")
+
+;; but overwrite them with conditional features if enabled
+(nyoom-module-p! vc-gutter
+  (fn get-git-status []
+    (let [branch (or vim.b.gitsigns_status_dict
+                     {:head ""})
+          is-head-empty (not= branch.head "")]
+      (or (and is-head-empty
+               (string.format "(λ • #%s)"
+                              (or branch.head "")))
+          ""))))
+
+(nyoom-module-p! lsp
+  (fn get-lsp-diagnostic []
+    (when (not (rawget vim :lsp))
+      (lua "return \"\""))
+    (local count [0 0 0 0])
+    (local result {:errors (. count vim.diagnostic.severity.ERROR)
+                   :warnings (. count vim.diagnostic.severity.WARN)
+                   :info (. count vim.diagnostic.severity.INFO)
+                   :hints (. count vim.diagnostic.severity.HINT)})
+    (string.format " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s "
+                   (or (. result :warnings) 0) (or (. result :errors) 0))))
+
 (global Statusline {})
 (set Statusline.statusline (fn []
                              (table.concat [(color)

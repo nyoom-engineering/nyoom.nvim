@@ -1,4 +1,5 @@
 (import-macros {: packadd! : pack : rock : use-package! : rock! : unpack! : echo!} :macros)
+
 ;; Load packer
 (echo! "Loading Packer")
 (packadd! packer.nvim)
@@ -44,5 +45,5 @@
 ;; ---------------------
 
 ;; Send plugins to packer
-(echo! "Installing Plugins")
+(echo! "Installing Packages")
 (unpack!)
