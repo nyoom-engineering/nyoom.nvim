@@ -32,6 +32,7 @@
         (hotpot +reflect)    ; lets get cooking. please don't disable this
         scratch              ; emacs-like scratch buffer functionality
         ;;word-wrap          ; soft wrapping with language-aware indent
+	)
 
 (nyoom! :term
 	toggleterm)          ; persistant/floating terminal wrapper for :term
