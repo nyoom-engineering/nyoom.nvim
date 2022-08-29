@@ -44,7 +44,9 @@
 ;; Put your plugins here
 ;; ---------------------
 (use-package! :folke/tokyonight.nvim)
-(use-package! :numToStr/Comment.nvim)
+(use-package! :numToStr/Comment.nvim {:config (fn []
+                                                (local {: setup } (require :Comment))
+                                                (setup))})
 (use-package! :kylechui/nvim-surround {:config (fn []
                                                  (local {: setup} (require :nvim-surround))
                                                  (setup {:keymaps {:insert "ys"}}
