@@ -79,6 +79,21 @@
     (string.format " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s "
                    (or (. result :warnings) 0) (or (. result :errors) 0))))
 
+
+;; get the number of entries of certain severity
+(nyoom-module-p! lsp
+  (fn get-lsp-diagnostic []
+    (when (not (rawget vim :lsp))
+      (lua "return \"\""))
+    (fn get-severity [s]
+      (length (vim.diagnostic.get 0 {:severity s})))
+    (local result {:errors (get-severity vim.diagnostic.severity.ERROR)
+                   :warnings (get-severity vim.diagnostic.severity.WARN)
+                   :info (get-severity vim.diagnostic.severity.INFO)
+                   :hints (get-severity vim.diagnostic.severity.HINT)})
+    (string.format " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s "
+                   (or (. result :warnings) 0) (or (. result :errors) 0))))
+
 (fn get-searchcount []
   (when (= vim.v.hlsearch 0)
     (lua "return \"%#Normal# %l:%c \""))
