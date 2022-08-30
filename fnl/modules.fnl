@@ -1,5 +1,7 @@
 (import-macros {: nyoom!} :macros)
-;; we shouldn't have to repeat the `nyoom!` calls but somethings buggy NOTE: Any module with a TODO either isn't ready or hasn't been implemented yet.
+
+;; we shouldn't have to repeat the `nyoom!` calls but somethings buggy
+;; NOTE: Any module with a TODO either isn't ready or hasn't been implemented yet.
 (nyoom! :completion
         cmp                  ; the ultimate code completion backend
         ;;compleet           ; TODO the *other* ultimate code completion backend
@@ -28,11 +30,11 @@
         parinfer             ; turn lisp into python, sort of
         (hotpot +reflect)    ; lets get cooking. please don't disable this
         scratch              ; emacs-like scratch buffer functionality
-        ;;word-wrap          ; soft wrapping with language-aware indent
+        word-wrap)           ; language-aware smart soft and hard wrapping
 
-        :term)
-        ;;fshell             ; the fennel shell that works everywhere
-        ;;toggleterm         ; persistant/floating terminal wrapper for :term
+(nyoom! :term)
+        ;;fshell            ; WIP: the fennel shell that works everywhere
+        ;;toggleterm)        ; persistant/floating terminal wrapper for :term
 
 (nyoom! :checkers
         syntax)              ; tasing you for every semicolon you forget

@@ -1,4 +1,4 @@
-(import-macros {: set!} :macros)
+(import-macros {: set! : nyoom-module-p!} :macros)
 (local cmp (require :cmp))
 (local luasnip (require :luasnip))
 
@@ -54,10 +54,13 @@
                                       (fallback)))
                                   [:i :s])
                       "<space>" (cmp.mapping.confirm {:select false})}
-            :sources [{:name :nvim_lsp}
+            :sources [(nyoom-module-p! lsp
+                        {:name :nvim_lsp})
                       {:name :luasnip}
-                      {:name :conjure}
-                      {:name :crates}
+                      (nyoom-module-p! eval
+                        {:name :conjure})
+                      (nyoom-module-p! rust
+                        {:name :crates})
                       {:name :buffer}
                       {:name :path}]
             :formatting {:fields {1 :kind 2 :abbr 3 :menu}
