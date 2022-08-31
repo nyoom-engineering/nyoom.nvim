@@ -29,20 +29,14 @@
 ;; Sign column
 (set! signcolumn "yes:1")
 
-;; Substitution
+;; Global subtitution by default
 (set! gdefault)
+
+;; Theres no need for formatoptions, we have our own
+(set! formatoptions [:q :j])
 
 ;; By default no wrapping
 (set! nowrap)
-
-;; smart wrapping
-(nyoom-module-p! word-wrap
-  (do
-    (set! wrap)
-    (set! linebreak)
-    (set! breakindent)
-    (set! breakindentopt ["shift:2"])
-    (set! showbreak "↳ ")))
 
 ;; Use clipboard outside Neovim
 (set! clipboard :unnamedplus)
@@ -52,38 +46,39 @@
 
 ;; Disable swapfiles and enable undofiles
 (set! undofile)
+(set! nowritebackup)
 (set! noswapfile)
 
-;; Lazy redraw
+;; Don't redraw the screen when executing macros
 (set! lazyredraw)
 
 ;; Smart search
+(set! ignorecase)
 (set! smartcase)
 
-;; Indentation rules
-(set! copyindent)
-(set! smartindent)
-(set! preserveindent)
-
-;; Indentation level
+;; Expand tabs to spaces
+(set! expandtab)
 (set! tabstop 4)
 (set! shiftwidth 4)
 (set! softtabstop 4)
 
-;; Expand tabs
-(set! expandtab)
-
-;; Automatic split locations
+;; Split from left to right and top to bottom
 (set! splitright)
 (set! splitbelow)
 
-;; Scroll off
+;; A little more padding while scrolling
 (nyoom-module-p! nyoom
   (set! scrolloff 4))
 
-;; Grep
+;; Use ripgrep for the builtin grep
 (set! grepprg "rg --vimgrep")
 (set! grepformat "%f:%l:%c:%m")
+
+;; Support fuzzy finding
+(set! path ["." "**"])
+
+;; Diff-mode
+(set! diffopt [:filler :internal :indent-heuristic :algorithm:histogram])
 
 ;; colorscheme
 (nyoom-module-p! nyoom
