@@ -13,8 +13,7 @@
                                    :height 0.8
                                    :preview_cutoff 120}
                    :set_env {:COLORTERM :truecolor}
-                   :dynamic_preview_title true}
-        :extensions {:project {:base_dirs ["~/.config/nvim"]}}})
+                   :dynamic_preview_title true}})
 
 ;; Load extensions
 (packadd! telescope-ui-select.nvim)
@@ -30,6 +29,17 @@
   (do
     (packadd! telescope-fzf-native.nvim)
     (load_extension :fzf)))
+
+;; load media-files and zoxide only if their executables exist
+(when (= (vim.fn.executable :ueberzug) 1)
+  (do
+    (packadd! telescope-media-files.nvim)
+    (load_extension :media_files)))
+
+(when (= (vim.fn.executable :zoxide) 1)
+  (do
+    (packadd! telescope-zoxide)
+    (load_extension :zoxide)))
 
 (nyoom-module-p! lsp
   (do

@@ -14,11 +14,17 @@
 ;;   https://www.ibm.com/brand/experience-guides/developer/brand/color/)
 
 (import-macros {: custom-set-face! : let! : nyoom-module-p!} :macros)
-(local {: blend-hex} (require :modules.ui.nyoom.colorutils))
+(local {: blend-hex
+        : lighten-hex
+        : darken-hex
+        : saturate-hex
+        : desaturate-hex
+        : rotate-hex} (require :modules.ui.nyoom.colorutils))
 
-;; define a bg and fg
+;; define a bg and fg and accent
 (local base00 :#161616)
 (local base06 :#ffffff)
+(local base09 :#78a9ff)
 
 ;; generate a gradient of bg/fg colors based off of that
 (local base01 (blend-hex base00 base06 0.085))
@@ -26,6 +32,16 @@
 (local base03 (blend-hex base00 base06 0.3))
 (local base04 (blend-hex base00 base06 0.82))
 (local base05 (blend-hex base00 base06 0.95))
+
+;; generate some other colors using that
+;; (local base07 (lighten-hex (desaturate-hex (blend-hex base09 base06 0.085) 0.085) 0.085)) 
+;; (local base08 (darken-hex (desaturate-hex base09 0.18) 0.18))
+;; (local base10 (darken-hex (saturate-hex base09 0.085) 0.3))
+;; (local base11 (rotate-hex (blend-hex base09 base06 0.18) 360))
+;; (local base12 (rotate-hex (blend-hex base09 base06 0.18) 288))
+;; (local base13 (rotate-hex (blend-hex base09 base06 0.18) 216))
+;; (local base14 (rotate-hex (blend-hex base09 base06 0.18) 144))
+;; (local base15 (rotate-hex (blend-hex base09 base06 0.18) 72))
 
 ;; TODO dynamically geneate the rest
 (local carbon {:base00 base00 ;; The origin color or the Carbon palette
@@ -37,7 +53,7 @@
                :base06 base06 ;; The brightest shade color based on base04
                :base07 "#08bdba" ;; A calm and highly contrasted color reminiscent of glowing ice
                :base08 "#3ddbd9" ;; The bright and shiny primary accent color reminiscent of pure and clear energy
-               :base09 "#78a9ff" ;; And the sky was never quite the same shade of blue again
+               :base09 base09 ;; And the sky was never quite the same shade of blue again
                :base10 "#ee5396" ;; A dark and intensive color reminiscent of the withering flowers come fall
                :base11 "#33b1ff" ;; But never have I been a blue calm sea. I have always been a storm
                :base12 "#ff7eb6" ;; A more darkened and less saturated color reminiscent of cherry blossoms
@@ -46,6 +62,25 @@
                :base15 "#82cfff" ;; A book must be an ice axe to break the seas frozen inside our soul
                :blend  "#131313" ;; Blend of #000000 & base00 for darker accents 
                :none :NONE})
+
+;; (local carbon {:base00 base00 ;; The origin color or the Carbon palette
+;;                :base01 base01 ;; A brighter shade color based on base00
+;;                :base02 base02 ;; An even more brighter shade color of base00
+;;                :base03 base03 ;; The brightest shade color based on base00
+;;                :base04 base04 ;; The origin color or the Snow Storm sequence.
+;;                :base05 base05 ;; A brighter shade color of base04
+;;                :base06 base06 ;; The brightest shade color based on base04
+;;                :base07 base07 ;; A calm and highly contrasted color reminiscent of glowing ice
+;;                :base08 base08 ;; The bright and shiny primary accent color reminiscent of pure and clear energy
+;;                :base09 base09 ;; And the sky was never quite the same shade of blue again
+;;                :base10 base10 ;; A dark and intensive color reminiscent of the withering flowers come fall
+;;                :base11 base11 ;; But never have I been a blue calm sea. I have always been a storm
+;;                :base12 base12 ;; A more darkened and less saturated color reminiscent of cherry blossoms
+;;                :base13 base13 ;; Nature in her green, tranquil woods heals and soothes all afflictions
+;;                :base14 base14 ;; I want to watch wisteria grow right over my bare feet
+;;                :base15 base15 ;; A book must be an ice axe to break the seas frozen inside our soul
+;;                :blend "#131313" ;; Blend of #000000 & base00 for darker accents 
+;;                :none :NONE})
 
 ;; terminal 
 (let! terminal_color_0 carbon.base01)
@@ -243,18 +278,14 @@
 ;; statusline/winbar
 (nyoom-module-p! modeline
   (do
-    (custom-set-face! StatusLine [] {:fg carbon.base03 :bg carbon.base00})
-    (custom-set-face! StatusLineNC [] {:fg carbon.base02 :bg carbon.base00})
     (custom-set-face! StatusReplace [] {:fg carbon.base00 :bg carbon.base08})
-    (custom-set-face! StatusInsert [] {:fg carbon.base00 :bg carbon.base012})
-    (custom-set-face! StatusVisual [] {:fg carbon.base00 :bg carbon.base014})
-    (custom-set-face! StatusTerminal [] {:fg carbon.base00 :bg carbon.base011})
+    (custom-set-face! StatusInsert [] {:fg carbon.base00 :bg carbon.base12})
+    (custom-set-face! StatusVisual [] {:fg carbon.base00 :bg carbon.base14})
+    (custom-set-face! StatusTerminal [] {:fg carbon.base00 :bg carbon.base11})
+    (custom-set-face! StatusNormal [] {:fg carbon.base00 :bg carbon.base15})
+    (custom-set-face! StatusCommand [] {:fg carbon.base00 :bg carbon.base13})
     (custom-set-face! StatusLineDiagnosticWarn [:bold] {:fg carbon.base14 :bg carbon.base00})
-    (custom-set-face! StatusLineDiagnosticError [:bold] {:fg carbon.base08 :bg carbon.base00})
-    (custom-set-face! WinBar [] {:fg :#a2a9b0 :bg carbon.base00})
-    (custom-set-face! StatusPosition [] {:fg :#a2a9b0 :bg carbon.base00})
-    (custom-set-face! StatusNormal [:underline] {:fg :#a2a9b0 :bg carbon.base00})
-    (custom-set-face! StatusCommand [:underline] {:fg :#a2a9b0 :bg carbon.base00})))
+    (custom-set-face! StatusLineDiagnosticError [:bold] {:fg carbon.base08 :bg carbon.base00})))
 
 ;; telescope
 (nyoom-module-p! telescope
@@ -264,8 +295,8 @@
     (custom-set-face! TelescopePromptNormal [] {:fg carbon.base05 :bg carbon.base02})
     (custom-set-face! TelescopePromptPrefix [] {:fg carbon.base08 :bg carbon.base02})
     (custom-set-face! TelescopeNormal [] {:fg carbon.none :bg carbon.blend})
-    (custom-set-face! TelescopePreviewTitle [] {:fg carbon.base02 :bg carbon.base11})
-    (custom-set-face! TelescopePromptTitle [] {:fg carbon.base02 :bg carbon.base08})
+    (custom-set-face! TelescopePreviewTitle [] {:fg carbon.base02 :bg carbon.base12})
+    (custom-set-face! TelescopePromptTitle [] {:fg carbon.base02 :bg carbon.base11})
     (custom-set-face! TelescopeResultsTitle [] {:fg carbon.blend :bg carbon.blend})
     (custom-set-face! TelescopeSelection [] {:fg carbon.none :bg carbon.base02})
     (custom-set-face! TelescopePreviewLine [] {:fg carbon.none :bg carbon.base01})))

@@ -1,3 +1,3 @@
-(import-macros {: use-package!} :macros)
+(import-macros {: nyoom-module!} :macros)
 
-(use-package! :shaunsingh/fennel-repl.nvim {:cmd :FennelRepl})
+(nyoom-module! term.fshell)
