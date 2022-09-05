@@ -27,17 +27,17 @@
   (buf-map! [n] "]d" goto-diag-next!)
   (buf-map! [n] "<leader>gD" goto-declaration!)
   (buf-map! [n] "<leader>gd" goto-definition!)
-  (buf-map! [n] "<leader>gt" goto-type-definition!)
+  (buf-map! [n] "<leader>gt" goto-type-definition!))
 
   ;; Enable lsp formatting if available 
-  (nyoom-module-p! format.+onsave
-    (when (client.supports_method "textDocument/formatting")
-      (augroup! lsp-format-before-saving
-        (clear! {:buffer bufnr})
-        (autocmd! BufWritePre <buffer>
-          '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
-                                :bufnr bufnr})
-          {:buffer bufnr})))))
+  ;; (nyoom-module-p! format.+onsave
+  ;;   (when (client.supports_method "textDocument/formatting")
+  ;;     (augroup! lsp-format-before-saving
+  ;;       (clear! {:buffer bufnr})
+  ;;       (autocmd! BufWritePre <buffer>
+  ;;         '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
+  ;;                               :bufnr bufnr})
+  ;;         {:buffer bufnr})))))
 
 ;; What should the lsp be demanded of?
 (local capabilities (vim.lsp.protocol.make_client_capabilities))
