@@ -4,6 +4,19 @@
 
 (set! completeopt [:menu :menuone :noselect])
 
+;; set the cmp sources, but keep it conditioned on the modules
+ (local src [])
+ (nyoom-module-p! lsp (table.insert src {:name :nvim_lsp}))
+
+ (nyoom-module-p! rust (table.insert src {:name :crates}))
+
+ (nyoom-module-p! eval (table.insert src {:name :conjure}))
+
+ ;; add general cmp sources
+ (table.insert src {:name :luasnip})
+ (table.insert src {:name :buffer})
+ (table.insert src {:name :path})
+
 ;; default icons (lspkind)
 (local icons {:Text ""
               :Method ""
@@ -54,15 +67,7 @@
                                       (fallback)))
                                   [:i :s])
                       "<space>" (cmp.mapping.confirm {:select false})}
-            :sources [(nyoom-module-p! lsp
-                        {:name :nvim_lsp})
-                      {:name :luasnip}
-                      (nyoom-module-p! eval
-                        {:name :conjure})
-                      (nyoom-module-p! rust
-                        {:name :crates})
-                      {:name :buffer}
-                      {:name :path}]
+            :sources src
             :formatting {:fields {1 :kind 2 :abbr 3 :menu}
                          :format (fn [_ vim-item]
                                    (set vim-item.menu vim-item.kind)
