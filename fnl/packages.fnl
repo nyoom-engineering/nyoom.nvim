@@ -44,16 +44,21 @@
 ;; Put your plugins here
 ;; ---------------------
 (use-package! :folke/tokyonight.nvim)
+(use-package! :phelipetls/jsonpath.nvim)
 (use-package! :numToStr/Comment.nvim {:config (fn []
                                                 (local {: setup } (require :Comment))
                                                 (setup))})
 (use-package! :kylechui/nvim-surround {:config (fn []
                                                  (local {: setup} (require :nvim-surround))
-                                                 (setup {:keymaps {:insert "ys"}}
-                                                        :insert_line "yss"
-                                                        :visual "S"
-                                                        :delete "ds"
-                                                        :change "cs"))})
+                                                 (setup))})
+;; (use-package! :phaazon/notisys.nvim {:branch "v0.1"
+;;                                      :call-setup :notisys})
+;; (use-package! :folke/noice.nvim {:event [:VimEnter]
+;;                                  :config (fn []
+;;                                            (local {: setup} (require :noice))
+;;                                            (setup))
+;;                                  :requires [(pack :MunifTanjim/nui.nvim {:opt true})
+;;                                             (pack :rcarriga/nvim-notify {:opt true})]})
                                                 
 ;; Send plugins to packer
 (echo! "Installing Packages")

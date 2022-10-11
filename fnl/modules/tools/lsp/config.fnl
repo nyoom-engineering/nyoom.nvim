@@ -21,13 +21,14 @@
   (buf-map! [n] "K" open-doc-float!)
   (buf-map! [nv] "<leader>ca" open-code-action-float!)
   (buf-map! [nv] "<leader>cr" rename!)
-  (buf-map! [nv] "<leader>cf" vim.lsp.buf.format {:noremap true :silent true})
-  (buf-map! [n] "<leader>d" open-line-diag-float!)
-  (buf-map! [n] "[d" goto-diag-prev!)
-  (buf-map! [n] "]d" goto-diag-next!)
-  (buf-map! [n] "<leader>gD" goto-declaration!)
-  (buf-map! [n] "<leader>gd" goto-definition!)
-  (buf-map! [n] "<leader>gt" goto-type-definition!))
+  (buf-map! [nv] "<leader>cf" vim.lsp.buf.format {:noremap true :silent true}))
+  ;; (buf-map! [n] "<leader>d" open-line-diag-float!))
+  ;; (buf-map! [n] "[d" goto-diag-prev!))
+  ;; (buf-map! [n] "]d" goto-diag-next!)
+  ;; (buf-map! [n] "<leader>gD" goto-declaration!)
+  ;; (buf-map! [n] "<leader>gd" goto-definition!)
+  ;; (buf-map! [n] "<leader>gt" goto-type-definition!)
+  
 
   ;; Enable lsp formatting if available 
   ;; (nyoom-module-p! format.+onsave
@@ -65,17 +66,17 @@
 (nyoom-module-p! clojure
   (table.insert lsp-servers :clojure-lsp))
 
-(nyoom-module-p! java
-  (table.insert lsp-servers :jdtls))
+;; (nyoom-module-p! java
+;;   (table.insert lsp-servers :jdtls))
 
 (nyoom-module-p! sh
   (table.insert lsp-servers :bashls))
 
-(nyoom-module-p! julia
-  (table.insert lsp-servers :julials))
+;; (nyoom-module-p! julia
+;;   (table.insert lsp-servers :julials))
 
-(nyoom-module-p! kotlin
-  (table.insert lsp-servers :kotlin_language_server))
+;; (nyoom-module-p! kotlin
+;;   (table.insert lsp-servers :kotlin_language_server))
 
 (nyoom-module-p! latex
   (table.insert lsp-servers :texlab))
@@ -83,17 +84,23 @@
 (nyoom-module-p! markdown
   (table.insert lsp-servers :marksman))
 
-(nyoom-module-p! nim
-  (table.insert lsp-servers :nimls))
+;; (nyoom-module-p! nim
+;;   (table.insert lsp-servers :nimls))
+;;
+;; (nyoom-module-p! nix
+;;   (table.insert lsp-servers :rnix))
+;;
+;; (nyoom-module-p! python
+;;   (table.insert lsp-servers :pyright))
 
-(nyoom-module-p! nix
-  (table.insert lsp-servers :rnix))
+;; (nyoom-module-p! zig
+;;   (table.insert lsp-servers :zls))
 
-(nyoom-module-p! python
-  (table.insert lsp-servers :pyright))
+(table.insert lsp-servers :lemminx)
+(table.insert lsp-servers :jsonls)
+(table.insert lsp-servers :awk_ls)
+  
 
-(nyoom-module-p! zig
-  (table.insert lsp-servers :zls))
 
 ;; Load lsp
 (let [servers lsp-servers]
@@ -101,13 +108,16 @@
     ((. (. lsp server) :setup) defaults)))
 
 ;; for trickier servers you can change up the defaults
-(nyoom-module-p! lua
-  (lsp.sumneko_lua.setup {:on_attach on-attach
-                          : capabilities
-                          :settings {:Lua {:diagnostics {:globals {1 :vim}}
-                                           :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
-                                                                 (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
-                                                       :maxPreload 100000
-                                                       :preloadFileSize 10000}}}}))
+;; (nyoom-module-p! lua
+;;   (lsp.sumneko_lua.setup {:on_attach on-attach
+;;                           : capabilities
+;;                           :settings {:Lua {:diagnostics {:globals {1 :vim}}
+;;                                            :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
+;;                                                                  (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
+;;                                                        :maxPreload 100000
+;;                                                        :preloadFileSize 10000}}}}))
+;; (lsp.jsonls.setup {:get_root_dir "123"})
+;; (set lsp.jsonls.get_root_dir vim.loop.cwd)
+;; (print (vim.inspect lsp.jsonls))
 
 {: on-attach}
