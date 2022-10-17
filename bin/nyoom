@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -o errexit -o pipefail -o nounset
 
+setup_envs() {
+  CONFIG_PATH="${XDG_CONFIG_HOME:-${HOME}/.config}/nvim"
+  CACHE_PATH="${XDG_CACHE_HOME:-${HOME}/.cache}/nvim"
+  DATA_PATH="${XDG_DATA_HOME:-${HOME}/.local/share}/nvim"
+}
+
+setup_envs
+
 case "${1:-}" in
   "")
     printf "%s\n%s\n  %s\n%s\n" \
@@ -12,9 +20,19 @@ case "${1:-}" in
     ;;
   install)
     printf -- 'Installing Required Plugins... \n';
-    git clone -q --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/opt/packer.nvim
-    git clone -q -b nightly --single-branch https://github.com/rktjmp/hotpot.nvim.git ~/.local/share/nvim/site/pack/packer/start/hotpot.nvim
-    printf -- '\033[32m Successfully Installed Plugins \033[0m\n';
+    if [ -z "$(ls -A "${DATA_PATH}")" ]; then
+	    git clone -q --depth 1 https://github.com/wbthomason/packer.nvim "${DATA_PATH}/site/pack/packer/opt/packer.nvim"
+    	git clone -q -b nightly --single-branch https://github.com/rktjmp/hotpot.nvim.git "${DATA_PATH}/site/pack/packer/start/hotpot.nvim"
+
+    	printf -- '\033[32m Successfully Installed Plugins \033[0m\n';
+    else
+	    rm -rf "${DATA_PATH}"
+
+	    git clone -q --depth 1 https://github.com/wbthomason/packer.nvim "${DATA_PATH}/site/pack/packer/opt/packer.nvim"
+    	git clone -q -b nightly --single-branch https://github.com/rktjmp/hotpot.nvim.git "${DATA_PATH}/site/pack/packer/start/hotpot.nvim"
+
+    	printf -- '\033[32m Successfully Installed Plugins \033[0m\n';
+    fi
     ;;
   sync)
     start_time=`date +%s`
@@ -22,8 +40,8 @@ case "${1:-}" in
     printf "\033[36mnyoom version $(git log --pretty=tformat:"%h" -n1)\033[0m\n";
     nvim --version | sed '/^$/,$d'
     printf "\nClearing cache\n";
-    rm -rf "${XDG_CACHE_HOME:-${HOME}/.cache}/nvim/"
-    rm -rf "${XDG_CONFIG_HOME:-${HOME}/.config}/nvim/lua/"
+    rm -rf "${CACHE_PATH}"
+    rm -rf "${CONFIG_PATH}/lua"
     NYOOM_CLI=true nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require[[packages]]' -c 'lua require("packer").sync()'
     printf "\n\n\033[92mNyoom successfully synced plugins in $(expr `date +%s` - $start_time)s\033[0m\n";
     printf "Restart Neovim for changes to take effect\n\n";
