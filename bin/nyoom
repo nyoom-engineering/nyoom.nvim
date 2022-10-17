@@ -23,7 +23,8 @@ case "${1:-}" in
     nvim --version | sed '/^$/,$d'
     printf "\nClearing cache\n";
     rm -rf ~/.cache/nvim/
-    rm -rf "${XDG_CONFIG_HOME:-${HOME}/.config}/nvim"/lua/
+    rm -rf "${XDG_CACHE_HOME-${HOME}/.cache}/nvim/"
+    rm -rf "${XDG_CONFIG_HOME:-${HOME}/.config}/nvim/lua/"
     NYOOM_CLI=true nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require[[packages]]' -c 'lua require("packer").sync()'
     printf "\n\n\033[92mNyoom successfully synced plugins in $(expr `date +%s` - $start_time)s\033[0m\n";
     printf "Restart Neovim for changes to take effect\n\n";
