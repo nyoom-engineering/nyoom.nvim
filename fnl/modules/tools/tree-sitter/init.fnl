@@ -14,6 +14,7 @@
                           (pack :p00f/nvim-ts-rainbow {:opt true})                           ;; rainbow parens!
                           (pack :nvim-treesitter/nvim-treesitter-textobjects {:opt true})]   ;; textobjects
                :setup (fn []
+                        (local {: autoload} (require :core.lib.autoload))
                         (vim.api.nvim_create_autocmd [:BufRead]
                                  {:group (vim.api.nvim_create_augroup :nvim-treesitter {})
                                   :callback (fn []
@@ -23,6 +24,6 @@
                                                                 (not= file "[packer]"))
                                                            (not= file "")))
                                                 (vim.api.nvim_del_augroup_by_name :nvim-treesitter)
-                                                ((. (require :packer) :loader) :nvim-treesitter)))}))})
+                                                ((. (autoload :packer) :loader) :nvim-treesitter)))}))})
 
 

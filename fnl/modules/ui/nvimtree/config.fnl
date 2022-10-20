@@ -1,4 +1,5 @@
-(local {: setup} (require :nvim-tree))
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (autoload :nvim-tree))
 
 (setup {:view {:side :left :width 25 :hide_root_folder true :adaptive_size true}
         :disable_netrw true

@@ -1,5 +1,6 @@
-(import-macros {: nyoom-module-p!} :macros)
-(local lsp (require :lspconfig))
+(import-macros {: nyoom-module-p! : packadd!} :macros)
+(local {: autoload} (require :core.lib.autoload))
+(local lsp (autoload :lspconfig))
 
 ;;; Improve UI
 (set vim.lsp.handlers.textDocument/signatureHelp
@@ -60,9 +61,6 @@
 
 (nyoom-module-p! clojure
   (table.insert lsp-servers :clojure-lsp))
-
-(nyoom-module-p! java
-  (table.insert lsp-servers :jdtls))
 
 (nyoom-module-p! sh
   (table.insert lsp-servers :bashls))

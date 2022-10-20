@@ -1,11 +1,8 @@
 (import-macros {: packadd!} :macros)
-(local {: setup} (require :headlines))
-(setup {:org {:headline_highlights [:HeadlineGreen
-                                    :HeadlineBlue
-                                    :HeadlineRed
-                                    :HeadlinePurple
-                                    :HeadlineYellow]}})
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (autoload :headlines))
+(setup {:org {:headline_highlights false}})
 
 (packadd! org-bullets.nvim)
-(local {: setup} (require :org-bullets))
+(local {: setup} (autoload :org-bullets))
 (setup {:concealcursor true})

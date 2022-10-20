@@ -6,50 +6,26 @@
 ;;     `:::::::::'   `::::::' .'   `:::::   .'   `::.     .'   `.       .'
 ;;       `':::''       `'::'-'       `'::.-'       `':..-'       `-...-'
 ;; 
-;;   Colorscheme name:    carbon
-;;   Description:         Neovim Colorscheme inspired from the IBM Carbon Palette in fennel with (hs)luv <3 
+;;   Colorscheme name:    carbon themeing system
+;;   Description:         Neovim Colorschemes based on base16 in fennel made with (hs)luv <3 
 ;;   Author:              https://github.com/shaunsingh
-;; 
-;;   Losely based off of IBM Carbon Palette
-;;   https://www.ibm.com/brand/experience-guides/developer/brand/color/)
 
 (import-macros {: custom-set-face! : let! : nyoom-module-p!} :macros)
-(local {: blend-hex
-        : lighten-hex
-        : darken-hex
-        : saturate-hex
-        : desaturate-hex
-        : rotate-hex} (require :modules.ui.nyoom.colorutils))
+(local {: autoload} (require :core.lib.autoload))
+(local {: blend-hex} (autoload :modules.ui.nyoom.colorutils))
 
-;; define a bg and fg and accent
+;; carbon palette 
+;; (nyoom-module-p! nyoom.+carbon
 (local base00 :#161616)
 (local base06 :#ffffff)
 (local base09 :#78a9ff)
 
-;; generate a gradient of bg/fg colors based off of that
-(local base01 (blend-hex base00 base06 0.085))
-(local base02 (blend-hex base00 base06 0.18))
-(local base03 (blend-hex base00 base06 0.3))
-(local base04 (blend-hex base00 base06 0.82))
-(local base05 (blend-hex base00 base06 0.95))
-
-;; generate some other colors using that
-;; (local base07 (lighten-hex (desaturate-hex (blend-hex base09 base06 0.085) 0.085) 0.085)) 
-;; (local base08 (darken-hex (desaturate-hex base09 0.18) 0.18))
-;; (local base10 (darken-hex (saturate-hex base09 0.085) 0.3))
-;; (local base11 (rotate-hex (blend-hex base09 base06 0.18) 360))
-;; (local base12 (rotate-hex (blend-hex base09 base06 0.18) 288))
-;; (local base13 (rotate-hex (blend-hex base09 base06 0.18) 216))
-;; (local base14 (rotate-hex (blend-hex base09 base06 0.18) 144))
-;; (local base15 (rotate-hex (blend-hex base09 base06 0.18) 72))
-
-;; TODO dynamically geneate the rest
 (local carbon {:base00 base00 ;; The origin color or the Carbon palette
-               :base01 base01 ;; A brighter shade color based on base00
-               :base02 base02 ;; An even more brighter shade color of base00
-               :base03 base03 ;; The brightest shade color based on base00
-               :base04 base04 ;; The origin color or the Snow Storm sequence.
-               :base05 base05 ;; A brighter shade color of base04
+               :base01 (blend-hex base00 base06 0.085) ;; A brighter shade color based on base00
+               :base02 (blend-hex base00 base06 0.18)  ;; An even more brighter shade color of base00
+               :base03 (blend-hex base00 base06 0.3)   ;; The brightest shade color based on base00
+               :base04 (blend-hex base00 base06 0.82)  ;; The origin color or the Snow Storm sequence.
+               :base05 (blend-hex base00 base06 0.95)  ;; A brighter shade color of base04
                :base06 base06 ;; The brightest shade color based on base04
                :base07 "#08bdba" ;; A calm and highly contrasted color reminiscent of glowing ice
                :base08 "#3ddbd9" ;; The bright and shiny primary accent color reminiscent of pure and clear energy
@@ -62,25 +38,6 @@
                :base15 "#82cfff" ;; A book must be an ice axe to break the seas frozen inside our soul
                :blend  "#131313" ;; Blend of #000000 & base00 for darker accents 
                :none :NONE})
-
-;; (local carbon {:base00 base00 ;; The origin color or the Carbon palette
-;;                :base01 base01 ;; A brighter shade color based on base00
-;;                :base02 base02 ;; An even more brighter shade color of base00
-;;                :base03 base03 ;; The brightest shade color based on base00
-;;                :base04 base04 ;; The origin color or the Snow Storm sequence.
-;;                :base05 base05 ;; A brighter shade color of base04
-;;                :base06 base06 ;; The brightest shade color based on base04
-;;                :base07 base07 ;; A calm and highly contrasted color reminiscent of glowing ice
-;;                :base08 base08 ;; The bright and shiny primary accent color reminiscent of pure and clear energy
-;;                :base09 base09 ;; And the sky was never quite the same shade of blue again
-;;                :base10 base10 ;; A dark and intensive color reminiscent of the withering flowers come fall
-;;                :base11 base11 ;; But never have I been a blue calm sea. I have always been a storm
-;;                :base12 base12 ;; A more darkened and less saturated color reminiscent of cherry blossoms
-;;                :base13 base13 ;; Nature in her green, tranquil woods heals and soothes all afflictions
-;;                :base14 base14 ;; I want to watch wisteria grow right over my bare feet
-;;                :base15 base15 ;; A book must be an ice axe to break the seas frozen inside our soul
-;;                :blend "#131313" ;; Blend of #000000 & base00 for darker accents 
-;;                :none :NONE})
 
 ;; terminal 
 (let! terminal_color_0 carbon.base01)
@@ -385,9 +342,4 @@
 ;; headlines.nvim
 (nyoom-module-p! org
   (do
-    (custom-set-face! CodeBlock [] {:fg carbon.none :bg :#1c1c1c})
-    (custom-set-face! HeadlineGreen [] {:fg carbon.none :bg :#1e2718})
-    (custom-set-face! HeadlineBlue [] {:fg carbon.none :bg :#21262d})
-    (custom-set-face! HeadlineRed [] {:fg carbon.none :bg :#2c1517})
-    (custom-set-face! HeadlinePurple [] {:fg carbon.none :bg :#27182C})
-    (custom-set-face! HeadlineYellow [] {:fg carbon.none :bg :#3e2e1e})))
+    (custom-set-face! CodeBlock [] {:fg carbon.none :bg carbon.base01})))

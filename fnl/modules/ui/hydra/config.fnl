@@ -1,6 +1,6 @@
 (import-macros {: set! : colorscheme : nyoom-module-p!} :macros)
-(local {: autoload} (require :core.autoload))
-(local Hydra (require :hydra))
+(local {: autoload} (require :core.lib.autoload))
+(local Hydra (autoload :hydra))
 
 ;; Git
 (nyoom-module-p! vc-gutter
@@ -236,7 +236,7 @@
                        (vim.cmd.Telescope :resume))]
                     [:p 
                      (fn []
-                       ((. (. (. (require :telescope) :extensions) :project) :project) {:display_type :full}))
+                       ((. (. (. (autoload :telescope) :extensions) :project) :project) {:display_type :full}))
                      {:desc :projects}]
                     ["/"
                      (fn []
@@ -364,3 +364,38 @@
                     [:q
                      nil 
                      {:exit true :nowait true}]]})))
+
+(nyoom-module-p! latex
+  (do
+    (local vimtex-hint "
+    ^VimTex                      
+    ^                            
+    _c_: Continuous Compile      
+    _s_: Snapshot Compile        
+    _e_: Clean Up Extra Files    
+    ^                            
+    ^^^^^^                   _<Esc>_^^^
+       ")
+
+    (Hydra {:name :VimTeX
+            :hint vimtex-hint
+            :config {:color :amaranth
+                     :invoke_on_body true
+                     :hint {:border :solid :position :middle}}
+            :mode [:n :x]
+            :body :<leader>v
+            :heads [[:c
+                      (fn []
+                        (vim.cmd :VimtexCompile))
+                      {:exit true}]
+                    [:s
+                      (fn []
+                        (vim.cmd :VimtexCompileSS))
+                      {:exit true}]
+                    [:e
+                      (fn []
+                        (vim.cmd :VimtexClean!))
+                      {:exit true}]
+                    [:<Esc>
+                      nil
+                      {:exit true}]]})))

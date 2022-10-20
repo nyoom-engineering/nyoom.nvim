@@ -1,8 +1,8 @@
 (import-macros {: packadd! : map! : nyoom-module-p!} :macros)
-(local {: setup : load_extension} (require :telescope))
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup : load_extension} (autoload :telescope))
 
-(setup {:defaults {:prompt_prefix "   "
-                   :selection_caret "  "
+(setup {:defaults {:selection_caret "  "
                    :entry_prefix "  "
                    :sorting_strategy :ascending
                    :layout_strategy :flex
@@ -44,7 +44,7 @@
             :lsp_references open-ref-float!
             :diagnostics open-diag-float!
             :lsp_document_symbols open-local-symbol-float!
-            :lsp_workspace_symbols open-workspace-symbol-float!} (require :telescope.builtin))
+            :lsp_workspace_symbols open-workspace-symbol-float!} (autoload :telescope.builtin))
     (map! [n] "<leader>li" open-impl-float!)
     (map! [n] "<leader>lr" open-ref-float!)
     (map! [n] "<leader>ls" open-local-symbol-float!)
@@ -52,6 +52,6 @@
 
 (nyoom-module-p! syntax
   (do
-    (local {:diagnostics open-diag-float!} (require :telescope.builtin))
+    (local {:diagnostics open-diag-float!} (autoload :telescope.builtin))
     (map! [n] "<leader>ld" '(open-diag-float! {:bufnr 0}))
     (map! [n] "<leader>lD" open-diag-float!)))

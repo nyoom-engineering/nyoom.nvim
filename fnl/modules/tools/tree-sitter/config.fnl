@@ -1,11 +1,12 @@
 (import-macros {: packadd! : nyoom-module-p! : map!} :macros)
-(local {: setup} (require :nvim-treesitter.configs))
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (autoload :nvim-treesitter.configs))
 
 ;; Conditionally enable leap-ast
 (nyoom-module-p! bindings
   (do
     (packadd! leap-ast.nvim)
-    (let [leap-ast (require :leap-ast)]
+    (let [leap-ast (autoload :leap-ast)]
      (map! [nxo] :gs '(leap-ast.leap) {:desc "Leap AST"}))))
 
 (local treesitter-filetypes [:comment
@@ -66,7 +67,7 @@
 
 (nyoom-module-p! org
   (do
-    (local tsp (require :nvim-treesitter.parsers))
+    (local tsp (autoload :nvim-treesitter.parsers))
     (local parser-config (tsp.get_parser_configs))
     (set parser-config.org {:filetype :org
                             :install_info {:url "https://github.com/milisims/tree-sitter-org"
@@ -76,7 +77,7 @@
 
 (nyoom-module-p! neorg
   (do
-    (local tsp (require :nvim-treesitter.parsers))
+    (local tsp (autoload :nvim-treesitter.parsers))
     (local parser-config (tsp.get_parser_configs))
     (set parser-config.norg {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg"
                                             :files [:src/parser.c :src/scanner.cc]

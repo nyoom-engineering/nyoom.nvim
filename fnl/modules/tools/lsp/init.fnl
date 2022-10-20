@@ -8,5 +8,3 @@
 (use-package! :neovim/nvim-lspconfig {:opt true
                                       :defer nvim-lspconfig
                                       :nyoom-module tools.lsp})
-
-
