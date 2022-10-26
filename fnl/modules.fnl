@@ -14,7 +14,7 @@
         dashboard            ; a nifty splash screen for neovim
         ;;nyoom-quit         ; WIP: buggy, terrible implementation of doom-quit. 
         hydra                ; the heads don't byte
-        ;;indent-guides      ; highlighted indent columns
+        indent-guides      ; highlighted indent columns
         modeline             ; snazzy, nano-emacs-inspired modeline
         nvimtree           ; a project drawer, like NERDTree for vim
         ;;tabs               ; keep tabs on your buffers, literally
@@ -47,33 +47,34 @@
         pastebin             ; interacting with pastebin platforms
         lsp                  ; :vscode 
         (neogit +forge)               ; a git porcelain for Neovim
-        rgb                ; creating color strings
+        ;; rgb                ; creating color strings
         tree-sitter)          ; syntax and parsing, sitting in a tree...
 
 (nyoom! :lang
-        cc                   ; C > C++ == 1
-        ;;clojure            ; java with a lisp
+        ;; cc                   ; C > C++ == 1
+        clojure            ; java with a lisp
         ;;common-lisp        ; if you've seen one lisp, you've seen them all
-        java                 ; the poster child for carpal tunnel syndrome
+        ;; java                 ; the poster child for carpal tunnel syndrome
         ;;julia              ; a better, faster MATLAB
         ;;kotlin             ; a better, slicker Java(Script)
-        latex                ; writing papers in Neovim has never been so fun
+        ;; latex                ; writing papers in Neovim has never been so fun
         lua                  ; one-based indices? one-based indices
-        markdown             ; writing docs for people to ignore
+        ;; markdown             ; writing docs for people to ignore
         ;;nim                ; python + lisp at the speed of c
-        ;;neorg              ; organize your plain life in plain text, the neovim way TODO +export +present
+        ;; neorg              ; organize your plain life in plain text, the neovim way TODO +export +present
         ;;(org +pretty)      ; organize your plain life in plain text, the emacs way
         ;;nix                  ; I hereby declare "nix geht mehr!"
-        python             ; beautiful is better than ugly
-        rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+        ;; python             ; beautiful is better than ugly
+        ;; rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
         (sh +fish))          ; she sells {ba,z,fi}sh shells on the C xor
         ;;zig                ; C, but simpler
 
 (nyoom! :config
         (default +bindings +smartparens))
-        ;;literate           ; literate configurations for neovim
+        ;; literate)           ; literate configurations for neovim
 
 
-(nyoom! :app
-        calendar)
+(nyoom! :app)
+        ;; calendar
+        
         ;;spotify

@@ -44,7 +44,7 @@
 ;; ---------------------
 ;; Put your plugins here
 ;; ---------------------
-(use-package! :folke/tokyonight.nvim)
+;; (use-package! :folke/tokyonight.nvim)
 (use-package! :phelipetls/jsonpath.nvim)
 (use-package! :numToStr/Comment.nvim {:config (fn []
                                                 (local {: setup } (require :Comment))

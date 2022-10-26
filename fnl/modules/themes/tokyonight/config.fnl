@@ -1,2 +1,2 @@
-(require-macros :macros)
-(colorscheme tokyonight)
+;; (require-macros :macros)
+;; (colorscheme tokyonight)

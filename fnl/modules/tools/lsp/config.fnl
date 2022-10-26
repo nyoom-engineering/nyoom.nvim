@@ -64,14 +64,14 @@
 ;; conditional lsp servesr
 (local lsp-servers [])
 
-(nyoom-module-p! clojure
-  (table.insert lsp-servers :clojure-lsp))
+;; (nyoom-module-p! clojure
+;;   (table.insert lsp-servers :clojure-lsp))
 
 ;; (nyoom-module-p! java
 ;;   (table.insert lsp-servers :jdtls))
 
-(nyoom-module-p! sh
-  (table.insert lsp-servers :bashls))
+;; (nyoom-module-p! sh
+;;   (table.insert lsp-servers :bashls))
 
 ;; (nyoom-module-p! julia
 ;;   (table.insert lsp-servers :julials))
@@ -79,11 +79,11 @@
 ;; (nyoom-module-p! kotlin
 ;;   (table.insert lsp-servers :kotlin_language_server))
 
-(nyoom-module-p! latex
-  (table.insert lsp-servers :texlab))
+;; (nyoom-module-p! latex
+;;   (table.insert lsp-servers :texlab))
 
-(nyoom-module-p! markdown
-  (table.insert lsp-servers :marksman))
+;; (nyoom-module-p! markdown
+;;   (table.insert lsp-servers :marksman))
 
 ;; (nyoom-module-p! nim
 ;;   (table.insert lsp-servers :nimls))
@@ -100,6 +100,7 @@
 (table.insert lsp-servers :lemminx)
 (table.insert lsp-servers :jsonls)
 (table.insert lsp-servers :awk_ls)
+(table.insert lsp-servers :clojure_lsp)
   
 
 
