@@ -1,5 +1,6 @@
 (import-macros {: nyoom-module-p! : autocmd!} :macros)
-(local {: setup} (require :orgmode))
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (autoload :orgmode))
 
 (setup {:org_default_notes_file "~/org/refile.org"
         :org_agenda_files ["~/org/**/*"]})

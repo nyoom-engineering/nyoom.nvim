@@ -1,8 +1,21 @@
 (import-macros {: set! : nyoom-module-p!} :macros)
-(local cmp (require :cmp))
-(local luasnip (require :luasnip))
+(local {: autoload} (require :core.lib.autoload))
+(local cmp (autoload :cmp))
+(local luasnip (autoload :luasnip))
 
 (set! completeopt [:menu :menuone :noselect])
+
+(local sources [])
+
+;; add general cmp sources
+(table.insert sources {:name :luasnip})
+(table.insert sources {:name :buffer})
+(table.insert sources {:name :path})
+
+;; add conditional sources
+(nyoom-module-p! lsp (table.insert sources {:name :nvim_lsp}))
+(nyoom-module-p! rust (table.insert sources {:name :crates}))
+(nyoom-module-p! eval (table.insert sources {:name :conjure}))
 
 ;; default icons (lspkind)
 (local icons {:Text ""
@@ -54,15 +67,7 @@
                                       (fallback)))
                                   [:i :s])
                       "<space>" (cmp.mapping.confirm {:select false})}
-            :sources [(nyoom-module-p! lsp
-                        {:name :nvim_lsp})
-                      {:name :luasnip}
-                      (nyoom-module-p! eval
-                        {:name :conjure})
-                      (nyoom-module-p! rust
-                        {:name :crates})
-                      {:name :buffer}
-                      {:name :path}]
+            :sources sources 
             :formatting {:fields {1 :kind 2 :abbr 3 :menu}
                          :format (fn [_ vim-item]
                                    (set vim-item.menu vim-item.kind)

@@ -1,5 +1,6 @@
 (import-macros {: packadd! : set! : map! : nyoom-module-p!} :macros)
-(local {: openAllFolds : closeAllFolds : setup} (require :ufo))
+(local {: autoload} (require :core.lib.autoload))
+(local {: openAllFolds : closeAllFolds : setup} (autoload :ufo))
 
 (packadd! promise-async)
 

@@ -307,6 +307,7 @@
   (-> (rotate (hex->hsluv c) n)
       (hsluv->hex)))
 
+;; gradient generations
 (fn gradient [c1 c2]
   (var ls [])
   (for [i 0.00 1.01 0.02]
@@ -320,6 +321,51 @@
       (set ls (vim.list_extend ls [(* i step)]))))
   (vim.list_extend [c1] (vim.tbl_map #(blend-hex c1 c2 $1) ls) [c2]))
 
+
+;; base16 colorscheme generation
+(math.randomseed (os.time))
+(fn random-color [red-range green-range blue-range]
+  (let [rgb {:b (math.random (. blue-range 1) (. blue-range 2))
+             :r (math.random (. red-range 1) (. red-range 2))
+             :g (math.random (. green-range 1) (. green-range 2))}]
+    (string.format "#%02x%02x%02x" rgb.r rgb.g rgb.b)))
+
+(fn generate-pallete []
+  (let [bghex (random-color [0 63] [0 63] [0 63])
+        fghex (random-color [240 255] [240 255] [240 255])]
+
+    (local palette [bghex
+                    (blend-hex bghex fghex 0.085)
+                    (blend-hex bghex fghex 0.18)
+                    (blend-hex bghex fghex 0.3)
+                    (blend-hex bghex fghex 0.7)
+                    (blend-hex bghex fghex 0.82)
+                    (blend-hex bghex fghex 0.95)
+                    fghex])
+
+    (local base16-names [:base00
+                         :base01
+                         :base02
+                         :base03
+                         :base04
+                         :base05
+                         :base06
+                         :base07
+                         :base08
+                         :base09
+                         :base0A
+                         :base0B
+                         :base0C
+                         :base0D
+                         :base0E
+                         :base0F])
+
+    (local base16-palette {})
+    (each [i hex (ipairs palette)]
+      (local name (. base16-names i))
+      (tset base16-palette name hex))
+    base16-palette))
+
 {: blend-hex
  : lighten-hex
  : darken-hex
@@ -327,4 +373,5 @@
  : desaturate-hex
  : rotate-hex
  : gradient
- : gradient-n}
+ : gradient-n
+ : generate-pallete}

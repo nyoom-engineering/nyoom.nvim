@@ -1,4 +1,5 @@
 (require-macros :macros)
+
 ;; Place your private configuration here! Remember, you do not need to run 'nyoom
 ;; sync' after modifying this file!
 

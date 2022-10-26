@@ -121,7 +121,7 @@ For this guide, replace `langname` with the language you'd like to add
 3. Use `nyoom-module-p!` to add support for your language's parsers to `tools.tree-sitter`
 4. Use `nyoom-module-p!` to add support for your language's language server to `tools.lsp`
 5. (optional) Use `nyoom-module-p!` to add support for formatting to `editor.format` if available
-6. (optional) Use `nyoom-module-p!` to add support for linting to `checkers.synatx`
+6. (optional) Use `nyoom-module-p!` to add support for linting to `checkers.syntax`
 7. (optional) Use `nyoom-module-p!` to add debugging support to `tools.debugger`
 8. (recommended) If available, add the newly configured tooling to mason in `tools.mason`
 9. (optional) Add any language-specific plugins to `fnl/modules/lang/langmane/init.fnl`

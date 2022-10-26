@@ -1,5 +1,6 @@
 (import-macros {: packadd! : nyoom-module-p!} :macros)
-(local dap (require :dap))
+(local {: autoload} (require :core.lib.autoload))
+(local dap (autoload :dap))
 
 ;; lua setup
 (nyoom-module-p! cc
@@ -48,6 +49,6 @@
      ((. (require :dap-python) :setup) "~/.virtualenvs/debugpy/bin/python")))
 
 (packadd! nvim-dap-ui)
-(local {: setup} (require :dapui))
+(local {: setup} (autoload :dapui))
 (setup)
 

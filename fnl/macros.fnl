@@ -59,10 +59,10 @@
 (λ count [xs]
   "Count the number of items in a table"
   (if
-    (table? xs) (let [maxn (table.maxn xs)]
-                  (if (= 0 maxn)
-                    (table.maxn (keys xs))
-                    maxn))
+    (tbl? xs) (let [maxn (table.maxn xs)]
+                (if (= 0 maxn)
+                  (table.maxn (keys xs))
+                  maxn))
     (not xs) 0
     (length xs)))
 
@@ -631,21 +631,6 @@
      [name value] (let-global! name value)
      _ (error "expected let! to have at least two arguments: name value")))
 
-(λ echo! [msg]
-  "Print a vim message without any format."
-  (assert-compile (str? msg) "expected string for msg" msg)
-  `(vim.notify ,msg vim.log.levels.INFO))
-
-(λ warn! [msg]
-  "Print a vim message with a warning format."
-  (assert-compile (str? msg) "expected string for msg" msg)
-  `(vim.notify ,msg vim.log.levels.WARN))
-
-(λ err! [msg]
-  "Print a vim message with an error format."
-  (assert-compile (str? msg) "expected string for msg" msg)
-  `(vim.notify ,msg vim.log.levels.ERROR))
-
 (λ sh [...]
   "simple macro to run shell commands inside fennel"
   `(let [str# 
@@ -660,6 +645,54 @@
      (fd#:close)
      (string.sub d# 1 (- (length d#) 1))))
 
+;; (λ nyoom! [...]
+;;   "Recreation of the `doom!` macro for Nyoom
+;;   See modules.fnl for usage
+;;   Accepts the following arguments:
+;;   value -> anything.
+;;   Example of use:
+;;   ```fennel
+;;   (nyoom! :catagory
+;;           module
+;;           (module +with +flags
+;;           :anothercatagory
+;;           anothermodule
+;;           (module +with +more +flags)
+;;   ```"
+;;   (var moduletag nil)
+;;   (fn nyoom-module-set [name]
+;;     (if (str? name)
+;;       (set moduletag name))
+;;     (if (sym? name)
+;;       (do
+;;         (table.insert _G.nyoom/modules name)
+;;         (let [name (->str name)
+;;               include-path (.. :fnl.modules. moduletag "." name)
+;;               config-path (.. :modules. moduletag "." name :.config)]
+;;           `(do
+;;              (include ,include-path)
+;;              (pcall require ,config-path))))
+;;       (do
+;;         (table.insert _G.nyoom/modules (first name))
+;;         (let [modulename (->str (first name))
+;;               include-path (.. :fnl.modules. moduletag "." modulename)
+;;               config-path (.. :modules. moduletag "." modulename :.config)
+;;               result `(do)]
+;;           (table.remove name 1)
+;;           (table.insert result `(include ,include-path))
+;;           (table.insert result `(pcall require ,config-path))
+;;           (each [_ v (ipairs name)]
+;;             (let [modulename (.. modulename "." (->str v))
+;;                   flag-include-path (.. include-path "." (->str v))
+;;                   flag-config-path (.. :modules. moduletag "." modulename :.config)]
+;;               (table.insert _G.nyoom/modules (sym modulename))
+;;               (table.insert result `(include ,flag-include-path))
+;;               (table.insert result `(pcall require ,flag-config-path))))
+;;           result))))
+;;   (expand-exprs 
+;;     (icollect [_ name (ipairs [...])]
+;;       (nyoom-module-set name))))
+
 (λ nyoom! [...]
   "Recreation of the `doom!` macro for Nyoom
   See modules.fnl for usage
@@ -670,7 +703,6 @@
   (nyoom! :catagory
           module
           (module +with +flags
-
           :anothercatagory
           anothermodule
           (module +with +more +flags)
@@ -783,9 +815,6 @@
  : map!
  : buf-map!
  : let!
- : echo!
- : warn!
- : err!
  : sh
  : nyoom!
  : nyoom-module!

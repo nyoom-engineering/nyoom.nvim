@@ -1,8 +1,3 @@
-(import-macros {: use-package! : set!} :macros)
+(import-macros {: nyoom-module!} :macros)
 
-(use-package! :lewis6991/spellsitter.nvim {:call-setup spellsitter
-                                           :after :nvim-treesitter
-                                           :config (fn []
-                                                     (set! spell)
-                                                     (set! spelllang [:en])
-                                                     (set! spelloptions [:camel]))})
+(nyoom-module! checkers.spell)

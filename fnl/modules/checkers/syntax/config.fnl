@@ -1,5 +1,6 @@
 (import-macros {: nyoom-module-p! : map! : autocmd!} :macros)
-(local {: try_lint : linters_by_ft} (require :lint))
+(local {: autoload} (require :core.lib.autoload))
+(local {: try_lint : linters_by_ft} (autoload :lint))
 
 ;; configure signs
 (let [{: config : severity} vim.diagnostic
