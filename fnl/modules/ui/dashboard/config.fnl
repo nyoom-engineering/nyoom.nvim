@@ -1,7 +1,10 @@
 (import-macros {: nyoom-module-p! : nyoom-package-count : nyoom-module-count} :macros)
-(local {: setup} (require :alpha))
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (autoload :alpha))
 
-(nyoom-module-p! ui.dashboard.+startuptime
+(local startup-message (.. "Nyoom loaded " (nyoom-package-count) " packages across " (nyoom-module-count) " modules"))
+
+(nyoom-module-p! dashboard.+startuptime
   (do
     ;; truncate a number to a certain decimal
     (fn truncate [num digits]
@@ -19,7 +22,9 @@
     (local compiled-or-loaded
        (if (< startup-time 0.2)
            "loaded "
-           "compiled "))))
+           "compiled "))
+
+    (local startup-message (.. startup-message " in " startup-time :s))))
 
 ;; setup alpha
 (fn button [sc txt keybind]
@@ -43,8 +48,7 @@
 
 (local bottom-text (if (= (nyoom-package-count) 0)
                      "Nyoom is in an incomplete state. Please run 'nyoom sync'" 
-                     ;; (.. "Nyoom " compiled-or-loaded (nyoom-package-count) " packages across " (nyoom-module-count) " modules in " startup-time :s)))
-                     (.. "Nyoom loaded " (nyoom-package-count) " packages across " (nyoom-module-count) " modules")))
+                     startup-message)) 
 
 (var options {:header {:type :text
                        :val ["   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          "

@@ -1,5 +1,5 @@
-(require :indent_blankline)
-(local {: setup} (require :indent_blankline))
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (setup :indent_blankline))
 
 (setup {:buftype_exclude [:terminal]
         :filetype_exclude [:help

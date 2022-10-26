@@ -1,10 +1,11 @@
 (import-macros {: map! : nyoom-module-p!} :macros)
+(local {: autoload} (require :core.lib.autoload))
 
 
 ;; hotpot fun
 (local reflect-session {:id nil :mode :compile})
 (fn new-or-attach-reflect []
-  (let [reflect (require :hotpot.api.reflect)
+  (let [reflect (autoload :hotpot.api.reflect)
         with-session-id (if reflect-session.id
                           (fn [f]
                             (f reflect-session.id))
@@ -25,7 +26,7 @@
                        (reflect.attach-input session-id 0)))))
 
 (fn swap-reflect-mode []
-  (let [reflect (require :hotpot.api.reflect)]
+  (let [reflect (autoload :hotpot.api.reflect)]
     (when reflect-session.id
       (if (= reflect-session.mode :compile)
         (set reflect-session.mode :eval)

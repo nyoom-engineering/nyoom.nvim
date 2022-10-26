@@ -1,4 +1,5 @@
-(import-macros {: packadd! : pack : rock : use-package! : rock! : unpack! : echo!} :macros)
+(import-macros {: packadd! : pack : rock : use-package! : rock! : unpack!} :macros)
+(local {: echo!} (require :core.lib.io))
 
 ;; Load packer
 (echo! "Loading Packer")

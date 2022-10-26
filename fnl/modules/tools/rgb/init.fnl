@@ -1,5 +1,7 @@
 (import-macros {: use-package!} :macros)
 
 ; show hex codes as virtualtext
-(use-package! :brenoprata10/nvim-highlight-colors {:call-setup nvim-highlight-colors 
-                                                   :cmd :HighlightColorsToggle})
+(use-package! :uga-rosa/ccc.nvim {:nyoom-module tools.rgb
+                                  :cmd [:CccPick
+                                        :CccHighlighterEnable
+                                        :CccHighlighterToggle]})

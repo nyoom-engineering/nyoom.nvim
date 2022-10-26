@@ -1,5 +1,5 @@
-(import-macros {: set! : nyoom-module-p!} :macros)
-(global Statusline {})
+(import-macros {: set! : nyoom-module-p! : vlua} :macros)
+
 (local cache {:bufnrs {}})
 (local modes {:n :RW
               :no :RO
@@ -21,9 +21,6 @@
               :r? :r
               :! "!"
               :t :})
-
-(set! laststatus 3)
-(set! cmdheight 0)
 
 ;; by default these can be blank:
 (fn get-git-status []
@@ -67,19 +64,6 @@
                                               (or branch.head ""))))
           ""))))
 
-(nyoom-module-p! lsp
-  (fn get-lsp-diagnostic []
-    (when (not (rawget vim :lsp))
-      (lua "return \"\""))
-    (local count [0 0 0 0])
-    (local result {:errors (. count vim.diagnostic.severity.ERROR)
-                   :warnings (. count vim.diagnostic.severity.WARN)
-                   :info (. count vim.diagnostic.severity.INFO)
-                   :hints (. count vim.diagnostic.severity.HINT)})
-    (string.format " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s "
-                   (or (. result :warnings) 0) (or (. result :errors) 0))))
-
-
 ;; get the number of entries of certain severity
 (nyoom-module-p! lsp
   (fn get-lsp-diagnostic []
@@ -107,6 +91,7 @@
                    count.total))
   (.. "%#Normal#" (: " %s matches " :format total)))
 
+(global Statusline {})
 (set Statusline.statusline (fn []
                              (table.concat [(color)
                                             (: (string.format " %s "
@@ -122,11 +107,12 @@
                                             (get-filetype)
                                             (get-searchcount)])))
 
-(set! statusline "%!v:lua.Statusline.statusline()")
-
 (set Statusline.winbar (fn []
                          (table.concat ["%#Comment#"
                                         " %f "])))
 
-(set! winbar "%!v:lua.Statusline.winbar()")
+(set! laststatus 3)
+(set! cmdheight 0)
+(set! statusline (.. "%!" (vlua Statusline.statusline)))
+(set! winbar (.. "%!" (vlua Statusline.winbar)))
 

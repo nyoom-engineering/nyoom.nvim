@@ -1,4 +1,5 @@
-(local {: setup} (require :rust-tools))
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (autoload :rust-tools))
 
 (setup {:tools {:server {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
                 :hover_actions {:border [[" " :FloatBorder]

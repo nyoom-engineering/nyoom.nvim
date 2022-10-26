@@ -1,7 +1,8 @@
 (import-macros {: nyoom-module-p!} :macros)
+(local {: autoload} (require :core.lib.autoload))
 
 ;; Init mason
-(local {: setup} (require :mason))
+(local {: setup} (autoload :mason))
 (setup {:ui {:border :solid}})
 
 (local mason-tools [])

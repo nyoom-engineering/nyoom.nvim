@@ -1,4 +1,6 @@
-(import-macros {: nyoom-module-p! : set! : augroup! : autocmd! : command! : warn!} :macros)
+(import-macros {: nyoom-module-p! : set! : augroup! : autocmd! : command!} :macros)
+(local {: autoload} (require :core.lib.autoload))
+(local {: warn!} (autoload :core.lib.io))
 
 ;; Restore cursor on exit
 (augroup! restore-cursor-on-exit
@@ -83,6 +85,6 @@
 ;; colorscheme
 (nyoom-module-p! nyoom
  (do
-   (set! guifont "Liga SFMono Nerd Font:h15")
+   (set! guifont "Scientifica:h15")
    (set! background :dark)
    (set! termguicolors)))

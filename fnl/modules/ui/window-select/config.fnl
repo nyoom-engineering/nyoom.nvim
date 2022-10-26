@@ -1,5 +1,6 @@
 (import-macros {: map!} :macros)
-(local {: setup : pick_window} (require :window-picker))
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup : pick_window} (autoload :window-picker))
 
 (setup {:include_current_win true})
 
