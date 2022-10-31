@@ -52,6 +52,10 @@
 (use-package! :kylechui/nvim-surround {:config (fn []
                                                  (local {: setup} (require :nvim-surround))
                                                  (setup))})
+(use-package! :luukvbaal/nnn.nvim {:config (fn []
+                                             (local {: setup} (require :nnn))
+                                             (setup))})
+                                             
 ;; (use-package! :phaazon/notisys.nvim {:branch "v0.1"
 ;;                                      :call-setup :notisys})
 ;; (use-package! :folke/noice.nvim {:event [:VimEnter]
@@ -60,7 +64,6 @@
 ;;                                            (setup))
 ;;                                  :requires [(pack :MunifTanjim/nui.nvim {:opt true})
 ;;                                             (pack :rcarriga/nvim-notify {:opt true})]})
-                                                
 ;; Send plugins to packer
 (echo! "Installing Packages")
 (unpack!)

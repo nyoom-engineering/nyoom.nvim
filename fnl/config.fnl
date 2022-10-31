@@ -34,6 +34,7 @@
 
 ;; Explorer
 (map! [n] "<leader>op" "<cmd>NvimTreeToggle<CR>")
+(map! [n] "<leader>o-" "<cmd>NnnExplorer %:p:h<CR>")
 ;;(map! [n] "<leader>o-" "<cmd>NnnPicker %:p:h<CR>")
 
 ;; Terminal

@@ -1,5 +1,6 @@
 (local {: setup
-        : set_default_keymaps} (require :leap))
+        : add_default_mappings} (require :leap))
 
 (setup {:case_insensitive false})
-(set_default_keymaps)
+                       
+(add_default_mappings)
