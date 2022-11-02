@@ -9,6 +9,9 @@ setup_envs() {
 
 setup_envs
 
+# Change directory to config directory
+pushd ${CONFIG_PATH}
+
 case "${1:-}" in
   "")
     printf "%s\n%s\n  %s\n%s\n" \
@@ -68,3 +71,5 @@ case "${1:-}" in
     fi
     ;;
 esac
+# Get out of ${CONFIG_PATH}
+popd
