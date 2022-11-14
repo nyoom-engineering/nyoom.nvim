@@ -34,8 +34,8 @@
 
 ;; Explorer
 (map! [n] "<leader>op" "<cmd>NvimTreeToggle<CR>")
-(map! [n] "<leader>o-" "<cmd>NnnExplorer %:p:h<CR>")
-;;(map! [n] "<leader>o-" "<cmd>NnnPicker %:p:h<CR>")
+;; (map! [n] "<leader>o-" "<cmd>NnnExplorer %:p:h<CR>")
+(map! [n] "<leader>o-" "<cmd>NnnPicker %:p:h<CR>")
 
 ;; Terminal
 (map! [n] "<leader>ot" "<cmd>exe v:count1 . 'ToggleTerm'<cr>")

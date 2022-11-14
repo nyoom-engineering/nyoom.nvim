@@ -5,7 +5,7 @@
 (nyoom! :completion
         cmp                  ; the ultimate code completion backend
         ;;compleet           ; FIXME the *other* ultimate code completion backend
-        copilot              ; the code completion of the future
+        ;copilot              ; the code completion of the future
         ;;fzf-lua            ; TODO a search engine for love and life
         (telescope +native)) ; the search engine of the future
 
@@ -33,9 +33,9 @@
         scratch              ; emacs-like scratch buffer functionality
         word-wrap)           ; language-aware smart soft and hard wrapping
 
-(nyoom! :term)
+(nyoom! :term
         ;;fshell             ; WIP: the fennel shell that works everywhere
-        ;;toggleterm)        ; persistant/floating terminal wrapper for :term
+        toggleterm)        ; persistant/floating terminal wrapper for :term
 
 (nyoom! :checkers
         syntax)           ; tasing you for misspelling mispelling
@@ -76,5 +76,4 @@
 
 (nyoom! :app)
         ;; calendar
-        
         ;;spotify

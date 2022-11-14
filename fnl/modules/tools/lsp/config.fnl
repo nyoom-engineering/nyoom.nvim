@@ -101,6 +101,7 @@
 (table.insert lsp-servers :jsonls)
 (table.insert lsp-servers :awk_ls)
 (table.insert lsp-servers :clojure_lsp)
+(table.insert lsp-servers :bashls)
   
 
 

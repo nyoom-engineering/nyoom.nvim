@@ -2,7 +2,6 @@
 
 ; git-gutter but better
 (use-package! :lewis6991/gitsigns.nvim {:call-setup gitsigns
-                                        :ft :gitcommit
                                         :setup (fn []
                                                  (vim.api.nvim_create_autocmd [:BufRead]
                                                                               {:callback (fn []
