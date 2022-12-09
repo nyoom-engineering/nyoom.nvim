@@ -1,4 +1,4 @@
-(import-macros {: colorscheme : set! : let! : map!} :macros)
+(require-macros :macros)
 (local {: autoload} (require :core.lib.autoload))
 (local {: after} (autoload :core.lib.setup))
 
@@ -24,7 +24,8 @@
 
 (map! [n] :<esc> :<esc><cmd>noh<cr>)
 
-;; sometimes you want to modify a plugin thats loaded from within a module. For this you can use the `after` function
+;; sometimes you want to modify a plugin thats loaded from within a module. For 
+;; this you can use the `after` function
 
 (after :neorg
        {:load {:core.norg.dirman {:config {:workspaces {:main "~/neorg"}}}}})

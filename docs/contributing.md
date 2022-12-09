@@ -1,0 +1,13 @@
+---
+title: Contributing
+description: How to contribute to Nyoom
+author: shaunsingh
+categories: docs
+created: 2022-11-24
+version: 0.1.0
+---
+
+
+# Contributing
+
+TODO. Nyoom is still quite early and the syntax for declaring modules isn't quite done yet. Stay tuned!

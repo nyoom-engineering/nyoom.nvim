@@ -1,0 +1,16 @@
+---
+title: Examples
+description: Examples of Nyoom configurations
+author: shaunsingh
+categories: docs
+created: 2022-12-09
+version: 0.1.0
+---
+
+
+# Introduction
+
+Examples speak louder than technical explanations, so this file exists to house examples of Nyoom’s (and Nvim’) concepts, libraries, dotfiles, and more, for your own reference. This section is dedicated to examples of concepts and libraries only relevant to Nyoom and its users. These are intended to be demonstrations, not substitutes for documentation.
+
+TODO
+
