@@ -30,7 +30,7 @@ version: 0.1.0
 
 ** `:checkers`
    For modules dedicated to linting plain text, primarily code and prose. 
-*** syntax
+*** diagnostics
     @code
     tasing you for every semicolon you forget
     @end

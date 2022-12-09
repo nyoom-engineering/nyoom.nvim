@@ -17,16 +17,13 @@
 (table.insert cmp-sources {:name :path :group_index 2})
 (table.insert cmp-sources {:name :path :group_index 2})
 
-;; add conditional sources
-
-(nyoom-module-p! lsp
-                 (table.insert cmp-sources {:name :nvim_lsp :group_index 1}))
-
 (nyoom-module-p! rust (table.insert cmp-sources {:name :crates :group_index 1}))
 (nyoom-module-p! neorg (table.insert cmp-sources {:name :neorg :group_index 1}))
 (nyoom-module-p! eval
                  (table.insert cmp-sources {:name :conjure :group_index 1}))
-;; copilot
+
+(nyoom-module-p! lsp
+                 (table.insert cmp-sources {:name :nvim_lsp :group_index 1}))
 
 (nyoom-module-p! copilot
                  (do
@@ -44,46 +41,38 @@
                                                         (- line 1) col {})
                              1) :match "^%s*$") nil)))
 
-(fn border [hl-name]
-  :solid)
-
-(local cmp-window (require :cmp.utils.window))
-
-;; default icons (lspkind)
-
-(local icons {:Text ""
-              :Method ""
-              :Function ""
-              :Constructor "⌘"
-              :Field "ﰠ"
-              :Variable ""
-              :Class "ﴯ"
-              :Interface ""
-              :Module ""
-              :Unit "塞"
-              :Property "ﰠ"
-              :Value ""
-              :Enum ""
-              :Keyword "廓"
-              :Snippet ""
-              :Color ""
-              :File ""
-              :Reference ""
-              :Folder ""
-              :EnumMember ""
-              :Constant ""
-              :Struct "פּ"
-              :Event ""
-              :Operator ""
-              :Copilot ""
-              :TypeParameter ""})
+(local icons {:Text "  "
+              :Method "  "
+              :Function "  "
+              :Constructor "  "
+              :Field "  "
+              :Variable "  "
+              :Class "  "
+              :Interface "  "
+              :Module "  "
+              :Property "  "
+              :Unit "  "
+              :Value "  "
+              :Enum "  "
+              :Keyword "  "
+              :Snippet "  "
+              :Color "  "
+              :File "  "
+              :Reference "  "
+              :Folder "  "
+              :EnumMember "  "
+              :Constant "  "
+              :Struct "  "
+              :Event "  "
+              :Operator "  "
+              :Copilot "  "
+              :TypeParameter "  "})
 
 (setup :cmp {:experimental {:ghost_text true}
-             :window {:documentation {:border (border :CmpDocBorder)
-                                      :max_height 30}
-                      :completion {:border (border :CmpBorder)
-                                   :max_height 30
-                                   :scrolloff 5}}
+             :window {:documentation {:border :solid}
+                      :completion {:border :solid
+                                   :col_offset -3
+                                   :side_padding 0}}
              :view {:entries {:name :custom :selection_order :near_cursor}}
              :preselect cmp.PreselectMode.None
              :snippet {:expand (fn [args]
@@ -137,10 +126,7 @@
                    {:mapping (cmp.mapping.preset.cmdline)
                     :sources [{:name :path} {:name :cmdline :group_index 1}]})
 
-;; snippets
-
-((. (require :luasnip.loaders.from_vscode) :lazy_load))
-((. (require :luasnip.loaders.from_lua) :lazy_load))
+;; copilot menus
 
 (nyoom-module-p! copilot (cmp.event:on :menu_opened
                                        (fn []
@@ -149,3 +135,7 @@
                  (cmp.event:on :menu_closed
                                (fn []
                                  (set vim.b.copilot_suggestion_hidden false))))
+
+;; snippets
+
+((. (autoload :luasnip.loaders.from_vscode) :lazy_load))

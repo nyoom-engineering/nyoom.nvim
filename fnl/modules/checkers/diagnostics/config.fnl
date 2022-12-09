@@ -5,11 +5,9 @@
 (local {: diagnostic-icons} (autoload :core.shared))
 (local null-ls (autoload :null-ls))
 (local null-ls-sources [])
-
 ;; ensures
 
 (nyoom-module-ensure! lsp)
-
 ;; configure signs
 
 (let [{: config : severity} vim.diagnostic
@@ -85,7 +83,7 @@
                  (do
                    (nyoom-module-p! lua
                                     (table.insert null-ls-sources
-                                                  null-ls.builtins.formatting.selene))
+                                                  null-ls.builtins.diagnostics.selene))
                    (nyoom-module-p! markdown
                                     (nyoom-module-p! grammar
                                                      (table.insert null-ls-sources

@@ -7,15 +7,15 @@ if pcall(require, "hotpot") then
             modules = {
                 -- not default but recommended, align lua lines with fnl source
                 -- for more debuggable errors, but less readable lua.
-                correlate = true
+                correlate = true,
             },
             macros = {
                 -- allow macros to access vim global, needed for nyoom modules
                 env = "_COMPILER",
                 compilerEnv = _G,
                 allowGlobals = true,
-            }
-        }
+            },
+        },
     })
     require("core")
 else

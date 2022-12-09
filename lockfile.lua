@@ -31,6 +31,7 @@ return {
   ["nabla.nvim"] = { commit = "c5496bb", date = "1669123559" },
   ["neogit"] = { commit = "19bc837", date = "1670321511" },
   ["neorg"] = { commit = "a79bf596", date = "1670272172" },
+  ["nim.nvim"] = { commit = "87afde2", date = "1659961705" },
   ["noice.nvim"] = { commit = "e013b6e", date = "1670090452" },
   ["nui.nvim"] = { commit = "d12a697", date = "1666860078" },
   ["null-ls.nvim"] = { commit = "a0acd49", date = "1670516492" },
@@ -54,6 +55,7 @@ return {
   ["octo.nvim"] = { commit = "b75630f", date = "1666126221" },
   ["one-small-step-for-vimkind"] = { commit = "4ca4df5", date = "1668856117" },
   ["packer.nvim"] = { commit = "191d37b", date = "1669646807" },
+  ["paperplanes.nvim"] = { commit = "d704b2e", date = "1664467872" },
   ["parinfer-rust"] = { commit = "55ce1e0", date = "1661707472" },
   ["playground"] = { commit = "1290fdf", date = "1668674170" },
   ["plenary.nvim"] = { commit = "4b7e520", date = "1664607953" },
@@ -68,4 +70,6 @@ return {
   ["trouble.nvim"] = { commit = "897542f", date = "1668579978" },
   ["true-zen.nvim"] = { commit = "98740c7", date = "1659883982" },
   ["vim-repeat"] = { commit = "24afe92", date = "1611544268" },
+  ["vimtex"] = { commit = "7a887028", date = "1670364587" },
+  ["vlime"] = { commit = "3205f02", date = "1636437398" },
 }

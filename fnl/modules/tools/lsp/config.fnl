@@ -3,6 +3,7 @@
 (local {: deep-merge} (autoload :core.lib.tables))
 (local lsp (autoload :lspconfig))
 (local lsp-servers {})
+
 ;;; Improve UI
 
 (set vim.lsp.handlers.textDocument/signatureHelp
@@ -80,7 +81,7 @@
 
 ;; conditional servers
 
-(nyoom-module-p! clojure (tset lsp-servers :clojure-lsp {}))
+(nyoom-module-p! clojure (tset lsp-servers :clojure_lsp {}))
 
 (nyoom-module-p! java (tset lsp-servers :jdtls {}))
 
@@ -88,7 +89,7 @@
 
 (nyoom-module-p! julia (tset lsp-servers :julials {}))
 
-(nyoom-module-p! kotlin (tset lsp-servers :kotlin_age_server {}))
+(nyoom-module-p! kotlin (tset lsp-servers :kotlin_langage_server {}))
 
 (nyoom-module-p! latex (tset lsp-servers :texlab {}))
 
@@ -112,6 +113,7 @@
                                                        :disableOrganizeImports false}}}}))
 
 (nyoom-module-p! zig (tset lsp-servers :zls {}))
+
 ;; Load lsp
 
 (let [servers lsp-servers]

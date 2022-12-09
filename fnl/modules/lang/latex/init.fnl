@@ -1,4 +1,3 @@
-(import-macros {: use-package! : nyoom-module!} :macros)
-(nyoom-module! lang.latex)
+(import-macros {: use-package!} :macros)
 
 (use-package! :lervag/vimtex {:ft [:tex :bib]})
