@@ -3,11 +3,9 @@
 (local {: setup} (require :core.lib.setup))
 (local cmp (autoload :cmp))
 (local luasnip (autoload :luasnip))
-
 ;; vim settings
 
 (set! completeopt [:menu :menuone :noselect])
-
 ;; add general cmp sources
 
 (local cmp-sources [])
@@ -22,8 +20,12 @@
 (nyoom-module-p! eval
                  (table.insert cmp-sources {:name :conjure :group_index 1}))
 
-(nyoom-module-p! lsp
-                 (table.insert cmp-sources {:name :nvim_lsp :group_index 1}))
+(nyoom-module-p! lsp (do
+                       (table.insert cmp-sources
+                                     {:name :nvim_lsp :group_index 1})
+                       (table.insert cmp-sources
+                                     {:name :nvim_lsp_signature_help
+                                      :group_index 1})))
 
 (nyoom-module-p! copilot
                  (do
@@ -31,15 +33,7 @@
                    (setup :copilot_cmp)
                    (table.insert cmp-sources {:name :copilot :group_index 2})))
 
-;; copilot uses lines above/below current text which confuses cmp, fix:
-
-(fn has-words-before []
-  (when (= (vim.api.nvim_buf_get_option 0 :buftype) :prompt)
-    (lua "return false"))
-  (local (line col) (unpack (vim.api.nvim_win_get_cursor 0)))
-  (and (not= col 0) (= (: (. (vim.api.nvim_buf_get_text 0 (- line 1) 0
-                                                        (- line 1) col {})
-                             1) :match "^%s*$") nil)))
+;; lsp icons
 
 (local icons {:Text "  "
               :Method "  "
@@ -68,12 +62,27 @@
               :Copilot "  "
               :TypeParameter "  "})
 
+;; copilot uses lines above/below current text which confuses cmp, fix:
+
+(fn has-words-before []
+  (when (= (vim.api.nvim_buf_get_option 0 :buftype) :prompt)
+    (lua "return false"))
+  (local (line col) (unpack (vim.api.nvim_win_get_cursor 0)))
+  (and (not= col 0) (= (: (. (vim.api.nvim_buf_get_text 0 (- line 1) 0
+                                                        (- line 1) col {})
+                             1) :match "^%s*$") nil)))
+
 (setup :cmp {:experimental {:ghost_text true}
              :window {:documentation {:border :solid}
-                      :completion {:border :solid
-                                   :col_offset -3
-                                   :side_padding 0}}
+                      :completion {:col_offset (- 3)
+                                   :side_padding 0
+                                   :winhighlight "Normal:Pmenu,FloatBorder:Pmenu,Search:None"}}
              :view {:entries {:name :custom :selection_order :near_cursor}}
+             :enabled (fn []
+                        (local context (autoload :cmp.config.context))
+                        (if (= (. (vim.api.nvim_get_mode) :mode) :c) true
+                            (and (not (context.in_treesitter_capture :comment))
+                                 (not (context.in_syntax_group :Comment)))))
              :preselect cmp.PreselectMode.None
              :snippet {:expand (fn [args]
                                  (luasnip.lsp_expand args.body))}
@@ -107,7 +116,7 @@
                        :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Replace
                                                    :select false})
                        :<space> (cmp.mapping.confirm {:select false})}
-             : cmp-sources
+             :sources cmp-sources
              :formatting {:fields {1 :kind 2 :abbr 3 :menu}
                           :format (fn [_ vim-item]
                                     (set vim-item.menu vim-item.kind)
