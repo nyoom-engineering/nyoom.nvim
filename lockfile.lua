@@ -17,7 +17,6 @@ return {
   ["copilot.lua"] = { commit = "741f62c", date = "1670391294" },
   ["crates.nvim"] = { commit = "22fcb7a", date = "1670466036" },
   ["diffview.nvim"] = { commit = "85903aa", date = "1670502769" },
-  ["flit.nvim"] = { commit = "be110f9", date = "1665756443" },
   ["friendly-snippets"] = { commit = "9b3e497", date = "1670268523" },
   ["gitsigns.nvim"] = { commit = "d076301", date = "1669826718" },
   ["hotpot.nvim"] = { commit = "e422268", date = "1669984174" },

@@ -2,8 +2,9 @@
 (local {: autoload} (require :core.lib.autoload))
 (local {: setup} (require :core.lib.setup))
 (local {: on-attach} (autoload :modules.tools.lsp.config))
-(local {: diagnostic-icons : null-ls-sources} (autoload :core.shared))
+(local {: diagnostic-icons} (autoload :core.shared))
 (local null-ls (autoload :null-ls))
+(local null-ls-sources [])
 
 ;; ensures
 
@@ -55,6 +56,9 @@
                    (nyoom-module-p! kotlin
                                     (table.insert null-ls-sources
                                                   null-ls.builtins.formatting.ktlint))
+                   (nyoom-module-p! lua
+                                    (table.insert null-ls-sources
+                                                  null-ls.builtins.formatting.stylua))
                    (nyoom-module-p! markdown
                                     (table.insert null-ls-sources
                                                   null-ls.builtins.formatting.markdownlint))
@@ -79,6 +83,9 @@
 
 (nyoom-module-p! diagnostics
                  (do
+                   (nyoom-module-p! lua
+                                    (table.insert null-ls-sources
+                                                  null-ls.builtins.formatting.selene))
                    (nyoom-module-p! markdown
                                     (nyoom-module-p! grammar
                                                      (table.insert null-ls-sources

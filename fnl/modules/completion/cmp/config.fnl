@@ -1,18 +1,22 @@
 (import-macros {: set! : nyoom-module-p! : packadd!} :macros)
 (local {: autoload} (require :core.lib.autoload))
 (local {: setup} (require :core.lib.setup))
-(local {: cmp-sources} (require :core.shared))
 (local cmp (autoload :cmp))
 (local luasnip (autoload :luasnip))
+
 ;; vim settings
 
 (set! completeopt [:menu :menuone :noselect])
+
 ;; add general cmp sources
+
+(local cmp-sources [])
 
 (table.insert cmp-sources {:name :luasnip :group_index 1})
 (table.insert cmp-sources {:name :buffer :group_index 2})
 (table.insert cmp-sources {:name :path :group_index 2})
 (table.insert cmp-sources {:name :path :group_index 2})
+
 ;; add conditional sources
 
 (nyoom-module-p! lsp
@@ -44,6 +48,7 @@
   :solid)
 
 (local cmp-window (require :cmp.utils.window))
+
 ;; default icons (lspkind)
 
 (local icons {:Text ""

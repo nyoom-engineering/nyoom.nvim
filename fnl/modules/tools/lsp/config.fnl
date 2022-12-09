@@ -1,8 +1,8 @@
 (import-macros {: nyoom-module-p!} :macros)
 (local {: autoload} (require :core.lib.autoload))
 (local {: deep-merge} (autoload :core.lib.tables))
-(local {: lsp-servers} (autoload :core.shared))
 (local lsp (autoload :lspconfig))
+(local lsp-servers {})
 ;;; Improve UI
 
 (set vim.lsp.handlers.textDocument/signatureHelp
@@ -91,6 +91,12 @@
 (nyoom-module-p! kotlin (tset lsp-servers :kotlin_age_server {}))
 
 (nyoom-module-p! latex (tset lsp-servers :texlab {}))
+
+(nyoom-module-p! lua
+                 (tset lsp-servers :sumneko_lua
+                       {:settings {:Lua {:diagnostics {:globals [:vim]}
+                                         :workspace {:library (vim.api.nvim_list_runtime_paths)
+                                                     :maxPreload 100000}}}}))
 
 (nyoom-module-p! markdown (tset lsp-servers :marksman {}))
 

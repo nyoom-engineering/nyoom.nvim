@@ -5,10 +5,8 @@
 ;; Set leader to space by default
 
 (let! mapleader " ")
-;; leap and friends
 
 (leap.add_default_mappings)
-(setup :flit)
 ;; easier command line mode + 
 
 (map! [n] ";" ":" {:desc :vim-ex})

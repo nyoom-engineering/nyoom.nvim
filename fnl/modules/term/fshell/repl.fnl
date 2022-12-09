@@ -1,4 +1,5 @@
 ;; heavily modified version of https://github.com/gpanders/fennel-repl.nvim to function as a shell
+
 (local {: autoload} (require :core.lib.autoload))
 (local fennel (autoload :fennel))
 
@@ -12,15 +13,16 @@ endfunction")
 
 (fn create-buf []
   (let [bufnr (vim.api.nvim_create_buf true true)]
-   (doto bufnr
-     (vim.api.nvim_buf_set_name (: "fennel-repl.%d" :format state.n))
-     (vim.api.nvim_buf_set_option :buftype :prompt)
-     (vim.api.nvim_buf_set_option :filetype :fennel)
-     (vim.api.nvim_buf_set_option :complete ".")
-     (vim.fn.prompt_setcallback :FennelReplCallback)
-     (vim.fn.prompt_setprompt (.. "$ ")))
-   (vim.api.nvim_command (: "autocmd BufEnter <buffer=%d> startinsert" :format bufnr))
-   bufnr))
+    (doto bufnr
+      (vim.api.nvim_buf_set_name (: "fennel-repl.%d" :format state.n))
+      (vim.api.nvim_buf_set_option :buftype :prompt)
+      (vim.api.nvim_buf_set_option :filetype :fennel)
+      (vim.api.nvim_buf_set_option :complete ".")
+      (vim.fn.prompt_setcallback :FennelReplCallback)
+      (vim.fn.prompt_setprompt (.. "$ ")))
+    (vim.api.nvim_command (: "autocmd BufEnter <buffer=%d> startinsert" :format
+                             bufnr))
+    bufnr))
 
 (fn create-win [bufnr opts]
   (let [mods (or opts.mods "")]
@@ -34,8 +36,7 @@ endfunction")
 (fn find-repl-win [bufnr]
   (. (icollect [_ win (ipairs (vim.api.nvim_list_wins))]
        (when (= (vim.api.nvim_win_get_buf win) bufnr)
-         win))
-     1))
+         win)) 1))
 
 (fn close [bufnr]
   (let [win (find-repl-win bufnr)]
@@ -53,24 +54,24 @@ endfunction")
         paren? (string.match input "(%b())")
         repl-cmd? (string.match input "^(,)")
         input (if (and (not paren?) (not repl-cmd?))
-                (.. "(sh " input ")") input)]
+                  (.. "(sh " input ")")
+                  input)]
     (if (not paren?) (set output-sh true))
     (and input (.. input "\n"))))
 
 (fn on-values [vals]
-  (local vals
-    (if output-sh 
-      (icollect [i v (ipairs vals)]
-                (string.gsub v "\"" "")) vals))
+  (local vals (if output-sh
+                  (icollect [i v (ipairs vals)]
+                    (string.gsub v "\"" ""))
+                  vals))
   (coroutine.yield -1 (.. (table.concat vals "\t") "\n"))
   (if output-sh (set output-sh (not output-sh))))
 
 (fn on-error [errtype err lua-source]
-  (coroutine.yield
-    -1
-    (match errtype
-      "Runtime" (.. (fennel.traceback (tostring err) 4) "\n")
-      _ (: "%s error: %s\n" :format errtype (tostring err)))))
+  (coroutine.yield -1
+                   (match errtype
+                     :Runtime (.. (fennel.traceback (tostring err) 4) "\n")
+                     _ (: "%s error: %s\n" :format errtype (tostring err)))))
 
 (fn write [bufnr ...]
   (let [text (-> (table.concat [...] " ") (string.gsub "\\n" "\n"))
@@ -85,7 +86,7 @@ endfunction")
 
 (fn callback [bufnr text]
   (let [(ok? stack-size out) (coroutine.resume state.coro text)]
-    (if (and ok? (= (coroutine.status state.coro) "suspended"))
+    (if (and ok? (= (coroutine.status state.coro) :suspended))
         (do
           (->> (if (< 0 stack-size) ".." "$ ")
                (vim.fn.prompt_setprompt bufnr))
@@ -110,15 +111,14 @@ endfunction")
       (tset env :print #(write bufnr $... "\n"))
       (tset fenv :xpcall xpcall*)
       (let [repl (setfenv fennel.repl fenv)]
-        (set state.coro (coroutine.create #(repl {: env
-                                                  :allowedGlobals false
-                                                  :pp fennel.view
-                                                  :readChunk read-chunk
-                                                  :onValues on-values
-                                                  :onError on-error})))
+        (set state.coro
+             (coroutine.create #(repl {: env
+                                       :allowedGlobals false
+                                       :pp fennel.view
+                                       :readChunk read-chunk
+                                       :onValues on-values
+                                       :onError on-error})))
         (coroutine.resume state.coro)))
     bufnr))
 
-{: open
- : callback}
-
+{: open : callback}

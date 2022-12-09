@@ -1,10 +1,10 @@
 (import-macros {: nyoom-module-p!} :macros)
 (local {: autoload} (require :core.lib.autoload))
 (local {: setup} (require :core.lib.setup))
-(local {: mason-tools} (autoload :core.shared))
 
 ;; Init mason
 
+(local mason-tools [])
 (setup :mason {:ui {:border :solid} :PATH :skip})
 
 ;; language servers

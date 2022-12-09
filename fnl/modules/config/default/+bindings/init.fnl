@@ -4,7 +4,6 @@
 (use-package! :ggandor/leap.nvim
               {:nyoom-module config.default.+bindings
                :requires [(pack :ggandor/leap-ast.nvim {:opt true})
-                          (pack :ggandor/flit.nvim)
                           (pack :tpope/vim-repeat)
                           (pack :numToStr/Comment.nvim
                                 {:opt true

@@ -2,6 +2,7 @@
 (local {: autoload} (require :core.lib.autoload))
 (local {: setup} (require :core.lib.setup))
 (local {: echo!} (autoload :core.lib.io))
+
 ;; truncate a number to a certain decimal
 
 (fn truncate [num digits]
@@ -37,6 +38,7 @@
                              load-counter unload-counter)))
 
 (: (io.open startup-file :w) :close)
+
 ;; setup alpha
 
 (fn button [sc txt keybind]
