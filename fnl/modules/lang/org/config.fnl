@@ -1,9 +1,11 @@
-(import-macros {: nyoom-module-p! : autocmd!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :orgmode))
+(import-macros {: autocmd!} :macros)
 
-(setup {:org_default_notes_file "~/org/refile.org"
-        :org_agenda_files ["~/org/**/*"]})
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (require :core.lib.setup))
+
+(setup :orgmode {:org_default_notes_file "~/org/refile.org"
+                 :org_agenda_files ["~/org/**/*"]})
 
 ;; Load tablemode on org enter
-(autocmd! VimEnter *.org '(vim.cmd.TableModeToggle))
+
+(autocmd! VimEnter *.org `(vim.cmd.TableModeToggle))

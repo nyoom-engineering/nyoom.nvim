@@ -1,3 +1,2 @@
-(import-macros {: use-package!} :macros)
-
-(use-package! :mfussenegger/nvim-dap-python {:opt true})
+(import-macros {: nyoom-module!} :macros)
+(nyoom-module! lang.python)

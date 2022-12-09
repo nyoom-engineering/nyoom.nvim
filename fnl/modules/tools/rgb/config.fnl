@@ -1,10 +1,10 @@
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :ccc))
+(local {: setup} (require :core.lib.setup))
 
-(setup {:bar_char "■"
-        :point_char "◇"
-        :win_opts {:border :solid
-                   :style :minimal
-                   :col 1
-                   :row 1
-                   :relative :cursor}})
+(setup :ccc {:bar_char "■"
+             :point_char "◇"
+             :win_opts {:border :solid
+                        :style :minimal
+                        :col 1
+                        :row 1
+                        :relative :cursor}})

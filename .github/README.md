@@ -43,9 +43,7 @@ It also aligns with many of Doom's features:
 - A declarative package management and module system (inspired by `use-package`, powered by [Packer.nvim](https://github.com/wbthomason/packer.nvim)). Install packages from anywhere, and pin them to any commit.
 - A Space(vim)-esque keybinding scheme, centered around leader and localleader prefix keys (SPC and SPCm).
 - Project search (and replace) utilities, powered by ripgrep, and telescope.
-
-However, it also disagrees with some of those ideals
-- Packages are not pinned to commits *by default*. This configuration is still quite a bit simpler than doom emacs, and breaking changes are usually few and far between.  Of course, you are free to pin packages yourself (and use [:PackerSnapshot](https://github.com/wbthomason/packer.nvim/pull/370)). 
+- Reproducability with a provided lockfile.
 
 For more info, checkout our (under construction) [FAQ](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/faq.md)
 
@@ -60,7 +58,7 @@ Moved to [changelog.md](https://github.com/shaunsingh/nyoom.nvim/blob/master/doc
 ## Feature Overview
 - Fast (avg. 30ms) loading and a declarative package manage system using Nyoom! macros and [Packer.nvim](https://github.com/wbthomason/packer.nvim).
 - Lispy editing with [Conjure](https://github.com/Olical/conjure), [Hotpot](https://github.com/rktjmp/hotpot.nvim), and Parinfer.
-- An "oxidized" Rust version of the [IBM Carbon](https://carbondesignsystem.com/guidelines/color/overview/#themes) light & dark colorschemes using [Nvim-Oxi](https://github.com/noib3/nvim-oxi)
+- A fennel version of the [IBM Carbon](https://carbondesignsystem.com/guidelines/color/overview/#themes) dark colorscheme
 - Easy to use mappings, motions, and hydras with [Hydra](https://github.com/anuvyklack/hydra.nvim) and [Leap](https://github.com/ggandor/leap.nvim). Don't worry, the heads don't bite!
 - Fuzzy file navigation and selections with [Telescope](https://github.com/nvim-telescope/telescope.nvim), [Fzf-Native](https://github.com/nvim-telescope/telescope-fzf-native.nvim), and [Nvim-Tree](https://github.com/kyazdani42/nvim-tree.lua)
 - Syntax highlighting, smarter textobjects, distinctive parenthesis, and better refactoring with [Nvim-Treesitter](https://github.com/nvim-treesitter/nvim-treesitter), [Nvim-Ts-Rainbow](https://github.com/p00f/nvim-ts-rainbow) and [Nvim-Treesitter-Textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)

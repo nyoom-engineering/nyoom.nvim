@@ -1,17 +1,19 @@
-(import-macros {: packadd! : set! : map! : nyoom-module-p!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: openAllFolds : closeAllFolds : setup} (autoload :ufo))
+(import-macros {: packadd! : set! : map! : nyoom-module-ensure!} :macros)
 
+(nyoom-module-ensure! tree-sitter)
 (packadd! promise-async)
+
+(local {: autoload} (require :core.lib.autoload))
+(local {: setup} (require :core.lib.setup))
+(local {: openAllFolds : closeAllFolds} (autoload :ufo))
 
 (set! foldcolumn :1)
 (set! foldlevel 99)
 (set! foldlevelstart 99)
 (set! foldenable true)
 
-(map! [n] :zR '(openAllFolds))
-(map! [n] :zM '(closeAllFolds))
+(map! [n] :zR `(openAllFolds))
+(map! [n] :zM `(closeAllFolds))
 
-(setup (nyoom-module-p! tree-sitter
-            {:provider_selector (fn [bufnr filetype buftype]
-                                  [:treesitter :indent])}))
+(setup :ufo {:provider_selector (fn [bufnr filetype buftype]
+                                  [:treesitter :indent])})

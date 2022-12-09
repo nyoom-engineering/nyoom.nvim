@@ -3,6 +3,7 @@
 ; fuzzy finder
 (use-package! :nvim-lua/telescope.nvim
               {:nyoom-module completion.telescope
+               :module ["telescope"]
                :cmd :Telescope
                :requires [(pack :nvim-telescope/telescope-ui-select.nvim {:opt true})
                           (pack :nvim-telescope/telescope-file-browser.nvim {:opt true})

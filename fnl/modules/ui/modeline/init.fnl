@@ -1,3 +1,3 @@
-(import-macros {: nyoom-module!} :macros)
+(import-macros {: use-package!} :macros)
 
-(nyoom-module! ui.modeline)
+(use-package! :b0o/incline.nvim {:nyoom-module ui.modeline})

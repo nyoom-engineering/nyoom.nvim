@@ -1,13 +1,15 @@
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :rust-tools))
+(local {: setup} (require :core.lib.setup))
 
-(setup {:tools {:server {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
-                :hover_actions {:border [[" " :FloatBorder]
-                                         [" " :FloatBorder]
-                                         [" " :FloatBorder]
-                                         [" " :FloatBorder]
-                                         [" " :FloatBorder]
-                                         [" " :FloatBorder]
-                                         [" " :FloatBorder]
-                                         [" " :FloatBorder]]}
-                :crate_graph {:backend :svg}}})
+(local tools {:server {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
+              :hover_actions {:border [[" " :FloatBorder]
+                                       [" " :FloatBorder]
+                                       [" " :FloatBorder]
+                                       [" " :FloatBorder]
+                                       [" " :FloatBorder]
+                                       [" " :FloatBorder]
+                                       [" " :FloatBorder]
+                                       [" " :FloatBorder]]}
+              :crate_graph {:backend :svg}})
+
+(setup :rust-tools {: tools})

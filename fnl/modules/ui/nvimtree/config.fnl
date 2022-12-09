@@ -1,7 +1,11 @@
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :nvim-tree))
+(local {: setup} (require :core.lib.setup))
 
-(setup {:view {:side :left :width 25 :hide_root_folder true :adaptive_size true}
+(setup :nvim-tree
+       {:view {:side :left
+               :width 25
+               :hide_root_folder true
+               :adaptive_size true}
         :disable_netrw true
         :hijack_netrw true
         :hijack_cursor true
@@ -10,5 +14,3 @@
         :hijack_directories {:enable true :auto_open true}
         :actions {:open_file {:resize_window true}}
         :renderer {:indent_markers {:enable false}}})
-
-

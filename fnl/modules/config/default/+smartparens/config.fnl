@@ -1,5 +1,5 @@
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :nvim-autopairs))
-(local lisp-ft [:fennel :clojure :lisp :racket :scheme])
+(local {: setup} (require :core.lib.setup))
 
-(setup {:disable_filetype lisp-ft})
+(local lisp-ft [:fennel :clojure :lisp :racket :scheme])
+(setup :nvim-autopairs {:disable_filetype lisp-ft})

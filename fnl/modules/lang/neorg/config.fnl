@@ -1,18 +1,37 @@
-(import-macros {: packadd! : map!} :macros)
+(import-macros {: packadd! : nyoom-module-p! : nyoom-module-ensure!} :macros)
+
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :neorg))
+(local {: setup} (require :core.lib.setup))
 
-(setup {:load {:core.defaults {}
-               :core.norg.qol.toc {}
-               :core.norg.concealer {}
-               :core.gtd.base {:config {:workspace :main}}
-               :core.norg.completion {:config {:engine :nvim-cmp}}
-               :core.norg.dirman {:config {:workspaces {:main "~/org/neorg"}
-                                           :autodetect true
-                                           :autochdir true}}}})
+;; conditional modules
 
-(packadd! nabla.nvim)
-(local {: enable_virt : popup} (autoload :nabla))
+(local neorg-modules
+       {:core.defaults {}
+        :core.norg.manoeuvre {}
+        :core.gtd.base {:config {:workspace :main}}
+        :core.norg.dirman {:config {:workspaces {:main "~/neorg"}}}})
 
-(map! [n] :<leader>ov '(enable_virt))
-(map! [n] :<leader>op '(popup {:border :solid}))
+;; add conditional modules
+
+(nyoom-module-p! cmp (tset neorg-modules :core.norg.completion
+                           {:config {:engine :nvim-cmp}}))
+
+;; add flaged modules
+
+(nyoom-module-p! neorg.+pretty
+                 (tset neorg-modules :core.norg.concealer
+                       {:config {:icon_preset :varied}}))
+
+(nyoom-module-p! neorg.+present
+                 (do
+                   (nyoom-module-ensure! zen)
+                   (tset neorg-modules :core.presenter
+                         {:config {:zen_mode :truezen}})))
+
+(nyoom-module-p! neorg.+export
+                 (do
+                   (tset neorg-modules :core.export {})
+                   (tset neorg-modules :core.export.markdown
+                         {:config {:extensions :all}})))
+
+(setup :neorg {:load neorg-modules})

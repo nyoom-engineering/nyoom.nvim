@@ -1,5 +1,4 @@
 (import-macros {: use-package!} :macros)
 
-(use-package! :mvllow/modes.nvim {:opt true
-                                  :defer modes.nvim
-                                  :nyoom-module ui.nyoom.+modes})
+(use-package! :mvllow/modes.nvim
+              {:event :BufWinEnter :nyoom-module ui.nyoom.+modes})

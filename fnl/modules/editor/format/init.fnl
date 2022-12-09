@@ -1,4 +1,3 @@
-(import-macros {: use-package!} :macros)
+(import-macros {: nyoom-module!} :macros)
 
-(use-package! "mhartington/formatter.nvim" {:nyoom-module editor.format
-                                            :cmd [:Format :FormatWrite]})
+(nyoom-module! editor.format)

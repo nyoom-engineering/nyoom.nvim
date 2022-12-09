@@ -1,0 +1,18 @@
+@document.meta
+title: Nyoom CLI
+description: Description of Nyoom CLI system 
+author: shaunsingh
+categories: docs
+created: 2022-11-23
+version: 0.1.0
+@end
+
+* Nyoom CLI 
+  As mentioned earlier, Nyoom is split into two distinct parts: CLI and GUI. Each part is completely isolated from the other, with the goal being to create a reliable and reproducable package management while still remaining relatively quick startup times. This allows for deploying nyoom to servers and installing it ahead of time headlessly, parsing enabled modules and plugins through external tools e.g. nix, and discards the need to load packer on startup.
+
+  The CLI currently is responsible for installing core dependencies (packer, hotpot), installing plugins, installing tree-sitter parsers, generating/updating lockfiles, and updating Nyoom. These are available though the following commands: 
+  - `nyoom install`
+  - `nyoom sync`
+  - `nyoom lock`
+  - `nyoom upgrade`
+

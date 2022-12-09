@@ -1,42 +1,53 @@
-(import-macros {: nyoom-module-p! : packadd!} :macros)
+(import-macros {: nyoom-module-p!} :macros)
 (local {: autoload} (require :core.lib.autoload))
+(local {: deep-merge} (autoload :core.lib.tables))
+(local {: lsp-servers} (autoload :core.shared))
 (local lsp (autoload :lspconfig))
-
 ;;; Improve UI
+
 (set vim.lsp.handlers.textDocument/signatureHelp
-      (vim.lsp.with vim.lsp.handlers.signature_help {:border :solid}))
+     (vim.lsp.with vim.lsp.handlers.signature_help {:border :solid}))
+
 (set vim.lsp.handlers.textDocument/hover
      (vim.lsp.with vim.lsp.handlers.hover {:border :solid}))
 
 (fn on-attach [client bufnr]
-  (import-macros {: buf-map! : autocmd! : augroup! : clear! : contains?} :macros)
-
+  (import-macros {: buf-map! : autocmd! : augroup! : clear!} :macros)
+  (local {: contains?} (autoload :core.lib))
   ;; Keybindings
   (local {:hover open-doc-float!
           :declaration goto-declaration!
           :definition goto-definition!
           :type_definition goto-type-definition!
           :code_action open-code-action-float!
+          :references goto-references!
           :rename rename!} vim.lsp.buf)
-
-  (buf-map! [n] "K" open-doc-float!)
-  (buf-map! [nv] "<leader>a" open-code-action-float!)
-  (buf-map! [nv] "<leader>rn" rename!)
-  (buf-map! [n] "<leader>gD" goto-declaration!)
-  (buf-map! [n] "<leader>gd" goto-definition!)
-  (buf-map! [n] "<leader>gt" goto-type-definition!)
-
+  (buf-map! [n] :K open-doc-float!)
+  (buf-map! [nv] :<leader>a open-code-action-float!)
+  (buf-map! [nv] :<leader>rn rename!)
+  (buf-map! [n] :<leader>gD goto-declaration!)
+  (buf-map! [n] :gD goto-declaration!)
+  (buf-map! [n] :<leader>gd goto-definition!)
+  (buf-map! [n] :gd goto-definition!)
+  (buf-map! [n] :<leader>gt goto-type-definition!)
+  (buf-map! [n] :gt goto-type-definition!)
+  (buf-map! [n] :<leader>gr goto-references!)
+  (buf-map! [n] :gr goto-references!)
   ;; Enable lsp formatting if available 
   (nyoom-module-p! format.+onsave
-    (when (client.supports_method "textDocument/formatting")
-      (augroup! lsp-format-before-saving
-        (clear! {:buffer bufnr})
-        (autocmd! BufWritePre <buffer>
-          '(vim.lsp.buf.format {:filter (fn [client] (not (contains? [:jsonls :tsserver] client.name)))
-                                :bufnr bufnr})
-          {:buffer bufnr})))))
+                   (when (client.supports_method :textDocument/formatting)
+                     (augroup! lsp-format-before-saving
+                               (clear! {:buffer bufnr})
+                               (autocmd! BufWritePre <buffer>
+                                         `(vim.lsp.buf.format {:filter (fn [client]
+                                                                         (not (contains? [:jsonls
+                                                                                          :tsserver]
+                                                                                         client.name)))
+                                                               : bufnr})
+                                         {:buffer bufnr})))))
 
 ;; What should the lsp be demanded of?
+
 (local capabilities (vim.lsp.protocol.make_client_capabilities))
 (set capabilities.textDocument.completion.completionItem
      {:documentationFormat [:markdown :plaintext]
@@ -52,56 +63,53 @@
                                     :additionalTextEdits]}})
 
 ;;; Setup servers
+
 (local defaults {:on_attach on-attach
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
-;; conditional lsp servesr
-(local lsp-servers [])
+;; fennel-language-server
+;; (tset lsp-servers :fennel-language-server {})
+;; (tset (require :lspconfig.configs) :fennel-language-server
+;;       {:default_config {:cmd [:fennel-language-server]
+;;                         :filetypes [:fennel]
+;;                         :single_file_support true
+;;                         :root_dir (lsp.util.root_pattern :fnl)
+;;                         :settings {:fennel {:workspace {:library (vim.api.nvim_list_runtime_paths)}
+;;                                             :diagnostics {:globals [:vim]}}}}})
 
-(nyoom-module-p! clojure
-  (table.insert lsp-servers :clojure-lsp))
+;; conditional servers
 
-(nyoom-module-p! sh
-  (table.insert lsp-servers :bashls))
+(nyoom-module-p! clojure (tset lsp-servers :clojure-lsp {}))
 
-(nyoom-module-p! julia
-  (table.insert lsp-servers :julials))
+(nyoom-module-p! java (tset lsp-servers :jdtls {}))
 
-(nyoom-module-p! kotlin
-  (table.insert lsp-servers :kotlin_language_server))
+(nyoom-module-p! sh (tset lsp-servers :bashls {}))
 
-(nyoom-module-p! latex
-  (table.insert lsp-servers :texlab))
+(nyoom-module-p! julia (tset lsp-servers :julials {}))
 
-(nyoom-module-p! markdown
-  (table.insert lsp-servers :marksman))
+(nyoom-module-p! kotlin (tset lsp-servers :kotlin_age_server {}))
 
-(nyoom-module-p! nim
-  (table.insert lsp-servers :nimls))
+(nyoom-module-p! latex (tset lsp-servers :texlab {}))
 
-(nyoom-module-p! nix
-  (table.insert lsp-servers :rnix))
+(nyoom-module-p! markdown (tset lsp-servers :marksman {}))
+
+(nyoom-module-p! nim (tset lsp-servers :nimls {}))
+
+(nyoom-module-p! nix (tset lsp-servers :rnix {}))
 
 (nyoom-module-p! python
-  (table.insert lsp-servers :pyright))
+                 (tset lsp-servers :pyright
+                       {:root_dir (lsp.util.root_pattern [:.flake8])
+                        :settings {:python {:analysis {:autoImportCompletions true
+                                                       :useLibraryCodeForTypes true
+                                                       :disableOrganizeImports false}}}}))
 
-(nyoom-module-p! zig
-  (table.insert lsp-servers :zls))
-
+(nyoom-module-p! zig (tset lsp-servers :zls {}))
 ;; Load lsp
-(let [servers lsp-servers]
-  (each [_ server (ipairs servers)]
-    ((. (. lsp server) :setup) defaults)))
 
-;; for trickier servers you can change up the defaults
-(nyoom-module-p! lua
-  (lsp.sumneko_lua.setup {:on_attach on-attach
-                          : capabilities
-                          :settings {:Lua {:diagnostics {:globals {1 :vim}}
-                                           :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
-                                                                 (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
-                                                       :maxPreload 100000
-                                                       :preloadFileSize 10000}}}}))
+(let [servers lsp-servers]
+  (each [server server_config (pairs servers)]
+    ((. (. lsp server) :setup) (deep-merge defaults server_config))))
 
 {: on-attach}

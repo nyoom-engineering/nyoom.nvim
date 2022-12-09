@@ -1,32 +1,44 @@
-(import-macros {: nyoom-module-p! : nyoom-package-count : nyoom-module-count} :macros)
+(import-macros {: nyoom-module-p!} :macros)
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :alpha))
+(local {: setup} (require :core.lib.setup))
+(local {: echo!} (autoload :core.lib.io))
+;; truncate a number to a certain decimal
 
-(local startup-message (.. "Nyoom loaded " (nyoom-package-count) " packages across " (nyoom-module-count) " modules"))
+(fn truncate [num digits]
+  (let [mult (^ 10 digits)]
+    (/ (math.modf (* num mult)) mult)))
 
-(nyoom-module-p! dashboard.+startuptime
-  (do
-    ;; truncate a number to a certain decimal
-    (fn truncate [num digits]
-      (let [mult (^ 10 digits)]
-        (/ (math.modf (* num mult)) mult)))
+(var load-counter 0)
+(var unload-counter 0)
+(each [_ pack (pairs packer_plugins)]
+  (if pack.loaded (set load-counter (+ load-counter 1))
+      (set unload-counter (+ unload-counter 1))))
 
-    ;; read startuptime, only if the file exists
-    (local startup-file :/tmp/nvim-startuptime)
-    (local startup-time-file (: (io.open startup-file) :read :*all))
-    (local startup-time (truncate (* (tonumber (startup-time-file:match "([%d.]+)  [%d.]+: [-]+ NVIM STARTED [-]+")) 0.001) 3))
-    (: (io.open startup-file :w) :close)
+(local startup-file :/tmp/nvim-startuptime)
+(local startup-time-pattern "([%d.]+)  [%d.]+: [-]+ NVIM STARTED [-]+")
+(local startup-time-file (or (and (io.open startup-file)
+                                  (: (io.open startup-file) :read :*a))
+                             nil))
 
-    ;; Honestly I can't think of a better way to do this. 
-    ;; On average, compiling took 0.2+ and loading took 0.03+ so, I think its good for now
-    (local compiled-or-loaded
-       (if (< startup-time 0.2)
-           "loaded "
-           "compiled "))
+(local startup-time (or (and startup-time-file
+                             (tonumber (startup-time-file:match startup-time-pattern)))
+                        nil))
 
-    (local startup-message (.. startup-message " in " startup-time :s))))
+(var text "")
+(if (and startup-time (>= startup-time 1000))
+    (set text
+         (string.format "Nyoom loaded %d packages in %.1fs (%d packages & modules cached)"
+                        load-counter (* startup-time 0.001) unload-counter))
+    startup-time
+    (set text (string.format "Nyoom loaded %d packages in %.1fms (%d packages & modules cached)"
+                             load-counter (truncate startup-time 3)
+                             unload-counter))
+    (set text (string.format "Nyoom loaded %d packages (%d packages & modules cached)"
+                             load-counter unload-counter)))
 
+(: (io.open startup-file :w) :close)
 ;; setup alpha
+
 (fn button [sc txt keybind]
   (let [sc- (: (sc:gsub "%s" "") :gsub :SPC :<leader>)
         opts {:position :center
@@ -45,10 +57,6 @@
                         (vim.api.nvim_replace_termcodes sc- true false true))
                  (vim.api.nvim_feedkeys key :normal false))
      : opts}))
-
-(local bottom-text (if (= (nyoom-package-count) 0)
-                     "Nyoom is in an incomplete state. Please run 'nyoom sync'" 
-                     startup-message)) 
 
 (var options {:header {:type :text
                        :val ["   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          "
@@ -76,13 +84,14 @@
                                       ":Telescope keymaps<CR>")]
                         :opts {:spacing 1}}
               :footer {:type :text
-                       :val bottom-text
+                       ;; :val startup-message
+                       :val text
                        :opts {:position :center :hl :alpha3}}})
 
-(setup {:layout [{:type :padding :val 5}
-                 options.header
-                 {:type :padding :val 2}
-                 options.buttons
-                 {:type :padding :val 2}
-                 options.footer]
-        :opts {}})
+(setup :alpha {:layout [{:type :padding :val 5}
+                        options.header
+                        {:type :padding :val 2}
+                        options.buttons
+                        {:type :padding :val 2}
+                        options.footer]
+               :opts {}})

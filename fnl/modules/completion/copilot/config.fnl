@@ -1,15 +1,8 @@
-(import-macros {: packadd! : map!} :macros)
+(import-macros {: nyoom-module-ensure!} :macros)
 (local {: autoload} (require :core.lib.autoload))
+(local {: setup} (require :core.lib.setup))
 
-(packadd! copilot.lua)
-(local copilot (autoload :copilot))
-(local client (autoload :copilot-client))
+(nyoom-module-ensure! cmp)
+(nyoom-module-ensure! lsp)
 
-(copilot.setup) {:cmp {:enabled false}}
-(client.setup) {:mapping {:accept :<CR>}}
-
-(vim.api.nvim_set_keymap :i :<C-c>
-                         "<cmd>lua require(\"copilot-client\").suggest()<CR>"
-                         {:noremap true :silent true})
-
-(map! [i] :<C-c> "<cmd>lua require(\"copilot-client\").suggest()<CR>" {:noremap true :silent true})
+(setup :copilot {:cmp {:enabled true}})

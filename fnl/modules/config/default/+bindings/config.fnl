@@ -1,38 +1,31 @@
 (import-macros {: nyoom-module-p! : map! : let!} :macros)
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :leap)) 
-
+(local {: setup} (require :core.lib.setup))
+(local leap (autoload :leap))
 ;; Set leader to space by default
+
 (let! mapleader " ")
+;; leap and friends
 
-(setup {:max_aot_targets nil
-        :case_sensitive false
-        :character_classes [" \t\r\n"]
-        :special_keys {:repeat_search :<enter>
-                       :next_match    :<enter>
-                       :prev_match    :<tab>
-                       :next_group    :<space>
-                       :prev_group    :<tab>}})
-
-;; Regular Leap 
-(map! [nx] :s "<Plug>(leap-forward)" {:desc "Leap Forward"})
-(map! [nx] :S "<Plug>(leap-backward)" {:desc "Leap Backward"})
-(map! [o] :z "<Plug>(leap-forward)" {:desc "Leap Forward"})
-(map! [o] :Z "<Plug>(leap-backward)" {:desc "Leap Backward"})
-(map! [nxo] :gz "<Plug>(leap-cross-window)" {:desc "Leap Cross Window"})
-(map! [o] :x "<Plug>(leap-forward-x)" {:desc "Leap Forward (x)"})
-(map! [o] :X "<Plug>(leap-backward-x)" {:desc "Leap Backward (x)"})
-
+(leap.add_default_mappings)
+(setup :flit)
 ;; easier command line mode + 
-(map! [n] ";" ":" {:desc "vim-ex"})
 
+(map! [n] ";" ":" {:desc :vim-ex})
 ;; telescope
+
 (nyoom-module-p! telescope
-  (do
-    (map! [n] "<leader><space>" "<cmd>Telescope find_files<CR>" {:desc "Find Files"})
-    (map! [n] "<leader>bb" "<cmd>Telescope buffers<CR>" {:desc "Buffers"})
-    (map! [n] "<leader>:" "<cmd>Telescope commands<CR>" {:desc "M-x"})))
+                 (do
+                   (map! [n] :<leader><space> "<cmd>Telescope find_files<CR>"
+                         {:desc "Find Files"})
+                   (map! [n] :<leader>bb "<cmd>Telescope buffers<CR>"
+                         {:desc :Buffers})
+                   (map! [n] "<leader>:" "<cmd>Telescope commands<CR>"
+                         {:desc :M-x})))
 
 ;; calendar
+
 (nyoom-module-p! calendar
-  (map! [n] :<leader>oc "<cmd>Calendar -frame=space -google_calendar<CR>" {:desc "Open Google Calendar"}))
+                 (map! [n] :<leader>oc
+                       "<cmd>Calendar -frame=space -google_calendar<CR>"
+                       {:desc "Open Google Calendar"}))

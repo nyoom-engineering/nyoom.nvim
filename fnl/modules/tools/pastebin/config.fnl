@@ -1,4 +1,4 @@
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :paperplanes))
+(local {: setup} (require :core.lib.setup))
 
-(setup {:provider :paste.rs})
+(setup :paperplanes {:provider :paste.rs})

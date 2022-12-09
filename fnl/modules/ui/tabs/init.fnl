@@ -1,5 +1,4 @@
 (import-macros {: use-package!} :macros)
 
-(use-package! :akinsho/bufferline.nvim {:opt true
-                                        :defer bufferline.nvim
-                                        :call-setup bufferline})
+(use-package! :akinsho/bufferline.nvim
+              {:nyoom-module ui.tabs :opt true :defer bufferline.nvim})
