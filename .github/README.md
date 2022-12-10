@@ -7,10 +7,10 @@
 <div align="center">
 
 [![Fennel](https://img.shields.io/badge/Made%20with%20Fennel-2C2D72?style=for-the-badge&logo=lua&logoColor=white)](https://fennel-lang.org)
-[![Stars](https://img.shields.io/github/stars/shaunsingh/nyoom.nvim?color=%23b66467&style=for-the-badge)](https://github.com/shaunsingh/nyoom.nvim/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/shaunsingh/nyoom.nvim?color=%238c977d&style=for-the-badge)](https://github.com/shaunsingh/nyoom.nvim/issues)
-[![Forks](https://img.shields.io/github/forks/shaunsingh/nyoom.nvim?color=%23d9bc8c&logoColor=%23151515&style=for-the-badge)](https://github.com/shaunsingh/nyoom.nvim/network/members)
-[![License](https://img.shields.io/github/license/shaunsingh/nyoom.nvim?color=%238da3b9&style=for-the-badge)](https://mit-license.org/)
+[![Stars](https://img.shields.io/github/stars/nyoom-engineering/nyoom.nvim?color=%23b66467&style=for-the-badge)](https://github.com/nyoom-engineering/nyoom.nvim/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/nyoom-engineering/nyoom.nvim?color=%238c977d&style=for-the-badge)](https://github.com/nyoom-engineering/nyoom.nvim/issues)
+[![Forks](https://img.shields.io/github/forks/nyoom-engineering/nyoom.nvim?color=%23d9bc8c&logoColor=%23151515&style=for-the-badge)](https://github.com/nyoom-engineering/nyoom.nvim/network/members)
+[![License](https://img.shields.io/github/license/nyoom-engineering/nyoom.nvim?color=%238da3b9&style=for-the-badge)](https://mit-license.org/)
 ![Discord Server](https://img.shields.io/discord/1050624267592663050?color=738adb&label=Discord&Color=white&style=for-the-badge)
 
 </div>
@@ -49,7 +49,7 @@ It also aligns with many of Doom's features:
 someone else argue about tabs vs *spaces*
 + Support for modern tooling and navigation through language-servers, null-ls, and tree-sitter.
 
-For more info, checkout our (under construction) [FAQ](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/faq.md)
+For more info, checkout our (under construction) [FAQ](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/faq.md)
 
 ## Prerequisites
 
@@ -59,17 +59,17 @@ For more info, checkout our (under construction) [FAQ](https://github.com/shauns
 
 Nyoom works best with a modern terminal with [Truecolor](https://github.com/termstandard/colors) support. Optionally, you can install [Neovide](https://github.com/neovide/neovide) if you'd like a gui.
 
-Nyoom is comprised of optional [modules](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/modules.md), some of which may have additional dependencies. Run `:checkhealth` to check for what you may have missed.
+Nyoom is comprised of optional [modules](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/modules.md), some of which may have additional dependencies. Run `:checkhealth` to check for what you may have missed.
 
 ## Install
 
 ```bash
-git clone --depth 1 https://github.com/shaunsingh/nyoom.nvim.git ~/.config/nvim 
+git clone --depth 1 https://github.com/nyoom-engineering/nyoom.nvim.git ~/.config/nvim 
 cd ~/.config/nvim/
 bin/nyoom install 
 bin/nyoom sync
 ```
-Then read [getting started](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/getting_started.md) to be walked through
+Then read [getting started](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/getting_started.md) to be walked through
 installing, configuring and maintaining Doom Emacs.
 
 It's a good idea to add `~/.config/nvim/bin` to your `PATH`! Other `bin/nyoom`
@@ -85,12 +85,12 @@ whenever you modify your `packages.fnl` and `modules.fnl`
 Neovim is no journey of a mere thousand miles. You _will_ run into problems and
 mysterious errors. When you do, here are some places you can look for help:
 
-+ [Our Documentation](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/) covers many use cases.
++ [Our Documentation](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/) covers many use cases.
 + The builtin `:help` is your best friend
 + To search available keybinds: `<SPC>fk`
 + Run `:check health` to detect common issues with your development
 environment.
-+ Search [Nyoom's issue tracker](https://github.com/shaunsingh/nyoom.nvim/issues) in case your issue was already
++ Search [Nyoom's issue tracker](https://github.com/nyoom-engineering/nyoom.nvim/issues) in case your issue was already
 reported.
 + Hop on [our Discord server][https://discord.gg/JcypH4UtYW]; it's active and friendly!
 
@@ -104,11 +104,11 @@ If you have an issue with a plugin in Nyoom.nvim, first you should report it her
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-Checkout the [Contributor Guide](https://github.com/shaunsingh/nyoom.nvim/blob/master/docs/contributing.md)
+Checkout the [Contributor Guide](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/contributing.md)
 
 + I love pull requests and bug reports!
 + Don't hesitate to [tell me my lisp-fu
-sucks](https://github.com/shaunsingh/nyoom.nvim/issues/new), but please tell me
+sucks](https://github.com/nyoom-engineering/nyoom.nvim/issues/new), but please tell me
 why.
 + Don't see support for your language, or think it should be improved? Feel free to open an issue or PR with your changes.
 
