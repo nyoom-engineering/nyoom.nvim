@@ -15,6 +15,7 @@
 (local {: init} (autoload :packer))
 
 ;; Load packer
+
 (echo! "Loading Packer")
 (local headless (= 0 (length (vim.api.nvim_list_uis))))
 (init {:lockfile {:enable true
@@ -24,6 +25,7 @@
        :display {:non_interactive headless}})
 
 ;; compile healthchecks
+
 (echo! "Compiling Nyoom Doctor")
 (build (vim.fn.stdpath :config) {:verbosity 0}
        (.. (vim.fn.stdpath :config) :/fnl/core/doctor.fnl)
@@ -31,14 +33,17 @@
          (.. (vim.fn.stdpath :config) :/lua/health.lua)))
 
 ;; include modules
+
 (echo! "Initializing Module System")
 (nyoom-init-modules!)
 
 ;; compile modules
+
 (echo! "Compiling Nyoom Modules")
 (nyoom-compile-modules!)
 
 ;; Core packages
+
 (use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 
@@ -66,5 +71,6 @@
 ;; ---------------------
 
 ;; Send plugins to packer
+
 (echo! "Installing Packages")
 (unpack!)

@@ -13,7 +13,6 @@
 (import-macros {: custom-set-face! : let! : set! : nyoom-module-p!} :macros)
 (local {: autoload} (require :core.lib.autoload))
 (local {: blend-hex} (autoload :modules.ui.nyoom.colorutils))
-
 ;; reset variables
 
 (when vim.g.colors_name
@@ -23,8 +22,6 @@
 
 (let! colors_name :carbon)
 (set! termguicolors true)
-(set! background :dark)
-
 ;; carbon palette 
 ;; (nyoom-module-p! nyoom.+carbon
 
@@ -32,25 +29,43 @@
 (local base06 "#ffffff")
 (local base09 "#78a9ff")
 
-(local carbon {: base00
-               :base01 (blend-hex base00 base06 0.085)
-               :base02 (blend-hex base00 base06 0.18)
-               :base03 (blend-hex base00 base06 0.3)
-               :base04 (blend-hex base00 base06 0.82)
-               :base05 (blend-hex base00 base06 0.95)
-               : base06
-               :base07 "#08bdba"
-               :base08 "#3ddbd9"
-               : base09
-               :base10 "#ee5396"
-               :base11 "#33b1ff"
-               :base12 "#ff7eb6"
-               :base13 "#42be65"
-               :base14 "#be95ff"
-               :base15 "#82cfff"
-               :blend "#131313"
-               ;; Blend of #000000 & base00 for darker accents 
-               :none :NONE})
+(local carbon (or (and (= vim.o.background :dark)
+                       {: base00
+                        :base01 (blend-hex base00 base06 0.085)
+                        :base02 (blend-hex base00 base06 0.18)
+                        :base03 (blend-hex base00 base06 0.3)
+                        :base04 (blend-hex base00 base06 0.82)
+                        :base05 (blend-hex base00 base06 0.95)
+                        : base06
+                        :base07 "#08bdba"
+                        :base08 "#3ddbd9"
+                        : base09
+                        :base10 "#ee5396"
+                        :base11 "#33b1ff"
+                        :base12 "#ff7eb6"
+                        :base13 "#42be65"
+                        :base14 "#be95ff"
+                        :base15 "#82cfff"
+                        :blend "#131313"
+                        :none :NONE})
+                  {:base00 base06
+                   :base01 (blend-hex base00 base06 0.95)
+                   :base02 (blend-hex base00 base06 0.82)
+                   :base03 base00
+                   :base04 "#37474F"
+                   :base05 "#90A4AE"
+                   :base06 "#525252"
+                   :base07 "#08bdba"
+                   :base08 "#ff7eb6"
+                   :base09 "#ee5396"
+                   :base10 "#FF6F00"
+                   :base11 "#0f62fe"
+                   :base12 "#673AB7"
+                   :base13 "#42be65"
+                   :base14 "#be95ff"
+                   :base15 "#FFAB91"
+                   :blend "#FAFAFA"
+                   :none :NONE}))
 
 ;; terminal 
 
@@ -70,7 +85,6 @@
 (let! terminal_color_13 carbon.base15)
 (let! terminal_color_14 carbon.base07)
 (let! terminal_color_15 carbon.base06)
-
 ;; editor
 
 (custom-set-face! :ColorColumn [] {:fg carbon.none :bg carbon.base01})
@@ -97,7 +111,6 @@
 (custom-set-face! :Bold [:bold] {:fg carbon.none :bg carbon.none})
 (custom-set-face! :Italic [:italic] {:fg carbon.none :bg carbon.none})
 (custom-set-face! :Underlined [:underline] {:fg carbon.none :bg carbon.none})
-
 ;; diagnostics
 
 (nyoom-module-p! diagnostics
@@ -137,11 +150,9 @@
 (custom-set-face! :Folded [] {:fg carbon.base02 :bg carbon.base01})
 (custom-set-face! :FoldColumn [] {:fg carbon.base01 :bg carbon.base00})
 (custom-set-face! :SignColumn [] {:fg carbon.base01 :bg carbon.base00})
-
 ;; navigation
 
 (custom-set-face! :Directory [] {:fg carbon.base08 :bg carbon.none})
-
 ;; prompts
 
 (custom-set-face! :EndOfBuffer [] {:fg carbon.base01 :bg carbon.none})
@@ -152,14 +163,12 @@
 (custom-set-face! :Substitute [] {:fg carbon.base04 :bg carbon.none})
 (custom-set-face! :WarningMsg [] {:fg carbon.base13 :bg carbon.none})
 (custom-set-face! :WildMenu [] {:fg carbon.base08 :bg carbon.base01})
-
 ;; vimhelp
 
 (custom-set-face! :helpHyperTextJump [] {:fg carbon.base08 :bg carbon.none})
 (custom-set-face! :helpSpecial [] {:fg carbon.base09 :bg carbon.none})
 (custom-set-face! :helpHeadline [] {:fg carbon.base10 :bg carbon.none})
 (custom-set-face! :helpHeader [] {:fg carbon.base15 :bg carbon.none})
-
 ;; diff
 
 (custom-set-face! :DiffAdded [] {:fg carbon.base07 :bg carbon.none})
@@ -169,23 +178,19 @@
 (custom-set-face! :DiffChange [] {:bg "#222a39" :fg carbon.none})
 (custom-set-face! :DiffText [] {:bg "#2f3f5c" :fg carbon.none})
 (custom-set-face! :DiffDelete [] {:bg "#361c28" :fg carbon.none})
-
 ;; search
 
 (custom-set-face! :IncSearch [] {:fg carbon.base06 :bg carbon.base10})
 (custom-set-face! :Search [] {:fg carbon.base01 :bg carbon.base08})
-
 ;; tabs
 
 (custom-set-face! :TabLine [] {:fg carbon.base04 :bg carbon.base01})
 (custom-set-face! :TabLineFill [] {:fg carbon.base04 :bg carbon.base01})
 (custom-set-face! :TabLineSel [] {:fg carbon.base08 :bg carbon.base03})
-
 ;; window
 
 (custom-set-face! :Title [] {:fg carbon.base04 :bg carbon.none})
 (custom-set-face! :VertSplit [] {:fg carbon.base01 :bg carbon.base00})
-
 ;; regular syntax
 
 (custom-set-face! :Boolean [] {:fg carbon.base09 :bg carbon.none})
@@ -219,7 +224,6 @@
 (custom-set-face! :Todo [] {:fg carbon.base13 :bg carbon.none})
 (custom-set-face! :Type [] {:fg carbon.base09 :bg carbon.none})
 (custom-set-face! :Typedef [] {:fg carbon.base09 :bg carbon.none})
-
 ;; treesitter
 
 (nyoom-module-p! tree-sitter
@@ -388,7 +392,6 @@
 (custom-set-face! :NormalNC [] {:fg carbon.base05 :bg carbon.base00})
 (custom-set-face! :TermCursor [] {:fg carbon.base00 :bg carbon.base04})
 (custom-set-face! :TermCursorNC [] {:fg carbon.base00 :bg carbon.base04})
-
 ;; statusline/winbar
 
 (nyoom-module-p! modeline

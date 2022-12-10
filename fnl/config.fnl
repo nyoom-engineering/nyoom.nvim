@@ -5,6 +5,7 @@
 ;; You can use the `colorscheme` macro to load a custom theme, or load it manually
 ;; via require. This is the default:
 
+(set! background :dark)
 (colorscheme carbon)
 
 ;; The set! macro sets vim.opt options. By default it sets the option to true 

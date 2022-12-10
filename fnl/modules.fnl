@@ -1,6 +1,5 @@
 (import-macros {: nyoom!} :macros)
 
-;; we shouldn't have to repeat the `nyoom!` calls but somethings buggy
 ;; NOTE: Any module with a TODO either isn't ready or hasn't been implemented yet.
 
 ;; fnlfmt: skip
