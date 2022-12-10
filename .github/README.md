@@ -70,7 +70,7 @@ bin/nyoom install
 bin/nyoom sync
 ```
 Then read [getting started](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/getting_started.md) to be walked through
-installing, configuring and maintaining Doom Emacs.
+installing, configuring and maintaining Nyoom Nvim.
 
 It's a good idea to add `~/.config/nvim/bin` to your `PATH`! Other `bin/nyoom`
 commands you should know about:
@@ -116,4 +116,5 @@ why.
 
 + [David Guevara](https://github.com/datwaft) For getting me into fennel, and for some of his beautiful macros. Without him Nyoom wouldn't exist!
 + [Oliver Caldwell](https://github.com/Olical/) For his excellent work on Aniseed, Conjure, and making fennel feel like a first class language in neovim
+
 
