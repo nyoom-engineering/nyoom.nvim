@@ -1,5 +1,5 @@
 (local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :modes))
+(local {: setup} (autoload :core.lib.setup))
 
 (setup :modes {:colors {:insert "#be95ff"
                         :delete "#ff7eb6"
