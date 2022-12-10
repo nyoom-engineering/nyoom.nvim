@@ -76,7 +76,7 @@
              :window {:documentation {:border :solid}
                       :completion {:col_offset (- 3)
                                    :side_padding 0
-                                   :winhighlight "Normal:Pmenu,FloatBorder:Pmenu,Search:None"}}
+                                   :winhighlight "Normal:NormalFloat,NormalFloat:Pmenu,Pmenu:NormalFloat"}}
              :view {:entries {:name :custom :selection_order :near_cursor}}
              :enabled (fn []
                         (local context (autoload :cmp.config.context))

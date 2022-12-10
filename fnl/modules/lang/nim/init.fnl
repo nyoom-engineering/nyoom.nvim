@@ -1,4 +1,3 @@
-(import-macros {: use-package! : nyoom-module!} :macros)
-(nyoom-module! lang.nim)
+(import-macros {: use-package!} :macros)
 
 (use-package! :alaviss/nim.nvim {:ft :nim})

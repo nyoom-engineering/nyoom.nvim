@@ -1,0 +1,357 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.007  000.007: --- NVIM STARTING ---
+000.130  000.122: event init
+000.483  000.353: early init
+000.965  000.482: locale set
+001.011  000.047: init first window
+011.254  010.243: inits 1
+011.272  000.018: window checked
+011.274  000.002: parsing arguments
+011.655  000.067  000.067: require('vim.shared')
+011.745  000.031  000.031: require('vim._meta')
+011.746  000.088  000.057: require('vim._editor')
+011.747  000.182  000.027: require('vim._init_packages')
+011.749  000.293: init lua interpreter
+011.987  000.238: expanding arguments
+012.027  000.040: inits 2
+012.289  000.261: init highlight
+012.290  000.001: waiting for UI
+014.876  002.587: done waiting for UI
+014.905  000.029: clear screen
+015.034  000.128: init default mappings
+015.046  000.013: init default autocommands
+016.951  000.060  000.060: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/ftplugin.vim
+017.160  000.048  000.048: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/indent.vim
+017.902  000.003  000.003: require('hotpot.bootstrap')
+018.382  000.282  000.282: require('hotpot.index')
+018.598  000.214  000.214: require('hotpot.fs')
+018.768  000.158  000.158: require('hotpot.runtime')
+022.047  000.156  000.156: require('hotpot.common')
+022.052  004.525  003.711: require('hotpot')
+022.362  000.302  000.302: require('hotpot.api.diagnostics')
+022.501  000.044  000.044: require('core.lib.autoload')
+022.642  000.049  000.049: require('core.lib')
+022.646  000.093  000.044: require('core.lib.string')
+022.654  000.150  000.057: require('core.lib.io')
+023.054  000.037  000.037: require('core.lib.tables')
+023.087  000.031  000.031: require('core.shared')
+023.089  000.107  000.039: require('core.lib.setup')
+024.668  000.057  000.057: require('modules.ui.nyoom.colorutils')
+025.465  000.947  000.889: require('modules.ui.nyoom.config')
+025.468  000.974  000.027: sourcing /Users/shauryasingh/.config/nvim/colors/carbon.lua
+025.492  000.005  000.005: require('vim.keymap')
+025.506  002.626  001.540: require('config')
+027.156  000.006  000.006: require('vim.F')
+027.163  000.224  000.218: require('alpha')
+027.653  000.952  000.728: require('modules.ui.dashboard.config')
+027.911  000.061  000.061: require('packer.util')
+028.007  000.261  000.200: require('packer')
+028.017  000.363  000.102: require('modules.tools.antifennel.config')
+028.093  000.073  000.073: require('modules.editor.format.config')
+028.220  000.038  000.038: require('leap')
+028.264  000.042  000.042: require('leap.user')
+028.502  000.405  000.325: require('modules.config.default.+bindings.config')
+028.634  000.131  000.131: require('modules.config.default.config')
+028.730  000.091  000.091: require('modules.editor.hotpot.+reflect.config')
+029.023  000.033  000.033: require('incline.config.transform')
+029.027  000.078  000.045: require('incline.config.schema')
+029.097  000.069  000.069: require('incline.config.validate')
+029.149  000.249  000.102: require('incline.config')
+029.236  000.042  000.042: require('incline.util')
+029.274  000.036  000.036: require('incline.debounce')
+029.444  000.053  000.053: require('incline.highlight')
+029.449  000.123  000.069: require('incline.winline')
+029.452  000.176  000.054: require('incline.tabpage')
+029.455  000.304  000.051: require('incline.manager')
+029.457  000.627  000.074: require('incline')
+030.500  001.768  001.141: require('modules.ui.modeline.config')
+030.594  000.092  000.092: require('modules.editor.word-wrap.config')
+031.269  000.018  000.018: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim
+031.352  000.012  000.012: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/neorg/ftdetect/norg.vim
+031.439  000.020  000.020: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/cls.vim
+031.520  000.022  000.022: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim
+031.657  000.018  000.018: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim
+031.667  006.159  002.196: require('packer_compiled')
+031.669  009.289  000.310: require('core')
+031.670  014.181  000.066: sourcing /Users/shauryasingh/.config/nvim/init.lua
+031.682  002.347: sourcing vimrc file(s)
+033.680  000.243  000.243: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/filetype.lua
+033.997  000.090  000.090: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/syntax/synload.vim
+034.081  000.307  000.217: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/syntax/syntax.vim
+036.094  000.025  000.025: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/gzip.vim
+036.166  000.013  000.013: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/health.vim
+036.238  000.013  000.013: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/matchit.vim
+036.305  000.013  000.013: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/matchparen.vim
+036.377  000.019  000.019: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/netrwPlugin.vim
+036.644  000.010  000.010: sourcing /Users/shauryasingh/.local/share/nvim/rplugin.vim
+036.651  000.222  000.212: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/rplugin.vim
+036.764  000.059  000.059: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/shada.vim
+036.838  000.019  000.019: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/spellfile.vim
+036.904  000.014  000.014: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tarPlugin.vim
+036.981  000.012  000.012: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tohtml.vim
+037.050  000.018  000.018: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tutor.vim
+037.135  000.031  000.031: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/zipPlugin.vim
+038.104  000.082  000.082: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/man.lua
+038.137  005.366: loading rtp plugins
+038.864  000.066  000.066: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/hotpot.nvim/plugin/hotpot.vim
+039.760  000.422  000.422: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/leap.nvim/plugin/init.lua
+040.301  001.675: loading packages
+041.853  001.552: loading after plugins
+041.863  000.010: inits 3
+045.115  003.253: reading ShaDa
+045.276  000.072  000.072: require('packer.load')
+046.013  000.039  000.039: require('modes.utils')
+046.018  000.093  000.054: require('modes')
+046.404  000.539  000.446: require('modules.ui.nyoom.+modes.config')
+046.535  000.809: opening buffers
+046.537  000.001: BufEnter autocommands
+046.542  000.005: editing files in windows
+049.954  003.412: VimEnter autocommands
+049.956  000.002: UIEnter autocommands
+050.235  000.159  000.159: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/autoload/provider/clipboard.vim
+050.240  000.125: before starting main loop
+050.906  000.666: first screen update
+050.907  000.001: --- NVIM STARTED ---
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.007  000.007: --- NVIM STARTING ---
+000.133  000.126: event init
+000.514  000.381: early init
+001.078  000.564: locale set
+001.136  000.058: init first window
+013.713  012.577: inits 1
+013.731  000.017: window checked
+013.733  000.003: parsing arguments
+014.191  000.081  000.081: require('vim.shared')
+014.302  000.038  000.038: require('vim._meta')
+014.304  000.110  000.071: require('vim._editor')
+014.307  000.229  000.038: require('vim._init_packages')
+014.309  000.347: init lua interpreter
+014.571  000.263: expanding arguments
+014.617  000.046: inits 2
+014.947  000.330: init highlight
+014.948  000.001: waiting for UI
+017.684  002.736: done waiting for UI
+017.698  000.013: clear screen
+017.837  000.140: init default mappings
+017.852  000.014: init default autocommands
+019.957  000.060  000.060: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/ftplugin.vim
+020.115  000.030  000.030: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/indent.vim
+020.809  000.003  000.003: require('hotpot.bootstrap')
+021.265  000.269  000.269: require('hotpot.index')
+021.480  000.212  000.212: require('hotpot.fs')
+021.674  000.183  000.183: require('hotpot.runtime')
+025.102  000.148  000.148: require('hotpot.common')
+025.106  004.655  003.840: require('hotpot')
+025.424  000.310  000.310: require('hotpot.api.diagnostics')
+025.558  000.040  000.040: require('core.lib.autoload')
+025.701  000.053  000.053: require('core.lib')
+025.706  000.096  000.043: require('core.lib.string')
+025.713  000.152  000.057: require('core.lib.io')
+026.153  000.043  000.043: require('core.lib.tables')
+026.195  000.040  000.040: require('core.shared')
+026.197  000.130  000.047: require('core.lib.setup')
+027.912  000.065  000.065: require('modules.ui.nyoom.colorutils')
+028.666  000.932  000.867: require('modules.ui.nyoom.config')
+028.668  000.954  000.021: sourcing /Users/shauryasingh/.config/nvim/colors/carbon.lua
+028.694  000.006  000.006: require('vim.keymap')
+028.710  002.772  001.682: require('config')
+030.408  000.005  000.005: require('vim.F')
+030.416  000.224  000.218: require('alpha')
+030.750  000.811  000.588: require('modules.ui.dashboard.config')
+031.016  000.073  000.073: require('packer.util')
+031.110  000.288  000.215: require('packer')
+031.120  000.368  000.080: require('modules.tools.antifennel.config')
+031.183  000.059  000.059: require('modules.editor.format.config')
+031.312  000.050  000.050: require('leap')
+031.358  000.043  000.043: require('leap.user')
+031.600  000.416  000.323: require('modules.config.default.+bindings.config')
+031.724  000.122  000.122: require('modules.config.default.config')
+031.805  000.080  000.080: require('modules.editor.hotpot.+reflect.config')
+032.085  000.031  000.031: require('incline.config.transform')
+032.088  000.072  000.041: require('incline.config.schema')
+032.172  000.083  000.083: require('incline.config.validate')
+032.230  000.257  000.102: require('incline.config')
+032.307  000.038  000.038: require('incline.util')
+032.340  000.032  000.032: require('incline.debounce')
+032.470  000.042  000.042: require('incline.highlight')
+032.475  000.099  000.057: require('incline.winline')
+032.479  000.138  000.039: require('incline.tabpage')
+032.482  000.251  000.044: require('incline.manager')
+032.484  000.583  000.074: require('incline')
+033.138  001.331  000.748: require('modules.ui.modeline.config')
+033.261  000.121  000.121: require('modules.editor.word-wrap.config')
+033.868  000.015  000.015: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim
+033.947  000.012  000.012: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/neorg/ftdetect/norg.vim
+034.028  000.019  000.019: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/cls.vim
+034.101  000.020  000.020: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim
+034.212  000.015  000.015: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim
+034.218  005.506  002.120: require('packer_compiled')
+034.220  008.778  000.307: require('core')
+034.221  013.803  000.061: sourcing /Users/shauryasingh/.config/nvim/init.lua
+034.227  002.481: sourcing vimrc file(s)
+035.967  000.205  000.205: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/filetype.lua
+036.240  000.076  000.076: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/syntax/synload.vim
+036.313  000.263  000.187: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/syntax/syntax.vim
+038.279  000.020  000.020: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/gzip.vim
+038.368  000.018  000.018: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/health.vim
+038.433  000.014  000.014: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/matchit.vim
+038.521  000.011  000.011: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/matchparen.vim
+038.618  000.021  000.021: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/netrwPlugin.vim
+038.876  000.010  000.010: sourcing /Users/shauryasingh/.local/share/nvim/rplugin.vim
+038.882  000.214  000.204: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/rplugin.vim
+038.991  000.056  000.056: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/shada.vim
+039.086  000.024  000.024: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/spellfile.vim
+039.155  000.014  000.014: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tarPlugin.vim
+039.217  000.011  000.011: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tohtml.vim
+039.286  000.018  000.018: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tutor.vim
+039.367  000.030  000.030: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/zipPlugin.vim
+040.201  000.068  000.068: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/man.lua
+040.227  005.015: loading rtp plugins
+040.792  000.043  000.043: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/hotpot.nvim/plugin/hotpot.vim
+041.577  000.403  000.403: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/leap.nvim/plugin/init.lua
+042.015  001.342: loading packages
+043.319  001.304: loading after plugins
+043.327  000.008: inits 3
+046.403  003.076: reading ShaDa
+046.525  000.047  000.047: require('packer.load')
+047.149  000.030  000.030: require('modes.utils')
+047.153  000.074  000.044: require('modes')
+047.466  000.425  000.351: require('modules.ui.nyoom.+modes.config')
+047.568  000.693: opening buffers
+047.569  000.001: BufEnter autocommands
+047.571  000.003: editing files in windows
+050.759  003.188: VimEnter autocommands
+050.761  000.002: UIEnter autocommands
+051.013  000.148  000.148: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/autoload/provider/clipboard.vim
+051.017  000.108: before starting main loop
+051.665  000.648: first screen update
+051.666  000.001: --- NVIM STARTED ---
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.006  000.006: --- NVIM STARTING ---
+000.111  000.105: event init
+000.481  000.370: early init
+001.046  000.566: locale set
+001.109  000.063: init first window
+014.710  013.601: inits 1
+014.730  000.019: window checked
+014.733  000.003: parsing arguments
+015.245  000.085  000.085: require('vim.shared')
+015.363  000.040  000.040: require('vim._meta')
+015.366  000.116  000.076: require('vim._editor')
+015.367  000.241  000.040: require('vim._init_packages')
+015.369  000.395: init lua interpreter
+015.686  000.316: expanding arguments
+015.745  000.060: inits 2
+016.083  000.338: init highlight
+016.084  000.001: waiting for UI
+019.297  003.213: done waiting for UI
+019.311  000.014: clear screen
+019.461  000.150: init default mappings
+019.477  000.015: init default autocommands
+021.462  000.062  000.062: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/ftplugin.vim
+021.617  000.031  000.031: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/indent.vim
+022.381  000.003  000.003: require('hotpot.bootstrap')
+022.844  000.269  000.269: require('hotpot.index')
+023.057  000.211  000.211: require('hotpot.fs')
+023.243  000.175  000.175: require('hotpot.runtime')
+026.589  000.146  000.146: require('hotpot.common')
+026.594  004.615  003.811: require('hotpot')
+026.895  000.293  000.293: require('hotpot.api.diagnostics')
+027.031  000.042  000.042: require('core.lib.autoload')
+027.174  000.054  000.054: require('core.lib')
+027.180  000.098  000.044: require('core.lib.string')
+027.186  000.152  000.054: require('core.lib.io')
+027.581  000.038  000.038: require('core.lib.tables')
+027.615  000.032  000.032: require('core.shared')
+027.617  000.106  000.036: require('core.lib.setup')
+029.329  000.064  000.064: require('modules.ui.nyoom.colorutils')
+030.133  000.983  000.918: require('modules.ui.nyoom.config')
+030.135  001.004  000.022: sourcing /Users/shauryasingh/.config/nvim/colors/carbon.lua
+030.159  000.008  000.008: require('vim.keymap')
+030.175  002.764  001.645: require('config')
+031.695  000.005  000.005: require('vim.F')
+031.702  000.201  000.196: require('alpha')
+032.306  001.006  000.805: require('modules.ui.dashboard.config')
+032.510  000.042  000.042: require('packer.util')
+032.535  000.152  000.110: require('packer')
+032.555  000.247  000.095: require('modules.tools.antifennel.config')
+032.607  000.051  000.051: require('modules.editor.format.config')
+032.710  000.033  000.033: require('leap')
+032.769  000.057  000.057: require('leap.user')
+033.102  000.494  000.403: require('modules.config.default.+bindings.config')
+033.239  000.135  000.135: require('modules.config.default.config')
+033.334  000.093  000.093: require('modules.editor.hotpot.+reflect.config')
+033.610  000.036  000.036: require('incline.config.transform')
+033.614  000.076  000.040: require('incline.config.schema')
+033.669  000.054  000.054: require('incline.config.validate')
+033.704  000.208  000.078: require('incline.config')
+033.798  000.047  000.047: require('incline.util')
+033.832  000.033  000.033: require('incline.debounce')
+033.942  000.033  000.033: require('incline.highlight')
+033.946  000.079  000.046: require('incline.winline')
+033.949  000.115  000.036: require('incline.tabpage')
+033.952  000.247  000.051: require('incline.manager')
+033.954  000.529  000.075: require('incline')
+034.564  001.229  000.700: require('modules.ui.modeline.config')
+034.657  000.091  000.091: require('modules.editor.word-wrap.config')
+035.285  000.015  000.015: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim
+035.375  000.014  000.014: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/neorg/ftdetect/norg.vim
+035.467  000.025  000.025: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/cls.vim
+035.541  000.019  000.019: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim
+035.652  000.015  000.015: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim
+035.657  005.481  002.046: require('packer_compiled')
+035.659  008.747  000.308: require('core')
+035.660  013.720  000.065: sourcing /Users/shauryasingh/.config/nvim/init.lua
+035.666  002.376: sourcing vimrc file(s)
+037.570  000.209  000.209: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/filetype.lua
+037.839  000.070  000.070: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/syntax/synload.vim
+037.909  000.253  000.184: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/syntax/syntax.vim
+039.787  000.013  000.013: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/gzip.vim
+039.850  000.010  000.010: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/health.vim
+039.914  000.012  000.012: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/matchit.vim
+039.975  000.011  000.011: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/matchparen.vim
+040.042  000.015  000.015: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/netrwPlugin.vim
+040.283  000.010  000.010: sourcing /Users/shauryasingh/.local/share/nvim/rplugin.vim
+040.289  000.197  000.187: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/rplugin.vim
+040.402  000.055  000.055: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/shada.vim
+040.485  000.019  000.019: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/spellfile.vim
+040.550  000.013  000.013: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tarPlugin.vim
+040.606  000.010  000.010: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tohtml.vim
+040.672  000.016  000.016: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/tutor.vim
+040.746  000.028  000.028: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/zipPlugin.vim
+041.585  000.055  000.055: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/plugin/man.lua
+041.613  005.032: loading rtp plugins
+042.222  000.041  000.041: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/hotpot.nvim/plugin/hotpot.vim
+042.912  000.299  000.299: sourcing /Users/shauryasingh/.local/share/nvim/site/pack/packer/start/leap.nvim/plugin/init.lua
+043.379  001.426: loading packages
+044.766  001.388: loading after plugins
+044.774  000.008: inits 3
+047.745  002.971: reading ShaDa
+047.934  000.068  000.068: require('packer.load')
+048.574  000.038  000.038: require('modes.utils')
+048.577  000.086  000.048: require('modes')
+048.948  000.495  000.409: require('modules.ui.nyoom.+modes.config')
+049.034  000.726: opening buffers
+049.035  000.001: BufEnter autocommands
+049.036  000.001: editing files in windows
+051.924  002.888: VimEnter autocommands
+051.925  000.002: UIEnter autocommands
+052.171  000.142  000.142: sourcing /nix/store/w63jg68yxz9311sqm84pjvaljzb26m4f-neovim-unwrapped-master/share/nvim/runtime/autoload/provider/clipboard.vim
+052.175  000.108: before starting main loop
+052.930  000.755: first screen update
+052.931  000.001: --- NVIM STARTED ---
