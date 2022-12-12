@@ -39,6 +39,7 @@ package management should be declarative and your private config reproducible,
 and comes with a means to roll back releases and updates (still a WIP).
 
 It also aligns with many of Doom's features:
+
 + Minimalistic good looks inspired by modern editors.
 + A modular organizational structure for separating concerns in your config.
 + A standard library designed to simplify your fennel bike shedding.
@@ -53,7 +54,7 @@ For more info, checkout our (under construction) [FAQ](https://github.com/nyoom-
 
 ## Prerequisites
 
-+ Neovim v0.8.0+
++ Neovim v0.8.1+
 + Git
 + Ripgrep 11.0+
 
@@ -69,6 +70,7 @@ cd ~/.config/nvim/
 bin/nyoom install 
 bin/nyoom sync
 ```
+
 Then read [getting started](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/getting_started.md) to be walked through
 installing, configuring and maintaining Nyoom Nvim.
 
@@ -82,7 +84,8 @@ whenever you modify your `packages.fnl` and `modules.fnl`
 + `nyoom lock` to dump a snapshot of your currently installed packages to a lockfile file.
 
 ## Getting help
-Neovim is no journey of a mere thousand miles. You _will_ run into problems and
+
+Neovim is no journey of a mere thousand miles. You *will* run into problems and
 mysterious errors. When you do, here are some places you can look for help:
 
 + [Our Documentation](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/) covers many use cases.
@@ -92,9 +95,9 @@ mysterious errors. When you do, here are some places you can look for help:
 environment.
 + Search [Nyoom's issue tracker](https://github.com/nyoom-engineering/nyoom.nvim/issues) in case your issue was already
 reported.
-+ Hop on [our Discord server][https://discord.gg/JcypH4UtYW]; it's active and friendly!
++ Hop on [our Discord server](https://discord.gg/5R5DvQs9) ; it's active and friendly!
 
-If you have an issue with a plugin in Nyoom.nvim, first you should report it here. Please don't bother package maintainers with issues that are caused by my configs, and vice versa. 
+If you have an issue with a plugin in Nyoom.nvim, first you should report it here. Please don't bother package maintainers with issues that are caused by my configs, and vice versa.
 
 ## Roadmap
 
@@ -116,5 +119,3 @@ why.
 
 + [David Guevara](https://github.com/datwaft) For getting me into fennel, and for some of his beautiful macros. Without him Nyoom wouldn't exist!
 + [Oliver Caldwell](https://github.com/Olical/) For his excellent work on Aniseed, Conjure, and making fennel feel like a first class language in neovim
-
-
