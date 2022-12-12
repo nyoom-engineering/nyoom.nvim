@@ -639,30 +639,27 @@
     (if (str? name)
         (set moduletag name)
         (if (sym? name)
-            (do
-              (let [name (->str name)
-                    include-path (.. :fnl.modules. moduletag "." name)
-                    config-path (.. :modules. moduletag "." name :.config)]
-                (tset registry name
-                      {:include-paths [include-path]
-                       :config-paths [config-path]})))
-            (do
-              (let [modulename (->str (first name))
-                    include-path (.. :fnl.modules. moduletag "." modulename)
-                    config-path (.. :modules. moduletag "." modulename :.config)
-                    [_ & flags] name]
-                (var includes [include-path])
-                (var configs [config-path])
-                (each [_ v (ipairs flags)]
-                  (let [flagmodule (.. modulename "." (->str v))
-                        flag-include-path (.. include-path "." (->str v))
-                        flag-config-path (.. :modules. moduletag "." flagmodule
-                                             :.config)]
-                    (table.insert includes flag-include-path)
-                    (table.insert configs flag-config-path)
-                    (tset registry flagmodule {})))
-                (tset registry modulename
-                      {:include-paths includes :config-paths configs}))))))
+            (let [name (->str name)
+                  include-path (.. :fnl.modules. moduletag "." name)
+                  config-path (.. :modules. moduletag "." name :.config)]
+              (tset registry name
+                    {:include-paths [include-path] :config-paths [config-path]}))
+            (let [modulename (->str (first name))
+                  include-path (.. :fnl.modules. moduletag "." modulename)
+                  config-path (.. :modules. moduletag "." modulename :.config)
+                  [_ & flags] name]
+              (var includes [include-path])
+              (var configs [config-path])
+              (each [_ v (ipairs flags)]
+                (let [flagmodule (.. modulename "." (->str v))
+                      flag-include-path (.. include-path "." (->str v))
+                      flag-config-path (.. :modules. moduletag "." flagmodule
+                                           :.config)]
+                  (table.insert includes flag-include-path)
+                  (table.insert configs flag-config-path)
+                  (tset registry flagmodule {})))
+              (tset registry modulename
+                    {:include-paths includes :config-paths configs})))))
 
   (fn register-modules [...]
     (each [_ mod (ipairs [...])]

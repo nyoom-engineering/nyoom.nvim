@@ -13,6 +13,7 @@
 (local {: build} (autoload :hotpot.api.make))
 (local {: echo!} (autoload :core.lib.io))
 (local {: init} (autoload :packer))
+
 ;; Load packer
 
 (echo! "Loading Packer")
@@ -31,19 +32,15 @@
        (fn []
          (.. (vim.fn.stdpath :config) :/lua/health.lua)))
 
+;; Core packages
+
+(use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
+(use-package! :nvim-lua/plenary.nvim {:module :plenary})
 ;; include modules
 
 (echo! "Initializing Module System")
 (include :fnl.modules)
 (nyoom-init-modules!)
-;; compile modules
-
-(echo! "Compiling Nyoom Modules")
-(nyoom-compile-modules!)
-;; Core packages
-
-(use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
-(use-package! :nvim-lua/plenary.nvim {:module :plenary})
 ;; To install a package with Nyoom you must declare them here and run 'nyoom sync'
 ;; on the command line, then restart nvim for the changes to take effect
 ;; The syntax is as follows: 
@@ -71,3 +68,7 @@
 
 (echo! "Installing Packages")
 (unpack!)
+;; Compile modules 
+
+(echo! "Compiling Nyoom Modules")
+(nyoom-compile-modules!)
