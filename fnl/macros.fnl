@@ -3,15 +3,14 @@
 (local {: nil? : str? : tbl? : ->str : first : second : all? : begins-with?}
        (require :core.lib))
 
-(local {: tset-default} (require :core.lib.tables))
 (local {: djb2} (require :core.lib.crypt))
 
 (λ expr->str [expr]
   `(macrodebug ,expr nil))
 
-(tset-default _G :nyoom/pack [])
-(tset-default _G :nyoom/rock [])
-(tset-default _G :nyoom/modules {})
+(tset _G :nyoom/pack [])
+(tset _G :nyoom/rock [])
+(tset _G :nyoom/modules {})
 
 (λ fn? [x]
   "Checks if `x` is a function definition.
@@ -677,11 +676,13 @@
        (. _G :nyoom/modules))))
 
 (λ nyoom-init-modules! []
-  "Initialize nyoom's module system"
+  "Initializes nyoom's module system.
+  ```fennel
+  (nyoom-init-modules!)
+  ```"
   (fn init-module [module-name module-def]
-    `(do
-       ,(icollect [_ include-path (ipairs (or module-def.include-paths []))]
-          `(include ,include-path))))
+    (icollect [_ include-path (ipairs (or module-def.include-paths []))]
+      `(include ,include-path)))
 
   (fn init-modules [registry]
     (icollect [module-name module-def (pairs registry)]
@@ -691,11 +692,13 @@
     (expand-exprs inits)))
 
 (λ nyoom-compile-modules! []
-  "Compile and cache module files"
+  "Compiles and caches module files.
+  ```fennel
+  (nyoom-compile-modules!)
+  ```"
   (fn compile-module [module-name module-decl]
-    `(do
-       ,(icollect [_ config-path (ipairs (or module-decl.config-paths []))]
-          `,(pcall require config-path))))
+    (icollect [_ config-path (ipairs (or module-decl.config-paths []))]
+      `,(pcall require config-path)))
 
   (fn compile-modules [registry]
     (icollect [module-name module-def (pairs registry)]

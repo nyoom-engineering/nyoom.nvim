@@ -1,0 +1,34 @@
+;; -*- mode: fennel; -*- vi:ft=fennel
+;; Configuration file for Fenneldoc v1.0.0
+;; https://gitlab.com/andreyorst/fenneldoc
+
+{:fennel-path {}
+ :function-signatures true
+ :ignored-args-patterns ["%.%.%."]
+ :inline-references :link
+ :insert-comment true
+ :insert-copyright false
+ :insert-license true
+ :insert-version true
+ :mode :fenneldoc
+ :modules-info {:fnl/core/lib/autoload.fnl {:description "Nyoom Nvim: Nyoom Autoload Library"
+                                            :name :autoload}
+                :fnl/core/lib/crypt.fnl {:description "Nyoom Nvim: Nyoom Crypt Library"
+                                         :name :crypt}
+                :fnl/core/lib/init.fnl {:description "Nyoom Nvim: Nyoom Core Library"
+                                        :name :core}
+                :fnl/core/lib/io.fnl {:description "Nyoom Nvim: Nyoom IO Library"
+                                      :name :io}
+                :fnl/core/lib/setup.fnl {:description "Nyoom Nvim: Nyoom Setup Wrapper"
+                                         :name :setup}
+                :fnl/core/lib/tables.fnl {:description "Nyoom Nvim: Nyoom Table Library"
+                                          :name :tables}
+                :fnl/macros.fnl {:description "Nyoom Nvim: Nyoom Macros Library"
+                                 :name :macros}}
+ :order :alphabetic
+ :out-dir :./docs/lib
+ :project-license "[MIT](https://github.com/nyoom-engineering/nyoom.nvim/blob/main/LICENSE.md)"
+ :project-version :v0.5.0
+ :sandbox false
+ :test-requirements {}
+ :toc true}

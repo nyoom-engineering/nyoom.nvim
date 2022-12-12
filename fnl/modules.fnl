@@ -48,7 +48,7 @@
         ;;magma              ; FIXME: tame Jupyter notebooks
         mason                ; setting your tools in stone
         eval                 ; run code, run (also, repls)
-        antifennel           ; for all the fennel haters out there
+        ;;antifennel         ; FIXME: for all the fennel haters out there
         pastebin             ; interacting with pastebin platforms
         lsp                  ; :vscode 
         (neogit              ; a git porclain for neovim

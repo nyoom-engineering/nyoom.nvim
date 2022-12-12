@@ -3,10 +3,13 @@
 (local {: userconfigs} (autoload :core.shared))
 
 (fn setup [name ?config]
-  "Wrapper for the common `.setup()` script to use the nyoom `after` macro
-  Accepts the following arguements:
+  "Wrapper for the common .setup() script to use the nyoom after macro.
+
+  Accepts the following arguments:
+  * `name`: the name of the plugin to set up
+  * `?config`: (optional) a table of configuration options to merge with the plugin's default configuration
+
   Example of use:
-  ```fennel
   (setup :nvim-telescope {:config-to-merge})
   ```"
   (let [config (or ?config)]
@@ -14,7 +17,12 @@
     (setup (deep-merge (?. userconfigs name) config))))
 
 (fn after [name config]
-  "Recreation of the `after!` macro for Nyoom
+  "Recreation of the `after!` macro for Nyoom.
+
+  Accepts the following arguments:
+  * `name`: the name of the plugin to set up
+  * `config`: a table of configuration options to merge with the plugin's default configuration
+  
   Example of use:
   ```fennel
   (after nvim-telescope {:config-to-merge})
