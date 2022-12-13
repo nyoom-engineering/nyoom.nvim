@@ -1,16 +1,27 @@
 (import-macros {: command!} :macros)
 (local {: autoload} (require :core.lib.autoload))
-(local io (autoload :core.lib.io))
-(local str (autoload :core.lib.string))
+(local {: tmpfile : slurp : get-clipboard} (autoload :core.lib.io))
 
-(if (not vim.g.antifennel_executable)
-    (set vim.g.antifennel_executable (.. (. (autoload :packer) :config :package_root) :/packer/start/antifennel/antifennel)))
+(fn split [s pat]
+  "Split the given string into a sequential table using the pattern."
+  (var done? false)
+  (var acc [])
+  (var index 1)
+  (while (not done?)
+    (let [(start end) (string.find s pat index)]
+      (if (= :nil (type start))
+          (do
+            (table.insert acc (string.sub s index))
+            (set done? true))
+          (do
+            (table.insert acc (string.sub s index (- start 1)))
+            (set index (+ end 1))))))
+  acc)
 
 (fn antifennel [lua-code]
-  (let [compiler-path (or vim.g.antifennel_executable :antifennel)
-        tmpfile (io.tmpfile lua-code)
-        output (vim.fn.system (.. compiler-path " " tmpfile))]
-    (print "tmpfile: " (io.slurp tmpfile))
+  (let [tmpfile (tmpfile lua-code)
+        output (vim.fn.system (.. :antifennel " " tmpfile))]
+    (print "tmpfile: " (slurp tmpfile))
     (if (= 0 vim.v.shell_error)
         (values output true)
         (values (.. "[nvim-antifennel] " output) false))))
@@ -35,12 +46,11 @@
 
 (fn convert-selection []
   (let [(s-start s-end lua-code) (get-selection)
-        fennel-code (str.split (convert (str.join "\n" lua-code)
-                                   "\n"))]
+        fennel-code (split (convert (.. "\n" lua-code) "\n"))]
     (vim.api.nvim_buf_set_lines 0 (- s-start 1) s-end false fennel-code)))
 
 (fn convert-clipboard []
-  (let [lua-code (io.get-clipboard)
+  (let [lua-code (get-clipboard)
         fnl-code (convert lua-code)]
     (when fnl-code
       (vim.api.nvim_paste fnl-code true -1))

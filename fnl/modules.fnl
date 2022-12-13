@@ -1,6 +1,6 @@
 (import-macros {: nyoom!} :macros)
 
-;; NOTE: Any module with a TODO either isn't ready or hasn't been implemented yet.
+;; NOTE: TODO and FIXME modules still need work. WIP: modules work but may still be buggy
 
 ;; fnlfmt: skip
 (nyoom! :completion
@@ -48,7 +48,7 @@
         ;;magma              ; FIXME: tame Jupyter notebooks
         mason                ; setting your tools in stone
         eval                 ; run code, run (also, repls)
-        ;;antifennel         ; FIXME: for all the fennel haters out there
+        antifennel           ; for all the fennel haters out there. this ones for you
         pastebin             ; interacting with pastebin platforms
         lsp                  ; :vscode 
         (neogit              ; a git porclain for neovim
@@ -63,7 +63,7 @@
         common-lisp          ; if you've seen one lisp, you've seen them all
         java                 ; the poster child for carpal tunnel syndrome
         julia                ; a better, faster MATLAB
-        ;;kotlin             ; a better, slicker Java(Script)
+        ;;kotlin             ; FIXME: a better, slicker Java(Script)
         latex                ; writing papers in Neovim has never been so fun
         lua                  ; one-based indices? one-based indices
         markdown             ; writing docs for people to ignore
@@ -84,7 +84,7 @@
         ;;calendar           ; Watch your missed deadlines in real time
 
         :config
-        ;;literate           ; Disguise your config as poor documentation
+        ;;literate           ; FIXME: Disguise your config as poor documentation
         (default             ; Reasonable defaults for reasonable people
           +bindings 
           +smartparens))
