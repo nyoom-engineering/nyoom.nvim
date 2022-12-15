@@ -18,6 +18,9 @@
     (nyoom-module-p! clojure
       (table.insert mason-tools :clojure-lsp))
 
+    (nyoom-module-p! csharp
+      (table.insert mason-tools :omnisharp))
+
     (nyoom-module-p! java
       (table.insert mason-tools :jdtls))
 

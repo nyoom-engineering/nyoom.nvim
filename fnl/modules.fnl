@@ -62,6 +62,7 @@
         cc                   ; C > C++ == 1
         clojure              ; java with a lisp
         common-lisp          ; if you've seen one lisp, you've seen them all
+        csharp               ; java but with linq
         java                 ; the poster child for carpal tunnel syndrome
         julia                ; a better, faster MATLAB
         ;;kotlin             ; FIXME: a better, slicker Java(Script)
