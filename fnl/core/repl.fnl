@@ -5,7 +5,6 @@
 (local fennel (require :fennel))
 (var sh-out false)
 (var output [])
-
 ;; read user input and add prompt + wrap in sh macro if nessecary 
 
 (fn read-chunk [parser-state]
@@ -66,7 +65,6 @@
   (tset fenv k v))
 
 (tset fenv :xpcall xpcall*)
-
 ;; create repl with functions and env
 
 (let [repl (setfenv fennel.repl fenv)]

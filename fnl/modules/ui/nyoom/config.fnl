@@ -13,11 +13,6 @@
 (import-macros {: custom-set-face! : let! : set! : nyoom-module-p!} :macros)
 (local {: autoload} (require :core.lib.autoload))
 (local {: blend-hex} (autoload :modules.ui.nyoom.colorutils))
-;; reset variables
-
-(when vim.g.colors_name
-  (vim.cmd "hi clear"))
-
 ;; set defaults
 
 (let! colors_name :carbon)

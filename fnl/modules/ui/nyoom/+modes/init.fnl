@@ -1,4 +1,4 @@
 (import-macros {: use-package!} :macros)
 
 (use-package! :mvllow/modes.nvim
-              {:event :BufWinEnter :nyoom-module ui.nyoom.+modes})
+              {:event :InsertEnter :nyoom-module ui.nyoom.+modes})
