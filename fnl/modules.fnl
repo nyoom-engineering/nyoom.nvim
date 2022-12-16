@@ -34,7 +34,7 @@
 
         :term
         ;;fshell             ; WIP: the fennel shell that works everywhere
-        ;;toggleterm)        ; persistant/floating terminal wrapper for :term
+        ;;toggleterm         ; persistant/floating terminal wrapper for :term
 
         :checkers
         diagnostics          ; tasing you for every semicolon you forget
@@ -45,7 +45,7 @@
         debugger             ; stepping through code, to help you add bugs
         docker               ; row row row your boat TODO +netman?
         ;;editorconfig       ; let someone else argue about tabs vs spaces
-        ;;magma              ; FIXME: tame Jupyter notebooks
+        magma                ; tame Jupyter notebooks
         mason                ; setting your tools in stone
         eval                 ; run code, run (also, repls)
         antifennel           ; for all the fennel haters out there. this ones for you

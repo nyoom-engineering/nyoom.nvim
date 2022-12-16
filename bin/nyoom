@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -o errexit -o pipefail -o nounset
 
 # people like xdg
@@ -10,15 +11,13 @@ NYOOM_CONFIG="${XDG_DATA_HOME:-${HOME}/.config}/nyoom"
 # silently enter ~/.config/nvim when updating
 pushd ${CONFIG_PATH} >/dev/null
 
-# function to pretty print nyoom/nvim version when updating
-print_nyoom_status() {
+function print_nyoom_status() {
 	printf "\033[1m\033[36mNyoom version:\033[0m $(git log --pretty=tformat:"%h" -n1)\n"
 	nvim --version | sed '/^$/,$d'
 	echo
 }
 
-# function to install packer/hotpot
-install_nyoom() {
+function install_nyoom() {
 	printf "Linking Nyoom ..."
 	mkdir -p "${NYOOM_CONFIG}"
 	[ ! -f "${NYOOM_CONFIG}/config.fnl" ] && ln "${CONFIG_PATH}/fnl/config.fnl" "${NYOOM_CONFIG}/config.fnl"
@@ -32,9 +31,7 @@ install_nyoom() {
 	printf "\n\033[1m\033[32mSuccessfully Installed Core Dependencies\033[0m\n\n"
 }
 
-case "${1:-}" in
-"")
-	# show help info
+function help() {
 	printf "%s\n%s\n  %s\n%s\n" \
 		"usage: $(basename "$0") [options] [script [args]]" \
 		"Available options are:" \
@@ -42,6 +39,14 @@ case "${1:-}" in
 		"sync  sync nyoom modules, plugins, and dependencies (linters/formatters/parsers/language-servers)" \
 		"lock  generate lockfile for installed plugins (unstable)" \
 		"upgrade  upgrade Nyoom Nvim"
+}
+
+case "${1:-}" in
+"")
+	help
+	;;
+help)
+	help
 	;;
 install)
 	if [ -d "${DATA_PATH}/site/pack/packer/opt/packer.nvim/" ]; then
@@ -51,13 +56,10 @@ install)
 	fi
 	;;
 sync)
-	# sync nyoom modules/plugins with lockfile
 	start_time=$(date +%s)
 	printf "Synchronizing your config with Nyoom Nvim\n\n"
 	print_nyoom_status
-	# only proceed of lockfile exists
 	if [ -e "${CONFIG_PATH}/lockfile.lua" ]; then
-		# run 'nyoom install' if dependencies aren't available
 		if [ ! -d "${DATA_PATH}/site/pack/packer/opt/packer.nvim/" ]; then
 			printf "Core Dependencies Unavailable, running 'nyoom install'\n"
 			install_nyoom
@@ -95,13 +97,11 @@ sync)
 		fi
 		printf "\n\033[1m\033[92mNyoom successfully synced dependencies in $(expr $(date +%s) - $start_time)s\033[0m\n\n"
 	else
-		# if the lockfile doesn't exist, somethings gone wrong. Ask them to reinstall nyoom which should download a valid lockfile
 		printf "\n\033[31mError: Lockfile not available. Please run 'nyoom lock'\033[0m\n"
 		printf "\033[1m\033[92mNyoom unsuccessfully synced plugins in $(expr $(date +%s) - $start_time)s\033[0m\n\n"
 	fi
 	;;
 lock)
-	# update the lockfile
 	if [ -e "${CONFIG_PATH}/lua/packer_compiled.lua" ]; then
 		start_time=$(date +%s)
 		printf "\nGenerating lockfile with Nyoom Nvim\n\n"
@@ -115,7 +115,6 @@ lock)
 	fi
 	;;
 upgrade)
-	# git pull latest version of nyoom
 	printf "\033[1mUpdating Nyoom\033[0m\n"
 	git fetch
 	if [ $(git rev-parse HEAD) == $(git rev-parse @{u}) ]; then
@@ -134,6 +133,17 @@ upgrade)
 		printf "\033[1m\033[92mNyoom successfully updated to version $(git log --pretty=tformat:"%h" -n1) in $(expr $(date +%s) - $start_time)s\033[0m\n"
 		printf "Run 'nyoom sync' to syncronize modules\n\n"
 	fi
+	;;
+repl)
+	printf "\nFennel Repl with Nyoom Nvim\n\n"
+	print_nyoom_status
+	exec nvim --headless -S "${CONFIG_PATH}/fnl/core/repl.fnl" -c 'echo""|qall!' -- "${@:2}"
+
+	;;
+*)
+	# printf "\nRunning File with Nyoom Nvim\n\n"
+	# print_nyoom_status
+	exec nvim --headless -S "$1" -i NONE -c 'echo""|qall!' -- "${@:2}"
 	;;
 esac
 popd >/dev/null

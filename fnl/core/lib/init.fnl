@@ -1,14 +1,3 @@
-(fn nightly? []
-  "Returns true if the given neovim is of version 0.9, false otherwise.
-  Arguments:
-  
-  Example:
-  ```fennel
-  (assert (= nightly? true))
-  (assert (= nightly? false))
-  ```"
-  (vim.fn.has :nvim-0.9))
-
 (fn nil? [x]
   "Returns true if the given value is nil, false otherwise.
   Arguments:
@@ -80,6 +69,29 @@
   (assert (= (tbl? 'hello') false))
   ```"
   (= :table (type x)))
+  
+(fn executable? [...]
+  "Returns true if the input is executable, false otherwise.
+  Arguments:
+  * `...`: a string
+  
+  Example:
+  ```fennel
+  (assert (= (executable? :python3) true))
+  (assert (= (executable? :python3) false))
+  ```"
+  (= 1 (vim.fn.executable ...)))
+
+(fn nightly? []
+  "Returns true if the given neovim is of version 0.9, false otherwise.
+  
+  Example:
+  ```fennel
+  (assert (= (nightly?) true))
+  (assert (= (nightly?) false))
+  ```"
+  (let [nightly (vim.fn.has :nvim-0.9.0)]
+    (= nightly 1))) 
 
 (fn ->str [x]
   "Converts `x` to a string.
@@ -631,7 +643,7 @@
                        (if (nil? step)
                            (get (assoc acc k {}) k)
                            step))) t path) final (f (get-in t ks)))
-    t))
+    t))    
 
 {: nil?
  : str?
@@ -639,6 +651,8 @@
  : bool?
  : fn?
  : tbl?
+ : executable?
+ : nightly?
  : ->str
  : ->bool
  : empty?

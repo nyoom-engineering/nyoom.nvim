@@ -19,26 +19,27 @@
                       "Please don't leave, otherwise I'll tell packer to break your setup on next launch!"
                       "It's not like I'll miss you or anything, b-baka!"
                       "You are *not* prepared!"])
-(λ going-to-quit []
+
+(fn going-to-quit []
   (var open-buffers 0)
   (for [buf (vim.fn.bufnr 1) (vim.fn.bufnr "$")]
     (when (= (vim.fn.bufloaded buf) 1)
       (set open-buffers (+ open-buffers 1))))
   (= open-buffers 1))
+
 (fn confirm-quit [save? last-buffer?]
   (local buftype (vim.api.nvim_buf_get_option 0 :buftype))
   (local msg (string.format "%s  %s"
                             (. quit-messages
                                (math.random (length quit-messages)))
                             "Really quit Neovim?"))
-  (if (or (= buftype :help) (= buftype :nofile))
-      (vim.api.nvim_command :q)
-      (and last-buffer? (going-to-quit))
-      (vim.api.nvim_command :q)
-      (= (vim.fn.confirm msg "&Yes\n&No" 2) 1)
-      (if (and save? (vim.api.nvim_buf_get_option 0 :modified))
-          (vim.api.nvim_command :wqa)
-          (vim.api.nvim_command :qa))))
+  (if (or (= buftype :help) (= buftype :nofile)) (vim.api.nvim_command :q)
+      (and last-buffer? (going-to-quit)) (vim.api.nvim_command :q)
+      (= (vim.fn.confirm msg "&Yes\n&No" 2) 1) (if (and save?
+                                                        (vim.api.nvim_buf_get_option 0
+                                                                                     :modified))
+                                                   (vim.api.nvim_command :wqa)
+                                                   (vim.api.nvim_command :qa))))
 
-(map! [c] :q '((confirm-quit) false true))
-(map! [c] :wq '((confirm-quit) true true))
+(map! [c] :q `((confirm-quit) false true))
+(map! [c] :wq `((confirm-quit) true true))

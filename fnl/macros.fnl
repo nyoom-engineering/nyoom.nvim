@@ -1,9 +1,9 @@
 ;; fennel-ls: macro-file
 
+(local {: deep-merge} (require :core.lib.tables))
+(local {: djb2} (require :core.lib.crypt))
 (local {: nil? : str? : tbl? : ->str : first : second : all? : begins-with?}
        (require :core.lib))
-
-(local {: djb2} (require :core.lib.crypt))
 
 (λ expr->str [expr]
   `(macrodebug ,expr nil))
@@ -744,6 +744,28 @@
     (let [msg (.. "One of your installed modules depends on " (->str name)
                   ". Please enable it")]
       `(vim.notify ,msg vim.log.levels.WARN))))
+
+;; (tset _G :nyoom/servers [])
+;; (tset _G :nyoom/lintesr [])
+;; (tset _G :nyoom/formatters [])
+;; (tset _G :nyoom/parsers [])
+;; (tset _G :nyoom/cmp [])
+;; 
+;; (λ nyoom-add-language-server! [server ?config]
+;;   (assert-compile (sym? server) "expected symbol for server" server)
+;;   (let [server (->str server)
+;;         config (or ?config)]
+;;     (tset _G :nyoom/servers server config)))
+;; 
+;; (λ nyoom-load-language-servers! []
+;;   (let [servers _G.nyoom/servers]
+;;     (each [server server_config (pairs servers)]
+;;       ((. (. lsp server) :setup) (deep-merge defaults server_config)))))
+;; 
+;; (λ nyoom-add-linter! [])
+;; (λ nyoom-add-formatter! [])
+;; (λ nyoom-add-parsers! [])
+;; (λ nyoom-add-cmp-source! [])
 
 {: expr->str
  : vlua
