@@ -137,7 +137,7 @@ upgrade)
 repl)
 	printf "\nFennel Repl with Nyoom Nvim\n\n"
 	print_nyoom_status
-	exec nvim --headless -S "${CONFIG_PATH}/fnl/core/repl.fnl" -c 'echo""|qall!' -- "${@:2}"
+	exec nvim --headless -S "${CONFIG_PATH}/fnl/core/repl.fnl" -c 'echo""|qall!'
 
 	;;
 *)
