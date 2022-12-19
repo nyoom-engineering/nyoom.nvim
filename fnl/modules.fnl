@@ -47,7 +47,7 @@
         pastebin             ; interacting with pastebin platforms
         lsp                  ; :vscode 
         (neogit +forge)               ; a git porcelain for Neovim
-        ;; rgb                ; creating color strings
+        rgb                ; creating color strings
         tree-sitter)          ; syntax and parsing, sitting in a tree...
 
 (nyoom! :lang

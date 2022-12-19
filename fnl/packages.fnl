@@ -55,6 +55,13 @@
 (use-package! :luukvbaal/nnn.nvim {:config (fn []
                                              (local {: setup} (require :nnn))
                                              (setup))})
+;; (use-package! :kevinhwang91/nvim-bgf {:ft [:qf]})
+
+;; (use-package! :glacambre/firenvim {:run (fn []
+;;                                           (vim.fn.firenvim#install 0))})
+                                          
+;; (use-package! :rktjmp/lush.nvim)
+;; (use-package! :Dkendal/nvim-treeclimber {:call-setup :nvim-treeclimber})
                                              
 ;; (use-package! :phaazon/notisys.nvim {:branch "v0.1"
 ;;                                      :call-setup :notisys})

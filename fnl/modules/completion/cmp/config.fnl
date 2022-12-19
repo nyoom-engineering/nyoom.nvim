@@ -11,11 +11,13 @@
 (table.insert sources {:name :luasnip})
 (table.insert sources {:name :buffer})
 (table.insert sources {:name :path})
+(table.insert sources {:name :nvim_lsp})
+(table.insert sources {:name :conjure})
 
 ;; add conditional sources
-(nyoom-module-p! lsp (table.insert sources {:name :nvim_lsp}))
-(nyoom-module-p! rust (table.insert sources {:name :crates}))
-(nyoom-module-p! eval (table.insert sources {:name :conjure}))
+;; (nyoom-module-p! lsp (table.insert sources {:name :nvim_lsp}))
+;; (nyoom-module-p! rust (table.insert sources {:name :crates}))
+;; (nyoom-module-p! eval (table.insert sources {:name :conjure}))
 
 ;; default icons (lspkind)
 (local icons {:Text ""

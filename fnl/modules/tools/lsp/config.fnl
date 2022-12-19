@@ -103,7 +103,14 @@
 (table.insert lsp-servers :clojure_lsp)
 (table.insert lsp-servers :bashls)
   
-
+(lsp.sumneko_lua.setup {:on_attach on-attach
+                          : capabilities
+                          :settings {:Lua {:diagnostics {:globals {1 :vim}}
+                                           :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
+                                                                 (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true
+                                                                 (vim.fn.expand :$HOME/.hammerspoon/Spoons/EmmyLua.spoon/annotations) true}
+                                                       :maxPreload 100000
+                                                       :preloadFileSize 10000}}}})
 
 ;; Load lsp
 (let [servers lsp-servers]
@@ -112,13 +119,13 @@
 
 ;; for trickier servers you can change up the defaults
 ;; (nyoom-module-p! lua
-;;   (lsp.sumneko_lua.setup {:on_attach on-attach
-;;                           : capabilities
-;;                           :settings {:Lua {:diagnostics {:globals {1 :vim}}
-;;                                            :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
-;;                                                                  (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
-;;                                                        :maxPreload 100000
-;;                                                        :preloadFileSize 10000}}}}))
+  ;; (lsp.sumneko_lua.setup {:on_attach on-attach
+  ;;                         : capabilities
+  ;;                         :settings {:Lua {:diagnostics {:globals {1 :vim}}
+  ;;                                          :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
+  ;;                                                                (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
+  ;;                                                      :maxPreload 100000
+  ;;                                                      :preloadFileSize 10000}}}}))
 ;; (lsp.jsonls.setup {:get_root_dir "123"})
 ;; (set lsp.jsonls.get_root_dir vim.loop.cwd)
 ;; (print (vim.inspect lsp.jsonls))
