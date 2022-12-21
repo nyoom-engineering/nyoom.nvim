@@ -4,7 +4,6 @@
 (local {: autoload} (require :core.lib.autoload))
 (local Hydra (autoload :hydra))
 
-;; Git
 (nyoom-module-p! vc-gutter
                  (do
                    (local {: toggle_linehl
@@ -29,7 +28,7 @@
   ^
     _<Enter>_: Neogit       _<Esc>_: Exit
       ")
-                   (Hydra {:name :Git
+                   (Hydra {:name :+git
                            :hint git-hint
                            :mode [:n :x]
                            :body :<leader>g
@@ -108,7 +107,6 @@
                                     {:exit true :desc :Neogit}]
                                    [:<Esc> nil {:exit true :nowait true}]]})))
 
-;; Vim options
 (nyoom-module-p! nyoom
                  (do
                    (local options-hint "
@@ -125,13 +123,13 @@
     ^
          ^^^^              _<Esc>_
     ")
-                   (Hydra {:name :Options
+                   (Hydra {:name :+options
                            :hint options-hint
                            :config {:color :amaranth
                                     :invoke_on_body true
                                     :hint {:border :solid :position :middle}}
                            :mode [:n :x]
-                           :body :<leader>o
+                           :body :<leader>v
                            :heads [[:b
                                     (fn []
                                       (if (= vim.o.background :dark)
@@ -184,13 +182,12 @@
                                     {:desc "cursor line"}]
                                    [:<Esc> nil {:exit true :nowait true}]]})))
 
-;; Telescope
 (nyoom-module-p! telescope
                  (do
                    (local telescope-hint "
            _o_: old files   _g_: live grep
            _p_: projects    _/_: search in file
-           _r_: resume      _f_: files
+           _r_: resume      _f_: find files
    ▁
            _h_: vim help    _c_: execute command
            _k_: keymaps     _;_: commands history  
@@ -198,7 +195,7 @@
   ^
   _<Esc>_         _<Enter>_: NvimTree
     ")
-                   (Hydra {:name :Telescope
+                   (Hydra {:name :+file
                            :hint telescope-hint
                            :config {:color :teal
                                     :invoke_on_body true
@@ -257,37 +254,6 @@
                                     {:exit true :desc :NvimTree}]
                                    [:<Esc> nil {:exit true :nowait true}]]})))
 
-;; Visuals
-(nyoom-module-p! tree-sitter
-                 (do
-                   (local visuals-hint "
-  ^ ^     פּ Visuals
-  ^
-  _z_ TrueZen Ataraxis
-  _p_ TS Playground
-  _h_ TS Highlight Capture  
-  ^
-  ^^^^              _<Esc>_
-    ")
-                   (Hydra {:name :Visuals
-                           :hint visuals-hint
-                           :config {:color :teal
-                                    :invoke_on_body true
-                                    :hint {:border :solid :position :middle}}
-                           :mode [:n :x]
-                           :body :<leader>z
-                           :heads [[:z
-                                    (fn []
-                                      (vim.cmd :TZAtaraxis))]
-                                   [:p
-                                    (fn []
-                                      (vim.cmd :TSPlayground))]
-                                   [:h
-                                    (fn []
-                                      (vim.cmd :TSHighlightCapturesUnderCursor))]
-                                   [:<Esc> nil {:exit true :nowait true}]]})))
-
-;; debugging
 (nyoom-module-p! debugger
                  (do
                    (local dap (autoload :dap))
@@ -305,7 +271,7 @@
       ^
   _<Esc>_               _<Enter>_: DapUI
 ")
-                   (Hydra {:name :Debug
+                   (Hydra {:name :+debug
                            : hint
                            :config {:color :pink
                                     :invoke_on_body true
@@ -332,8 +298,6 @@
                                     (fn []
                                       (ui.toggle))]]})))
 
-;; filetype hydras
-;; Rust
 (nyoom-module-p! rust
                  (do
                    (fn rust-hydra []
@@ -348,7 +312,7 @@
 ^
   _i_: Toggle Inlay Hints   _<Esc>_: Exit
     ")
-                     (Hydra {:name :Rust
+                     (Hydra {:name :+rust
                              :hint rust-hint
                              :config {:color :red
                                       :invoke_on_body true
@@ -415,7 +379,7 @@
     ^                          
     ^^^^^^                   _<Esc>_^^^
        ")
-                     (Hydra {:name :VimTeX
+                     (Hydra {:name :+latex
                              :hint vimtex-hint
                              :config {:color :amaranth
                                       :invoke_on_body true

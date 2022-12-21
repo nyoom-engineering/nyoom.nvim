@@ -1,6 +1,5 @@
 (import-macros {: map! : nyoom-module-p!} :macros)
 (local {: autoload} (require :core.lib.autoload))
-
 ;; hotpot fun
 
 (local reflect-session {:id nil :mode :compile})
@@ -37,5 +36,7 @@
 
 (nyoom-module-p! default.+bindings
                  (do
-                   (map! [v] :<space>hr `(new-or-attach-reflect))
-                   (map! [n] :<space>hx `(swap-reflect-mode))))
+                   (map! [v] :<space>mhn `(new-or-attach-reflect)
+                         {:desc "New reflect session"})
+                   (map! [n] :<space>mhx `(swap-reflect-mode)
+                         {:desc "Swap reflect mode"})))

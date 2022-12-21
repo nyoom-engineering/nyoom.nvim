@@ -12,8 +12,8 @@
 (set! foldlevelstart 99)
 (set! foldenable true)
 
-(map! [n] :zR `(openAllFolds))
-(map! [n] :zM `(closeAllFolds))
+(map! [n] :zR `(openAllFolds) {:desc "Open all folds"})
+(map! [n] :zM `(closeAllFolds {:desc "Close all folds"}))
 
 (setup :ufo {:provider_selector (fn [bufnr filetype buftype]
                                   [:treesitter :indent])})

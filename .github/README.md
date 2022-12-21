@@ -27,7 +27,7 @@ Nyoom can be anything you'd like. Enable all the modules for the vscode-alternat
 
 At its core, Nyoom consists of a set of intuitive macros, a nice standard library, a set of modules, and some opinionated default options, and nothing more.
 
-Designed against the mantras of doom-emacs [doom-emacs](https://github.com/hlissner/doom-emacs):
+Designed against the mantras of [doom-emacs](https://github.com/hlissner/doom-emacs):
 
 + **Gotta go fast**. Startup and run-time performance are priorities.
 + **Close to metal**. There's less between you and vanilla neovim by design. That's less to grok and less to work around when you tinker.
@@ -70,6 +70,8 @@ cd ~/.config/nvim/
 bin/nyoom install 
 bin/nyoom sync
 ```
+
+If you'd like to view your startuptime on the dashboard, please alias `nvim` to `nvim --startuptime /tmp/nvim-startuptime`
 
 Then read [getting started](https://github.com/nyoom-engineering/nyoom.nvim/blob/master/docs/getting_started.md) to be walked through
 installing, configuring and maintaining Nyoom Nvim.

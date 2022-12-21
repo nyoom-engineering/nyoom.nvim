@@ -1,6 +1,6 @@
 (require-macros :macros)
 (local {: autoload} (require :core.lib.autoload))
-(local {: after} (autoload :core.lib.setup))
+(local {: after : setup} (autoload :core.lib.setup))
 
 ;; You can use the `colorscheme` macro to load a custom theme, or load it manually
 ;; via require. This is the default:
@@ -23,7 +23,7 @@
 ;; map! is used for mappings
 ;; Heres an example, preseing esc should also remove search highlights
 
-(map! [n] :<esc> :<esc><cmd>noh<cr>)
+(map! [n] :<esc> :<esc><cmd>noh<cr> {:desc "No highlight escape"})
 
 ;; sometimes you want to modify a plugin thats loaded from within a module. For 
 ;; this you can use the `after` function

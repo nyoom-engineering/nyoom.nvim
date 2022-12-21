@@ -69,7 +69,7 @@
   (assert (= (tbl? 'hello') false))
   ```"
   (= :table (type x)))
-  
+
 (fn executable? [...]
   "Returns true if the input is executable, false otherwise.
   Arguments:
@@ -91,7 +91,7 @@
   (assert (= (nightly?) false))
   ```"
   (let [nightly (vim.fn.has :nvim-0.9.0)]
-    (= nightly 1))) 
+    (= nightly 1)))
 
 (fn ->str [x]
   "Converts `x` to a string.
@@ -237,6 +237,20 @@
             (doto output
               (table.insert v))))
       x))
+
+(fn truncate [num digits]
+  "Truncates a value to a given number of digits.
+  
+  Arguments:
+  * `num`: the value to truncate.
+  * `digits`: the number of digits to truncate to.
+
+  Example:
+  ```fennel
+  (assert (= (truncate .123456 3) .123)
+  ```"
+  (let [mult (^ 10 digits)]
+    (/ (math.modf (* num mult)) mult)))
 
 (fn begins-with? [chars str]
   "Returns `true` if the string `str` begins with the characters in `chars`, `false` otherwise.
@@ -643,7 +657,7 @@
                        (if (nil? step)
                            (get (assoc acc k {}) k)
                            step))) t path) final (f (get-in t ks)))
-    t))    
+    t))
 
 {: nil?
  : str?
@@ -664,6 +678,7 @@
  : all?
  : contains?
  : flatten
+ : truncate
  : begins-with?
  : rand
  : ++

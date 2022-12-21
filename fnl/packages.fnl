@@ -35,6 +35,7 @@
 
 (use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
+(use-package! :MunifTanjim/nui.nvim {:module :nui})
 
 ;; include modules
 

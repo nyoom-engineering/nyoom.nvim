@@ -7,10 +7,10 @@
         :report_warn report-warn!
         :report_error report-error!} vim.health)
 
-(λ executable? [command]
+(lambda executable? [command]
   (= 1 (vim.fn.executable command)))
 
-(λ report! [name]
+(lambda report! [name]
   (assert (= :string (type name)) "expected string for name")
   (let [command (?. config name :cmd 1)]
     (if (nil? command)
@@ -21,10 +21,11 @@
         (report-error! (string.format "**%s**: the command '_%s_' is not executable."
                                       name command)))))
 
-(λ check! []
+(lambda check! []
   (report-start! "LSP server executables")
   (let [configured-servers (config.available_servers)
-        configured-servers (doto configured-servers (table.sort))]
+        configured-servers (doto configured-servers
+                             (table.sort))]
     (if (= 0 (length configured-servers))
         (report-info! "no lsp servers have been configured.")
         (each [_ server (ipairs configured-servers)]

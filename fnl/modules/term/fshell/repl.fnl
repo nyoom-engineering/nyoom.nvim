@@ -16,7 +16,6 @@ endfunction")
     (doto bufnr
       (vim.api.nvim_buf_set_name (: "fennel-repl.%d" :format state.n))
       (vim.api.nvim_buf_set_option :buftype :prompt)
-      (vim.api.nvim_buf_set_option :filetype :fennel)
       (vim.api.nvim_buf_set_option :complete ".")
       (vim.fn.prompt_setcallback :FennelReplCallback)
       (vim.fn.prompt_setprompt (.. "λ "))

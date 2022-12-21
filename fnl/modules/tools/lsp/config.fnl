@@ -16,24 +16,23 @@
   (import-macros {: buf-map! : autocmd! : augroup! : clear!} :macros)
   (local {: contains?} (autoload :core.lib))
   ;; Keybindings
-  (local {:hover open-doc-float!
-          :declaration goto-declaration!
-          :definition goto-definition!
-          :type_definition goto-type-definition!
-          :code_action open-code-action-float!
-          :references goto-references!
-          :rename rename!} vim.lsp.buf)
-  (buf-map! [n] :K open-doc-float!)
-  (buf-map! [nv] :<leader>a open-code-action-float!)
-  (buf-map! [nv] :<leader>rn rename!)
-  (buf-map! [n] :<leader>gD goto-declaration!)
-  (buf-map! [n] :gD goto-declaration!)
-  (buf-map! [n] :<leader>gd goto-definition!)
-  (buf-map! [n] :gd goto-definition!)
-  (buf-map! [n] :<leader>gt goto-type-definition!)
-  (buf-map! [n] :gt goto-type-definition!)
-  (buf-map! [n] :<leader>gr goto-references!)
-  (buf-map! [n] :gr goto-references!)
+  (nyoom-module-p! defaults.+bindings
+                   (do
+                     (local {:hover open-doc-float!
+                             :declaration goto-declaration!
+                             :definition goto-definition!
+                             :type_definition goto-type-definition!
+                             :references goto-references!}
+                            vim.lsp.buf)
+                     (buf-map! [n] :K open-doc-float!)
+                     (buf-map! [n] :<leader>gD goto-declaration!)
+                     (buf-map! [n] :gD goto-declaration!)
+                     (buf-map! [n] :<leader>gd goto-definition!)
+                     (buf-map! [n] :gd goto-definition!)
+                     (buf-map! [n] :<leader>gt goto-type-definition!)
+                     (buf-map! [n] :gt goto-type-definition!)
+                     (buf-map! [n] :<leader>gr goto-references!)
+                     (buf-map! [n] :gr goto-references!)))
   ;; Enable lsp formatting if available 
   (nyoom-module-p! format.+onsave
                    (when (client.supports_method :textDocument/formatting)
