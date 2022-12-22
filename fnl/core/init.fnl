@@ -34,9 +34,20 @@
     (let [provider (.. :loaded_ v :_provider)]
       (let! provider 0))))
 
+;; add python provider and mason binaries
+
+(set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
+
+(set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :config) :/bin))
+
+;; (let! python3_host_prog (if (executable? :python) (vim.fn.exepath :python)
+;;                             (executable? :python3) (vim.fn.exepath :python3)
+;;                             nil))
+
 ;; check for cli
 
 (local cli (os.getenv :NYOOM_CLI))
+
 ;; If its a cli instance, load package management
 ;; If its a regular instance, load defaults, userconfig and plugins
 
@@ -87,6 +98,7 @@
       (set! list)
       (set! fillchars {:eob " "
                        :vert " "
+                       :horiz " "
                        :diff "╱"
                        :foldclose ""
                        :foldopen ""
@@ -125,11 +137,4 @@
 
       (let [packer-commands [:install :update :compile :sync :status :lockfile]]
         (each [_ v (ipairs packer-commands)]
-          (replace-packer v)))
-      (set vim.env.PATH
-           (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
-      (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :config) :/bin))
-      (let! python3_host_prog
-            (if (executable? :python) (vim.fn.exepath :python)
-                (executable? :python3) (vim.fn.exepath :python3)
-                nil))))
+          (replace-packer v)))))

@@ -30,7 +30,6 @@
                              package-counter module-counter)))
 
 (: (io.open startup-file :w) :close)
-
 ;; setup alpha
 
 (fn button [sc txt keybind keybind-opts]

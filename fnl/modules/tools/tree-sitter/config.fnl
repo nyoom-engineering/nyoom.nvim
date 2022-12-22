@@ -10,7 +10,7 @@
                    (let [leap-ast (autoload :leap-ast)]
                      (map! [nxo] :gs `(leap-ast.leap) {:desc "Leap AST"}))))
 
-(local treesitter-filetypes [:comment :help :fennel :vim :regex])
+(local treesitter-filetypes [:comment :help :fennel :vim :regex :query])
 ;; conditionally install parsers
 
 (nyoom-module-p! clojure (table.insert treesitter-filetypes :clojure))
@@ -51,6 +51,13 @@
                  (do
                    (table.insert treesitter-filetypes :markdown)
                    (table.insert treesitter-filetypes :markdown_inline)))
+
+(nyoom-module-p! vc-gutter
+                 (do
+                   (table.insert treesitter-filetypes :git_rebase)
+                   (table.insert treesitter-filetypes :gitattributes)
+                   (table.insert treesitter-filetypes :gitcommit)
+                   (table.insert treesitter-filetypes :gitignore)))
 
 (nyoom-module-p! org
                  (do
