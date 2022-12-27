@@ -1,6 +1,6 @@
 (import-macros {: use-package!} :macros)
 
-(use-package! "https://codeberg.org/esensar/nvim-dev-containe"
+(use-package! "https://codeberg.org/esensar/nvim-dev-container"
               {:nyoom-module tools.docker
                :cmd [:DevcontainerBuild
                      :DevcontainerImageRun
