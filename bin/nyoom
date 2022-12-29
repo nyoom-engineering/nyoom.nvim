@@ -39,7 +39,7 @@ function help() {
 		"sync  sync nyoom modules, plugins, and dependencies (linters/formatters/parsers/language-servers)" \
 		"lock  generate lockfile for installed plugins (unstable)" \
 		"upgrade  upgrade Nyoom Nvim" \
-		"profile  run Nyoom Nvim with profilers enabled at startuptime" \
+		"profile  run Nyoom Nvim with profilers enabled at startuptime"
 }
 
 case "${1:-}" in
