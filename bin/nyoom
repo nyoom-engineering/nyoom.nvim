@@ -40,7 +40,6 @@ function help() {
 		"lock  generate lockfile for installed plugins (unstable)" \
 		"upgrade  upgrade Nyoom Nvim" \
 		"profile  run Nyoom Nvim with profilers enabled at startuptime" \
-		"startup  print required lua modules and the time taken to initialize on startup"
 }
 
 case "${1:-}" in
