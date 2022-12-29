@@ -1,6 +1,4 @@
 (import-macros {: nyoom-module-p! : nyoom-module-ensure!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
 (local {: on-attach} (autoload :modules.tools.lsp.config))
 (local {: diagnostic-icons} (autoload :core.shared))
 (local null-ls (autoload :null-ls))

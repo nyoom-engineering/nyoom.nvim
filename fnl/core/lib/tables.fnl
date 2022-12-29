@@ -1,5 +1,3 @@
-(local {: tbl?} (require :core.lib))
-
 (fn deep-copy [x]
   "Creates a deep copy of the given value.
   
@@ -16,8 +14,10 @@
     (assert (not (= (. t \"a\") (deep-copy (. t \"a\")))))
     (assert (= (deep-copy \"hello\") \"hello\")))
   ```"
-  (if (tbl? x) (collect [k v (pairs x)]
-                 (values (deep-copy k) (deep-copy v))) x))
+  (if (= :table (type x))
+      (collect [k v (pairs x)]
+        (values (deep-copy k) (deep-copy v)))
+      x))
 
 (fn deep-merge [x1 x2]
   "Merges two tables recursively.
@@ -37,7 +37,8 @@
     [nil nil] nil
     [nil _] (deep-copy x2)
     [_ nil] (deep-copy x1)
-    (where _ (or (not (tbl? x1)) (not (tbl? x2)))) (deep-copy x1)
+    (where _ (or (not (= :table (type x1))) (not (= :table (type x2)))))
+    (deep-copy x1)
     _ (accumulate [acc (deep-copy x1) k v (pairs x2)]
         (doto acc
           (tset k (deep-merge v (?. acc k)))))))

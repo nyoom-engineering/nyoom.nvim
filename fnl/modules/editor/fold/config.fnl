@@ -3,8 +3,6 @@
 (nyoom-module-ensure! tree-sitter)
 (packadd! promise-async)
 
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
 (local {: openAllFolds : closeAllFolds} (autoload :ufo))
 
 (set! foldcolumn :1)

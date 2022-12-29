@@ -38,7 +38,9 @@ function help() {
 		"install  install core plugins" \
 		"sync  sync nyoom modules, plugins, and dependencies (linters/formatters/parsers/language-servers)" \
 		"lock  generate lockfile for installed plugins (unstable)" \
-		"upgrade  upgrade Nyoom Nvim"
+		"upgrade  upgrade Nyoom Nvim" \
+		"profile  run Nyoom Nvim with profilers enabled at startuptime" \
+		"startup  print required lua modules and the time taken to initialize on startup"
 }
 
 case "${1:-}" in
@@ -138,7 +140,9 @@ repl)
 	printf "\nFennel Repl with Nyoom Nvim\n\n"
 	print_nyoom_status
 	exec nvim --headless -S "${CONFIG_PATH}/fnl/core/repl.fnl" -c 'echo""|qall!'
-
+	;;
+profile)
+	NYOOM_PROFILE=true nvim
 	;;
 *)
 	# printf "\nRunning File with Nyoom Nvim\n\n"

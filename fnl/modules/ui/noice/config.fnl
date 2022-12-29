@@ -1,10 +1,5 @@
 (import-macros {: packadd! : nyoom-module-p!} :macros)
 
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
-
-;; load noice
-
 (setup :noice {:health {:checker false}
                :cmdline {:format {:cmdline {:pattern "^:"
                                             :icon " "
@@ -36,8 +31,6 @@
                :presets {:long_message_to_split true :lsp_doc_border true}
                :popupmenu {:backend :cmp}
                :format {}})
-
-;; load nvim-notify
 
 (set vim.notify
      (fn [msg level opts]

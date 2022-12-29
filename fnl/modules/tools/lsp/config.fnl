@@ -1,6 +1,4 @@
 (import-macros {: nyoom-module-p!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: deep-merge} (autoload :core.lib.tables))
 (local lsp (autoload :lspconfig))
 (local lsp-servers {})
 
@@ -115,6 +113,7 @@
 
 ;; Load lsp
 
+(local {: deep-merge} (autoload :core.lib))
 (let [servers lsp-servers]
   (each [server server_config (pairs servers)]
     ((. (. lsp server) :setup) (deep-merge defaults server_config))))

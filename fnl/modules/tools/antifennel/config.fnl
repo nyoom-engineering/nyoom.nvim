@@ -1,6 +1,4 @@
 (import-macros {: command!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: tmpfile : slurp : get-clipboard} (autoload :core.lib.io))
 
 (fn split [s pat]
   "Split the given string into a sequential table using the pattern."

@@ -1,9 +1,4 @@
-(local {: autoload} (require :core.lib.autoload))
-(local plenary-path (autoload :plenary.path))
-
-(local os-path-sep ;; Determines the path separator for the current OS.
-       ;; On Linux, OSX, and BSD, it returns '/'.
-       ;; On other OSes, it returns ''.
+(local os-path-sep
        (let [os (string.lower jit.os)]
          (if (or (= :linux os) (= :osx os) (= :bsd os)) "/" "\\")))
 
@@ -165,21 +160,6 @@
   (assert (not (readable? \"invalid-file.txt\")))
   ```"
   (vim.fn.filereadable p))
-
-(fn plenary-path-init [...]
-  "Initializes a new `plenary.path.Path` instance with the given arguments.
-  
-  Arguments:
-  * `args`: the arguments to pass to `plenary.path.Path::new`
-  
-  Returns:
-  * a new `plenary.path.Path` instance
-  
-  Example:
-  ```fennel
-  (assert (= (type (plenary-path-init \"./\")) \"plenary.path.Path\"))
-  ```"
-  ((. plenary-path "Path::new") ...))
 
 (fn normalize-path [p]
   "Normalizes a path to a standard format.
@@ -453,7 +433,6 @@
  : directory?
  : file?
  : readable?
- : plenary-path-init
  : normalize-path
  : absolute-path
  : parent-path

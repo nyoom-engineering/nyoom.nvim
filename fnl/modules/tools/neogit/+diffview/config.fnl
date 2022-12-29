@@ -1,5 +1,3 @@
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
 (local actions (autoload :diffview.actions))
 
 (setup :diffview

@@ -11,9 +11,6 @@
 ;;   Author:              https://github.com/shaunsingh
 
 (import-macros {: custom-set-face! : let! : set! : nyoom-module-p!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: blend-hex} (autoload :modules.ui.nyoom.colorutils))
-
 ;; set defaults
 
 (let! colors_name :carbon)
@@ -28,11 +25,11 @@
 
 (local carbon (or (and (= vim.o.background :dark)
                        {: base00
-                        :base01 (blend-hex base00 base06 0.085)
-                        :base02 (blend-hex base00 base06 0.18)
-                        :base03 (blend-hex base00 base06 0.3)
-                        :base04 (blend-hex base00 base06 0.82)
-                        :base05 (blend-hex base00 base06 0.95)
+                        :base01 (colorutils.blend-hex base00 base06 0.085)
+                        :base02 (colorutils.blend-hex base00 base06 0.18)
+                        :base03 (colorutils.blend-hex base00 base06 0.3)
+                        :base04 (colorutils.blend-hex base00 base06 0.82)
+                        :base05 (colorutils.blend-hex base00 base06 0.95)
                         : base06
                         :base07 "#08bdba"
                         :base08 "#3ddbd9"
@@ -46,8 +43,8 @@
                         :blend "#131313"
                         :none :NONE})
                   {:base00 base06
-                   :base01 (blend-hex base00 base06 0.95)
-                   :base02 (blend-hex base00 base06 0.82)
+                   :base01 (colorutils.blend-hex base00 base06 0.95)
+                   :base02 (colorutils.blend-hex base00 base06 0.82)
                    :base03 base00
                    :base04 "#37474F"
                    :base05 "#90A4AE"

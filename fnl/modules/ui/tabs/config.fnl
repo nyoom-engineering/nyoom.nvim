@@ -1,5 +1,3 @@
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
 (local {: diagnostic-icons} (autoload :core.shared))
 
 (setup :bufferline

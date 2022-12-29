@@ -1,16 +1,9 @@
 ;; fennel-ls: macro-file
 
-(local {: deep-merge} (require :core.lib.tables))
-(local {: djb2} (require :core.lib.crypt))
-(local {: nil?
-        : str?
-        : tbl?
-        : ->str
-        : first
-        : second
-        : all?
-        : begins-with?
-        : count} (require :core.lib))
+(local {: nil? : str? : ->str : begins-with? : all : crypt} (require :core.lib))
+
+(fn car [xs]
+  (. xs 1))
 
 (lambda expr->str [expr]
   `(macrodebug ,expr nil))
@@ -22,25 +15,24 @@
 (lambda fn? [x]
   "Checks if `x` is a function definition.
   Cannot check if a symbol is a function in compile time."
-  (and (list? x)
-       (or (= `fn (first x)) (= `hashfn (first x)) (= `lambda (first x))
-           (= `partial (first x)))))
+  (and (list? x) (or (= `fn (car x)) (= `hashfn (car x)) (= `lambda (car x))
+                     (= `partial (car x)))))
 
 (lambda quoted? [x]
   "Check if `x` is a list that begins with `quote`."
-  (and (list? x) (= `quote (first x))))
+  (and (list? x) (= `quote (car x))))
 
 (lambda quoted->fn [expr]
   "Converts an expression like `(quote (+ 1 1))` into `(fn [] (+ 1 1))`."
   (assert-compile (quoted? expr) "expected quoted expression for expr" expr)
-  (let [non-quoted (second expr)]
+  (let [non-quoted (. expr 2)]
     `(fn []
        ,non-quoted)))
 
 (lambda quoted->str [expr]
   "Converts a quoted expression like `(quote (+ 1 1))` into an string with its shorthand form."
   (assert-compile (quoted? expr) "expected quoted expression for expr" expr)
-  (let [non-quoted (second expr)]
+  (let [non-quoted (. expr 2)]
     (.. "'" (view non-quoted))))
 
 (lambda expand-exprs [exprs]
@@ -49,7 +41,7 @@
   (if (> (length exprs) 1)
       `(do
          ,(unpack exprs))
-      (first exprs)))
+      (car exprs)))
 
 (lambda gensym-checksum [x ?options]
   "Generates a new symbol from the checksum of the object passed as a parameter
@@ -59,7 +51,7 @@
   (let [options (or ?options {})
         prefix (or options.prefix "")
         suffix (or options.suffix "")]
-    (sym (.. prefix (djb2 (view x)) suffix))))
+    (sym (.. prefix (crypt.djb2 (view x)) suffix))))
 
 (lambda vlua [x]
   "Return a symbol mapped to `v:lua.%s()` where `%s` is the symbol."
@@ -110,8 +102,9 @@
                                     :bold true})
   ```"
   (assert-compile (str? name) "expected string for name" name)
-  (assert-compile (tbl? attributes) "expected table for attributes" attributes)
-  (assert-compile (tbl? colors) "expected colors for colors" colors)
+  (assert-compile (table? attributes) "expected table for attributes"
+                  attributes)
+  (assert-compile (table? colors) "expected colors for colors" colors)
   (let [definition (collect [_ attr (ipairs attributes) &into colors]
                      (->str attr)
                      true)]
@@ -207,7 +200,7 @@
                       (quoted? command))
                   "expected string, symbol, function or quoted expression for command"
                   command)
-  (assert-compile (or (nil? ?options) (tbl? ?options))
+  (assert-compile (or (nil? ?options) (table? ?options))
                   "expected table for options" ?options)
   (let [name (->str name)
         options (or ?options {})
@@ -291,22 +284,22 @@
                                 :group \"custom\"
                                 :desc \"This is a description\"})
   ```"
-  (assert-compile (or (sym? event) (and (tbl? event) (all? #(sym? $) event))
+  (assert-compile (or (sym? event) (and (table? event) (all #(sym? $) event))
                       "expected symbol or list of symbols for event" event))
   (assert-compile (or (sym? pattern)
-                      (and (tbl? pattern) (all? #(sym? $) pattern))
+                      (and (table? pattern) (all #(sym? $) pattern))
                       "expected symbol or list of symbols for pattern" pattern))
   (assert-compile (or (str? command) (sym? command) (fn? command)
                       (quoted? command))
                   "expected string, symbol, function or quoted expression for command"
                   command)
-  (assert-compile (or (nil? ?options) (tbl? ?options))
+  (assert-compile (or (nil? ?options) (table? ?options))
                   "expected table for options" ?options)
-  (let [event (if (and (tbl? event) (not (sym? event)))
+  (let [event (if (and (table? event) (not (sym? event)))
                   (icollect [_ v (ipairs event)]
                     (->str v))
                   (->str event))
-        pattern (if (and (tbl? pattern) (not (sym? pattern)))
+        pattern (if (and (table? pattern) (not (sym? pattern)))
                     (icollect [_ v (ipairs pattern)]
                       (->str v))
                     (->str pattern))
@@ -354,14 +347,14 @@
   ```"
   (assert-compile (or (str? name) (sym? name))
                   "expected string or symbol for name" name)
-  (assert-compile (all? #(and (list? $)
-                              (or (= `clear! (first $)) (= `autocmd! (first $))))
-                        [...])
+  (assert-compile (all #(and (list? $)
+                             (or (= `clear! (car $)) (= `autocmd! (car $))))
+                       [...])
                   "expected autocmd exprs for body" ...)
   (expand-exprs (let [name (->str name)]
                   (icollect [_ expr (ipairs [...]) &into [`(vim.api.nvim_create_augroup ,name
                                                                                         {:clear false})]]
-                    (if (= `autocmd! (first expr))
+                    (if (= `autocmd! (car expr))
                         (let [[_ event pattern command ?options] expr
                               options (or ?options {})
                               options (doto options
@@ -383,7 +376,7 @@
   ```"
   (assert-compile (or (str? name) (sym? name))
                   "expected string or symbol for name" name)
-  (assert-compile (or (nil? ?options) (tbl? ?options))
+  (assert-compile (or (nil? ?options) (table? ?options))
                   "expected table for options" ?options)
   (let [name (->str name)
         options (or ?options {})
@@ -392,7 +385,7 @@
     `(vim.api.nvim_clear_autocmds ,options)))
 
 (lambda pack [identifier ?options]
-  "Return a mixed table with the identifier as the first sequential element and
+  "Return a mixed table with the identifier as the car sequential element and
   options as hash-table items.
   See https://github.com/wbthomason/packer.nvim for information about the
   options.
@@ -402,7 +395,7 @@
   nyoom-module to load the config for nyoom module"
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (if (not (nil? ?options))
-      (assert-compile (tbl? ?options) "expected table for options" ?options))
+      (assert-compile (table? ?options) "expected table for options" ?options))
   (let [options (or ?options {})
         options (collect [k v (pairs options)]
                   (match k
@@ -436,13 +429,13 @@
       (tset 1 identifier))))
 
 (lambda rock [identifier ?options]
-  "Return a mixed table with the identifier as the first sequential element and
+  "Return a mixed table with the identifier as the car sequential element and
   options as hash-table items.
   See https://github.com/wbthomason/packer.nvim for information about the
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (if (not (nil? ?options))
-      (assert-compile (tbl? ?options) "expected table for options" ?options))
+      (assert-compile (table? ?options) "expected table for options" ?options))
   (let [options (or ?options {})]
     (doto options
       (tset 1 identifier))))
@@ -454,17 +447,17 @@
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (if (not (nil? ?options))
-      (assert-compile (tbl? ?options) "expected table for options" ?options))
+      (assert-compile (table? ?options) "expected table for options" ?options))
   (table.insert _G.nyoom/pack (pack identifier ?options)))
 
 (lambda rock! [identifier ?options]
-  "Declares a rock with its options. This macro adds it to the nyoom/rock
+  "Declares a rock with its options. This macro addssh it to the nyoom/rock
   global table to later be used in the `unpack!` macro.
   See https://github.com/wbthomason/packer.nvim for information about the
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (if (not (nil? ?options))
-      (assert-compile (tbl? ?options) "expected table for options" ?options))
+      (assert-compile (table? ?options) "expected table for options" ?options))
   (table.insert _G.nyoom/rock (rock identifier ?options)))
 
 (lambda unpack! []
@@ -519,7 +512,7 @@
   (assert-compile (or (str? rhs) (sym? rhs) (fn? rhs) (quoted? rhs))
                   "expected string, symbol, function or quoted expression for rhs"
                   rhs)
-  (assert-compile (or (nil? ?options) (tbl? ?options))
+  (assert-compile (or (nil? ?options) (table? ?options))
                   "expected table for options" ?options)
   (let [modes (icollect [char (string.gmatch (->str modes) ".")]
                 char)
@@ -563,7 +556,7 @@
   (assert-compile (or (str? rhs) (sym? rhs) (fn? rhs) (quoted? rhs))
                   "expected string, symbol, function or quoted expression for rhs"
                   rhs)
-  (assert-compile (or (nil? ?options) (tbl? ?options))
+  (assert-compile (or (nil? ?options) (table? ?options))
                   "expected table for options" ?options)
   (let [options (or ?options {})
         options (doto options
@@ -651,7 +644,7 @@
                   config-path (.. :modules. moduletag "." name :.config)]
               (tset registry name
                     {:include-paths [include-path] :config-paths [config-path]}))
-            (let [modulename (->str (first name))
+            (let [modulename (->str (car name))
                   include-path (.. :fnl.modules. moduletag "." modulename)
                   config-path (.. :modules. moduletag "." modulename :.config)
                   [_ & flags] name]
@@ -674,10 +667,7 @@
     registry)
 
   (let [modules (register-modules ...)]
-    (tset _G :nyoom/modules modules)
-    `(do
-       (tset _G :nyoom/modules ,modules)
-       (. _G :nyoom/modules))))
+    (tset _G :nyoom/modules modules)))
 
 (lambda nyoom-init-modules! []
   "Initializes nyoom's module system.
@@ -722,7 +712,7 @@
   ```"
   (assert-compile (sym? name) "expected symbol for name" name)
   (let [name (->str name)
-        hash (djb2 name)]
+        hash (crypt.djb2 name)]
     (table.insert _G.nyoom/pack (pack (.. :nyoom. hash) {:nyoom-module name}))))
 
 (lambda nyoom-module-p! [name ?config]
@@ -764,13 +754,13 @@
 
 (lambda nyoom-package-count! []
   "Return number of installed packages"
-  (let [package-count (count _G.nyoom/pack)]
-    `,package-count))
+  (let [package-length (length _G.nyoom/pack)]
+    `,package-length))
 
 (lambda nyoom-module-count! []
   "Return number of installed modules"
-  (let [module-count (count _G.nyoom/modules)]
-    `,module-count))
+  (let [module-length (length _G.nyoom/modules)]
+    `,module-length))
 
 ;; (tset _G :nyoom/servers [])
 ;; (tset _G :nyoom/lintesr [])
@@ -778,11 +768,13 @@
 ;; (tset _G :nyoom/parsers [])
 ;; (tset _G :nyoom/cmp [])
 ;; 
+
 ;; (lambda nyoom-add-language-server! [server ?config]
 ;;   (assert-compile (sym? server) "expected symbol for server" server)
 ;;   (let [server (->str server)
 ;;         config (or ?config)]
 ;;     (tset _G :nyoom/servers server config)))
+;; 
 ;; 
 ;; (lambda nyoom-load-language-servers! []
 ;;   (let [servers _G.nyoom/servers]

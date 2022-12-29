@@ -1,8 +1,5 @@
 (import-macros {: augroup! : autocmd! : local-set!} :macros)
 
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
-
 (setup :neogit {:disable_signs false
                 :disable_hint true
                 :disable_context_highlighting false

@@ -1,14 +1,15 @@
-(import-macros {: use-package! : packadd! : autocmd!} :macros)
-; git-gutter but better
+(import-macros {: use-package! : autocmd!} :macros)
 
 (use-package! :lewis6991/gitsigns.nvim
               {:nyoom-module ui.vc-gutter
-               :module [:gitsigns]
+               :ft :gitcommit
+               :module :gitsigns
                :setup (fn []
-                        (autocmd! [:BufRead] *
+                        (autocmd! BufRead *
                                   `(fn []
-                                     (vim.fn.system (.. "git rev-parse 2>/dev/null "
-                                                        (vim.fn.expand "%:p:h")))
+                                     (vim.fn.system (.. "git -C "
+                                                        (vim.fn.expand "%:p:h")
+                                                        " rev-parse"))
                                      (when (= vim.v.shell_error 0)
                                        (vim.schedule (fn []
                                                        ((. (require :packer)

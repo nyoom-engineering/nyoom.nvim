@@ -1,6 +1,3 @@
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
-
 (setup :nvim-tree
        {:view {:side :left
                :width 25

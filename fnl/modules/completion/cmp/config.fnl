@@ -1,11 +1,11 @@
 (import-macros {: set! : nyoom-module-p! : packadd!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
 (local cmp (autoload :cmp))
 (local luasnip (autoload :luasnip))
+
 ;; vim settings
 
 (set! completeopt [:menu :menuone :noselect])
+
 ;; add general cmp sources
 
 (local cmp-sources [])

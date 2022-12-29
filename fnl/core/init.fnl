@@ -1,48 +1,8 @@
-(import-macros {: let!} :macros)
-
-(let [built-ins [:2html_plugin
-                 :getscript
-                 :getscriptPlugin
-                 :gzip
-                 :logipat
-                 :netrw
-                 :netrwPlugin
-                 :netrwSettings
-                 :netrwFileHandlers
-                 :matchit
-                 :tar
-                 :tarPlugin
-                 :rrhelper
-                 :spellfile_plugin
-                 :vimball
-                 :vimballPlugin
-                 :zip
-                 :zipPlugin
-                 :tutor
-                 :rplugin
-                 :syntax
-                 :synmenu
-                 :optwin
-                 :compiler
-                 :bugreport
-                 :ftplugin]
-      providers [:node :perl :ruby]]
-  (each [_ v (ipairs built-ins)]
-    (let [plugin (.. :loaded_ v)]
-      (let! plugin 1)))
-  (each [_ v (ipairs providers)]
-    (let [provider (.. :loaded_ v :_provider)]
-      (let! provider 0))))
-
 ;; add python provider and mason binaries
 
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :config) :/bin))
-
-;; (let! python3_host_prog (if (executable? :python) (vim.fn.exepath :python)
-;;                             (executable? :python3) (vim.fn.exepath :python3)
-;;                             nil))
 
 ;; check for cli
 
@@ -54,9 +14,8 @@
 (if cli
     (require :packages)
     (do
-      (import-macros {: command! : set!} :macros)
-      (local {: executable? : nightly?} (require :core.lib))
-      (local {: error!} (require :core.lib.io))
+      ;; set opinionated defaults. TODO this should be in a module?
+      (import-macros {: command! : let! : set!} :macros)
       ;; speedups
       (set! updatetime 250)
       (set! timeoutlen 400)
@@ -90,6 +49,7 @@
       (set! grepformat "%f:%l:%c:%m")
       (set! path ["." "**"])
       ;; nightly only options
+      (local {: nightly?} (autoload :core.lib))
       (if (nightly?)
           (do
             (set! diffopt+ "linematch:60")
@@ -115,26 +75,21 @@
       (let! neovide_padding_left 38)
       (let! neovide_padding_right 38)
       (let! neovide_padding_bottom 20)
+      ;; load userconfig
       (require :config)
       (require :packer_compiled)
+      ;; disable packer commands
 
-      (fn replace-packer [command]
+      (fn disable-packer [command]
         (fn first-to-upper [str]
           (str:gsub "^%l" string.upper))
 
         (local packer-command (.. :Packer (first-to-upper command)))
-        (local nyoom-command (.. :Nyoom (first-to-upper command)))
         (vim.api.nvim_create_user_command packer-command
                                           (fn []
-                                            (error! (.. "Please use the `nyoom` cli or "
-                                                        nyoom-command)))
-                                          {})
-        (vim.api.nvim_create_user_command nyoom-command
-                                          (fn []
-                                            (require :packages)
-                                            ((. (require :packer) command)))
+                                            (error! (.. "Please use the `nyoom` cli")))
                                           {}))
 
       (let [packer-commands [:install :update :compile :sync :status :lockfile]]
         (each [_ v (ipairs packer-commands)]
-          (replace-packer v)))))
+          (disable-packer v)))))

@@ -1,8 +1,5 @@
 (import-macros {: packadd! : nyoom-module-p! : nyoom-module-ensure!} :macros)
 
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
-
 ;; conditional modules
 
 (local neorg-modules

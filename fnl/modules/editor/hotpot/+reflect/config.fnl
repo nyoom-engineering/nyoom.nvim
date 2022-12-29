@@ -1,6 +1,4 @@
 (import-macros {: map! : nyoom-module-p!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-;; hotpot fun
 
 (local reflect-session {:id nil :mode :compile})
 (fn new-or-attach-reflect []

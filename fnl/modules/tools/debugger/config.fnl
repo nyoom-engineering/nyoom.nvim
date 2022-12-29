@@ -1,6 +1,4 @@
 (import-macros {: packadd! : nyoom-module-p!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (autoload :core.lib.setup))
 (local dap (autoload :dap))
 
 (set dap.adapters.codelldb

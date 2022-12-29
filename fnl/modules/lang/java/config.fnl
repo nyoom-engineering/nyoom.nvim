@@ -1,6 +1,7 @@
 (import-macros {: nyoom-module-p! : nyoom-module-ensure!} :macros)
 
 ;; debugging
+
 (var bundles {})
 
 (nyoom-module-p! debugger
@@ -20,9 +21,9 @@
                                                "\n"))))
 
 ;; jdtls is quirky, configure it via nvim-jdtls
+
 (nyoom-module-p! lsp
                  (do
-                   (local {: autoload} (require :core.lib.autoload))
                    ;; needs mason because installing this is a mess and has to be hardcoded for self-installed jdtls.
                    (nyoom-module-ensure! mason)
                    (local {: on-attach} (autoload :modules.tools.lsp.config))

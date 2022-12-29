@@ -1,7 +1,6 @@
 (import-macros {: packadd! : map! : nyoom-module-p!} :macros)
-(local {: autoload} (require :core.lib.autoload))
-(local {: setup} (require :core.lib.setup))
 (local {: load_extension} (autoload :telescope))
+(local {: executable?} (autoload :core.lib))
 
 (setup :telescope {:defaults {:prompt_prefix "   "
                               :selection_caret "  "
@@ -27,7 +26,6 @@
 (load_extension :project)
 (packadd! telescope-tabs)
 (setup :telescope-tabs)
-
 ;; only install native if the flag is there
 
 (nyoom-module-p! telescope.+native
@@ -37,15 +35,13 @@
 
 ;; load media-files and zoxide only if their executables exist
 
-(when (= (vim.fn.executable :ueberzug) 1)
-  (do
-    (packadd! telescope-media-files.nvim)
-    (load_extension :media_files)))
+(when (executable? :ueberzug)
+  (packadd! telescope-media-files.nvim)
+  (load_extension :media_files))
 
-(when (= (vim.fn.executable :zoxide) 1)
-  (do
-    (packadd! telescope-zoxide)
-    (load_extension :zoxide)))
+(when (executable? :zoxide)
+  (packadd! telescope-zoxide)
+  (load_extension :zoxide))
 
 (nyoom-module-p! default.+bindings
                  (do

@@ -9,10 +9,9 @@
                 : autocmd!} :macros)
 
 (packadd! packer.nvim)
-(local {: autoload} (require :core.lib.autoload))
 (local {: build} (autoload :hotpot.api.make))
-(local {: echo!} (autoload :core.lib.io))
 (local {: init} (autoload :packer))
+(local {: echo!} (autoload :core.lib.io))
 ;; Load packer
 
 (echo! "Loading Packer")
@@ -31,9 +30,12 @@
        (fn []
          (.. (vim.fn.stdpath :config) :/lua/health.lua)))
 
-;; Core packages
+;; packer can manage itself
 
 (use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
+
+;; libraries
+
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 (use-package! :MunifTanjim/nui.nvim {:module :nui})
 
