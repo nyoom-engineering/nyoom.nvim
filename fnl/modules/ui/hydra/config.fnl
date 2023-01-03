@@ -318,7 +318,7 @@
                                       :hint {:position :middle :border :solid}
                                       :buffer true}
                              :mode :n
-                             :body :<Leader>m
+                             :body :<Leader>r
                              :heads [[:r
                                       (fn []
                                         (vim.cmd.RustRunnables))
