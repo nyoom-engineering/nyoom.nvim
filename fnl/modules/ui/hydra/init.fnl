@@ -7,5 +7,5 @@
                       :<leader>v
                       :<leader>f
                       :<leader>d
-                      :<leader>r
+                      :<leader>m
                       :<leader>t]})
