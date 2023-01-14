@@ -7,7 +7,12 @@
           (autocmd! VimLeave * `(set! guicursor ["a:ver100-blinkon0"])))
 
 (augroup! open-file-on-last-position (clear!)
-          (autocmd! BufReadPost * `(vim.cmd "silent! normal! g`\"zv")))
+          (autocmd! BufReadPost *
+                    `(fn []
+                       (local mark (vim.api.nvim_buf_get_mark 0 "\""))
+                       (local lcount (vim.api.nvim_buf_line_count 0))
+                       (when (and (> (. mark 1) 0) (<= (. mark 1) lcount))
+                         (pcall vim.api.nvim_win_set_cursor 0 mark)))))
 
 (augroup! read-file-on-disk-change (clear!)
           (autocmd! [FocusGained BufEnter CursorHold CursorHoldI] *

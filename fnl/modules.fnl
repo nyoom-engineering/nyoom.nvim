@@ -1,11 +1,10 @@
 (import-macros {: nyoom!} :macros)
-
 ;; NOTE: TODO and FIXME modules still need work. WIP: modules work but may still be buggy
 
 ;; fnlfmt: skip
 (nyoom! :completion
         cmp                  ; the ultimate code completion backend
-        copilot              ; the code completion of the future
+        ;;copilot              ; the code completion of the future
         ;;fzf-lua            ; TODO a search engine for love and life
         (telescope +native)  ; the search engine of the future
 

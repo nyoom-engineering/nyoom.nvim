@@ -78,6 +78,7 @@
       ;; load userconfig
       (require :config)
       (require :packer_compiled)
+      ;; (require :pacttesting)
       ;; disable packer commands
 
       (fn disable-packer [command]

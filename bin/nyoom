@@ -26,8 +26,9 @@ function install_nyoom() {
 	printf "\n\033[1m\033[32mSuccessfully Linked Nyoom\033[0m\n\n"
 	printf "Installing Core Dependencies..."
 	rm -rf "${DATA_PATH}/site/pack"
-	git clone -q -b feat/lockfile --single-branch https://github.com/EdenEast/packer.nvim "${DATA_PATH}/site/pack/packer/opt/packer.nvim"
-	git clone -q -b nightly --single-branch https://github.com/rktjmp/hotpot.nvim.git "${DATA_PATH}/site/pack/packer/start/hotpot.nvim"
+	# git clone -q -b feat/lockfile --single-branch https://github.com/EdenEast/packer.nvim "${DATA_PATH}/site/pack/packer/opt/packer.nvim"
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim "${DATA_PATH}/site/pack/packer/opt/packer.nvim"
+	git clone --depth 1 https://github.com/rktjmp/hotpot.nvim.git "${DATA_PATH}/site/pack/packer/start/hotpot.nvim"
 	printf "\n\033[1m\033[32mSuccessfully Installed Core Dependencies\033[0m\n\n"
 }
 
@@ -60,7 +61,7 @@ sync)
 	start_time=$(date +%s)
 	printf "Synchronizing your config with Nyoom Nvim\n\n"
 	print_nyoom_status
-	if [ -e "${CONFIG_PATH}/lockfile.lua" ]; then
+	# if [ -e "${CONFIG_PATH}/lockfile.lua" ]; then
 		if [ ! -d "${DATA_PATH}/site/pack/packer/opt/packer.nvim/" ]; then
 			printf "Core Dependencies Unavailable, running 'nyoom install'\n"
 			install_nyoom
@@ -97,10 +98,10 @@ sync)
 			printf "\nMason module disabled: skipping"
 		fi
 		printf "\n\033[1m\033[92mNyoom successfully synced dependencies in $(expr $(date +%s) - $start_time)s\033[0m\n\n"
-	else
-		printf "\n\033[31mError: Lockfile not available. Please run 'nyoom lock'\033[0m\n"
-		printf "\033[1m\033[92mNyoom unsuccessfully synced plugins in $(expr $(date +%s) - $start_time)s\033[0m\n\n"
-	fi
+	# else
+	# 	printf "\n\033[31mError: Lockfile not available. Please run 'nyoom lock'\033[0m\n"
+	# 	printf "\033[1m\033[92mNyoom unsuccessfully synced plugins in $(expr $(date +%s) - $start_time)s\033[0m\n\n"
+	# fi
 	;;
 lock)
 	if [ -e "${CONFIG_PATH}/lua/packer_compiled.lua" ]; then

@@ -12,12 +12,13 @@
 (local {: build} (autoload :hotpot.api.make))
 (local {: init} (autoload :packer))
 (local {: echo!} (autoload :core.lib.io))
+
 ;; Load packer
 
 (echo! "Loading Packer")
 (local headless (= 0 (length (vim.api.nvim_list_uis))))
-(init {:lockfile {:enable true
-                  :path (.. (vim.fn.stdpath :config) :/lockfile.lua)}
+(init {;; :lockfile {:enable true
+       ;;            :path (.. (vim.fn.stdpath :config) :/lockfile.lua)}
        :compile_path (.. (vim.fn.stdpath :config) :/lua/packer_compiled.lua)
        :auto_reload_compiled false
        :display {:non_interactive headless}})
@@ -32,12 +33,14 @@
 
 ;; packer can manage itself
 
-(use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
+;; (use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
+(use-package! :wbthomason/packer.nvim {:opt true :branch :feat/lockfile})
 
 ;; libraries
 
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 (use-package! :MunifTanjim/nui.nvim {:module :nui})
+;; (use-package! :rktjmp/pact.nvim {:branch :new-clone-method})
 
 ;; include modules
 
@@ -72,7 +75,6 @@
 
 (echo! "Installing Packages")
 (unpack!)
-
 ;; Compile modules 
 
 (echo! "Compiling Nyoom Modules")
