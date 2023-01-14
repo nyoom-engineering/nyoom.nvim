@@ -370,13 +370,14 @@
                  (do
                    (fn latex-hydra []
                      (local vimtex-hint "
-    ^VimTex                    
-    ^                          
-    _c_: Continuous Compile    
-    _s_: Snapshot Compile      
-    _e_: Clean Up Extra Files  
-    ^                          
-    ^^^^^^                   _<Esc>_^^^
+    ^                     VimTex                      
+    ^                                                 
+    _ll_: Continuous Compile    _ss_: Snapshot Compile
+    _lC_: Clean Up Files        _lt_: Table of Content
+    _cw_: Count Words           _cl_: Count Letters   
+    _le_: Errors                _lq_: Log             
+    ^                                                 
+    ^_h_: Default Maps                      _<Esc>_^^^
        ")
                      (Hydra {:name :+latex
                              :hint vimtex-hint
@@ -385,19 +386,43 @@
                                       :hint {:border :solid :position :middle}
                                       :buffer true}
                              :mode [:n :x]
-                             :body :<leader>m
-                             :heads [[:c
+                             :body :<leader>t
+                             :heads [[:ll
                                       (fn []
                                         (vim.cmd :VimtexCompile))
                                       {:exit true}]
-                                     [:s
+                                     [:ss
                                       (fn []
                                         (vim.cmd :VimtexCompileSS))
                                       {:exit true}]
-                                     [:e
+                                     [:lC
                                       (fn []
                                         (vim.cmd :VimtexClean!))
                                       {:exit true}]
+                                     [:cw
+                                       (fn []
+                                          (vim.cmd :VimtexCountWords))
+                                       {:exit true}]
+                                     [:cl
+                                       (fn []
+                                         (vim.cmd :VimtexCountLetters))
+                                       {:exit true}]
+                                     [:le
+                                       (fn []
+                                         (vim.cmd :VimtexErrors))
+                                       {:exit true}]
+                                     [:lt
+                                       (fn []
+                                         (vim.cmd :VimtexTocToggle))
+                                       {:exit true}]
+                                     [:lq
+                                       (fn []
+                                         (vim.cmd :VimtexLog))
+                                       {:exit true}]
+                                     [:h
+                                       (fn []
+                                         (vim.cmd :h vimtex-mefault-mappings))
+                                       {:exit true}]
                                      [:<Esc> nil {:exit true :nowait true}]]}))
                    (augroup! localleader-hydras
                              (autocmd! FileType tex `(latex-hydra)))))
