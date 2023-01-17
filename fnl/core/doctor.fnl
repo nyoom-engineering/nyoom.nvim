@@ -1,5 +1,3 @@
-;; WIP: use :checkhealth to display missing LSP executables
-
 (local config (require :lspconfig))
 (local {:report_start report-start!
         :report_info report-info!

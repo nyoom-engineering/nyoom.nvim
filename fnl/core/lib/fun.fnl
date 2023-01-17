@@ -264,26 +264,26 @@
 (set methods.nth (method1 nth))
 (set exports.nth (export1 nth))
 
-(fn head-call [state ...]
+(fn car-call [state ...]
   (when (= state nil)
     (error "head: iterator is empty"))
   ...)
 
-(fn head [gen param state]
-  (head-call (gen param state)))
+(fn car [gen param state]
+  (car-call (gen param state)))
 
-(set methods.car head)
-(set exports.car (export0 head))
+(set methods.car car)
+(set exports.car (export0 car))
 
-(fn tail [gen param state]
+(fn cdr [gen param state]
   (set-forcibly! state (gen param state))
   (when (= state nil)
     (let [earlyrtns_1 [(wrap nil-gen nil nil)]]
       (lua "return (table.unpack or _G.unpack)(earlyrtns_1)")))
   (wrap gen param state))
 
-(set methods.cdr (method0 tail))
-(set exports.cdr (export0 tail))
+(set methods.cdr (method0 cdr))
+(set exports.cdr (export0 cdr))
 
 (fn take-n-gen-x [i state-x ...]
   (when (= state-x nil)

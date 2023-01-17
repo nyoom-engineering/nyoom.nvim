@@ -1,9 +1,6 @@
 ;; fennel-ls: macro-file
 
-(local {: nil? : str? : ->str : begins-with? : all : crypt} (require :core.lib))
-
-(fn car [xs]
-  (. xs 1))
+(local {: nil? : str? : ->str : begins-with? : all : crypt : car} (require :core.lib))
 
 (lambda expr->str [expr]
   `(macrodebug ,expr nil))
@@ -553,12 +550,12 @@
         loadname (string.sub (string.match package "/.+") 2)
         augroup (.. :nyoom-pact- loadname)
         host :github
-        autocmds `(do
-                    )
-        callback `(do
-                    )
-        result `(do
-                  )
+        autocmds `(do)
+                    
+        callback `(do)
+                    
+        result `(do)
+                  
         options (or ?options {})
         options (collect [k v (pairs options)]
                   (match k

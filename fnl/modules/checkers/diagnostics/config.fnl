@@ -4,17 +4,12 @@
 (local null-ls (autoload :null-ls))
 (local null-ls-sources [])
 
-;; ensures
-
 (nyoom-module-ensure! lsp)
-
-;; configure signs
 
 (let [{: config : severity} vim.diagnostic
       {: sign_define} vim.fn]
   (config {:underline {:severity {:min severity.INFO}}
            :signs {:severity {:min severity.INFO}}
-           ;; lsp_lines handles this
            :virtual_text false
            :update_in_insert true
            :severity_sort true
@@ -43,8 +38,7 @@
 
 (nyoom-module-p! format
                  (do
-                   (table.insert null-ls-sources
-                                 null-ls.builtins.formatting.fnlfmt)
+                   ;; (table.insert null-ls-sources null-ls.builtins.formatting.fnlfmt)
                    (nyoom-module-p! cc
                                     (table.insert null-ls-sources
                                                   null-ls.builtins.formatting.clang_format))

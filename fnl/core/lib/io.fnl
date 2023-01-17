@@ -90,7 +90,7 @@
   (assert (string.match (tmpfile \"Hello world\") \"^/tmp/vim\"
   (assert (string.match (tmpfile {\"Hello\", \"world\"}) \"^/tmp/vim\"))
   ```"
-  (let [tmp (vim.fn.tempname)]
+  (let [tmp (vim.loop.fs_mktemp)]
     (if (= :table (type contents))
         (spit tmp (.. "\n" contents))
         (spit tmp (or contents "")))
@@ -366,7 +366,7 @@
   ```fennel
   (assert (= (mkdirp \"/tmp/dir1/dir2\") true))
   ```"
-  (vim.fn.mkdir dir :p))
+  (vim.loop.fs_mkdir dir :p))
 
 (fn expand [...]
   "Expand environment variables in a path.

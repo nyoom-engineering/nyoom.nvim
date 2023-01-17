@@ -8,7 +8,7 @@
                    (let [leap-ast (autoload :leap-ast)]
                      (map! [nxo] :gs `(leap-ast.leap) {:desc "Leap AST"}))))
 
-(local treesitter-filetypes [:comment :help :fennel :vim :regex :query])
+(local treesitter-filetypes [:help :fennel :vim :regex :query])
 
 ;; conditionally install parsers
 
@@ -94,14 +94,22 @@
 ;; load dependencies
 
 (packadd! nvim-ts-rainbow)
+(packadd! nvim-ts-refactor)
 (packadd! nvim-treesitter-textobjects)
+(packadd! nvim-ts-context-commentstring) 
 ; the usual
 
 (setup :nvim-treesitter.configs
        {:ensure_installed treesitter-filetypes
-        :sync_install true
+        ;; :sync_install true
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
+        :context_commentstring {:enable true}
+        :refactor {:enable true
+                   :keymaps {:smart_rename "<localleader>rn"}}
+        :query_linter {:enable true
+                       :use_virtual_text true
+                       :lint_events ["BufWrite" "CursorHold"]}
         :rainbow {:enable true
                   :extended_mode true
                   :colors ["#878d96"

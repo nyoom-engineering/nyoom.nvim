@@ -5,7 +5,6 @@
 (local neorg-modules
        {:core.defaults {}
         :core.norg.manoeuvre {}
-        :core.gtd.base {:config {:workspace :main}}
         :core.keybinds {:config {:default_keybinds false}}
         :core.norg.dirman {:config {:workspaces {:main "~/neorg"}}}})
 

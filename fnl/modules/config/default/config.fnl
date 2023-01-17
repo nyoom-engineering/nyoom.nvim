@@ -3,9 +3,6 @@
 (fn bufexists? [...]
   (= (vim.fn.bufexists ...) 1))
 
-(augroup! restore-cursor-on-exit (clear!)
-          (autocmd! VimLeave * `(set! guicursor ["a:ver100-blinkon0"])))
-
 (augroup! open-file-on-last-position (clear!)
           (autocmd! BufReadPost *
                     `(fn []
@@ -16,9 +13,16 @@
 
 (augroup! read-file-on-disk-change (clear!)
           (autocmd! [FocusGained BufEnter CursorHold CursorHoldI] *
-                    `(if (and (not= :c (vim.fn.mode))
+                    `(if (and (not= :c (vim.api.nvim_get_mode))
                               (not (bufexists? "[Command Line]")))
                          (vim.cmd.checktime)))
           (autocmd! FileChangedShellPost *
                     `(vim.notify "File changed on disk. Buffer reloaded."
                                  vim.log.levels.INFO)))
+
+(let [open_floating_preview vim.lsp.util.open_floating_preview]
+  (fn vim.lsp.util.open_floating_preview [...]
+    (local (bufnr winid) (open_floating_preview ...))
+    (vim.api.nvim_win_set_option winid :breakindentopt "")
+    (vim.api.nvim_win_set_option winid :showbreak "NONE")
+    (values bufnr winid)))

@@ -1,8 +1,15 @@
+(import-macros {: let!} :macros)
+(local {: executable?} (autoload :core.lib))
+
+
 ;; add python provider and mason binaries
 
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
-
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :config) :/bin))
+
+(let! python3_host_prog (if (executable? "python") (vim.fn.exepath "python")
+                          (executable? "python3") (vim.fn.exepath "python3")
+                          nil))
 
 ;; check for cli
 
