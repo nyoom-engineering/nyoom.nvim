@@ -60,7 +60,7 @@ It controls what modules are enabled and in what order they are loaded. Some mod
 ``` 
 
 Different modules support different flags. You’ll find a comprehensive list of available modules and their supported flags in Module Index. Flags that a module does not recognize will be silently ignored.
-**IMPORTANT:** any changes to your doom! block won’t take effect until you run `nyoom sync` on the command line.
+**IMPORTANT:** any changes to your nyoom! block won’t take effect until you run `nyoom sync` on the command line.
 
 
 
