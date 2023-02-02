@@ -78,6 +78,8 @@
 
 ;; conditional servers
 
+(nyoom-module-p! csharp (tset lsp-servers :omnisharp {:cmd [:omnisharp]}))
+
 (nyoom-module-p! clojure (tset lsp-servers :clojure_lsp {}))
 
 (nyoom-module-p! java (tset lsp-servers :jdtls {}))

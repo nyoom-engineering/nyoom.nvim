@@ -22,10 +22,26 @@
                     (vim.fn.input "Path to executable: "
                                   (.. (vim.fn.getcwd) "/") :file))}])
 
+(local coreclr-configs
+       [{:name "netcoredbg"
+         :type :coreclr
+         :request :launch
+         :program (fn []
+                    (vim.fn.input "Path to executable: "
+                                  (.. (vim.fn.getcwd) "/bin/Debug/" :file)))}])
+       
+
 (nyoom-module-p! cc
                  (do
                    (set dap.configurations.c lldb-configs)
                    (set dap.configurations.c dap.configurations.cpp)))
+
+(nyoom-module-p! csharp 
+                 (do
+                   (set dap.configurations.cs coreclr-configs)
+                   (set dap.adapters.coreclr {:type :executable
+                                              :command "/usr/local/bin/netcoredbg/netcoredbg"
+                                              :args ["--interpreter=vscode"]})))
 
 (nyoom-module-p! rust (set dap.configurations.rust lldb-configs))
 

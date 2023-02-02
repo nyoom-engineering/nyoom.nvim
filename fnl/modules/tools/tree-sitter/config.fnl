@@ -16,6 +16,8 @@
 
 (nyoom-module-p! common-lisp (table.insert treesitter-filetypes :commonlisp))
 
+(nyoom-module-p! csharp (table.insert treesitter-filetypes :c_sharp))
+
 (nyoom-module-p! java (table.insert treesitter-filetypes :java))
 
 (nyoom-module-p! julia (table.insert treesitter-filetypes :julia))
