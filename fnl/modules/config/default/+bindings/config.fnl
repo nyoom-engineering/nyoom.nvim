@@ -90,7 +90,7 @@
                        "<cmd>:lua require'telescope'.extensions.project.project{}<CR>"
                        {:desc "List projects"}))
 
-(map! [n] :<leader><tab>n :<cmd>tabnewCR> {:desc "New tab"})
+(map! [n] :<leader><tab>n :<cmd>tabnew<CR> {:desc "New tab"})
 
 (nyoom-module-p! telescope
                  (do
