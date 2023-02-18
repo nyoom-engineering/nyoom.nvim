@@ -78,6 +78,8 @@
 
 ;; conditional servers
 
+(nyoom-module-p! cc (tset lsp-servers :clangd {:cmd [:clangd]}))
+
 (nyoom-module-p! csharp (tset lsp-servers :omnisharp {:cmd [:omnisharp]}))
 
 (nyoom-module-p! clojure (tset lsp-servers :clojure_lsp {}))
@@ -93,7 +95,7 @@
 (nyoom-module-p! latex (tset lsp-servers :texlab {}))
 
 (nyoom-module-p! lua
-                 (tset lsp-servers :sumneko_lua
+                 (tset lsp-servers :lua_ls
                        {:settings {:Lua {:diagnostics {:globals [:vim]}
                                          :workspace {:library (vim.api.nvim_list_runtime_paths)
                                                      :maxPreload 100000}}}}))
