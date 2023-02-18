@@ -95,7 +95,7 @@
 (nyoom-module-p! latex (tset lsp-servers :texlab {}))
 
 (nyoom-module-p! lua
-                 (tset lsp-servers :sumneko_lua
+                 (tset lsp-servers :lua_ls
                        {:settings {:Lua {:diagnostics {:globals [:vim]}
                                          :workspace {:library (vim.api.nvim_list_runtime_paths)
                                                      :maxPreload 100000}}}}))
