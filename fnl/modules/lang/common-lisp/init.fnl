@@ -1,3 +1,3 @@
 (import-macros {: use-package!} :macros)
 
-(use-package! :vlime/vlime {:ft :lisp})
+(use-package! :monkoose/nvlime {:ft :lisp})

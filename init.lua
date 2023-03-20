@@ -1,79 +1,44 @@
--- disable default vimscript bundled plugins, these load very early
-
-local default_plugins = {
-	"2html_plugin",
-	"getscript",
-	"getscriptPlugin",
-	"gzip",
-	"logipat",
-	"netrw",
-	"netrwPlugin",
-	"netrwSettings",
-	"netrwFileHandlers",
-	"matchit",
-	"tar",
-	"tarPlugin",
-	"rrhelper",
-	"spellfile_plugin",
-	"vimball",
-	"vimballPlugin",
-	"zip",
-	"zipPlugin",
-	"tutor",
-	"rplugin",
-	"syntax",
-	"synmenu",
-	"optwin",
-	"compiler",
-	"bugreport",
-	"ftplugin",
-}
-
+local default_plugins = {"2html_plugin", "getscript", "getscriptPlugin", "gzip", "logipat", "netrw", "netrwPlugin", "netrwSettings", "netrwFileHandlers", "matchit", "tar", "tarPlugin", "rrhelper", "spellfile_plugin", "vimball", "vimballPlugin", "zip", "zipPlugin", "tutor", "rplugin", "syntax", "synmenu", "optwin", "compiler", "bugreport", "ftplugin"}
+local default_providers = {"node", "perl", "ruby"}
 for _, plugin in pairs(default_plugins) do
-	vim.g["loaded_" .. plugin] = 1
+  vim.g[("loaded_" .. plugin)] = 1
 end
-
-local default_providers = {
-	"node",
-	"perl",
-	"ruby",
-}
-
 for _, provider in ipairs(default_providers) do
-	vim.g["loaded_" .. provider .. "_provider"] = 0
+  vim.g[("loaded_" .. provider .. "_provider")] = 0
 end
-
--- load hotpot
-
 if pcall(require, "hotpot") then
-	-- Setup hotpot.nvim
-	require("hotpot").setup({
-		provide_require_fennel = true,
-		enable_hotpot_diagnostics = false,
-		compiler = {
-			modules = {
-				-- not default but recommended, align lua lines with fnl source
-				-- for more debuggable errors, but less readable lua.
-				correlate = true,
-			},
-			macros = {
-				-- allow macros to access vim global, needed for nyoom modules
-				env = "_COMPILER",
-				compilerEnv = _G,
-				allowGlobals = true,
-				-- plugins = { "core.patch" },
-			},
-		},
-	})
-	-- Load profilers if nyoom is started in profile mode
-	if os.getenv("NYOOM_PROFILE") then
-		require("core.lib.profile").toggle()
-	end
-	local stdlib = require("core.lib")
-	for k, v in pairs(stdlib) do
-		rawset(_G, k, v)
-	end
-	require("core")
+  local function _3_(src, _1_)
+    local _arg_2_ = _1_
+    local path = _arg_2_["path"]
+    local modname = _arg_2_["modname"]
+    local macro_3f = _arg_2_["macro?"]
+    if not macro_3f then
+      return print(path, modname, string.match(path, "config/nvim/"))
+    else
+      local _4_ = string.match(path, "config/nvim/")
+      if (_4_ == nil) then
+        return src
+      elseif true then
+        local _any = _4_
+        local pre = "(require-macros :macros)"
+        return string.format("%s%s", pre, src)
+      else
+        return nil
+      end
+    end
+  end
+  do end (require("hotpot")).setup({enable_hotpot_diagnostics = true, provide_require_fennel = true, compiler = {macros = {allowGlobals = true, compilerEnv = _G, env = "_COMPILER"}, modules = {correlate = true, useBitLib = true}}})
+  if os.getenv("NYOOM_PROFILE") then
+    do end (require("core.lib.profile")).toggle()
+  else
+  end
+  local stdlib = require("core.lib")
+  for k, v in pairs(stdlib) do
+    rawset(_G, k, v)
+  end
+  return require("core")
 else
-	print("Unable to require hotpot")
-end
+  return print("Unable to require hotpot")
+end 
+
+

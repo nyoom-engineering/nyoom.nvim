@@ -1,6 +1,9 @@
-(import-macros {: let!} :macros)
+(import-macros {: let! : set!} :macros)
 (local {: executable?} (autoload :core.lib))
 
+;; add userconfig to runtimepath
+
+(set! rtp+ (.. (vim.loop.os_homedir) :/.config/nyoom))
 
 ;; add python provider and mason binaries
 

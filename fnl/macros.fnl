@@ -1,9 +1,11 @@
 ;; fennel-ls: macro-file
 
-(local {: nil? : str? : ->str : begins-with? : all : crypt : car} (require :core.lib))
+(local {: nil? : str? : bool? : num? : ->str : begins-with? : all : crypt : car} (require :core.lib))
 
 (lambda expr->str [expr]
-  `(macrodebug ,expr nil))
+  `(-> (macrodebug ,expr nil
+        (string.gsub "{}" "[]")
+        (string.gsub "_%d+_auto" "#"))))
 
 (tset _G :nyoom/pack [])
 (tset _G :nyoom/rock [])
@@ -717,6 +719,22 @@
     [name value] (let-global! name value)
     _ (error "expected let! to have at least two arguments: name value")))
 
+(lambda verify-dependencies! [dependencies]
+   "Uses the vim.notify API to print a warning for every dependecy that is no
+   available and then executes an early return from the module."
+   `(let [dependencies# ,dependencies
+          info# (debug.getinfo 1 :S)
+          module-name# info#.source
+          module-name# (module-name#:match "@(.*)")
+          not-available# (icollect [_# dependency# (ipairs dependencies#)]
+                           (when (not (pcall require dependency#))
+                             dependency#))]
+      (when (> (length not-available#) 0)
+        (each [_# dependency# (ipairs not-available#)]
+          (vim.notify (string.format "Could not load '%s' as '%s' is not available." module-name# dependency#)
+                      vim.log.levels.WARN))
+        (lua "return nil"))))
+
 (lambda sh [...]
   "simple macro to run shell commands inside fennel"
   `(let [str# ,(accumulate [str# "" _ v# (ipairs [...])]
@@ -918,6 +936,7 @@
  : unpack!
  : packadd!
  : pact-use-package!
+ : verify-dependencies!
  : nyoom!
  : nyoom-init-modules!
  : nyoom-compile-modules!

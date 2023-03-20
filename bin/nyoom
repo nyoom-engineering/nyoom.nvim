@@ -18,12 +18,16 @@ function print_nyoom_status() {
 }
 
 function install_nyoom() {
-	printf "Linking Nyoom ..."
-	mkdir -p "${NYOOM_CONFIG}"
-	[ ! -f "${NYOOM_CONFIG}/config.fnl" ] && ln "${CONFIG_PATH}/fnl/config.fnl" "${NYOOM_CONFIG}/config.fnl"
-	[ ! -f "${NYOOM_CONFIG}/modules.fnl" ] && ln "${CONFIG_PATH}/fnl/modules.fnl" "${NYOOM_CONFIG}/modules.fnl"
-	[ ! -f "${NYOOM_CONFIG}/packages.fnl" ] && ln "${CONFIG_PATH}/fnl/packages.fnl" "${NYOOM_CONFIG}/packages.fnl"
-	printf "\n\033[1m\033[32mSuccessfully Linked Nyoom\033[0m\n\n"
+	if [ -d "${NYOOM_CONFIG}/" ]; then
+		printf "\n\033[1m\033[32mNyoom Dir Already Exists\033[0m\n"
+	else
+		printf "Linking Nyoom Configs ..."
+		mkdir -p "${NYOOM_CONFIG}/fnl"
+		[ ! -f "${NYOOM_CONFIG}/config.fnl" ] && ln "${CONFIG_PATH}/fnl/config.fnl" "${NYOOM_CONFIG}/config.fnl"
+		[ ! -f "${NYOOM_CONFIG}/modules.fnl" ] && ln "${CONFIG_PATH}/fnl/modules.fnl" "${NYOOM_CONFIG}/modules.fnl"
+		[ ! -f "${NYOOM_CONFIG}/packages.fnl" ] && ln "${CONFIG_PATH}/fnl/packages.fnl" "${NYOOM_CONFIG}/packages.fnl"
+		printf "\n\033[1m\033[32mSuccessfully Linked Nyoom Configs\033[0m\n\n"
+	fi
 	printf "Installing Core Dependencies..."
 	rm -rf "${DATA_PATH}/site/pack"
 	# git clone -q -b feat/lockfile --single-branch https://github.com/EdenEast/packer.nvim "${DATA_PATH}/site/pack/packer/opt/packer.nvim"
@@ -62,42 +66,44 @@ sync)
 	printf "Synchronizing your config with Nyoom Nvim\n\n"
 	print_nyoom_status
 	# if [ -e "${CONFIG_PATH}/lockfile.lua" ]; then
-		if [ ! -d "${DATA_PATH}/site/pack/packer/opt/packer.nvim/" ]; then
-			printf "Core Dependencies Unavailable, running 'nyoom install'\n"
-			install_nyoom
-		fi
-		printf "Clearing cache"
-		rm -rf "${CACHE_PATH}"
-		rm -f "${CONFIG_PATH}/lua/packer_compiled.lua" || true
-		# set ulimit to fix packer.sync hanging with --headless: https://github.com/wbthomason/packer.nvim/issues/751
-		ulimit -S -n 4096
-		NYOOM_CLI=true nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require("packer").sync()'
+	if [ ! -d "${DATA_PATH}/site/pack/packer/opt/packer.nvim/" ]; then
+		printf "Core Dependencies Unavailable, running 'nyoom install'\n"
+		install_nyoom
+	fi
+	printf "Clearing cache"
+	rm -rf "${CACHE_PATH}"
+	rm -f "${CONFIG_PATH}/lua/packer_compiled.lua" || true
+	# set ulimit to fix packer.sync hanging with --headless: https://github.com/wbthomason/packer.nvim/issues/751
+	ulimit -S -n 4096
+	NYOOM_CLI=true nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require("packer").sync()'
+	echo
+	if [ -d "${DATA_PATH}/site/pack/packer/opt/nvim-treesitter/" ]; then
 		echo
-		if [ -d "${DATA_PATH}/site/pack/packer/opt/nvim-treesitter/" ]; then
-			echo
-			read -p "Would you like to sync tree-sitter parsers for enabled modules? y/n: " -n 1 -r
-			if [[ $REPLY =~ ^[Yy]$ ]]; then
-				ts_time=$(date +%s)
-				printf "\nSyncing Tree-sitter Parsers (this may take a while)\n"
-				nvim --headless -c 'TSUpdate' -c 'sleep 20' -c 'qall'
-				printf "\n\033[1m\033[36mNyoom successfully synced parsers in $(expr $(date +%s) - $ts_time)s\033[0m\n"
-			fi
-		else
-			printf "\nTree-sitter module disabled: skipping"
+		read -p "Would you like to sync tree-sitter parsers for enabled modules? y/n: " -n 1 -r
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			ts_time=$(date +%s)
+			printf "\nSyncing Tree-sitter Parsers (this may take a while)\n"
+                        # upstream bug?
+			# nvim --headless -c 'TSUpdate' -c 'sleep 20' -c 'qall'
+			nvim --headless -c 'TSUpdateSync' -c 'qall'
+			printf "\n\033[1m\033[36mNyoom successfully synced parsers in $(expr $(date +%s) - $ts_time)s\033[0m\n"
 		fi
-		if [ -d "${DATA_PATH}/site/pack/packer/opt/mason.nvim/" ]; then
-			echo
-			read -p "Would you like to sync tooling for enabled modules through Mason (language-servers, formatters, and linters)? y/n: " -n 1 -r
-			if [[ $REPLY =~ ^[Yy]$ ]]; then
-				mason_time=$(date +%s)
-				printf "\nSyncing tooling (this may take a while)\n"
-				nvim --headless -c 'Mason' -c 'qall'
-				printf "\n\033[1m\033[36mNyoom successfully synced tooling in $(expr $(date +%s) - $mason_time)s\033[0m\n"
-			fi
-		else
-			printf "\nMason module disabled: skipping"
+	else
+		printf "\nTree-sitter module disabled: skipping"
+	fi
+	if [ -d "${DATA_PATH}/site/pack/packer/opt/mason.nvim/" ]; then
+		echo
+		read -p "Would you like to sync tooling for enabled modules through Mason (language-servers, formatters, and linters)? y/n: " -n 1 -r
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			mason_time=$(date +%s)
+			printf "\nSyncing tooling (this may take a while)\n"
+			nvim --headless -c 'Mason' -c 'qall'
+			printf "\n\033[1m\033[36mNyoom successfully synced tooling in $(expr $(date +%s) - $mason_time)s\033[0m\n"
 		fi
-		printf "\n\033[1m\033[92mNyoom successfully synced dependencies in $(expr $(date +%s) - $start_time)s\033[0m\n\n"
+	else
+		printf "\nMason module disabled: skipping"
+	fi
+	printf "\n\033[1m\033[92mNyoom successfully synced dependencies in $(expr $(date +%s) - $start_time)s\033[0m\n\n"
 	# else
 	# 	printf "\n\033[31mError: Lockfile not available. Please run 'nyoom lock'\033[0m\n"
 	# 	printf "\033[1m\033[92mNyoom unsuccessfully synced plugins in $(expr $(date +%s) - $start_time)s\033[0m\n\n"

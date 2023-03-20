@@ -4,6 +4,8 @@
               {:nyoom-module tools.tree-sitter
                :cmd [:TSInstall
                      :TSUpdate
+                     :TSInstallSync
+                     :TSUpdateSync
                      :TSBufEnable
                      :TSBufDisable
                      :TSEnable

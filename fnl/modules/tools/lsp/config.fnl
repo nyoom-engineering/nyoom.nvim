@@ -10,6 +10,12 @@
 (set vim.lsp.handlers.textDocument/hover
      (vim.lsp.with vim.lsp.handlers.hover {:border :solid}))
 
+
+(fn format! [bufnr ?async?]
+  (vim.lsp.buf.format {: bufnr
+                       :filter #(not (contains? [:jsonls :tsserver] $.name))
+                       :async ?async?}))
+
 (fn on-attach [client bufnr]
   (import-macros {: buf-map! : autocmd! : augroup! : clear!} :macros)
   (local {: contains?} (autoload :core.lib))
@@ -33,16 +39,10 @@
                      (buf-map! [n] :gr goto-references!)))
   ;; Enable lsp formatting if available 
   (nyoom-module-p! format.+onsave
-                   (when (client.supports_method :textDocument/formatting)
-                     (augroup! lsp-format-before-saving
-                               (clear! {:buffer bufnr})
-                               (autocmd! BufWritePre <buffer>
-                                         `(vim.lsp.buf.format {:filter (fn [client]
-                                                                         (not (contains? [:jsonls
-                                                                                          :tsserver]
-                                                                                         client.name)))
-                                                               : bufnr})
-                                         {:buffer bufnr})))))
+    (when (client.supports_method "textDocument/formatting")
+      (augroup! format-before-saving
+        (clear! {:buffer bufnr})
+        (autocmd! BufWritePre <buffer> #(format! bufnr) {:buffer bufnr})))))
 
 ;; What should the lsp be demanded of?
 

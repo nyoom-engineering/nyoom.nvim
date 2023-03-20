@@ -1,4 +1,5 @@
 (local stdlib {})
+
 ;; load modified luafun + core libs by default
 
 (local fun (require :core.lib.fun))
@@ -21,11 +22,12 @@
 (each [k v (pairs io)]
   (tset stdlib k v))
 
-;; lazy load crypt/colorutils/profile
+;; lazy load crypt/colorutils/profile/package
 
 (tset stdlib :crypt (autoload.autoload :core.lib.crypt))
 (tset stdlib :colorutils (autoload.autoload :core.lib.color))
 (tset stdlib :profile (autoload.autoload :core.lib.profile))
+(tset stdlib :alpaca (autoload.autoload :core.lib.alpaca))
 
 (fn stdlib.nil? [x]
   "Returns true if the given value is nil, false otherwise.
@@ -267,6 +269,16 @@
   (assert (= (odd? 3) true)
   ```"
   (not (stdlib.even? n)))
+
+(fn stdlib.open [uri]
+  (var cmd nil)
+  (if (= (vim.fn.has :win32) 1) (set cmd [:explorer uri])
+      (= (vim.fn.has :macunix) 1) (set cmd [:open uri])
+      (if (vim.fn.executable :xdg-open) (set cmd [:xdg-open uri])
+          (set cmd [:open uri])))
+  (local ret (vim.fn.jobstart cmd {:detach true}))
+  (when (<= ret 0)
+    (io.error! (table.concat ["Failed to open uri" ret (vim.inspect cmd)] "\n"))))
 
 (fn stdlib.vals [t]
   "Returns a list of all values in the given table.

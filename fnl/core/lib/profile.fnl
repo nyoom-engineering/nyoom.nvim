@@ -16,7 +16,7 @@
   (let [start-time (vim.loop.hrtime)]
     (for [_ 1 iterations]
       (f ...))
-    (/ (- (vim.loop.hrtime) start-time) 1000000000)))
+    (/ (- (vim.loop.hrtime) start-time) 1000000)))
 
 (fn toggle []
   (local logfile :/tmp/profile.folded)

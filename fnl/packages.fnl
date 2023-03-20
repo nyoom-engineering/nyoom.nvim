@@ -34,13 +34,13 @@
 ;; packer can manage itself
 
 ;; (use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
-(use-package! :wbthomason/packer.nvim {:opt true :branch :feat/lockfile})
+(use-package! :wbthomason/packer.nvim {:opt true})
 
 ;; libraries
 
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 (use-package! :MunifTanjim/nui.nvim {:module :nui})
-;; (use-package! :rktjmp/pact.nvim {:branch :new-clone-method})
+(use-package! :nyoom-engineering/oxocarbon.nvim)
 
 ;; include modules
 
@@ -75,6 +75,7 @@
 
 (echo! "Installing Packages")
 (unpack!)
+
 ;; Compile modules 
 
 (echo! "Compiling Nyoom Modules")

@@ -4,7 +4,7 @@
 ;; via require. This is the default:
 
 (set! background :dark)
-(colorscheme carbon)
+(colorscheme oxocarbon)
 
 ;; The set! macro sets vim.opt options. By default it sets the option to true 
 ;; Appending `no` in front sets it to false. This determines the style of line 
