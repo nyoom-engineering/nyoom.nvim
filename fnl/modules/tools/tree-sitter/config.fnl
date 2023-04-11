@@ -8,7 +8,7 @@
                    (let [leap-ast (autoload :leap-ast)]
                      (map! [nxo] :gs `(leap-ast.leap) {:desc "Leap AST"}))))
 
-(local treesitter-filetypes [:help :fennel :vim :regex :query])
+(local treesitter-filetypes [:vimdoc :fennel :vim :regex :query])
 
 ;; conditionally install parsers
 
