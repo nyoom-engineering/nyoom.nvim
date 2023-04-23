@@ -14,7 +14,8 @@
                                               :height 0.8
                                               :preview_cutoff 120}
                               :set_env {:COLORTERM :truecolor}
-                              :dynamic_preview_title true}})
+                              :dynamic_preview_title true}
+                    :pickers {:oldfiles {:prompt_title "Recent files"}}})
 
 ;; Load extensions
 
