@@ -3,12 +3,14 @@
 set -o errexit -o pipefail -o nounset
 
 # people like xdg
-CONFIG_PATH="${XDG_CONFIG_HOME:-${HOME}/.config}/nvim"
-CACHE_PATH="${XDG_CACHE_HOME:-${HOME}/.cache}/nvim"
-DATA_PATH="${XDG_DATA_HOME:-${HOME}/.local/share}/nvim"
+CONFIG_PATH="${XDG_CONFIG_HOME:-${HOME}/.config}/${NVIM_APPNAME:-nvim}"
+CACHE_PATH="${XDG_CACHE_HOME:-${HOME}/.cache}/${NVIM_APPNAME:-nvim}"
+DATA_PATH="${XDG_DATA_HOME:-${HOME}/.local/share}/${NVIM_APPNAME:-nvim}"
 NYOOM_CONFIG="${XDG_DATA_HOME:-${HOME}/.config}/nyoom"
 
-# silently enter ~/.config/nvim when updating
+mkdir -p "$CONFIG_PATH" "$CACHE_PATH" "$DATA_PATH" "$NYOOM_CONFIG"
+
+# silently enter ${CONFIG_PATH} when updating
 pushd ${CONFIG_PATH} >/dev/null
 
 function print_nyoom_status() {
