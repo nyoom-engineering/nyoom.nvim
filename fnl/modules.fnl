@@ -80,6 +80,7 @@
         python               ; beautiful is better than ugly
         rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
         (sh +fish)           ; she sells {ba,z,fi}sh shells on the C xor
+        xml                  ; extend my language
         zig                  ; C, but simpler
 
         :app

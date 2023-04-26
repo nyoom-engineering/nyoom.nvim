@@ -52,6 +52,9 @@
     (nyoom-module-p! sh
       (table.insert mason-tools :bash-language-server))
 
+    (nyoom-module-p! xml
+      (table.insert mason-tools :lemminx))
+
     (nyoom-module-p! zig
       (table.insert mason-tools :zls))))
 
