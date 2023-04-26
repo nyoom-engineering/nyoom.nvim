@@ -66,6 +66,7 @@
         java                 ; the poster child for carpal tunnel syndrome
         julia                ; a better, faster MATLAB
         ;;kotlin             ; FIXME: a better, slicker Java(Script)
+        json                 ; { "dʒeɪsən":  "Javascript Object Notation" }
         latex                ; writing papers in Neovim has never been so fun
         lua                  ; one-based indices? one-based indices
         markdown             ; writing docs for people to ignore
