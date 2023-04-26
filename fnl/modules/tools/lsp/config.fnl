@@ -90,6 +90,20 @@
 
 (nyoom-module-p! julia (tset lsp-servers :julials {}))
 
+(nyoom-module-p! json 
+                 (tset lsp-servers :jsonls 
+       {:format {:enabled false}
+        :schemas [{:description "ESLint config"
+                   :fileMatch [:.eslintrc.json :.eslintrc]
+                   :url "http://json.schemastore.org/eslintrc"}
+                  {:description "Package config"
+                   :fileMatch [:package.json]
+                   :url "https://json.schemastore.org/package"}
+                  {:description "Packer config"
+                   :fileMatch [:packer.json]
+                   :url "https://json.schemastore.org/packer"}
+                   ]}))
+
 (nyoom-module-p! kotlin (tset lsp-servers :kotlin_langage_server {}))
 
 (nyoom-module-p! latex (tset lsp-servers :texlab {}))

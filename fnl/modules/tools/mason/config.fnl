@@ -25,6 +25,9 @@
     (nyoom-module-p! julia
       (table.insert mason-tools :julia-lsp))
 
+    (nyoom-module-p! json
+      (table.insert mason-tools :json-lsp))
+    ;
     (nyoom-module-p! kotlin
       (table.insert mason-tools :kotlin-language-server))
 
