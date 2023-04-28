@@ -82,6 +82,7 @@
         rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
         (sh +fish)           ; she sells {ba,z,fi}sh shells on the C xor
         xml                  ; extend my language
+        yaml                 ; yet another markup language to enable
         zig                  ; C, but simpler
 
         :app
