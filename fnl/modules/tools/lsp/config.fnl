@@ -127,6 +127,15 @@
                                                        :useLibraryCodeForTypes true
                                                        :disableOrganizeImports false}}}}))
 
+(nyoom-module-p! yaml
+                 (tset lsp-servers :yamlls
+                       {:settings {:yaml {
+                        :schemaStore {:enable false 
+                                      :url "https://www.schemastore.org/api/json/catalog.json"}
+                        :schemas {:/path/to/your/custom/strict/schema.json "yet-another.{yml,yaml}"
+                                  "http://json.schemastore.org/prettierrc" ".prettierrc.{yml,yaml}"}
+                        :validate true}}}))
+
 (nyoom-module-p! zig (tset lsp-servers :zls {}))
 
 ;; Load lsp

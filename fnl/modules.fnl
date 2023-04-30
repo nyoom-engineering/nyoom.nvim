@@ -66,7 +66,7 @@
         java                 ; the poster child for carpal tunnel syndrome
         julia                ; a better, faster MATLAB
         ;;kotlin             ; FIXME: a better, slicker Java(Script)
-        json                 ; { "dʒeɪsən":  "Javascript Object Notation" }
+        ;;json               ; { "dʒeɪsən":  "Javascript Object Notation" }
         latex                ; writing papers in Neovim has never been so fun
         lua                  ; one-based indices? one-based indices
         markdown             ; writing docs for people to ignore
@@ -81,7 +81,8 @@
         python               ; beautiful is better than ugly
         rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
         (sh +fish)           ; she sells {ba,z,fi}sh shells on the C xor
-        xml                  ; extend my language
+        ;;xml                ; extend my language
+        ;;yaml               ; yet another markup language to enable
         zig                  ; C, but simpler
 
         :app
