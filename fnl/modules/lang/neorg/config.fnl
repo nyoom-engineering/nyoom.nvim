@@ -4,19 +4,19 @@
 
 (local neorg-modules
        {:core.defaults {}
-        :core.norg.manoeuvre {}
+        :core.manoeuvre {}
         :core.keybinds {:config {:default_keybinds false}}
-        :core.norg.dirman {:config {:workspaces {:main "~/neorg"}}}})
+        :core.dirman {:config {:workspaces {:main "~/neorg"}}}})
 
 ;; add conditional modules
 
-(nyoom-module-p! cmp (tset neorg-modules :core.norg.completion
+(nyoom-module-p! cmp (tset neorg-modules :core.completion
                            {:config {:engine :nvim-cmp}}))
 
 ;; add flaged modules
 
 (nyoom-module-p! neorg.+pretty
-                 (tset neorg-modules :core.norg.concealer
+                 (tset neorg-modules :core.concealer
                        {:config {:icon_preset :varied}}))
 
 (nyoom-module-p! neorg.+present
