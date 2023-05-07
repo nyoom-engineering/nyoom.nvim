@@ -68,6 +68,7 @@
         ;;kotlin             ; FIXME: a better, slicker Java(Script)
         ;;json               ; { "dʒeɪsən":  "Javascript Object Notation" }
         latex                ; writing papers in Neovim has never been so fun
+        ;;ledger             ; be audit you can be
         lua                  ; one-based indices? one-based indices
         markdown             ; writing docs for people to ignore
         nim                  ; python + lisp at the speed of c

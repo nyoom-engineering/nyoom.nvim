@@ -26,6 +26,8 @@
 
 (nyoom-module-p! latex (table.insert treesitter-filetypes :latex))
 
+; (nyoom-module-p! ledger (table.insert treesitter-filetypes :ledger))
+
 (nyoom-module-p! lua (table.insert treesitter-filetypes :lua))
 
 (nyoom-module-p! nix (table.insert treesitter-filetypes :nix))
