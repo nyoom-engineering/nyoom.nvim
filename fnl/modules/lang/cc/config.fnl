@@ -1,3 +1,5 @@
+(import-macros {: nyoom-module-p!} :macros)
+
 (nyoom-module-p! lsp
   (do
-    (setup :clangd-extensions)))
+    (setup :clangd_extensions)))

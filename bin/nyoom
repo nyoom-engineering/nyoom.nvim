@@ -25,9 +25,9 @@ function install_nyoom() {
 	else
 		printf "Linking Nyoom Configs ..."
 		mkdir -p "${NYOOM_CONFIG}/fnl"
-		[ ! -f "${NYOOM_CONFIG}/config.fnl" ] && ln "${CONFIG_PATH}/fnl/config.fnl" "${NYOOM_CONFIG}/config.fnl"
-		[ ! -f "${NYOOM_CONFIG}/modules.fnl" ] && ln "${CONFIG_PATH}/fnl/modules.fnl" "${NYOOM_CONFIG}/modules.fnl"
-		[ ! -f "${NYOOM_CONFIG}/packages.fnl" ] && ln "${CONFIG_PATH}/fnl/packages.fnl" "${NYOOM_CONFIG}/packages.fnl"
+		[ ! -f "${NYOOM_CONFIG}/config.fnl" ] && ln -s "${CONFIG_PATH}/fnl/config.fnl" "${NYOOM_CONFIG}/config.fnl"
+		[ ! -f "${NYOOM_CONFIG}/modules.fnl" ] && ln -s "${CONFIG_PATH}/fnl/modules.fnl" "${NYOOM_CONFIG}/modules.fnl"
+		[ ! -f "${NYOOM_CONFIG}/packages.fnl" ] && ln -s "${CONFIG_PATH}/fnl/packages.fnl" "${NYOOM_CONFIG}/packages.fnl"
 		printf "\n\033[1m\033[32mSuccessfully Linked Nyoom Configs\033[0m\n\n"
 	fi
 	printf "Installing Core Dependencies..."

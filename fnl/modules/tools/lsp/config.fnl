@@ -10,11 +10,7 @@
 (set vim.lsp.handlers.textDocument/hover
      (vim.lsp.with vim.lsp.handlers.hover {:border :solid}))
 
-
-(fn format! [bufnr ?async?]
-  (vim.lsp.buf.format {: bufnr
-                       :filter #(not (contains? [:jsonls :tsserver] $.name))
-                       :async ?async?}))
+;;; on attach function
 
 (fn on-attach [client bufnr]
   (import-macros {: buf-map! : autocmd! : augroup! : clear!} :macros)
@@ -42,10 +38,12 @@
     (when (client.supports_method "textDocument/formatting")
       (augroup! format-before-saving
         (clear! {:buffer bufnr})
-        (autocmd! BufWritePre <buffer> #(format! bufnr) {:buffer bufnr})))))
+        (autocmd! BufWritePre <buffer> #(when (not vim.g.lsp_autoformat_disable)
+                                           (vim.lsp.buf.format {: bufnr}
+                                                              :filter #(not (contains? [:jsonls :tsserver] $.name)))) 
+                                       {:buffer bufnr})))))
 
 ;; What should the lsp be demanded of?
-
 (local capabilities (vim.lsp.protocol.make_client_capabilities))
 (set capabilities.textDocument.completion.completionItem
      {:documentationFormat [:markdown :plaintext]
@@ -92,17 +90,17 @@
 
 (nyoom-module-p! json 
                  (tset lsp-servers :jsonls 
-       {:format {:enabled false}
-        :schemas [{:description "ESLint config"
-                   :fileMatch [:.eslintrc.json :.eslintrc]
-                   :url "http://json.schemastore.org/eslintrc"}
-                  {:description "Package config"
-                   :fileMatch [:package.json]
-                   :url "https://json.schemastore.org/package"}
-                  {:description "Packer config"
-                   :fileMatch [:packer.json]
-                   :url "https://json.schemastore.org/packer"}
-                   ]}))
+                  {:format {:enabled false}
+                   :schemas [{:description "ESLint config"
+                              :fileMatch [:.eslintrc.json :.eslintrc]
+                              :url "http://json.schemastore.org/eslintrc"}
+                             {:description "Package config"
+                              :fileMatch [:package.json]
+                              :url "https://json.schemastore.org/package"}
+                             {:description "Packer config"
+                              :fileMatch [:packer.json]
+                              :url "https://json.schemastore.org/packer"}]}))
+                   
 
 (nyoom-module-p! kotlin (tset lsp-servers :kotlin_langage_server {}))
 
@@ -130,11 +128,11 @@
 (nyoom-module-p! yaml
                  (tset lsp-servers :yamlls
                        {:settings {:yaml {
-                        :schemaStore {:enable false 
-                                      :url "https://www.schemastore.org/api/json/catalog.json"}
-                        :schemas {:/path/to/your/custom/strict/schema.json "yet-another.{yml,yaml}"
-                                  "http://json.schemastore.org/prettierrc" ".prettierrc.{yml,yaml}"}
-                        :validate true}}}))
+                                          :schemaStore {:enable false 
+                                                        :url "https://www.schemastore.org/api/json/catalog.json"}
+                                          :schemas {:/path/to/your/custom/strict/schema.json "yet-another.{yml,yaml}"
+                                                    "http://json.schemastore.org/prettierrc" ".prettierrc.{yml,yaml}"}
+                                          :validate true}}}))
 
 (nyoom-module-p! zig (tset lsp-servers :zls {}))
 
