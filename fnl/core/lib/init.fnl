@@ -1,5 +1,9 @@
 (local stdlib {})
 
+;; load shared constants
+
+(require :core.lib.shared)
+
 ;; load modified luafun + core libs by default
 
 (local fun (require :core.lib.fun))

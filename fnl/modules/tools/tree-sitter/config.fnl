@@ -1,4 +1,4 @@
-(import-macros {: packadd! : nyoom-module-p! : map!} :macros)
+(import-macros {: packadd! : nyoom-module-p! : map! : custom-set-face!} :macros)
 
 ;; Conditionally enable leap-ast
 
@@ -97,15 +97,25 @@
 
 ;; load dependencies
 
-(packadd! nvim-ts-rainbow)
+(packadd! nvim-ts-rainbow2)
 (packadd! nvim-ts-refactor)
 (packadd! nvim-treesitter-textobjects)
 (packadd! nvim-ts-context-commentstring) 
-; the usual
+
+;; setup hl groups for ts-rainbow
+
+(custom-set-face! :TSRainbowRed  [] {:fg "#878d96" :bg :NONE})
+(custom-set-face! :TSRainbowYellow [] {:fg "#a8a8a8" :bg :NONE})
+(custom-set-face! :TSRainbowBlue [] {:fg "#8d8d8d" :bg :NONE})
+(custom-set-face! :TSRainbowOrange [] {:fg "#a2a9b0" :bg :NONE})
+(custom-set-face! :TSRainbowGreen [] {:fg "#8f8b8b" :bg :NONE})
+(custom-set-face! :TSRainbowViolet [] {:fg "#ada8a8" :bg :NONE})
+(custom-set-face! :TSRainbowCyan [] {:fg "#878d96" :bg :NONE})
+
+;; the usual
 
 (setup :nvim-treesitter.configs
        {:ensure_installed treesitter-filetypes
-        ;; :sync_install true
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
         :context_commentstring {:enable true}
@@ -115,14 +125,11 @@
                        :use_virtual_text true
                        :lint_events ["BufWrite" "CursorHold"]}
         :rainbow {:enable true
-                  :extended_mode true
-                  :colors ["#878d96"
-                           "#a8a8a8"
-                           "#8d8d8d"
-                           "#a2a9b0"
-                           "#8f8b8b"
-                           "#ada8a8"
-                           "#878d96"]}
+                  :query {1 :rainbow-parens 
+                          :html :rainbow-tags 
+                          :latex :rainbow-blocks
+                          :tsx :rainbow-tags
+                          :vue :rainbow-tags}}
         :incremental_selection {:enable true
                                 :keymaps {:init_selection :gnn
                                           :node_incremental :grn

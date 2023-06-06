@@ -17,7 +17,7 @@
           ""
           ""
           "(require-macros :macros)"
-          "(local fennel (autoload :fennel)"])
+          "(local fennel (autoload :fennel))"])
   (local-set! buftype :nofile)
   (vim.api.nvim_buf_set_lines 0 0 -1 true scratch-comments)
   (vim.api.nvim_win_set_cursor 0 [5 0]))

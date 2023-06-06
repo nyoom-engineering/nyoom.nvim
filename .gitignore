@@ -6,3 +6,6 @@ profile.json
 result/
 target/
 packages.json
+
+# macOS
+.DS_Store

@@ -310,52 +310,6 @@
             (set index (+ end 1))))))
   acc)
 
-(fn strip-prefix [p prefix]
-  "Removes a path prefix if it exists.
-  
-  Arguments:
-  * `p`: the path to strip the prefix from
-  * `prefix`: the prefix to strip
-  
-  Returns:
-  * the path with the prefix stripped
-  
-  Example:
-  ```fennel
-  (assert (= (strip-prefix \"/home/user/file.txt\" \"/home\") \"/user/file.txt\"))
-  (assert (= (strip-prefix \"/home/user/file.txt\" \"/\") \"/home/user/file.txt\"))
-  ```"
-  (var prefix-literal (escape-pattern (strip-suffix prefix os-path-sep)))
-  (let [(stripped _) (string.gsub p
-                                  (.. "^" prefix-literal os-path-sep "+" "(.-)")
-                                  "%1")]
-    stripped))
-
-(fn strip-suffix [p suffix]
-  "Removes a path suffix if it exists.
-  
-  Arguments:
-  * `p`: the path to strip the suffix from
-  * `suffix`: the suffix to strip
-  
-  Returns:
-  * the path with the suffix stripped
-  
-  Example:
-  ```fennel
-  (assert (= (strip-suffix \"/home/user/file.txt\" \".txt\") \"/home/user/file\"))
-  (assert (= (strip-suffix \"/home/user/file.txt\" \"file.txt\") \"/home/user/\"))
-  ```"
-  (if (= nil suffix)
-      (strip-suffix p os-path-sep)
-      (do
-        (var suffix-literal (escape-pattern (strip-prefix suffix os-path-sep)))
-        (let [(stripped _) (string.gsub p
-                                        (.. "(.-)" os-path-sep "+"
-                                            suffix-literal)
-                                        "%1")]
-          stripped))))
-
 (fn mkdirp [dir]
   "Recursively create a directory.
   
@@ -440,8 +394,6 @@
  : strip-ext
  : path-extension
  : path-components
- : strip-prefix
- : strip-suffix
  : mkdirp
  : expand
  : concat

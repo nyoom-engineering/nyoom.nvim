@@ -12,5 +12,6 @@
                                 {:opt true})
                           (pack :nvim-telescope/telescope-project.nvim
                                 {:opt true})
-                          (pack :LukasPietzschmann/telescope-tabs {:opt true})
+                          (pack :LukasPietzschmann/telescope-tabs 
+                                {:opt true})
                           (pack :jvgrootveld/telescope-zoxide {:opt true})]})

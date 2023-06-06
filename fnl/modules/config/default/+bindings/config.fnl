@@ -1,4 +1,4 @@
-(import-macros {: nyoom-module-p! : map! : let!} :macros)
+(import-macros {: nyoom-module-p! : map! : buf-map! : let! : augroup! : clear! : autocmd!} :macros)
 (local {: nightly?} (autoload :core.lib))
 (local leap (autoload :leap))
 
@@ -160,8 +160,6 @@
 (nyoom-module-p! lsp (map! [n] :<leader>ca `(vim.lsp.buf.code_action)
                            {:desc "LSP Code actions"}))
 
-(map! [n] :<leader>cc :<cmd>make<CR> {:desc "Compile with quickfix list"})
-(map! [n] :<leader>cC :<cmd>lmake<CR {:desc "Compile with location list"})
 (nyoom-module-p! lsp
                  (do
                    (map! [n] :<leader>cd `(vim.lsp.buf.definition)
@@ -205,6 +203,20 @@
 
 (map! [n] :<leader>cW "<cmd>v/\\_s*\\S/d<CR>"
       {:desc "Delete trailing newlines"})
+
+(nyoom-module-p! quickfix
+  (do
+    (map! [n] :<leader>cc :<cmd>make<CR> {:desc "Compile with quickfix list"})
+    (map! [n] :<leader>cC :<cmd>lmake<CR {:desc "Compile with location list"})
+    (map! [n] "<leader>cq" "<cmd>copen<cr>" {:desc "Open quickfix list"})
+    (map! [n] "<leader>cQ" "<cmd>cclose<cr>" {:desc "Close quickfix list"})
+    (augroup! quickfix-mappings
+      (clear!)
+      (autocmd! FileType qf #(buf-map! [n] "<leader>cq" "<cmd>cclose<cr>" {:desc "Close quickfix list"}))
+      (autocmd! FileType qf #(buf-map! [n] "dd" #(let [current-item (vim.fn.line ".")
+                                                       current-list (vim.fn.getqflist)
+                                                       new-list (doto current-list (table.remove current-item))]
+                                                   (vim.fn.setqflist new-list "r")))))))
 
 ;; x Local diagnostics (telescope)
 ;; x Project diagnostics (telescope)

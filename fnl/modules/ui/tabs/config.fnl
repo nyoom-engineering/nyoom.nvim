@@ -1,5 +1,3 @@
-(local {: diagnostic-icons} (autoload :core.shared))
-
 (setup :bufferline
        {:options {:numbers :none
                   :diagnostics :nvim_lsp
@@ -10,7 +8,7 @@
                                            (each [kind count (pairs diagnostics-dict)]
                                              (set s
                                                   (string.format "%s %s %d" s
-                                                                 (. diagnostic-icons
+                                                                 (. shared.icons
                                                                     kind)
                                                                  count)))
                                            s)

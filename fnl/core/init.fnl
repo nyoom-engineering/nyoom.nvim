@@ -1,6 +1,10 @@
 (import-macros {: let! : set!} :macros)
 (local {: executable?} (autoload :core.lib))
 
+;; load constants
+
+(autoload :core.shared)
+
 ;; add userconfig to runtimepath
 
 (set! rtp+ (.. (vim.loop.os_homedir) :/.config/nyoom))
@@ -31,6 +35,7 @@
       (set! timeoutlen 400)
       ;; visual options
       (set! conceallevel 2)
+      (set! infercase)
       (set! shortmess+ :sWcI)
       (set! signcolumn "yes:1")
       (set! formatoptions [:q :j])
@@ -50,6 +55,8 @@
       (set! undofile)
       (set! nowritebackup)
       (set! noswapfile)
+      ;; external config files
+      (set! exrc)
       ;; search and replace
       (set! ignorecase)
       (set! smartcase)
@@ -58,12 +65,13 @@
       (set! grepprg "rg --vimgrep")
       (set! grepformat "%f:%l:%c:%m")
       (set! path ["." "**"])
+      ;; previously nightly options
+      (set! diffopt+ "linematch:60")
+      (set! splitkeep :screen)
       ;; nightly only options
       (local {: nightly?} (autoload :core.lib))
       (if (nightly?)
-          (do
-            (set! diffopt+ "linematch:60")
-            (set! splitkeep :screen)))
+          (do))
       ;; gui options
       (set! list)
       (set! fillchars {:eob " "
@@ -98,7 +106,7 @@
         (local packer-command (.. :Packer (first-to-upper command)))
         (vim.api.nvim_create_user_command packer-command
                                           (fn []
-                                            (error! (.. "Please use the `nyoom` cli")))
+                                            (err! (.. "Please use the `nyoom` cli")))
                                           {}))
 
       (let [packer-commands [:install :update :compile :sync :status :lockfile]]

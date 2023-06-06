@@ -5,7 +5,7 @@
 ;; fnlfmt: skip
 (nyoom! :completion
         cmp                  ; the ultimate code completion backend
-        ;;copilot              ; the code completion of the future
+        ;;copilot            ; the code completion of the future
         ;;fzf-lua            ; TODO a search engine for love and life
         (telescope +native)  ; the search engine of the future
 
@@ -18,6 +18,8 @@
         modeline             ; snazzy, nano-emacs-inspired modeline
         ;;nvimtree           ; a project drawer, like NERDTree for vim
         neotree              ; tree-like structures for neovim
+        quickfix             ; enhancements to vim's builtin quickfix functionality
+        trouble              ; view your diagnostics, now with icons! (i knew u were trouble when you walked iiiinnn)
         ;;tabs               ; keep tabs on your buffers, literally
         vc-gutter            ; Get your diff out of the gutter
         window-select        ; Visually switch windows

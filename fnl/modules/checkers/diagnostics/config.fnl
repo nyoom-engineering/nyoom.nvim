@@ -1,6 +1,5 @@
 (import-macros {: nyoom-module-p! : nyoom-module-ensure!} :macros)
 (local {: on-attach} (autoload :modules.tools.lsp.config))
-(local {: icons} (autoload :core.shared))
 (local null-ls (autoload :null-ls))
 (local null-ls-sources [])
 
@@ -14,10 +13,10 @@
                         :update_in_insert false
                         :severity_sort true})
 
-(vim.fn.sign_define :DiagnosticSignError {:text icons.error :texthl "DiagnosticSignError"})
-(vim.fn.sign_define :DiagnosticSignWarn {:text icons.warn :texthl "DiagnosticSignWarn"})
-(vim.fn.sign_define :DiagnosticSignInfo {:text icons.info :texthl "DiagnosticSignInfo"})
-(vim.fn.sign_define :DiagnosticSignHint {:text icons.hint :texthl "DiagnosticSignHint"})
+(vim.fn.sign_define :DiagnosticSignError {:text shared.icons.error :texthl "DiagnosticSignError"})
+(vim.fn.sign_define :DiagnosticSignWarn {:text shared.icons.warn :texthl "DiagnosticSignWarn"})
+(vim.fn.sign_define :DiagnosticSignInfo {:text shared.icons.info :texthl "DiagnosticSignInfo"})
+(vim.fn.sign_define :DiagnosticSignHint {:text shared.icons.hint :texthl "DiagnosticSignHint"})
 
 (nyoom-module-p! config.+bindings
                  (do

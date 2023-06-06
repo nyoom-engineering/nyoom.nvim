@@ -466,6 +466,10 @@
 (local reduce-clones {})
 (local funcinfo (. (require :jit.util) :funcinfo))
 
+(fn reduce-call [fun start state ...]
+  (when (= state nil) (lua "return nil, start"))
+  (values state (fun start ...)))                    	
+
 (fn reduce-impl [fun start gen-x param-x state-x]
   (while true
     (set-forcibly! (state-x start)

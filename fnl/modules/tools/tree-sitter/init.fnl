@@ -13,7 +13,7 @@
                      :TSModuleInfo]
                :requires [(pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})
-                          (pack :p00f/nvim-ts-rainbow {:opt true})
+                          (pack :HiPhish/nvim-ts-rainbow2 {:opt true})
                           (pack :JoosepAlviste/nvim-ts-context-commentstring {:opt true})
                           (pack :nvim-treesitter/nvim-treesitter-refactor {:opt true})
                           (pack :nvim-treesitter/nvim-treesitter-textobjects
