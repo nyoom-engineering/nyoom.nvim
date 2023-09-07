@@ -1,0 +1,24 @@
+[package]
+name = "engine"
+version = "0.1.0"
+license = "MIT"
+edition = "2021"
+
+[[bin]]
+name = "nyoom"
+path = "src/main.rs"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+mlua = { version = "0.9.1", features = ["luajit", "module", "macros", "send"]}
+
+[features]
+vendor = ["git2/vendored-openssl", "git2/vendored-libgit2"]
+
+[profile.release]
+opt-level = 3
+strip = true
+lto = true
+codegen-units = 1
