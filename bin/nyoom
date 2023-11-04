@@ -10,7 +10,7 @@ DATA_PATH="${XDG_DATA_HOME:-${HOME}/.local/share}/${NVIM_APPNAME}"
 NYOOM_CONFIG="${XDG_DATA_HOME:-${HOME}/.config}/nyoom"
 
 NYOOM_CURRENT_DIR_REAL=$(realpath "$(pwd)")
-NYOOM_BASENAME=$(basename "$(pwd)")
+NYOOM_BASENAME=$(basename "$NYOOM_CURRENT_DIR_REAL")
 
 if [[ "$NYOOM_CURRENT_DIR_REAL" != "$CONFIG_PATH" ]]; then
 	echo "The directory you're running bin/nyoom ${1:-} in is not the expected location.";
