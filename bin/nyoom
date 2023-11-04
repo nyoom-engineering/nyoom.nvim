@@ -20,7 +20,7 @@ if [[ "$NYOOM_CURRENT_DIR_REAL" != "$CONFIG_PATH" ]]; then
 		NVIM_APPNAME=$NYOOM_BASENAME
 	else
 		echo "";
-		echo "Please clone Nyoom to ~/.config/nyoom or run this command as 'NVIM_APPNAME=${NYOOM_BASENAME} bin/nyoom ${1:-}'"
+		echo "Please clone Nyoom to ~/.config/nvim or run this command as 'NVIM_APPNAME=${NYOOM_BASENAME} bin/nyoom ${1:-}'"
 		exit;
 	fi
 
