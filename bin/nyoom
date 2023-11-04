@@ -9,6 +9,23 @@ CACHE_PATH="${XDG_CACHE_HOME:-${HOME}/.cache}/${NVIM_APPNAME}"
 DATA_PATH="${XDG_DATA_HOME:-${HOME}/.local/share}/${NVIM_APPNAME}"
 NYOOM_CONFIG="${XDG_DATA_HOME:-${HOME}/.config}/nyoom"
 
+NYOOM_CURRENT_DIR_REAL=$(realpath "$(pwd)")
+NYOOM_BASENAME=$(basename "$(pwd)")
+
+if [[ "$NYOOM_CURRENT_DIR_REAL" != "$CONFIG_PATH" ]]; then
+	echo "The directory you're running bin/nyoom ${1:-} in is not the expected location.";
+	echo
+	read -p "Set NVIM_APPNAME=${NYOOM_BASENAME} before continuing?  " -n 1 -r;
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		NVIM_APPNAME=$NYOOM_BASENAME
+	else
+		echo "";
+		echo "Please clone Nyoom to ~/.config/nyoom or run this command as 'NVIM_APPNAME=${NYOOM_BASENAME} bin/nyoom ${1:-}'"
+		exit;
+	fi
+
+fi
+
 mkdir -p "$CONFIG_PATH" "$CACHE_PATH" "$DATA_PATH" "$NYOOM_CONFIG"
 
 # silently enter ${CONFIG_PATH} when updating
