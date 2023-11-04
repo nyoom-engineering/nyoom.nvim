@@ -3,9 +3,10 @@
 set -o errexit -o pipefail -o nounset
 
 # people like xdg
-CONFIG_PATH="${XDG_CONFIG_HOME:-${HOME}/.config}/${NVIM_APPNAME:-nvim}"
-CACHE_PATH="${XDG_CACHE_HOME:-${HOME}/.cache}/${NVIM_APPNAME:-nvim}"
-DATA_PATH="${XDG_DATA_HOME:-${HOME}/.local/share}/${NVIM_APPNAME:-nvim}"
+NVIM_APPNAME="${NVIM_APPNAME:-nvim}"
+CONFIG_PATH="${XDG_CONFIG_HOME:-${HOME}/.config}/${NVIM_APPNAME}"
+CACHE_PATH="${XDG_CACHE_HOME:-${HOME}/.cache}/${NVIM_APPNAME}"
+DATA_PATH="${XDG_DATA_HOME:-${HOME}/.local/share}/${NVIM_APPNAME}"
 NYOOM_CONFIG="${XDG_DATA_HOME:-${HOME}/.config}/nyoom"
 
 mkdir -p "$CONFIG_PATH" "$CACHE_PATH" "$DATA_PATH" "$NYOOM_CONFIG"
@@ -77,7 +78,7 @@ sync)
 	rm -f "${CONFIG_PATH}/lua/packer_compiled.lua" || true
 	# set ulimit to fix packer.sync hanging with --headless: https://github.com/wbthomason/packer.nvim/issues/751
 	ulimit -S -n 4096
-	NYOOM_CLI=true nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require("packer").sync()'
+	NYOOM_CLI=true NVIM_APPNAME=$NVIM_APPNAME nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require("packer").sync()'
 	echo
 	if [ -d "${DATA_PATH}/site/pack/packer/opt/nvim-treesitter/" ]; then
 		echo
